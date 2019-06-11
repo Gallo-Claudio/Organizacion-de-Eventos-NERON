@@ -7,14 +7,15 @@
 <title>Listado</title>
 </head>
 <body>
-	<tbody>
-	<c:forEach var="variable" items="${listaSeleccionDeExtras}"> 
-		<tr>
-		<td>${variable.nombre}</td>
-		<td>${variable.precio}</td>
-		<td><input type="checkbox" value="${variable.id}"></td>
-		</tr>
-    </c:forEach>  
-	</tbody>  	     
+<c:forEach items="listaFinal" var="variable" >
+
+<input type="checkbox" path="listaFinal" value="${variable.nombre }"/><br>
+<input type="checkbox" path="hobbies" value="Astronomy"/><br>
+<input type="checkbox" path="hobbies" value="Snowboarding"/><br>
+
+
+</c:forEach>
+
+
 </body>
 </html>
