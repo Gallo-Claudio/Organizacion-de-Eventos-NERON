@@ -45,4 +45,12 @@ public class ControladorLogin {
 		return new ModelAndView("listado-final-extras", modelo);
 	}
 	
+	/*Lado Cliente*/
+	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
+	public ModelAndView listadoExtras2 () {
+		ModelMap modelo = new ModelMap();
+		modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+		return new ModelAndView("listado-seleccion-extras", modelo);
+	}
+	
 }

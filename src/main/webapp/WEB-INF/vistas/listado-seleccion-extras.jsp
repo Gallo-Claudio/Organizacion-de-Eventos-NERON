@@ -4,15 +4,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+	<link rel="stylesheet" type="text/css" href="css/extras.css">
+	
+	<title>Listado</title>
 </head>
+
+<header>
+				<center><b><i>Nerón - Seleccione los extras deseados para su evento</i></b></center><br><br>
+
+	
+	
+	</header>
+
 <body>
-	<c:forEach var="variable" items="${listaSeleccionDeExtras}"> 
+	<center><table border="6" cellpadding="4" cellspacing="6">
+	<thead>
+	<tr>
+	<th><i>Show</i></th>
+	<th><i>Precio</i></th>
+	</tr>
+	</thead></center>
+	<tbody>
+	<c:forEach var="variable" items="${listadoFinal}"> 
 		<tr>
-		<td>${variable.nombre}</td>
-		<td>${variable.precio}</td>
+		<td><b><i>${variable.nombre}</i></b></td>
+		<td><b>$<i>${variable.precio}</i></b></td>
 		<td><input type="checkbox" value="${variable.id}"></td>
 		</tr>
-    </c:forEach>       
+    </c:forEach>  
+	</tbody>
+	</table>   	<br><br>
+	<button Type="Submit"/>Agregar extra</button>     
 </body>
 </html>

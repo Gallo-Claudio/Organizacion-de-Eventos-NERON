@@ -4,18 +4,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Listado</title>
+	<link rel="stylesheet" type="text/css" href="css/extras.css">
+	
+	<title>Listado</title>
 </head>
+
+<header>
+				<center><b><i>Nerón - Listado de extras agregados</i></b></center><br><br>
+
+	
+	
+	</header>
+
 <body>
-<c:forEach items="listaFinal" var="variable" >
-
-<input type="checkbox" path="listaFinal" value="${variable.nombre }"/><br>
-<input type="checkbox" path="hobbies" value="Astronomy"/><br>
-<input type="checkbox" path="hobbies" value="Snowboarding"/><br>
-
-
-</c:forEach>
-
-
+	<center><table border="6" cellpadding="4" cellspacing="6">
+	<thead>
+	<tr>
+	<th><i>Tipo de show</i></th>
+	<th><i>Precio</i></th>
+	</tr>
+	</thead></center>
+	<tbody>
+	<c:forEach var="variable" items="${listadoFinal}"> 
+		<tr>
+		<td><b><i>${variable.nombre}</i></b></td>
+		<td><b>$<i>${variable.precio}</i></b></td>
+		<td><input type="checkbox" value="${variable.id}"></td>
+		</tr>
+    </c:forEach>  
+	</tbody>
+	</table>   	     
 </body>
 </html>
