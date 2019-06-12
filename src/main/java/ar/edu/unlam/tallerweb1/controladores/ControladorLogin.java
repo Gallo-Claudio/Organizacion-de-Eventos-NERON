@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListaSeleccionExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
 
 
 
@@ -22,7 +24,10 @@ public class ControladorLogin {
 	@Inject
 	private ServicioListarExtras servicioListarExtras;
 	
-		/*Lado del administrador*/
+	@Inject
+	private ServicioSeleccionoExtra servicioSeleccionoExtra;
+	
+	/*Lado del administrador*/
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
 	public ModelAndView ingresoDeExtras() {
 		Extras extras = new Extras();
@@ -46,8 +51,9 @@ public class ControladorLogin {
 	}
 	
 	/*Lado Cliente*/
+		
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 () {
+	public ModelAndView listadoExtras2 (@ModelAttribute ("Extras")Extras Extras) {
 		ModelMap modelo = new ModelMap();
 		modelo.put("listadoFinal", servicioListarExtras.listarExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
