@@ -22,8 +22,8 @@ public class ListadoOpcionesMenuDaoImpl implements ListadoOpcionesMenuDao {
 	@Override
 	public List<Menu> listadoOpcionesDeMenu () {
 		final Session session = sessionFactory.getCurrentSession(); // Obtengo una sesion
-		// A traves de la sesion abierta, consulto en la tabla Personas que esta en la BD
-		// y guardo el valor obtenido en la coleccion del tipo List llamada "listadoDePersonas
+		// A traves de la sesion abierta, consulto en la tabla Menu que esta en la BD
+		// y guardo el valor obtenido en la coleccion del tipo List llamada "listadoDeOpcionesDeMenu"
 		// para luego retornar el resultado
 		listadoDeOpcionesDeMenu = session.createCriteria(Menu.class).list();
 		return (listadoDeOpcionesDeMenu);

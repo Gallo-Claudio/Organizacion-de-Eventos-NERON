@@ -21,7 +21,7 @@ public class ServicioListadoOpcionesMenuImpl implements ServicioListadoOpcionesM
 
 	@Override
 	public List<Menu> listarOpcionesMenu() {
-		// Llamo al metodo "listaPersonas()" de la instancia del objeto "servicioListadoPersonasDao", que esta en el area del DAO
+		// Llamo al metodo "listadoOpcionesDeMenu()" de la instancia "listadoOpcionesMenuDao", que esta en el area del DAO
 		// El valor obtenido es retornado
 		return listadoOpcionesMenuDao.listadoOpcionesDeMenu();
 	}

@@ -20,7 +20,7 @@ public class ServicioListarTiposMenuImpl implements ServicioListarTiposMenu {
 
 	@Override
 	public List<TipoDeMenu> listarTipoDeMenus() {
-		// Llamo al metodo "listaPersonas()" de la instancia del objeto "servicioListadoPersonasDao", que esta en el area del DAO
+		// Llamo al metodo "listarTiposDeMenus()" de la instancia "servicioListadoTiposMenuDao", que esta en el area del DAO
 		// El valor obtenido es retornado
 		return servicioListadoTiposMenuDao.listarTiposDeMenus();
 	}

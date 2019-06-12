@@ -18,7 +18,7 @@ public class ServicioIngresoTipoDeMenuImpl implements ServicioIngresoTipoDeMenu 
 
 	@Override
 	public void ingresarNuevoTipoDeMenu(TipoDeMenu tipoDeMenu) {  	
-		servicioIngresoTipoEventoDao.ingresarNuevoMenuDao(tipoDeMenu);  //Paso el objeto persona que recibo del Controller hacia el DAO
+		servicioIngresoTipoEventoDao.ingresarNuevoMenuDao(tipoDeMenu);  //Paso el objeto tipoDeMenu que recibo del Controller hacia el DAO
 	}
 
 }

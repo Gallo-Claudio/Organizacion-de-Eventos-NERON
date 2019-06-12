@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.RegistroPlatosMenuDao;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.TipoDeMenu;
 
 
 @Service("servicioRegistroPlatoMenu")
@@ -17,8 +18,12 @@ public class ServicioRegistroPlatoMenuImpl implements ServicioRegistroPlatoMenu 
 	private RegistroPlatosMenuDao registroPlatosMenuDao;
 
 	@Override
-	public void ingresarPlatosAlMenu(Menu menu) {  	
-		registroPlatosMenuDao.registraPlatosAlMenu(menu);  //Paso el objeto persona que recibo del Controller hacia el DAO
+	public void ingresarPlatosAlMenu(String descripcion, Integer costo, Long tipodemenu) {
+		Menu menu = new Menu ();
+		menu.setDescripcion(descripcion);
+		menu.setCosto(costo);
+		menu.setTipoDeEvento(registroPlatosMenuDao.traerTipoDeMenuPorId(tipodemenu));
+		registroPlatosMenuDao.registraPlatosAlMenu(menu);
 	}
 
 }

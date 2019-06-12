@@ -43,18 +43,17 @@ public class ControladorMenu {
 	
 	@RequestMapping(path = "/registro-tipo-menu", method = RequestMethod.POST)
 	public ModelAndView registroTipoMenu (@ModelAttribute ("agregartipomenu") TipoDeMenu tipoDeMenuNuevo) {
-		servicioIngresoTipoDeMenu.ingresarNuevoTipoDeMenu(tipoDeMenuNuevo);   // Paso el objeto "persona" que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
-		return new ModelAndView("ingreso-tipo-menu"); // Retorna a la vista del formulario (ingreso de tipos de menu)
+		servicioIngresoTipoDeMenu.ingresarNuevoTipoDeMenu(tipoDeMenuNuevo);   // Paso el objeto tipoDeMenuNuevo que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
+		return new ModelAndView("ingreso-tipo-menu"); // Retorna a la vista del formulario (ingreso tipos menu)
 	}
 	
-	// Ingreso de Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Ingreso de los diferentes platos que integran el Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(path = "/ingresar-menu", method = RequestMethod.GET)
 	public ModelAndView ingresarMenu() {
-		Menu menu = new Menu();
 		ModelMap model = new ModelMap();
-		model.put("nuevomenu", menu);
-		// Llamo al metodo "listarTiposDeMenus()" de la instancia del objeto "servicioListarTiposMenu", que esta en el area de Servicios.
+		// Llamo al metodo "listarTiposDeMenus()" de la instancia "servicioListarTiposMenu", que esta en el area de Servicios.
 		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 		// Para luego pasarlo a la vista a traves del return ModelAndView
 		model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
@@ -62,18 +61,21 @@ public class ControladorMenu {
 	}
 	
 	@RequestMapping(path = "/registro-plato-menu", method = RequestMethod.POST)
-	public ModelAndView registroPlatosMenu (@ModelAttribute ("agregarplatosmenu") Menu menu) {
-		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(menu);   // Paso el objeto "persona" que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
-		return new ModelAndView("ingresar-menu"); // Retorna a la vista del formulario (ingreso de datos)
+	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("descripcion") String descripcion, @ModelAttribute ("costo") Integer costo, @ModelAttribute ("tipoDeEvento") Long tipodemenu) {
+		ModelMap model = new ModelMap();
+		model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
+		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(descripcion, costo, tipodemenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
+		return new ModelAndView("ingreso-menu", model); // Retorna a la vista del formulario (ingreso menu)
 	}
-
+	
+	
 	
 	// Seleccion del Menu  ///////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeMenu () {
 		ModelMap modelo = new ModelMap();
-		// Llamo al metodo "listarPersonas()" de la instancia del objeto "servicioListarPersonas", que esta en el area de Servicios.
+		// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
 		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 		// Para luego pasarlo a la vista a traves del return ModelAndView
 		modelo.put("listaopciones", servicioListadoOpcionesMenu.listarOpcionesMenu());

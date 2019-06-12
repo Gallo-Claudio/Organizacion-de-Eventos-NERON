@@ -10,16 +10,16 @@
 	<body>
 	   <h1>Ingreso de los distintos platos y bebidas que componen el Menu</h1>
 	
-				<form:form action="registro-plato-menu" method="POST" modelAttribute="agregarplatosmenu">
+				<form:form action="registro-plato-menu" method="POST" modelAttribute="descripcion, costo, tipoDeEvento">
 				  	<input name="descripcion" placeholder="Ingrese la descripcion del plato o bebida" />
 				  	<input name="costo" placeholder="Ingrese el costo" />
 				  	
-				  	<select name="tipoDeEvento">
+				     	<select name="tipoDeEvento">
 						<c:forEach var="tipodemenu" items="${listatiposmenu}"> 
 							<option value="${tipodemenu.id}">${tipodemenu.detalle}</option>
     					</c:forEach>
-					</select>
-		
+					    </select>
+
 					<button Type="Submit"/>Agregar</button>
 				</form:form>
         <a href="/proyecto-limpio-spring/home">Salir</a>
