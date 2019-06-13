@@ -27,7 +27,7 @@
 		<td>${menu.descripcion}</td>
 		<td>${menu.costo}</td>
 		<td>${menu.tipoDeEvento.detalle}</td>
-		<td><input type="checkbox" value="${menu.id}"></td>
+		<td><form:checkbox value="${menu.id}"></form:checkbox></td>
 		</tr>
 		</c:if>	
     </c:forEach>  
