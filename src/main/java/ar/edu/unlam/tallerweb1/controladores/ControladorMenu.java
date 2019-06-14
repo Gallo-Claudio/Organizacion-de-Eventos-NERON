@@ -31,8 +31,11 @@ public class ControladorMenu {
 	private ServicioListadoOpcionesMenu servicioListadoOpcionesMenu;
 	
 	
-	// Ingreso de Tipo de Menu  //////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Ingreso de Tipo de Menu  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	// Pasa un objeto vacio a la vista para ingresar datos en él
 	@RequestMapping(path = "/ingresar-tipo-menu", method = RequestMethod.GET)
 	public ModelAndView ingresarTipoDeMenu() {
 		TipoDeMenu tipoDeMenuNuevo = new TipoDeMenu();
@@ -40,7 +43,8 @@ public class ControladorMenu {
 		model.put("nuevotipomenu", tipoDeMenuNuevo);
 		return new ModelAndView("ingreso-tipo-menu", model);
 	}
-	
+		
+	// Recibe el objeto con los datos ingresados en la vista y los pasa a Servicio, para ser enviados al DAO y luego ser persistidos en la BD. Luego regresa a la vista
 	@RequestMapping(path = "/registro-tipo-menu", method = RequestMethod.POST)
 	public ModelAndView registroTipoMenu (@ModelAttribute ("agregartipomenu") TipoDeMenu tipoDeMenuNuevo) {
 		servicioIngresoTipoDeMenu.ingresarNuevoTipoDeMenu(tipoDeMenuNuevo);   // Paso el objeto tipoDeMenuNuevo que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
@@ -48,8 +52,11 @@ public class ControladorMenu {
 	}
 	
 
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Ingreso de los diferentes platos que integran el Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	// Se pasa un objeto vacio a la vista para ingresar los datos correspondientesy se recibe y pasa a la vista un listado de los diferentes tipos de menu 
 	@RequestMapping(path = "/ingresar-menu", method = RequestMethod.GET)
 	public ModelAndView ingresarMenu() {
 		ModelMap model = new ModelMap();
@@ -60,6 +67,7 @@ public class ControladorMenu {
 		return new ModelAndView("ingreso-menu", model);
 	}
 	
+	// Ingreso de los distintos platos/bebidas/postres que compondrán las opciones a elegir opr parte del cliente
 	@RequestMapping(path = "/registro-plato-menu", method = RequestMethod.POST)
 	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("descripcion") String descripcion, @ModelAttribute ("costo") Integer costo, @ModelAttribute ("tipoDeEvento") Long tipodemenu) {
 		ModelMap model = new ModelMap();
@@ -69,9 +77,11 @@ public class ControladorMenu {
 	}
 	
 	
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
+	// Seleccion del Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// Seleccion del Menu  ///////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	// Muestra el listado de los diferentes platos/bebidas/postres que componen el menú, para que el cliente seleccione entre ellos
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeMenu () {
 		ModelMap modelo = new ModelMap();
