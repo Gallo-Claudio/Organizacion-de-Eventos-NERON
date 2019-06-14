@@ -4,44 +4,43 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.List;
-
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Menu {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nombre;
-    private List<Double> puntuacion;
 
-    public Menu(){}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    public Menu(String nombre){
-        this.nombre=nombre;
-    }
+	private String descripcion;
+	private Integer costo;
+	@ManyToOne
+	private TipoDeMenu tipoDeEvento;
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public List<Double> getPuntuacion() {
-        return puntuacion;
-    }
-
-    public void setPuntuacion(List<Double> puntuacion) {
-        this.puntuacion = puntuacion;
-    }
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	public Integer getCosto() {
+		return costo;
+	}
+	public void setCosto(Integer costo) {
+		this.costo = costo;
+	}
+	public TipoDeMenu getTipoDeEvento() {
+		return tipoDeEvento;
+	}
+	public void setTipoDeEvento(TipoDeMenu tipoDeEvento) {
+		this.tipoDeEvento = tipoDeEvento;
+	}
 }
