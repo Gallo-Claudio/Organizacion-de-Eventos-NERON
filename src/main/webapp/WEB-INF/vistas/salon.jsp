@@ -5,15 +5,15 @@
 <html>
 <head>
     <link href="css/bootstrap.min.css" rel="stylesheet" >
-    <title>Sellecion de Salon</title>
+    <title>Seleccion de Salon</title>
 </head>
 <body>
-<p>id elegido ${id}</p>
+
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
 
-           <form class="border border-success" method="GET" action="tomarDatos", method = RequestMethod.GET)">
+           <form class="border border-success" method="GET" action="tomarDatos">
                <h2>Buscar salones</h2>
 
 
@@ -215,9 +215,7 @@
 </div>
 
 </c:if>
-<c:if test="${not empty mensaje}">
-    <h2>${mensaje}</h2>
-</c:if>
+
 
 </body>
 </html>
