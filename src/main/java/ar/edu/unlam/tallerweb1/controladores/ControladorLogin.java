@@ -27,6 +27,9 @@ public class ControladorLogin {
 	@Inject
 	private ServicioSeleccionoExtra servicioSeleccionoExtra;
 	
+	@Inject 
+	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;
+	
 	/*Lado del administrador*/
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
 	public ModelAndView ingresoDeExtras() {
@@ -51,11 +54,29 @@ public class ControladorLogin {
 	}
 	
 	/*Lado Cliente*/
-		
+	
+	@RequestMapping(path = "/seleccion-extras", method = RequestMethod.GET)
+	public ModelAndView ingresoDeExtras2() {
+		Extras extras2 = new Extras();
+		ModelMap model = new ModelMap();
+		model.put("extras2", extras2);
+		return new ModelAndView("seleccion-extras", model);
+	}
+
+	
+	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
+	public ModelAndView registroExtras2 (@ModelAttribute ("Extras2") Extras Extras2,
+										HttpServletRequest request) {
+		servicioSeleccionoExtra.seleccionarExtra(Extras2);
+		return new ModelAndView("redirect:/seleccion-extras"); 
+	}
+	
+	
+	
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 (@ModelAttribute ("Extras")Extras Extras) {
+	public ModelAndView listadoExtras2 () {
 		ModelMap modelo = new ModelMap();
-		modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
 	}
 	

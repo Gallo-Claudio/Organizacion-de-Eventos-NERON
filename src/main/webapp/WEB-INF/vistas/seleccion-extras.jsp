@@ -19,25 +19,8 @@
 	
 	</header>
 	<body><center>
-	
-		<tbody>
-	<c:forEach var="variable" items="${listadoFinal}"> 
-		<tr>
-		<td><b><i>${variable.nombre}</i></b></td>
-		<td><b>$<i>${variable.precio}</i></b></td>
-		<td><input type="checkbox" value="${variable.id}"></td>
-		</tr>
-    </c:forEach>  
-	</tbody>
-	
-	
-	
-				<form:form action="selecciono-extras" method="POST" modelAttribute="Extras">
-							
-					<button Type="Submit"/>Agregar extra</button>
+				<form:form action="sele-extras" method="POST" modelAttribute="Extras2">
+					
 				</form:form>
-				<br>
-				</center>
 	</body>
 </html>
-

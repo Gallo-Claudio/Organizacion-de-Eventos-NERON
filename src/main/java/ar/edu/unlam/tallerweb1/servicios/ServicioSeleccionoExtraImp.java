@@ -21,8 +21,8 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 
 
 	@Override
-	public void seleccionarExtra(Extras extras) {
-		servicioSeleccionoExtraDao.seleccionarExtra(extras);
+	public void seleccionarExtra(Extras extras2) {
+		servicioSeleccionoExtraDao.seleccionarExtra(extras2);
 		
 	}
 

@@ -11,11 +11,9 @@ public class Extras {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nombre ;
+	private String nombre;
 	private Integer precio;
 	
-	@ManyToOne
-	private Reservas reserva;
 
 	public Long getId() {
 		return id;
@@ -40,12 +38,4 @@ public class Extras {
 	public void setPrecio(Integer precio) {
 		this.precio = precio;
 	}
-
-	public Reservas getReserva() {
-		return reserva;
-	}
-
-	public void setReserva(Reservas reserva) {
-		this.reserva = reserva;
-		}
 }

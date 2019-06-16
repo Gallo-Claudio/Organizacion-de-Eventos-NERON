@@ -5,5 +5,5 @@ import ar.edu.unlam.tallerweb1.modelo.Extras;
 
 public interface ServicioSeleccionoExtra {
 
- void seleccionarExtra(Extras extras);
+ void seleccionarExtra(Extras extras2);
 }

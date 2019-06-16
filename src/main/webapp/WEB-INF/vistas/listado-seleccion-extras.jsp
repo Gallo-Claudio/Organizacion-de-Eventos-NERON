@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,9 +29,9 @@
 
 
 
-	<form:form action="SeleccionDeExtras" method="POST" modelAttribute="Extras">
+	<form:form action="sele-extras" method="POST" modelAttribute="Extras2">
 							
-	<c:forEach var="variable" items="${listadoFinal}"> 
+	<c:forEach var="variable" items="${listadoFinal2}"> 
 		<tr>
 		<td><b><i>${variable.nombre}</i></b></td>
 		<td><b>$<i>${variable.precio}</i></b></td>
@@ -37,21 +39,9 @@
 		</tr>
    	</c:forEach>  
    	
-	<input type="submit"></button>
+	<input type="submit">
 	
 	</form:form>
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-
-
-	    
+  
 </body>
 </html>

@@ -24,8 +24,8 @@ public class ListarSeleccionExtrasDaoImp implements ListarSeleccionExtrasDao {
 	@Override
 	public List<Extras> listarSeleccionExtras() {
 		final Session session = sessionFactory.getCurrentSession();
-		listarSeleccionExtras = session.createCriteria(Extras.class).list();
-		return (listarSeleccionExtras);
+		return listarSeleccionExtras = session.createCriteria(Extras.class).list();
+	
 	}
 
 }
