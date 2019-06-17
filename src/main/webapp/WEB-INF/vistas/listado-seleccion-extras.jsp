@@ -27,10 +27,7 @@
 	</tr>
 	</thead></center>
 
-
-
-	<form:form action="sele-extras" method="POST" modelAttribute="Extras2">
-							
+ <!-- sacar el form y ponerlo afuera del foreach -->					
 	<c:forEach var="variable" items="${listadoFinal2}"> 
 		<tr>
 		<td><b><i>${variable.nombre}</i></b></td>
@@ -38,10 +35,11 @@
 		<td><input type="checkbox" value="${variable.id}"></td>
 		</tr>
    	</c:forEach>  
-   	
-	<input type="submit">
+<form:form action="sele-extras" method="POST" modelAttribute="Extras">
+   	<input type="submit">
+</form:form>
 	
-	</form:form>
-  
+
+ 
 </body>
 </html>

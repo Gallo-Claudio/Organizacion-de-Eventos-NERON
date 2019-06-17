@@ -1,9 +1,9 @@
 
 package ar.edu.unlam.tallerweb1.servicios;
-
 import ar.edu.unlam.tallerweb1.modelo.Extras;
-
+import ar.edu.unlam.tallerweb1.modelo.Reservas;
 public interface ServicioSeleccionoExtra {
 
- void seleccionarExtra(Extras extras2);
+ void guardarExtra(Extras Extras);
+ 
 }

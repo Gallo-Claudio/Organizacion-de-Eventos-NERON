@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 import javax.inject.Inject;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -57,19 +58,19 @@ public class ControladorLogin {
 	
 	@RequestMapping(path = "/seleccion-extras", method = RequestMethod.GET)
 	public ModelAndView ingresoDeExtras2() {
-		Extras extras2 = new Extras();
+		Extras Extras = new Extras();
 		ModelMap model = new ModelMap();
-		model.put("extras2", extras2);
+		model.put("Extras", Extras);
 		return new ModelAndView("seleccion-extras", model);
 	}
 
 	
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras2 (@ModelAttribute ("Extras2") Extras Extras2,
+	public ModelAndView registroExtras2 (@ModelAttribute ("Extras") Extras Extras,
 										HttpServletRequest request) {
-		servicioSeleccionoExtra.seleccionarExtra(Extras2);
+		servicioSeleccionoExtra.guardarExtra(Extras);	
 		return new ModelAndView("redirect:/seleccion-extras"); 
-	}
+	} 
 	
 	
 	

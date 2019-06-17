@@ -1,5 +1,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,8 +20,13 @@
 	
 	</header>
 	<body><center>
-				<form:form action="sele-extras" method="POST" modelAttribute="Extras2">
-					
-				</form:form>
+	
+	
+			<form:form action="sele-extras" method="POST" modelAttribute="Extras">
+				<c:forEach var="variable" items="${listadoFinal2}">
+					<form:checkbox path="nombre" id="nombre" type="nombre" value="${variable.nombre}"/>
+					<form:checkbox path="precio" id="precio" type="precio" value="${variable.precio}"/>	
+				</c:forEach>		
+			</form:form>
 	</body>
 </html>
