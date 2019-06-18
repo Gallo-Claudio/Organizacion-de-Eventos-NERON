@@ -65,17 +65,15 @@ public class ControladorSalon {
                                    @ModelAttribute("horario") String horario,
                                 @ModelAttribute("fecha") String fecha) {//esta en la url
         ModelMap modelo = new ModelMap();
-        int mensaje=1;
+
 
        int error=0;
-
+       String mensaje=" ";
       if(id.equals(0)){
           error++;
-          mensaje=2;
-          }
+          mensaje+="seleccione un salon" ;}
 
-
-
+      modelo.put("id",id);
         if(error==0){
 
 
@@ -85,18 +83,12 @@ public class ControladorSalon {
            reserva.setSalon(servicioSalon.traerSalonPorId(id));
            reserva.setFecha(fecha);
            servicioSalon.guardarReserva(reserva);
+        }else{
 
-
+            modelo.put("mensaje",mensaje);
         }
 
-
-        modelo.put("mensaje",mensaje);
-
-
-
-
-
-        return new ModelAndView("/resultadoSalon", modelo);
+        return new ModelAndView("/salon", modelo);
     }
 
 

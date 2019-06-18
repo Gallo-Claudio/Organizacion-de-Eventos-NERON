@@ -109,7 +109,6 @@ public class SalonDaoImpl implements SalonDao {
                 .createAlias("reserva","reservaBuscada")
                 .add(ne(  "reservaBuscada.fecha", fecha))
                 .createAlias("ubicacion","ubicacionBuscada")
-                .add(like(  "ubicacionBuscada.zona","Oeste"))
                 .list();
 
 
