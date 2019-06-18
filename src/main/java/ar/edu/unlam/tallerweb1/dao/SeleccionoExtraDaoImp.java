@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Reservas;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -12,10 +14,11 @@ public class SeleccionoExtraDaoImp implements SeleccionoExtraDao {
     private SessionFactory sessionFactory;
 
 	@Override
-	public void seleccionarExtra(Extras extra) {
+	public void guardarExtra(Reservas reservas) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(extra);
+		session.save(reservas);
 		
 	}
-
 }
+//final Session session = sessionFactory.getCurrentSession();
+//session.save(Extras);

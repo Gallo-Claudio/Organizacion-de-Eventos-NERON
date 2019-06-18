@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 import javax.inject.Inject;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -57,6 +58,9 @@ public class ControladorLogin {
 	@Inject
 	private ServicioSeleccionoExtra servicioSeleccionoExtra;
 
+	@Inject
+	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;
+
 	/*Lado del administrador*/
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
 	public ModelAndView ingresoDeExtras() {
@@ -82,11 +86,32 @@ public class ControladorLogin {
 	}
 
 	/*Lado Cliente*/
+<<<<<<< HEAD
 
+=======
+
+	@RequestMapping(path = "/seleccion-extras", method = RequestMethod.GET)
+	public ModelAndView ingresoDeExtras2() {
+		Extras Extras = new Extras();
+		ModelMap model = new ModelMap();
+		model.put("Extras", Extras);
+		return new ModelAndView("seleccion-extras", model);
+	}
+
+
+	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
+	public ModelAndView registroExtras2 (@ModelAttribute ("Extra") Extras Extra ){
+		servicioSeleccionoExtra.guardarExtra(Extra);
+		return new ModelAndView("redirect:/seleccion-extras");
+	}
+
+
+
+>>>>>>> julieta
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 (@ModelAttribute ("Extras")Extras Extras) {
+	public ModelAndView listadoExtras2 () {
 		ModelMap modelo = new ModelMap();
-		modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
 	}
 

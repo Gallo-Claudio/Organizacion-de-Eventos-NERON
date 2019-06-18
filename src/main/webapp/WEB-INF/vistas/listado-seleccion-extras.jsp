@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,35 +25,24 @@
 	<th><i>Show</i></th>
 	<th><i>Precio</i></th>
 	</tr>
-	</thead></center>
-
-
-
-	<form:form action="SeleccionDeExtras" method="POST" modelAttribute="Extras">
-							
-	<c:forEach var="variable" items="${listadoFinal}"> 
+	</thead>
+	<form:form action="sele-extras" method="POST" modelAttribute="Extra">
+ <!-- sacar el form y ponerlo afuera del foreach -->					
+	<c:forEach var="variable" items="${listadoFinal2}"> 
 		<tr>
 		<td><b><i>${variable.nombre}</i></b></td>
+
 		<td><b>$<i>${variable.precio}</i></b></td>
-		<td><input type="checkbox" value="${variable.id}"></td>
+
+		<td><input name="id" type="checkbox" value="${variable.id}"/></td>
+
 		</tr>
    	</c:forEach>  
-   	
-	<input type="submit"></button>
-	
-	</form:form>
-	
-	
-	
+
+   	<input type="submit">
+</form:form>
 	
 
-	
-	
-	
-	
-	
-
-
-	    
+ 
 </body>
 </html>
