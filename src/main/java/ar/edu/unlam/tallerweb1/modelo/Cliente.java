@@ -11,8 +11,8 @@ public class Cliente {
     private String apellido;
     private String dni;
 
-    @OneToOne
-    private UbicacionCliente ubicacion;
+//    @OneToOne
+//    private UbicacionCliente ubicacion;
 
 
 
@@ -55,13 +55,13 @@ public class Cliente {
         this.dni = dni;
     }
 
-    public UbicacionCliente getUbicacion() {
-        return ubicacion;
-    }
+//    public UbicacionCliente getUbicacion() {
+//        return ubicacion;
+//    }
 
-    public void setUbicacion(UbicacionCliente ubicacion) {
-        this.ubicacion = ubicacion;
-    }
+//   public void setUbicacion(UbicacionCliente ubicacion) {
+//        this.ubicacion = ubicacion;
+//    }
 }
 
 
