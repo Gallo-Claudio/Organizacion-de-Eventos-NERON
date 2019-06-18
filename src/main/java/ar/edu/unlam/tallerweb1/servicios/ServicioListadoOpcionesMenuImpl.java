@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.ListadoOpcionesMenuDao;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
 
-
-
 @Service("servicioListadoOpcionesMenu")
 @Transactional
 public class ServicioListadoOpcionesMenuImpl implements ServicioListadoOpcionesMenu {
@@ -19,11 +17,11 @@ public class ServicioListadoOpcionesMenuImpl implements ServicioListadoOpcionesM
 	@Inject
 	private ListadoOpcionesMenuDao listadoOpcionesMenuDao;
 
+
 	@Override
 	public List<Menu> listarOpcionesMenu() {
 		// Llamo al metodo "listadoOpcionesDeMenu()" de la instancia "listadoOpcionesMenuDao", que esta en el area del DAO
 		// El valor obtenido es retornado
 		return listadoOpcionesMenuDao.listadoOpcionesDeMenu();
 	}
-
 }
