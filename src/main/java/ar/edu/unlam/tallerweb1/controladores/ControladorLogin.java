@@ -66,9 +66,8 @@ public class ControladorLogin {
 
 	
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras2 (@ModelAttribute ("Extras") Extras Extras,
-										HttpServletRequest request) {
-		servicioSeleccionoExtra.guardarExtra(Extras);	
+	public ModelAndView registroExtras2 (@ModelAttribute ("Extra") Extras Extra ){
+		servicioSeleccionoExtra.guardarExtra(Extra);
 		return new ModelAndView("redirect:/seleccion-extras"); 
 	} 
 	

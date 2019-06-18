@@ -18,9 +18,9 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 
 
 	@Override
-	public void guardarExtra(Extras Extras) {
+	public void guardarExtra(Extras extras) {
 		Reservas reservas = new Reservas();
-//		reservas.setExtras(Extras);
+         reservas.setExtras(extras);
 		servicioSeleccionoExtraDao.guardarExtra(reservas);
 		
 	}
