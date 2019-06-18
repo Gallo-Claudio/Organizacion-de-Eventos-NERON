@@ -17,7 +17,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
 
 
 @Controller
-public class ControladorLogin {
+public class ControladorExtras {
 	
 	@Inject
 	private ServicioIngresoExtras servicioIngresoExtras;	
