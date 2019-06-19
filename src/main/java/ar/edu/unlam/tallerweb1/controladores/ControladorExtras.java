@@ -2,11 +2,14 @@ package ar.edu.unlam.tallerweb1.controladores;
 import javax.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorH2DatabaseImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
@@ -61,21 +64,26 @@ public class ControladorExtras {
 		Extras Extras = new Extras();
 		ModelMap model = new ModelMap();
 		model.put("Extras", Extras);
+
 		return new ModelAndView("seleccion-extras", model);
 	}
 
 	
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras2 (@ModelAttribute ("Extra") Extras Extra ){
-		servicioSeleccionoExtra.guardarExtra(Extra);
+	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
+										 @ModelAttribute ("id") Long id ){
+		Extras extra=new Extras();
+		extra.setId(id);
+		servicioSeleccionoExtra.guardarExtra(idReserva,extra);
 		return new ModelAndView("redirect:/seleccion-extras"); 
 	} 
 	
 	
 	
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 () {
+	public ModelAndView listadoExtras2 (@RequestParam("idReserva") Long idReserva) {
 		ModelMap modelo = new ModelMap();
+		modelo.put("id",idReserva);
 		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
 	}

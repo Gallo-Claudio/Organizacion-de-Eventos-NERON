@@ -9,7 +9,7 @@
 </head>
 <body>
 				
-<form:form action="registrar-menu" method="POST" modelAttribute="eleccionfingerfood, eleccionentrada, eleccionplatoprincipal, eleccionbebida, eleccionpostre, eleccionmesadulce">
+<form:form action="registrar-menu?id=${id}" method="POST" modelAttribute="idReserva,eleccionfingerfood, eleccionentrada, eleccionplatoprincipal, eleccionbebida, eleccionpostre, eleccionmesadulce">
     
     <p>Opciones para el Finger Food</p>
 	<table border="1" cellpadding="0" cellspacing="0">
@@ -136,7 +136,7 @@
 	</tbody>
 	</table>
 	<br><br><br>
-	
+	<input type="text" mane="idReserva" value="${id}">
 	<button class="btn-agregar" Type="Submit"/>Siguiente</button>
 </form:form>    		     
 </body>

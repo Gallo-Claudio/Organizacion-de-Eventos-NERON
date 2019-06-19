@@ -1,9 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
-import ar.edu.unlam.tallerweb1.modelo.Menu;
-import org.springframework.stereotype.Repository;
+
 import java.util.List;
-
+import ar.edu.unlam.tallerweb1.modelo.Menu;
 public interface RecomendacionesDao {
-
-    List validarMenu();
+    List<Menu> obtenerMenusDeLaBase();
 }

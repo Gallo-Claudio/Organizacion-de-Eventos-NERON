@@ -1,10 +1,8 @@
 
 package ar.edu.unlam.tallerweb1.controladores;
-import ar.edu.unlam.tallerweb1.modelo.Salon;
-import ar.edu.unlam.tallerweb1.modelo.Reserva;
-import ar.edu.unlam.tallerweb1.modelo.Imagenes;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -83,12 +81,14 @@ public class ControladorSalon {
            reserva.setSalon(servicioSalon.traerSalonPorId(id));
            reserva.setFecha(fecha);
            servicioSalon.guardarReserva(reserva);
+           Long idReserva=new Long(reserva.getId());
+           return new ModelAndView("redirect:/menu-listado?q="+idReserva+"");
         }else{
 
             modelo.put("mensaje",mensaje);
         }
 
-        return new ModelAndView("/salon", modelo);
+        return new ModelAndView("salon");
     }
 
 
@@ -104,4 +104,17 @@ public class ControladorSalon {
 
 
 
+    @Inject
+    private ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones ServicioRecomendaciones;
+
+    @RequestMapping(path="/RecomendacionesMenu", method = RequestMethod.GET)
+    public ModelAndView MoostrarRecomendacionesMenu() {//esta en la url
+        ModelMap modelo = new ModelMap();
+
+        List<Menu> menus=ServicioRecomendaciones.ObtenerRecomendaciones();
+        modelo.put("menus",menus);
+
+
+        return new ModelAndView("recomendacionesMenu", modelo);
+    }
 }

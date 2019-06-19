@@ -2,42 +2,46 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.dao.RecomendacionesDao;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.PuntajeMenu;
 import org.springframework.stereotype.Service;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
 @Service("servicioRecomendaciones")
 @Transactional
-public class ServicioRecomendacionesImpl implements ServicioRecomendaciones {
+public class ServicioRecomendacionesImpl implements ServicioRecomendaciones{
 
     @Inject
-    private RecomendacionesDao servicioRecomendacionesDao;
-
+    private RecomendacionesDao RecomendacionesDao;
     @Override
-    public void obtenerListaDeRecomendaciones() {
-        List<Menu> listaMenus=servicioRecomendacionesDao.validarMenu();
-        TreeMap<String,Double> listaProm=new TreeMap();
-        Double suma=0.0;
-        int cantidad=0;
-        Double prom=0.0;
-        String nombre="";
-        for (Menu menu:listaMenus) {
-            nombre=menu.getNombre();
-            for (Double item:menu.getPuntuacion()) {
-                    suma=+item;
-                    cantidad=menu.getPuntuacion().size();
-              }
-               prom=suma/cantidad;
-            listaProm.put(nombre,prom);
-         }
 
+    public List<Menu> ObtenerRecomendaciones(){
+       Double puntajeTotal=0.0;
+      Integer cantidad=0;
+      Double promedio=0.0;
+        List<Menu> listaMenu=RecomendacionesDao.obtenerMenusDeLaBase();
+        List<Menu> menusRecomendados=new ArrayList<>();
+           for (Menu menu:listaMenu){
+             puntajeTotal=0.0;
+              cantidad=0;
+              promedio=0.0;
+           for(PuntajeMenu puntaje:menu.getPuntajes()){
+               puntajeTotal=+puntaje.getPuntaje();
+                cantidad=menu.getPuntajes().size();
+                promedio=puntajeTotal/cantidad;
+
+               }   if(promedio>7) {
+                   menusRecomendados.add(menu);
+               }
     }
 
 
+       return menusRecomendados;
 
+    }
 
 }

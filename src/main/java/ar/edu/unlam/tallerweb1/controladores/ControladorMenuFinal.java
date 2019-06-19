@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoDeMenu;
@@ -28,7 +29,7 @@ public class ControladorMenuFinal {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(path = "/menu-listado", method = RequestMethod.GET)
-	public ModelAndView listadoDeOpcionesDeMenu () {
+	public ModelAndView listadoDeOpcionesDeMenu (@RequestParam("q") Long id) {
 		ModelMap modelo = new ModelMap();
 		modelo.put("fingerfood", servicioListadoOpcionesMenuFinal.listarOpcionesFingerFood());
 		modelo.put("entrada", servicioListadoOpcionesMenuFinal.listarOpcionesEntrada());
@@ -36,19 +37,24 @@ public class ControladorMenuFinal {
 		modelo.put("bebida", servicioListadoOpcionesMenuFinal.listarOpcionesBebida());
 		modelo.put("postre", servicioListadoOpcionesMenuFinal.listarOpcionesPostre());
 		modelo.put("mesadulce", servicioListadoOpcionesMenuFinal.listarOpcionesMesaDulce());
+
+		modelo.put("id",id);
 		return new ModelAndView("listado-opciones-menu-final", modelo);
 	}
 	
 	// Guarda la seleccion del menu
 	@RequestMapping(path = "/registrar-menu", method = RequestMethod.POST)
-	public ModelAndView registrarMenu (@ModelAttribute ("eleccionfingerfood") Long fingerfood, 
-			                           @ModelAttribute ("eleccionentrada") Long entrada, 
-									   @ModelAttribute ("eleccionplatoprincipal") Long platoprincipal, 
-									   @ModelAttribute ("eleccionbebida") Long bebida, 
+	public ModelAndView registrarMenu (@RequestParam ("id") Long id,
+									   @ModelAttribute ("eleccionfingerfood") Long fingerfood,
+			                           @ModelAttribute ("eleccionentrada") Long entrada,
+									   @ModelAttribute ("eleccionplatoprincipal") Long platoprincipal,
+									   @ModelAttribute ("eleccionbebida") Long bebida,
 									   @ModelAttribute ("eleccionpostre") Long postre,
 									   @ModelAttribute ("eleccionmesadulce") Long mesadulce) {
-		servicioIngresoDeMenu.guardarSeleccionMenu(fingerfood, entrada, platoprincipal, bebida, postre, mesadulce);
-		return new ModelAndView("ingreso-tipo-menu"); 
+
+		servicioIngresoDeMenu.guardarSeleccionMenu(id,fingerfood, entrada, platoprincipal, bebida, postre, mesadulce);
+		//return new ModelAndView("ingreso-tipo-menu");
+		return new ModelAndView("redirect:/SeleccionDeExtras?idReserva="+id+"");
 	}
 	
 }

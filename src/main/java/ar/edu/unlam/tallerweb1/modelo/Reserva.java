@@ -17,6 +17,9 @@ public class Reserva {
     private Long id;
     private String fecha;
     private String horario;
+	@OneToOne
+	private Extras Extras;
+
     @ManyToOne
     private Salon salon;
 
@@ -121,5 +124,13 @@ public class Reserva {
 	}
 	public void setMesaDulce(MesaDulce mesaDulce) {
 		this.mesaDulce = mesaDulce;
+	}
+
+	public ar.edu.unlam.tallerweb1.modelo.Extras getExtras() {
+		return Extras;
+	}
+
+	public void setExtras(ar.edu.unlam.tallerweb1.modelo.Extras extras) {
+		Extras = extras;
 	}
 }

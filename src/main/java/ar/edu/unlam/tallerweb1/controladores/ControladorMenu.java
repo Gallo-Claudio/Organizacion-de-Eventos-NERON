@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
@@ -37,7 +38,7 @@ public class ControladorMenu {
 	// Ingreso de Tipo de Menu  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// Pasa un objeto vacio a la vista para ingresar datos en él
+	// Pasa un objeto vacio a la vista para ingresar datos en ï¿½l
 	@RequestMapping(path = "/ingresar-tipo-menu", method = RequestMethod.GET)
 	public ModelAndView ingresarTipoDeMenu() {
 		TipoDeMenu tipoDeMenuNuevo = new TipoDeMenu();
@@ -48,8 +49,8 @@ public class ControladorMenu {
 		
 	// Recibe el objeto con los datos ingresados en la vista y los pasa a Servicio, para ser enviados al DAO y luego ser persistidos en la BD. Luego regresa a la vista
 	@RequestMapping(path = "/registro-tipo-menu", method = RequestMethod.POST)
-	public ModelAndView registroTipoMenu (@ModelAttribute ("agregartipomenu") TipoDeMenu tipoDeMenuNuevo) {
-		servicioIngresoTipoDeMenu.ingresarNuevoTipoDeMenu(tipoDeMenuNuevo);   // Paso el objeto tipoDeMenuNuevo que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
+	public ModelAndView registroTipoMenu ( @ModelAttribute ("agregartipomenu") TipoDeMenu tipoDeMenuNuevo) {
+		servicioIngresoTipoDeMenu.ingresarNuevoTipoDeMenu(tipoDeMenuNuevo);   // Paso el objeto tipoDeMenuNuevo que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lï¿½gica
 		return new ModelAndView("ingreso-tipo-menu"); // Retorna a la vista del formulario (ingreso tipos menu)
 	}
 	
@@ -69,12 +70,12 @@ public class ControladorMenu {
 		return new ModelAndView("ingreso-menu", model);
 	}
 	
-	// Ingreso de los distintos platos/bebidas/postres que compondrán las opciones a elegir opr parte del cliente
+	// Ingreso de los distintos platos/bebidas/postres que compondrï¿½n las opciones a elegir opr parte del cliente
 	@RequestMapping(path = "/registro-plato-menu", method = RequestMethod.POST)
 	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("descripcion") String descripcion, @ModelAttribute ("costo") Integer costo, @ModelAttribute ("tipoDeEvento") Long tipodemenu) {
 		ModelMap model = new ModelMap();
 		model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
-		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(descripcion, costo, tipodemenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lógica
+		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(descripcion, costo, tipodemenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la lï¿½gica
 		return new ModelAndView("ingreso-menu", model); // Retorna a la vista del formulario (ingreso menu)
 	}
 	
@@ -83,7 +84,7 @@ public class ControladorMenu {
 	// Seleccion del Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	// Muestra el listado de los diferentes platos/bebidas/postres que componen el menú, para que el cliente seleccione entre ellos
+	// Muestra el listado de los diferentes platos/bebidas/postres que componen el menï¿½, para que el cliente seleccione entre ellos
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeMenu () {
 		ModelMap modelo = new ModelMap();

@@ -26,7 +26,7 @@
 	<th><i>Precio</i></th>
 	</tr>
 	</thead>
-	<form:form action="sele-extras" method="POST" modelAttribute="Extra">
+	<form:form action="sele-extras?idReserva=${id}" method="POST" modelAttribute="id">
  <!-- sacar el form y ponerlo afuera del foreach -->					
 	<c:forEach var="variable" items="${listadoFinal2}"> 
 		<tr>

@@ -16,7 +16,7 @@ public class Entrada {
 	private String descripcion;
 	private Integer costo;
 
-	
+	public Entrada(){}
 	
 	public Long getId() {
 		return id;

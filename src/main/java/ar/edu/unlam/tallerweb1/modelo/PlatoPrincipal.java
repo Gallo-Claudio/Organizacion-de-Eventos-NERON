@@ -16,8 +16,8 @@ public class PlatoPrincipal {
 	private String descripcion;
 	private Integer costo;
 
-	
-	
+
+	public PlatoPrincipal(){}
 	public Long getId() {
 		return id;
 	}

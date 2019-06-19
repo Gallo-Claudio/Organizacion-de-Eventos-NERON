@@ -25,7 +25,7 @@ public class ServicioIngresoDeMenuImpl implements ServicioIngresoDeMenu {
 	private IngresoDeMenuDao ingresoDeMenuDao;
 
 	@Override
-	public void guardarSeleccionMenu(Long seleccionFingerFood, Long seleccionEntrada, Long seleccionPlatoPrincipal, Long seleccionBebida, Long seleccionPostre, Long seleccionMesaDulce) {
+	public void guardarSeleccionMenu(Long id,Long seleccionFingerFood, Long seleccionEntrada, Long seleccionPlatoPrincipal, Long seleccionBebida, Long seleccionPostre, Long seleccionMesaDulce) {
 
 		FingerFood fingerFood = new FingerFood();
 		fingerFood.setId(seleccionFingerFood);
@@ -40,15 +40,15 @@ public class ServicioIngresoDeMenuImpl implements ServicioIngresoDeMenu {
 		MesaDulce mesaDulce = new MesaDulce();
 		mesaDulce.setId(seleccionMesaDulce);
 		
-		Reserva menuReserva = new Reserva();
+		Reserva menuReserva = ingresoDeMenuDao.traerReserva(id);
 		menuReserva.setFingerFood(fingerFood);
 		menuReserva.setEntrada(entrada);
 		menuReserva.setPlatoPrincipal(platoPrincipal);
 		menuReserva.setBebida(bebida);
 		menuReserva.setPostre(postre);
 		menuReserva.setMesaDulce(mesaDulce);
-		
-		ingresoDeMenuDao.guardarMenuSeleccionado(menuReserva);
+		ingresoDeMenuDao.guardarReserva(menuReserva);
+		//ingresoDeMenuDao.guardarMenuSeleccionado(menuReserva);
 		
 	}
 

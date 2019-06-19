@@ -16,7 +16,7 @@ public class MesaDulce {
 	private String descripcion;
 	private Integer costo;
 
-	
+	public MesaDulce(){}
 	
 	public Long getId() {
 		return id;

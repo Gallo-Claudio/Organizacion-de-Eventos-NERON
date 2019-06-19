@@ -16,7 +16,7 @@ public class Postre {
 	private String descripcion;
 	private Integer costo;
 
-	
+	public Postre(){}
 	
 	public Long getId() {
 		return id;

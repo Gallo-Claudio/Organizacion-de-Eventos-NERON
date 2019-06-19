@@ -14,7 +14,7 @@ public class Cliente {
 //    @OneToOne
 //    private UbicacionCliente ubicacion;
 
-
+    public Cliente(){}
 
     public Cliente(String nombre,String apellido,String dni) {
         this.nombre=nombre;

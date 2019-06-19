@@ -5,21 +5,23 @@ import ar.edu.unlam.tallerweb1.modelo.Salon;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
-import java.util.List;
+
 import javax.inject.Inject;
+import java.util.List;
 
 import static org.hibernate.criterion.Restrictions.*;
 
 @Repository("RecomendacionesDao")
-public class RecomendacionesDaoImpl implements RecomendacionesDao {
+public class ReomendacionesDaoImpl implements RecomendacionesDao{
+
     @Inject
     private SessionFactory sessionFactory;
 
     @Override
-    public List validarMenu(){
+    public List<Menu> obtenerMenusDeLaBase(){
         final Session session = sessionFactory.getCurrentSession();
-        List menu = session.createCriteria(Menu.class)
-                .list();
-        return  menu;
+        List Menus= session.createCriteria(Menu.class)
+               .list();
+        return Menus;
     }
 }

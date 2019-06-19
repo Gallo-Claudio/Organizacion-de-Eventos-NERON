@@ -16,7 +16,7 @@ public class FingerFood {
 	private String descripcion;
 	private Integer costo;
 
-	
+	public FingerFood(){}
 	
 	public Long getId() {
 		return id;

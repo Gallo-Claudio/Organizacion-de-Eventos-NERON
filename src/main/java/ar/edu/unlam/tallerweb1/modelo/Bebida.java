@@ -16,6 +16,7 @@ public class Bebida {
 	private String descripcion;
 	private Integer costo;
 
+	public Bebida(){}
 	
 	
 	public Long getId() {

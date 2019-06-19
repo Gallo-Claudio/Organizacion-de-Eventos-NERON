@@ -20,7 +20,7 @@ public class Evento {
 //	private LocalDate fechaDelEvento;
 	@ManyToMany
 	private List <Personal> personal;
-	
+	public Evento(){}
 	
 	public Long getId() {
 		return id;
