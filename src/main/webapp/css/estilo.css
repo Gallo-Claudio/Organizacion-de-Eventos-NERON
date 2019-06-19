@@ -1,0 +1,93 @@
+/*Adapta el fondo a cualquier tamaño y navegador*/
+body{
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+background: #efedee; 
+}
+#master { 
+width: 1200px; 
+margin: 0 auto; 
+}
+
+
+/*slider*/
+.slider{
+width:75%;
+margin:auto;
+overflow:hidden;
+}
+
+.slider ul{
+display:flex;
+width:300%;
+animation:cambio 20s infinite alternate;
+animation-timing-function: ease-in;
+}
+
+.slider li{
+width:100%;
+list-style:none;
+}
+
+.slider img{
+width:100%;
+}
+
+@keyframes cambio{
+0%{margin-left:0;}
+20%{margin-left:0;}
+
+25%{margin-left:-100%;}
+45%{margin-left:-100;}
+
+50%{margin-left:-200%;}
+70%{margin-left:-200%;}
+
+75%{margin-left:-300%;}
+100%{margin-left:-300;}
+}
+
+#logo{
+position: relative;
+width: 200px;
+height: 134px
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+.navegacion{
+width: 1000px;
+margin:30px auto; 
+text-decoration: none;
+padding: 10px;
+font-weight: 600;
+font-size: 20px;
+background-color: #ECD7ED;
+border-radius: 8px;
+font-family: 'Open sans', sans-serif;
+background: linear-gradient(30deg, #EADACB,#EFE0FF);
+}
+
+.navegacion ul{
+list-style: none; 
+}
+
+.menu > li{
+display: inline-block;
+}
+
+.menu > li > a{
+display:block;
+padding:15px 20px;
+color:#000000;
+font-family:'Open sans',san-serif;
+text-decoration:none;
+}
+
+.menu li a:hover{
+color:#1C2EB5;
+}

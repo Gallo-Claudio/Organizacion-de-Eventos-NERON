@@ -80,4 +80,12 @@ public class ControladorExtras {
 		return new ModelAndView("listado-seleccion-extras", modelo);
 	}
 	
+	/*Index*/
+	
+	@RequestMapping(path = "/index")
+	public ModelAndView Index() {
+		return new ModelAndView("index");
+	}
+
+	
 }

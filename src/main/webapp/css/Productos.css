@@ -1,0 +1,310 @@
+﻿/*Adapta el fondo a cualquier tamaño y navegador*/
+body{
+background: url(Fondo.jpg) no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+-ms-background-size: cover;
+background-size: cover; /*especifica el tamaño de las imágenes de fondo.*/
+background: #e3e4e5;
+}
+
+#master{
+width: 1200px; 
+margin: 0 auto; 
+}
+
+#logo{
+position: relative;
+width: 360px;
+height: 134px
+}
+
+/*Boton buscar estilo*/
+#buscar {
+width: 280px;
+height:30px;
+padding: 1px;
+margin-left: 480px;
+background: #DDE8E4;
+border-radius: 4px;
+position: relative;
+margin-top: 0px;
+margin-bottom: 0px;
+bottom: 100px;
+}
+
+#buscar input {
+width: 190px;
+padding: 5px;
+float: left;
+border: 0;
+background: #DDE8E4;
+height:21px;
+background: #ffffff;
+color:#000000;
+font-style: 'Open sans',san-serif;
+height: 20px;
+}
+
+#buscar button {
+position: relative;
+border: 0;
+height: 30px;
+width: 80px;
+font-size:14px;
+color: #000000;
+background: linear-gradient(30deg, #E8ECB2,#FFB1F0);
+}
+
+/*Estilo del carrito*/
+#carrito {
+margin-left: 1175px;
+width: 25px;
+height: 25px;
+position: relative;
+}
+
+#carrito2{
+width: 0px;
+height: 0px;
+}
+
+.CantidadC {
+background: black;
+color: white; 
+font-size: 12px;
+height: 16px;
+width: 20px;
+position: relative;
+left: 1208px;
+bottom: 36px;
+font-size: 15px;
+border: none;
+border-radius: 12px;
+font-family: 'Open sans',san-serif;
+text-indent: 4px;
+padding-bottom: 4px; 
+}
+
+.carrito{
+display:inline-grid;
+text-decoration: none;
+padding: 4px;
+font-weight: 800;
+font-size: 12px;
+color: #000000;
+background-color: #958BA6;
+border-radius: 8px;
+font-family: 'Open sans',san-serif;
+background:linear-gradient(30deg, #E8ECB2,#FFB1F0);
+margin-left: 50px;
+position:absolute;
+}
+
+.navegacion{
+width: 1000px;
+margin:30px auto; 
+text-decoration: none;
+padding: 10px;
+font-weight: 600;
+font-size: 20px;
+background-color: #ECD7ED;
+border-radius: 8px;
+font-family: 'Open sans', sans-serif;
+background: linear-gradient(30deg, #E8ECB2,#FFB1F0);
+}
+
+.navegacion ul{
+list-style: none; 
+}
+
+.menu > li{
+display: inline-block;
+}
+
+.menu > li > a{
+display:block;
+padding:15px 20px;
+color:#000000;
+font-family:'Open sans',san-serif;
+text-decoration:none;
+}
+
+.menu li a:hover{
+color:#1C2EB5;
+}
+
+/*Tamaño de las imaganes*/
+#productos img{
+width:200px;
+height:200px;
+}
+
+/*Nuestros productos*/
+#titulop{
+width: 1000px;
+margin:30px auto; 
+text-decoration: none;
+padding: 10px;
+font-weight: 600;
+font-size: 12px;
+background-color: #ECD7ED;
+border-radius: 8px;
+font-family: 'Open sans',san-serif;
+background: linear-gradient(30deg, #E8ECB2,#FFB1F0);
+}
+
+.box {
+color: #000000;
+border-radius: 5px;
+padding: 40px;
+font-size: 100%;
+font-family: 'Open sans',san-serif;
+}
+
+.a {
+grid-column: 1;
+grid-row: 1;
+margin-left: 150px;
+}
+
+.b{
+grid-column:3;
+grid-row: 2;
+margin-left: 140px;
+}
+
+.c {
+grid-column:1;
+grid-row: 3;
+margin-left: 150px;
+}
+
+.d {
+grid-column: 2;
+grid-row: 1;
+margin-left: 140px;
+}
+
+.e{
+grid-column:2;
+grid-row: 2;
+margin-left: 140px;
+}
+
+.f{
+grid-column:2;
+grid-row: 3;
+margin-left: 140px;
+}
+.g{
+grid-column:3;
+grid-row: 1;
+margin-left: 140px;
+}
+
+.h{
+grid-column:3;
+grid-row: 3;
+margin-left: 140px;
+}
+
+.i{
+grid-column:1;
+grid-row: 2;
+margin-left: 140px;
+}
+
+.j{
+grid-column:1;
+grid-row: 4;
+margin-left: 140px;
+}
+
+.k{
+grid-column:2;
+grid-row: 4;
+margin-left: 140px;
+}
+
+.l{
+grid-column:3;
+grid-row: 4;
+margin-left: 140px;
+}
+
+#productos img{
+width:200px;
+height:200px;
+border-radius: 8px;
+}
+
+#productos{
+display: grid;
+grid-template-columns:80px 80px 80px ;
+grid-template-rows: 100px 100px 100px 450px ;
+grid-gap: 300px;
+font-family:'Open sans',san-serif;
+}
+#productos p{
+font-family:'Open sans',san-serif;
+margin-left: 80px;
+margin-right:10px;
+position: relative;
+}
+
+/*Localizacion del boton carrito*/
+#botonCarritoa,
+#botonCarritoc, 
+#botonCarritoi,
+#botonCarritoj{
+right:1000px;}
+
+#botonCarritod,
+#botonCarritoe,
+#botonCarritof,
+#botonCarritok{
+right:620px;
+}
+
+#botonCarritog,
+#botonCarritoh,
+#botonCarritob,
+#botonCarritol{
+right:240px;
+}
+
+.menuCon {
+position: relative;
+display: inline-block;
+}
+
+.menuDes {
+display: none;
+position: absolute;
+background-color: #F1F1F1;
+min-width: 160px;
+box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+z-index: 1;
+}
+
+.formu{
+color: black;
+padding: 12px 16px;
+text-decoration: none;
+display: block;
+font-size: 15px;
+font-family: 'Open sans',san-serif;
+}
+
+.menuCon:hover .menuDes {
+display: block;
+}
+
+.navs {
+text-decoration: none;
+font-size: 18px;
+font-family: 'Open sans',san-serif;
+border: inset 0pt;
+}
