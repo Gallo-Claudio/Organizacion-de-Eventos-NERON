@@ -5,7 +5,29 @@ body{
 -o-background-size: cover;
 background-size: cover;
 background: #efedee; 
+ background-image: url(http://massquince.com.ar/wp-content/uploads/2015/09/mile-fiesta-foto-quince-a%C3%B1os-15-mercedes-fifteen-xv-31.jpg);
 }
+
+
+#login {
+margin-left: 1175px;
+width: 25px;
+height: 25px;
+position: relative;
+color: white;
+}
+
+#carrito2{
+width: 0px;
+height: 0px;
+}
+
+.h2,a{
+	text-decoration: none;
+	color: white;
+}
+
+
 #master { 
 width: 1200px; 
 margin: 0 auto; 
@@ -69,11 +91,17 @@ font-size: 20px;
 background-color: #ECD7ED;
 border-radius: 8px;
 font-family: 'Open sans', sans-serif;
-background: linear-gradient(30deg, #EADACB,#EFE0FF);
+background:#c0c0c0;
 }
 
 .navegacion ul{
 list-style: none; 
+}
+
+i{
+	color: white;
+	font-size: 30px;
+	
 }
 
 .menu > li{

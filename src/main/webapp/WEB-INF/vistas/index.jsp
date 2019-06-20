@@ -18,8 +18,14 @@
 	
 	<body> <!--Define inicio del cuero-->
 	
+	
+	
 	<div id="master"> <!--id define un identificador único-->
 		<div id="header"> <!--id define un identificador único-->
+		
+	<div id="carrito2"> <!--id define un identificador único-->
+				 <h2><a href="/proyecto-limpio-spring/login" id="login">Login</a></h2> </a> <!-- href indica el recurso que se quiere enlazar. Img colocacion de imagen. id, un identificador-->
+			</div> <!--Cierro bloque de contenido-->
 			
 
 			<div> <!--Abro bloque de contenido-->
@@ -38,12 +44,13 @@
 		</div><!--Cierro bloque de contenido-->
 	</div><!--Cierro bloque de contenido-->
 	
-		<header>																	<!--Provee informacion introductoria-->
-			<nav class="navegacion"> 												<!--Menu de navegacion-->
-				<ul class="menu">  													<!--Lista no odenada-->
-					<center><li><i>Organización Nerón</i></a></li></center>	<a href="/proyecto-limpio-spring/login"><i>Login</i></a><!--Llamo a productos, inicio-->	
-				</ul> <!--Cierre de lista no ordenada-->
-			</nav> <!--Cierre de menu de navegacion-->
+		<header>													
+			 												
+				 													
+					<center><i>Organización Nerón</i></center>	
+					
+				
+			
 		</header> 	<!--Cierre de informacion introductoria-->
 	
 			<div class="slider"> 	<!--Bloque de contenido. Slider con sus respectivas imagenes-->			
@@ -58,7 +65,7 @@
 				</ul> <!--Cierre de lista no ordenada-->
 			</div> <!--Cierre de bloque de contenido-->
 			
-		<div id="titulop"> <!--Subtitulo NUESTROS PRODUCTOS, bloque de contenido-->
+		<div id="titulop">
 
 
 <div class="a"> <!--Bloque de contenido vacio, clase a-->
