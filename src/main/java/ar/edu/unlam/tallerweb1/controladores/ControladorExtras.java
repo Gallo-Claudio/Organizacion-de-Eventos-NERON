@@ -81,7 +81,7 @@ public class ControladorExtras {
 	
 	
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 (@RequestParam("idReserva") Long idReserva) {
+	public ModelAndView listadoExtras2 (@RequestParam(name="idReserva",required=false) Long idReserva) {
 		ModelMap modelo = new ModelMap();
 		modelo.put("id",idReserva);
 		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());

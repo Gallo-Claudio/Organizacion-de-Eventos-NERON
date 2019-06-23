@@ -6,10 +6,11 @@
 <head>
 <title>Listado Historial de trabajo del Personal</title>
 <link href="css/gallo.css" rel="stylesheet" >
+<link rel="stylesheet" type="text/css" href="css/extras.css">
 </head>
 <body>
 				
-	<table border="1" cellpadding="1" cellspacing="0">
+	<center><table border="1" cellpadding="1" cellspacing="0">
 	<thead>
 	<tr>
 	<th>Identificador</th>
@@ -24,7 +25,7 @@
 		</tr>
     </c:forEach>  
 	</tbody>
-	</table>   
+	</table>   </center>
 		     
 </body>
 </html>

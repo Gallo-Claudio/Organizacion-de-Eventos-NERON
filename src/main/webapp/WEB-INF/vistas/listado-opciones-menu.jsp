@@ -4,23 +4,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Listado para la seleccion del menu</title>
+<title>Listado para la selección del menú</title>
 <link href="css/gallo.css" rel="stylesheet" >
+<link rel="stylesheet" type="text/css" href="css/extras.css">
 </head>
 <body>
 				
-Listado para la seleccion del menu<br><br><br>
-<form:form action="registra-reserva-menu" method="GET" modelAttribute="idmenu">
+<center><h2><i>Listado para la selección del menú</i></h2></center><br><br><br>
+<center><form:form action="registra-reserva-menu" method="GET" modelAttribute="idmenu">
 	<c:forEach var = "i" begin = "1" end = "6">
-	  			<c:forEach var="tipo" items="${secciones}">
+	  			<p><h2><i><c:forEach var="tipo" items="${secciones}">
 					<c:if test="${tipo.id==i}">
 						<td>${tipo.detalle}</td>
 					</c:if>	
-				</c:forEach>
-		<table border="1" cellpadding="1" cellspacing="0">
+				</c:forEach></i></p></h2>
+		<table border="6" cellpadding="4" cellspacing="6">
 			<thead>
 				<tr>
-				<th>Descripcion</th>
+				<th>Descripción</th>
 				<th>Precio</th>
 				<th></th>
 				</tr>
@@ -41,7 +42,7 @@ Listado para la seleccion del menu<br><br><br>
     </c:forEach>    
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>   
-</form:form>			  
+</form:form></center>		  
 			 
         
         <!-- Placed at the end of the document so the pages load faster -->

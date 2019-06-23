@@ -5,7 +5,8 @@
 <html>
 <head>
     <link href="css/bootstrap.min.css" rel="stylesheet" >
-    <title>Seleccion de Salon</title>
+    <link rel="stylesheet" type="text/css" href="css/extras.css">
+    <title>Selección de Salon</title>
 </head>
 <body>
 
@@ -14,14 +15,14 @@
         <div class="col-md-4 col-md-offset-4">
 
             <form class="border border-success" method="GET" action="tomarDatos">
-                <h2>Buscar salones</h2>
+                <h2><i><u>Buscar</u> <u>salones</u></i></h2>
 
 
                 <br>
-                <label>Cantidad de invitados</label>
+                <label><p>Cantidad de invitados</p></label>
                 <input class="form-control"  value="${cantidad}" type="number"  name="cantidad">
                 <br>
-                <label>Fecha</label>
+                <label><p>Fecha</p></label>
                 <input class="form-control" value="${fecha}" type="date"  name="fecha">
 
 
@@ -40,21 +41,21 @@
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
 
-            <form:form class="border border-success"  ModelAttribute="id,horario,fecha" action="validar" method ="post" >
+            <center><form:form class="border border-success"  ModelAttribute="id,horario,fecha" action="validar" method ="post" >
                 <input  type="hidden" value="${fecha}" name="fecha"/>
 
-                <label>Resultados</label>
+                <h2><i><u>Resultados</u></i></h2>
                 <div>
-                    <h2>Capital</h2>
+                    <h3>Capital</h3>
                     <table class="table table-condenced">
                         <tr>
                             <td class="success">-</td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas </td>
+                            <td class="success"><label>Nombre</label></td>
+                            <td class="success"><label>Localidad</label></td>
+                            <td class="success"><label>Calle</label></td>
+                            <td class="success"><label>Número</label></td>
+                            <td class="success"><label>Precio</label></td>
+                            <td class="success"><label>Más</label> </td>
 
                         </tr>
                         <c:forEach items="${capital}" var="salon">
@@ -81,16 +82,16 @@
 
                 <br>
                 <div>
-                    <h2>Zona Oeste</h2>
+                    <h3>Zona Oeste</h3>
                     <table class="table table-condenced">
                         <tr>
                             <td class="success">- </td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas</td>
+                            <td class="success"><label>Nombre</label></td>
+                            <td class="success"><label>Localidad</label></td>
+                            <td class="success"><label>Calle</label></td>
+                            <td class="success"><label>Número</label></td>
+                            <td class="success"><label>Precio</label></td>
+                            <td class="success"><label>Más</label></td>
 
                         </tr>
                         <c:forEach items="${oeste}" var="salon">
@@ -114,16 +115,16 @@
                 <br>
 
                 <div>
-                    <h2>Zona Sur</h2>
+                    <h3>Zona Sur</h3>
                     <table class="table table-condenced">
                         <tr>
                             <td class="success">-</td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas</td>
+                            <td class="success"><label>Nombre</label></td>
+                            <td class="success"><label>Localidad</label></td>
+                            <td class="success"><label>Calle</label></td>
+                            <td class="success"><label>Número</label></td>
+                            <td class="success"><label>Precio</label></td>
+                            <td class="success"><label>Más</label></td>
 
                         </tr>
                         <c:forEach items="${sur}" var="salon">
@@ -147,16 +148,16 @@
 
                 <br>
                 <div>
-                    <h2>Zona Norte</h2>
+                    <h3>Zona Norte</h3>
                     <table class="table table-condenced">
                         <tr>
                             <td class="success">-</td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas </td>
+                            <td class="success"><label>Nombre</label></td>
+                            <td class="success"><label>Localidad</label></td>
+                            <td class="success"><label>Calle</label></td>
+                            <td class="success"><label>Número</label></td>
+                            <td class="success"><label>Precio</label></td>
+                            <td class="success"><label>Más </label></td>
 
                         </tr>
                         <c:forEach items="${norte}" var="salon">
@@ -183,7 +184,9 @@
                 </div>
 
                 <div >
-                    <h2>Horarios</h2>
+                
+                <br><br><br>
+                    <h3>Horarios</h3>
                     <select class="list-group" name="horario">
 
                         <option >de 9:00 hs a 13:00hs</option>
@@ -192,7 +195,7 @@
                         <option>de 15:00 hs a 19:00hs</option>
 
 
-                        <option>de 21:00 hs a 00:00hs o mas</option>
+                        <option>de 21:00 hs a 00:00hs o más</option>
 
 
                     </select><br>
@@ -209,16 +212,16 @@
 
 
 
-            </form:form>
+            </form:form></center>
         </div>
     </div>
     </div>
 
 </c:if>
-
-<h2>Recomendaciones de Menu</h2>
+ <br><br><br>
+<center><h2><i>Recomendaciones de Menú</i></h2>
 <a href="RecomendacionesMenu">
-    <input  class=" btn btn-success" type="button" value="Menus"/>
+    <input  class=" btn btn-success" type="button" value="Menus"/></center>
 </a>
 </body>
 </html>

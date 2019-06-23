@@ -4,8 +4,16 @@ body {
  background-image: url(https://www.15club.com.ar/imgd/Up-Eventos-820706.jpg);
  
 }
+ 
+h2,h1,td,h3{
+	color: white;
+}
 
-h2{
+
+label{
+	color:black;
+}
+p{
 	color: white;
 }
 .cuerpo {
@@ -68,7 +76,7 @@ table{
 
 
 b,
-u {
+u{
  color: #ffffff;
 }
 
