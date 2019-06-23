@@ -1,9 +1,12 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -17,6 +20,11 @@ public class Menu {
 	private Integer costo;
 	@ManyToOne
 	private TipoDeMenu tipoDeEvento;
+	
+	
+	@ManyToMany
+	private List<ReservaMultiple> reservaMultiple;              
+	
 	
 	
 	public Long getId() {
@@ -43,4 +51,12 @@ public class Menu {
 	public void setTipoDeEvento(TipoDeMenu tipoDeEvento) {
 		this.tipoDeEvento = tipoDeEvento;
 	}
+	public List<ReservaMultiple> getReservaMultiple() {
+		return reservaMultiple;
+	}
+	public void setReservaMultiple(List<ReservaMultiple> reservaMultiple) {
+		this.reservaMultiple = reservaMultiple;
+	}
+	
+	
 }
