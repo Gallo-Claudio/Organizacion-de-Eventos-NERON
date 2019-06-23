@@ -33,19 +33,9 @@ public class ControladorPersonal {
 	private ServicioPersonal servicioPersonal;
 
 
-	@RequestMapping(path = "/ingresar-personal", method = RequestMethod.GET) //Cambiar el nombre "ingresar-personal" por uno mas adecuado, tipo asignacion de personal al evento a cubrir
+	@RequestMapping(path = "/asignar-personal-al-evento", method = RequestMethod.GET)
 	public ModelAndView ingresarPersonal() {
 		List <Long> personalDelEvento = new ArrayList <Long> ();
-//		personalDelEvento.add(2L);
-//		personalDelEvento.add(4L);
-//		personalDelEvento.add(6L);
-//		personalDelEvento.add(8L);
-//		personalDelEvento.add(10L);
-//		personalDelEvento.add(12L);
-//		personalDelEvento.add(14L);
-		
-		
-		
 		Map<Long, Integer>conteo = new HashMap();
 
 		Iterator<Personal> p = servicioPersonal.controlDeServiciosPrestados().iterator();
@@ -69,21 +59,16 @@ public class ControladorPersonal {
 		 Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
 		 
 		 for(int i=0;i<personalNecesario;i++) {
-//			 while (entries.hasNext()) {
-				 
 				 Map.Entry <Long,Integer> entry = (Map.Entry) entries.next(); 
 				 Long key = (Long)entry.getKey();
 				 personalDelEvento.add(key);	     
 			 }
-//		 }
+
 		servicioPersonal.consultarPersonal(personalDelEvento);
 		return new ModelAndView("ingreso-menu");
 	}
 
 
-	
-	
-	
 	@RequestMapping(path = "/listar-personal", method = RequestMethod.GET)
 	public ModelAndView listarPersonalAsignadoAlEvento() {
 		
@@ -92,8 +77,6 @@ public class ControladorPersonal {
 		
 		return new ModelAndView("listar-personal", model);
 	}
-	
-	
 	
 	
 	@RequestMapping(path = "/trabajo-personal", method = RequestMethod.GET)
@@ -122,23 +105,4 @@ public class ControladorPersonal {
 		return new ModelAndView("trabajo-personal", model);
 	}
 	
-	
-	
-//	 private static Map sortByAsc(Map unsortMap) {
-//		 List list = new LinkedList(unsortMap.entrySet());
-		 //Para ordenar ascendentemente
-//		 Collections.sort(list, new Comparator() {
-//		 public int compare(Object o1, Object o2) {
-//		 return ((Comparable) ((Map.Entry) (o1)).getValue())
-//		 .compareTo(((Map.Entry) (o2)).getValue());
-//		 }
-//		 });
-		 //put sorted list into map again
-//		 Map<string, integer=""> sortedMap = new LinkedHashMap<string, integer="">();
-//		 for (Iterator it = list.iterator(); it.hasNext();) {
-//		 Map.Entry<string, integer=""> entry = (Map.Entry<string, integer="">)it.next();
-//		 sortedMap.put(entry.getKey(), entry.getValue());
-//		 }
-//		 return sortedMap;
-//		 } 
 }
