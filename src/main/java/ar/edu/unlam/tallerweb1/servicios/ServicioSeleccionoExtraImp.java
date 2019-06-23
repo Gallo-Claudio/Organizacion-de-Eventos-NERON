@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.SeleccionoExtraDao;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
-import ar.edu.unlam.tallerweb1.modelo.Reservas;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
 
 
@@ -18,11 +18,12 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 
 
 	@Override
-	public void guardarExtra(Extras extras) {
-		Reservas reservas = new Reservas();
-         reservas.setExtras(extras);
-		servicioSeleccionoExtraDao.guardarExtra(reservas);
-		
+	public void guardarExtra(Long id,Extras extras) {
+
+		Reserva reserva = servicioSeleccionoExtraDao.traerReserva(id);
+         reserva.setExtras(extras);
+		servicioSeleccionoExtraDao.guardarExtra(reserva);
+
 	}
 
 

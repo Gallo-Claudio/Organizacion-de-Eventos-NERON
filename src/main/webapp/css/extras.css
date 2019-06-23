@@ -2,11 +2,12 @@
 body {
 	
  background-image: url(https://www.15club.com.ar/imgd/Up-Eventos-820706.jpg);
-
-
  
 }
 
+h2{
+	color: white;
+}
 .cuerpo {
  background: #fff;
  width: 900px;

@@ -21,7 +21,7 @@ public class Extras {
 	private Long id;
 	private String nombre;
 	private Integer precio;
-
+	public Extras(){}
 	public Long getId() {
 		return id;
 	}
