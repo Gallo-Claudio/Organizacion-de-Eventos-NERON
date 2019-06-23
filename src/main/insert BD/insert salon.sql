@@ -9,7 +9,7 @@ insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle5","local
 insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle6","localidad","213635","Sur");
 insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle7","localidad","2195","Sur");
 
-insert into  ubicacionsalon (calle,localidad,numero,zona) values ("calle8","localidad","21235","Norte");
+insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle8","localidad","21235","Norte");
 insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle9","localidad","268235","Norte");
 insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle3","localidad","213635","Norte");
 insert into  ubicacionsalon(calle,localidad,numero,zona) values ("calle7","localidad","2195","Norte");
