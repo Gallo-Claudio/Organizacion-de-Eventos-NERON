@@ -6,7 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 
 
 @Entity
@@ -25,6 +28,9 @@ public class Reserva {
 
     @OneToOne
     private Cliente cliente;
+    
+	@ManyToMany    
+	private List<Menu> menu;  
 
 
     public Reserva() {
@@ -77,5 +83,11 @@ public class Reserva {
 
 	public void setExtras(ar.edu.unlam.tallerweb1.modelo.Extras extras) {
 		Extras = extras;
+	}
+	public List<Menu> getMenu() {
+		return menu;
+	}
+	public void setMenu(List<Menu> menu) {
+		this.menu = menu;
 	}
 }

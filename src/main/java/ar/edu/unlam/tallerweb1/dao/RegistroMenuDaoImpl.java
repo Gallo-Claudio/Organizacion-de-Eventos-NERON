@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.ReservaMultiple;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,10 +16,9 @@ public class RegistroMenuDaoImpl implements RegistroMenuDao {
     private SessionFactory sessionFactory;
 
 	@Override
-	public void registraMenuEnReserva (ReservaMultiple reservaMultiple) {  
+	public void registraMenuEnReserva(Reserva reservaMenu) {
 		final Session session = sessionFactory.getCurrentSession();  // Obtengo una sesion
-		session.save(reservaMultiple);    // Persisto en la BD, el objeto recibido desde el area de Servicios
-
+		session.save(reservaMenu);    // Persisto en la BD, el objeto recibido desde el area de Servicios
 	}
 
 }

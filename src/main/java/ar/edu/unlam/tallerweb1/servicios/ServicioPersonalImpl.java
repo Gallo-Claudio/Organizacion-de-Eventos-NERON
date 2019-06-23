@@ -51,7 +51,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 	public Integer calcularPersonal() {
 		//Ahora cocino la cantidad de personal, pero habria que realizar el calculo
-		Integer personalNecesario = 7;
+		Integer personalNecesario = 3;
 		return personalNecesario;
 	}
 	

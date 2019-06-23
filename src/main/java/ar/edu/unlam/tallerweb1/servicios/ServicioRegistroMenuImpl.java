@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.RegistroMenuDao;
 import ar.edu.unlam.tallerweb1.dao.RegistroPlatosMenuDao;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.ReservaMultiple;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
 
 @Service("servicioRegistroMenu")
@@ -25,7 +25,7 @@ public class ServicioRegistroMenuImpl implements ServicioRegistroMenu {
 
 	@Override
 	public void ingresarMenuSeleccionado(Long idmenu[] ) {
-		ReservaMultiple reservaMultiple = new ReservaMultiple ();
+		Reserva reservaMenu = new Reserva ();
 		List<Menu> menuElegido = new ArrayList();
 		
 		   int arrayLength = idmenu.length;
@@ -35,8 +35,8 @@ public class ServicioRegistroMenuImpl implements ServicioRegistroMenu {
 		    	menuElegido.add(registroPlatosMenuDao.traerMenuPorId(id));
 		    }
 		
-		reservaMultiple.setMenu(menuElegido);
-		registroMenuDao.registraMenuEnReserva(reservaMultiple);
+		reservaMenu.setMenu(menuElegido);
+		registroMenuDao.registraMenuEnReserva(reservaMenu);
 	}
 
 }
