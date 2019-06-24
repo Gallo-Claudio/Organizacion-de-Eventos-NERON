@@ -1,9 +1,14 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.time.*;
 
 import javax.inject.Inject;
@@ -46,8 +51,8 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 	public Integer calcularPersonal() {
 		//Ahora cocino la cantidad de personal, pero habria que realizar el calculo
-		Integer personal = 5;
-		return personal;
+		Integer personalNecesario = 3;
+		return personalNecesario;
 	}
 	
 	public List<Personal> controlDeServiciosPrestados () {
@@ -62,5 +67,27 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			
 		return resultado;
 	}
+	
+
+	//////////////////////////////////////////////////////////////////////////////////
+	/// Ordena el map  ///////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////
+	 public Map sortByAsc(Map unsortMap) {
+		 List list = new LinkedList(unsortMap.entrySet());
+		 //Para ordenar ascendentemente
+		 Collections.sort(list, new Comparator() {
+		 public int compare(Object o1, Object o2) {
+		 return ((Comparable) ((Map.Entry) (o1)).getValue())
+		 .compareTo(((Map.Entry) (o2)).getValue());
+		 }
+		 });
+		 //put sorted list into map again
+		 Map<Long, Integer> sortedMap = new LinkedHashMap<Long, Integer>();
+		 for (Iterator it = list.iterator(); it.hasNext();) {
+		 Map.Entry<Long, Integer> entry = (Map.Entry<Long, Integer>)it.next();
+		 sortedMap.put(entry.getKey(), entry.getValue());
+		 }
+		 return sortedMap;
+		 } 
 	
 }

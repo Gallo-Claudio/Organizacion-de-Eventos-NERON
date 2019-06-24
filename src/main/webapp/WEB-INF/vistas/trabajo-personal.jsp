@@ -21,9 +21,9 @@
 	<tbody>
 	<c:forEach var="personal" items="${asistencia}"> 
 		<tr>
-		<td>${personal.id}</td>
-		<td>${personal.nombre}</td>
-		<td>${personal.nombre}</td>
+		<td>${personal.key}</td>
+		<td></td>
+		<td>${personal.value}</td>
 
 		</tr>
     </c:forEach>  

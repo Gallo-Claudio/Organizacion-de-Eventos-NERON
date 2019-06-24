@@ -2,9 +2,15 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -27,20 +33,41 @@ public class ControladorPersonal {
 	private ServicioPersonal servicioPersonal;
 
 
-	@RequestMapping(path = "/ingresar-personal", method = RequestMethod.GET)
+	@RequestMapping(path = "/asignar-personal-al-evento", method = RequestMethod.GET)
 	public ModelAndView ingresarPersonal() {
 		List <Long> personalDelEvento = new ArrayList <Long> ();
-		personalDelEvento.add(2L);
-		personalDelEvento.add(4L);
-		personalDelEvento.add(6L);
-		personalDelEvento.add(8L);
-		personalDelEvento.add(10L);
-		personalDelEvento.add(12L);
-		personalDelEvento.add(14L);
+		Map<Long, Integer>conteo = new HashMap();
+
+		Iterator<Personal> p = servicioPersonal.controlDeServiciosPrestados().iterator();
+		Personal personal;
+		while (p.hasNext()) {
+			personal=p.next();
+			
+	        if(conteo.containsKey(personal.getId())){
+	        	conteo.put(personal.getId(),conteo.get(personal.getId())+1);
+	         }
+	         else{
+	            conteo.put(personal.getId(),1);
+	         }
+		}
+
+		 Map<Long,Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.sortByAsc(conteo);
 		
+		 
+		 Integer personalNecesario = servicioPersonal.calcularPersonal();
+		 
+		 Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
+		 
+		 for(int i=0;i<personalNecesario;i++) {
+				 Map.Entry <Long,Integer> entry = (Map.Entry) entries.next(); 
+				 Long key = (Long)entry.getKey();
+				 personalDelEvento.add(key);	     
+			 }
+
 		servicioPersonal.consultarPersonal(personalDelEvento);
 		return new ModelAndView("ingreso-menu");
 	}
+
 
 	@RequestMapping(path = "/listar-personal", method = RequestMethod.GET)
 	public ModelAndView listarPersonalAsignadoAlEvento() {
@@ -51,17 +78,31 @@ public class ControladorPersonal {
 		return new ModelAndView("listar-personal", model);
 	}
 	
+	
 	@RequestMapping(path = "/trabajo-personal", method = RequestMethod.GET)
 	public ModelAndView listarTrabajoPersonal() {
+		Map<Long, Integer>conteo = new HashMap();
+
+		Iterator<Personal> p = servicioPersonal.controlDeServiciosPrestados().iterator();
+		Personal personal;
+		while (p.hasNext()) {
+			personal=p.next();
+			
+	        if(conteo.containsKey(personal.getId())){
+	        	conteo.put(personal.getId(),conteo.get(personal.getId())+1);
+	         }
+	         else{
+	            conteo.put(personal.getId(),1);
+	         }
+		}
+
 		
-		
-        Set<Personal> personal = new HashSet<Personal>(servicioPersonal.controlDeServiciosPrestados());
-  //      for (Personal p : personal) {
-  //         Collections.frequency(servicioPersonal.controlDeServiciosPrestados(), p);
-  //      }
+		Map<Long,Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.sortByAsc(conteo);
 
         ModelMap model = new ModelMap();
-		model.put("asistencia", personal);
+		model.put("asistencia", conteoOrdenadoAscendentementePorAsistencia);
+		
 		return new ModelAndView("trabajo-personal", model);
 	}
+	
 }
