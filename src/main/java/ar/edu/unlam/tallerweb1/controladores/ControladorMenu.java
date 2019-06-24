@@ -63,8 +63,9 @@ public class ControladorMenu {
 
 	// Muestra el listado de los diferentes platos/bebidas/postres que componen el men�, para que el cliente seleccione entre ellos
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
-	public ModelAndView listadoDeOpcionesDeMenu () {
+	public ModelAndView listadoDeOpcionesDeMenu (@RequestParam("q") Long id) {
 		ModelMap modelo = new ModelMap();
+		modelo.put("id",id);
 		// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
 		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 		// Para luego pasarlo a la vista a traves del return ModelAndView
@@ -74,10 +75,10 @@ public class ControladorMenu {
 	}
 
 	@RequestMapping(path = "/registra-reserva-menu", method = RequestMethod.GET)
-	public ModelAndView registraReservaMenu (@RequestParam(value = "idmenu") Long pasaidmenu[], HttpServletRequest request) {
+	public ModelAndView registraReservaMenu (@RequestParam ("id") Long id,@RequestParam(value = "idmenu") Long pasaidmenu[], HttpServletRequest request) {
 
-		servicioRegistroMenu.ingresarMenuSeleccionado(pasaidmenu);
-		return new ModelAndView("home");
+		servicioRegistroMenu.ingresarMenuSeleccionado(id,pasaidmenu);
+		return new ModelAndView("redirect:/SeleccionDeExtras?idReserva="+id+"");
 	}
 
 }

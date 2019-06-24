@@ -82,7 +82,7 @@ public class ControladorSalon {
            reserva.setFecha(fecha);
            servicioSalon.guardarReserva(reserva);
            Long idReserva=new Long(reserva.getId());
-           return new ModelAndView("redirect:/menu-listado?q="+idReserva+"");
+           return new ModelAndView("redirect:/listado-menu?q="+idReserva+"");
         }else{
 
             modelo.put("mensaje",mensaje);
