@@ -14,7 +14,7 @@
 	</head>
 	
 	<header>
-				<center><b><i>Nerï¿½n - Agregar extras</i></b></center><br><br>
+				<center><b><i>Nerón - Agregar extras</i></b></center><br><br>
 
 	
 	
