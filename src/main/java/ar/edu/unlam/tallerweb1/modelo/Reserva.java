@@ -32,7 +32,10 @@ public class Reserva {
 	@ManyToMany    
 	private List<Menu> menu;  
 
-
+	@ManyToMany
+	private List <Personal> personal;
+	
+	
     public Reserva() {
 
     }
@@ -77,11 +80,11 @@ public class Reserva {
         this.cliente = cliente;
     }
     
-	public ar.edu.unlam.tallerweb1.modelo.Extras getExtras() {
+	public Extras getExtras() {
 		return Extras;
 	}
 
-	public void setExtras(ar.edu.unlam.tallerweb1.modelo.Extras extras) {
+	public void setExtras(Extras extras) {
 		Extras = extras;
 	}
 	public List<Menu> getMenu() {
@@ -89,5 +92,11 @@ public class Reserva {
 	}
 	public void setMenu(List<Menu> menu) {
 		this.menu = menu;
+	}
+	public List<Personal> getPersonal() {
+		return personal;
+	}
+	public void setPersonal(List<Personal> personal) {
+		this.personal = personal;
 	}
 }

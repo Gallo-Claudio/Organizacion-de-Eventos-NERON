@@ -66,11 +66,11 @@ public class Menu {
 	public void setPuntajes(List<PuntajeMenu> puntajes) {
 		this.puntajes = puntajes;
 	}
-	public List<Reserva> getReservaMultiple() {
+	public List<Reserva> getReserva() {
 		return reserva;
 	}
-	public void setReservaMultiple(List<Reserva> reservaMultiple) {
-		this.reserva = reservaMultiple;
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
 	}
 	
 }

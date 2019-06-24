@@ -20,6 +20,7 @@ import ar.edu.unlam.tallerweb1.dao.PersonalDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Evento;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("servicioPersonal")
@@ -33,20 +34,26 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	public void consultarPersonal(List<Long> listado) {
 		List<Personal> listadoPersonalDelEvento = new ArrayList <Personal> ();
 		
+		// Recorro la coleccion (listado del tipo List) recibida y voy agregando al List (listadoPersonalDelEvento)
+		// los objetos del tipo Personal, que fueron buscados por su Id. Se genera una coleccion List <Personal>
+		// con el personal asignado a cubrir el evento
 		for(Long personal : listado) {
-			listadoPersonalDelEvento.add(personalDao.buscarPersonalAsignadoAlEvento(personal));
+			listadoPersonalDelEvento.add(personalDao.buscarPersonalPorId(personal));
 		}
 		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//Preguntar si no es mas conveniente separar esta logica en otro servicio que se podria llamar Guardar Evento
+		//Preguntar si no es mas conveniente separar esta logica en otro servicio que se podria llamar Guardar Reserva
 		LocalDate fecha_ingreso = LocalDate.of(2019, 6, 16);  //<----- Verificar si los datos año, mes dia se pueden pasar como integer
+	//	evento.setFechaDelEvento(fecha_ingreso);    <--------- ERROR CON LA FECHA 	
 		
-		Evento evento = new Evento();
-	//	evento.setFechaDelEvento(fecha_ingreso);    <--------- ERROR CON LA FECHA 
-		evento.setPersonal(listadoPersonalDelEvento);
 		
-		personalDao.ingresarEvento(evento);
+		
+		Reserva reserva = new Reserva();
+		// Agrego la coleccion List<Personal> obtenida, a un objeto Reserva
+		reserva.setPersonal(listadoPersonalDelEvento);
+		// Paso el objeto Reserva al DAO, para ser guardado en la BD
+		personalDao.ingresarReserva(reserva);
 	}
 
 	public Integer calcularPersonal() {
@@ -56,12 +63,12 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	}
 	
 	public List<Personal> controlDeServiciosPrestados () {
-		List<Evento> lista = new ArrayList();
-		lista=(personalDao.traerEventos());
+		List<Reserva> lista = new ArrayList();
+		lista=(personalDao.traerReservas());
 		
 		List<Personal> resultado = new ArrayList<>();
 		
-		for (Evento l: lista) {	
+		for (Reserva l: lista) {	
 			resultado.addAll(l.getPersonal());
 		}
 			
