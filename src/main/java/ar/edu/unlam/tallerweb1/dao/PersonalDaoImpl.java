@@ -1,6 +1,5 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.Evento;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -22,6 +21,8 @@ public class PersonalDaoImpl implements PersonalDao {
 	@Inject
     private SessionFactory sessionFactory;
 	List <Reserva> listaDeReservas;
+	List <Personal> personal;
+	
 	@Override
 	public Personal buscarPersonalPorId(Long id) {
 		
@@ -44,6 +45,13 @@ public class PersonalDaoImpl implements PersonalDao {
 	
 		//	listaDeReservas = session.createCriteria(Evento.class).list();
 		return (listaDeReservas) = session.createCriteria(Reserva.class).list();
+	}
+
+	@Override
+	public List <Personal> cantidadDePersonal() {
+		
+		final Session session = sessionFactory.getCurrentSession();
+		return (personal) = session.createCriteria(Personal.class).list();
 	}
 
 }

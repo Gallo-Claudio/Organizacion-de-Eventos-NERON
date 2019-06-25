@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
 
-import ar.edu.unlam.tallerweb1.modelo.Evento;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
@@ -15,5 +14,7 @@ public interface PersonalDao {
 	void ingresarReserva (Reserva reserva);
 	
 	List <Reserva> traerReservas();
+	
+	List <Personal> cantidadDePersonal();
 	
 }
