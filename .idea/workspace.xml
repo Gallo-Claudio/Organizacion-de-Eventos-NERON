@@ -21,32 +21,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorSalon.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="87" column="42" lean-forward="true" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="87">
-              <caret line="80" column="69" lean-forward="true" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Menu.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorExtras.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="71" column="26" selection-start-line="71" selection-start-column="26" selection-end-line="71" selection-end-column="26" />
+            <state relative-caret-position="50">
+              <caret line="77" column="6" lean-forward="true" selection-start-line="77" selection-start-column="6" selection-end-line="77" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-seleccion-extras.jsp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtraImp.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="175">
+              <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtra.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -76,15 +85,11 @@
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Postre.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioIngresoDeMenuImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-opciones-menu-final.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtra.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/dao/SeleccionoExtraDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/dao/SeleccionoExtraDaoImp.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/seleccion-extras.jsp" />
-        <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtraImp.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorMenuFinal.java" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-seleccion-extras.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/dao/SalonDaoImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorExtras.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorSalon.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-opciones-menu.jsp" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioRegistroMenu.java" />
@@ -93,6 +98,10 @@
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioRegistroMenuImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorMenu.java" />
         <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Menu.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtra.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorExtras.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtraImp.java" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-seleccion-extras.jsp" />
       </list>
     </option>
   </component>
@@ -115,18 +124,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="proyecto-limpio-spring" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Organizacion-de-Eventos-NERON" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -200,42 +197,6 @@
               <item name="edu" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="unlam" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="tallerweb1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="controladores" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="proyecto-limpio-spring" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="proyecto-limpio-spring" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ar" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="edu" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="unlam" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="tallerweb1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="dao" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="proyecto-limpio-spring" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="proyecto-limpio-spring" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ar" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="edu" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="unlam" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="tallerweb1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="modelo" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="proyecto-limpio-spring" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="proyecto-limpio-spring" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="ar" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="edu" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="unlam" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="tallerweb1" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="servicios" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
@@ -266,6 +227,18 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="proyecto-limpio-spring" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Organizacion-de-Eventos-NERON" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -375,17 +348,18 @@
       <workItem from="1560887109398" duration="19042000" />
       <workItem from="1561300683685" duration="1582000" />
       <workItem from="1561323805400" duration="6495000" />
+      <workItem from="1561429467682" duration="1182000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27119000" />
+    <option name="totallyTimeSpent" value="28301000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1107" height="589" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24336688" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23696248" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -395,7 +369,7 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32916668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32916668" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -423,13 +397,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioRecomendacionesImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="24" column="26" lean-forward="true" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioRecomendaciones.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -516,13 +483,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/PlatoPrincipal.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Postre.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/dao/ListadoDeMenuDaoImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtra.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="42" lean-forward="true" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/dao/IngresoDeMenuDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -561,13 +521,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorMenuFinal.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioIngresoDeMenuImpl.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-seleccion-extras.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Salon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -577,16 +530,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/recomendacionesMenu.jsp">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtraImp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="26" column="5" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/dao/SeleccionoExtraDaoImp.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -626,13 +569,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorExtras.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="89" column="4" lean-forward="true" selection-start-line="89" selection-start-column="4" selection-end-line="89" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/salon.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2243">
@@ -647,20 +583,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorSalon.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="87" column="42" lean-forward="true" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-opciones-menu-final.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="11" column="42" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-opciones-menu-final.jsp" />
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-opciones-menu.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="87">
@@ -696,13 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
-          <caret line="80" column="69" lean-forward="true" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/modelo/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
@@ -710,6 +626,54 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="80" column="69" selection-start-line="80" selection-start-column="69" selection-end-line="80" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorSalon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="87" column="42" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-final-extras.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtra.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/servicios/ServicioSeleccionoExtraImp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="24" column="31" lean-forward="true" selection-start-line="24" selection-start-column="31" selection-end-line="24" selection-end-column="31" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/vistas/listado-seleccion-extras.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ar/edu/unlam/tallerweb1/controladores/ControladorExtras.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="77" column="6" lean-forward="true" selection-start-line="77" selection-start-column="6" selection-end-line="77" selection-end-column="6" />
         </state>
       </provider>
     </entry>
