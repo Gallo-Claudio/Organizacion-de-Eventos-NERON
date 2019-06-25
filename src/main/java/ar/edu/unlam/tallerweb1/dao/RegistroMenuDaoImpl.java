@@ -22,7 +22,7 @@ public class RegistroMenuDaoImpl implements RegistroMenuDao {
 		session.save(reservaMenu);    // Persisto en la BD, el objeto recibido desde el area de Servicios
 	}
 
-}
+
 
 	@Override
 	public Reserva traerReserva(Long id){

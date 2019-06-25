@@ -74,16 +74,11 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		return conteo;
 	}
 
-<<<<<<< HEAD
+
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
-=======
-	public Integer calcularPersonal() {
-		//Ahora cocino la cantidad de personal, pero habria que realizar el calculo
-		Integer personalNecesario = 3;
-		return personalNecesario;
-	}
->>>>>>> rocio
+
+
 
 	// Obtengo un listado general de asistencia
 	@Override

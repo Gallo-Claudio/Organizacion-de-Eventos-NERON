@@ -75,7 +75,7 @@ public class ControladorMenu {
 	}
 
 	@RequestMapping(path = "/registra-reserva-menu", method = RequestMethod.GET)
-	public ModelAndView registraReservaMenu (@RequestParam ("id") Long id,@RequestParam(value = "idmenu") Long pasaidmenu[], HttpServletRequest request) {
+	public ModelAndView registraReservaMenu (@RequestParam ("id") Long id, @RequestParam(value = "idmenu") Long pasaidmenu[], HttpServletRequest request) {
 
 		servicioRegistroMenu.ingresarMenuSeleccionado(id,pasaidmenu);
 		return new ModelAndView("redirect:/SeleccionDeExtras?idReserva="+id+"");

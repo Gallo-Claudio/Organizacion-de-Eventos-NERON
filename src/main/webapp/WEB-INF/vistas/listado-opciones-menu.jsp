@@ -11,7 +11,7 @@
 
 Listado para la seleccion del menu<br><br><br>
 
-<form:form action="registra-reserva-menu?id=${id}" method="GET" modelAttribute="idmenu">
+<form:form action="registra-reserva-menu" method="GET"> <!--   modelAttribute="idmenu"-->
 
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${secciones}">
@@ -42,7 +42,7 @@ Listado para la seleccion del menu<br><br><br>
 		<br><br><br>
 
     </c:forEach>
-	<input type="text" mane="idReserva" value="${id}">
+	<input type="text" name="id" value="${id}">
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
 </form:form>

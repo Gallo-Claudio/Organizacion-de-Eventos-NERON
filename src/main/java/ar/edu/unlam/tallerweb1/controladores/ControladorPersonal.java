@@ -33,7 +33,7 @@ public class ControladorPersonal {
 	private ServicioPersonal servicioPersonal;
 
 
-<<<<<<< HEAD
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Asigna personal al evento contratado de forma automatica. Lo hace equilibrando las veces trabajadas  /////////////////
 	// por cada empleado, asegurando de esta forma que no haya disparidad en la asistencia a los eventos ////////////////////
