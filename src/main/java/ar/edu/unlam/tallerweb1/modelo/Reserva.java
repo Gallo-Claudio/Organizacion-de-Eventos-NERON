@@ -28,14 +28,16 @@ public class Reserva {
 
     @OneToOne
     private Cliente cliente;
-    
-	@ManyToMany    
-	private List<Menu> menu;  
+
+	@ManyToMany
+	private List<Menu> menu;
+
 
 	@ManyToMany
 	private List <Personal> personal;
-	
-	
+
+
+
     public Reserva() {
 
     }
@@ -79,7 +81,8 @@ public class Reserva {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
+
+<<<<<<< HEAD
 	public Extras getExtras() {
 		return Extras;
 	}
@@ -95,8 +98,22 @@ public class Reserva {
 	}
 	public List<Personal> getPersonal() {
 		return personal;
+=======
+	public ar.edu.unlam.tallerweb1.modelo.Extras getExtras() {
+		return Extras;
+>>>>>>> rocio
 	}
 	public void setPersonal(List<Personal> personal) {
 		this.personal = personal;
 	}
+<<<<<<< HEAD
 }
+=======
+	public List<Menu> getMenu() {
+		return menu;
+	}
+	public void setMenu(List<Menu> menu) {
+		this.menu = menu;
+	}
+}
+>>>>>>> rocio

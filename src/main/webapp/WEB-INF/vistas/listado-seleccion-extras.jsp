@@ -35,6 +35,7 @@
 		<td><b>$<i>${variable.precio}</i></b></td>
 
 		<td><input name="id" type="checkbox" value="${variable.id}"/></td>
+			<td><input name="id" type="text" value="${variable.id}"/></td>
 
 		</tr>
    	</c:forEach>  

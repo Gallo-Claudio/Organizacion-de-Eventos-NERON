@@ -72,16 +72,15 @@ public class ControladorExtras {
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
 	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
 										 @ModelAttribute ("id") Long id ){
-		Extras extra=new Extras();
-		extra.setId(id);
-		servicioSeleccionoExtra.guardarExtra(idReserva,extra);
+
+		servicioSeleccionoExtra.guardarExtra(idReserva,id);
 		return new ModelAndView("redirect:/seleccion-extras"); 
 	} 
 	
 	
 	
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 (@RequestParam("idReserva") Long idReserva) {
+	public ModelAndView listadoExtras2 (@RequestParam(name="idReserva",required=false) Long idReserva) {
 		ModelMap modelo = new ModelMap();
 		modelo.put("id",idReserva);
 		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());

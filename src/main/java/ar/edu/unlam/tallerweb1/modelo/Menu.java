@@ -27,7 +27,8 @@ public class Menu {
 	public Menu(){}
 	@ManyToMany
 	private List<Reserva> reserva;              
-	
+
+
 
 	public Long getId() {
 		return id;
@@ -71,6 +72,7 @@ public class Menu {
 	}
 	public void setReserva(List<Reserva> reserva) {
 		this.reserva = reserva;
+
 	}
-	
+
 }

@@ -9,17 +9,18 @@ import ar.edu.unlam.tallerweb1.modelo.Personal;
 public interface ServicioPersonal {
 
 	Map <Long, Integer> obtencionListadoDeAsistencias();
-	
-	List <Personal> controlDeServiciosPrestados ();	
-	
-	Map OrdenaAscendentemente(Map unsortMap); 	
-	
-	List <Integer> calcularPersonal();	
-	
+
+
+	List <Personal> controlDeServiciosPrestados ();
+
+	Map OrdenaAscendentemente(Map unsortMap);
+
+	List <Integer> calcularPersonal();
+
 	List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia);
-	
+
 	List <Personal> listadoPersonalAsignado(List <Long> listado);
-	
+
 	void persisteElListadoDePersonalAsignado (List <Personal> listado);
 
 }
