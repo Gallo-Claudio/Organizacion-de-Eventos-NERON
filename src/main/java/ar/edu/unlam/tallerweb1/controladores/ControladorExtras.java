@@ -72,9 +72,8 @@ public class ControladorExtras {
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
 	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
 										 @ModelAttribute ("id") Long id ){
-		Extras extra=new Extras();
-		extra.setId(id);
-		servicioSeleccionoExtra.guardarExtra(idReserva,extra);
+
+		servicioSeleccionoExtra.guardarExtra(idReserva,id);
 		return new ModelAndView("redirect:/seleccion-extras"); 
 	} 
 	
@@ -87,7 +86,6 @@ public class ControladorExtras {
 		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
 	}
-	
 	
 	/*INDEX*/
 	

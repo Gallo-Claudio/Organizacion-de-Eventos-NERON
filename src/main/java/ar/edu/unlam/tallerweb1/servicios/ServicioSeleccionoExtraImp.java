@@ -18,10 +18,11 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 
 
 	@Override
-	public void guardarExtra(Long id,Extras extras) {
-
+	public void guardarExtra(Long id,Long idExtra) {
+         Extras extra=new Extras();
+         extra.setId(idExtra);
 		Reserva reserva = servicioSeleccionoExtraDao.traerReserva(id);
-         reserva.setExtras(extras);
+        reserva.setExtras(extra);
 		servicioSeleccionoExtraDao.guardarExtra(reserva);
 
 	}
