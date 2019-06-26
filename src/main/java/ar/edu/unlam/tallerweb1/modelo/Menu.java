@@ -26,8 +26,9 @@ public class Menu {
 	private List<PuntajeMenu> puntajes;
 	public Menu(){}
 	@ManyToMany
-	private List<Reserva> reserva;
-	
+	private List<Reserva> reserva;              
+
+
 
 	public Long getId() {
 		return id;
@@ -69,8 +70,9 @@ public class Menu {
 	public List<Reserva> getReserva() {
 		return reserva;
 	}
-	public void setReserva(List<Reserva> reservaMultiple) {
-		this.reserva = reservaMultiple;
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
+
 	}
-	
+
 }

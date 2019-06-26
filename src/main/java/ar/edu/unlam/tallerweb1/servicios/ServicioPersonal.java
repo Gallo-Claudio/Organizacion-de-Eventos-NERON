@@ -8,11 +8,19 @@ import ar.edu.unlam.tallerweb1.modelo.Personal;
 // Interface que define los metodos del Servicio de Usuarios.
 public interface ServicioPersonal {
 
-	void consultarPersonal(List<Long> listado);
-	
-	Integer calcularPersonal();
-	
-	List<Personal> controlDeServiciosPrestados ();
-	
-	Map sortByAsc(Map unsortMap); 
+	Map <Long, Integer> obtencionListadoDeAsistencias();
+
+
+	List <Personal> controlDeServiciosPrestados ();
+
+	Map OrdenaAscendentemente(Map unsortMap);
+
+	List <Integer> calcularPersonal();
+
+	List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia);
+
+	List <Personal> listadoPersonalAsignado(List <Long> listado);
+
+	void persisteElListadoDePersonalAsignado (List <Personal> listado);
+
 }

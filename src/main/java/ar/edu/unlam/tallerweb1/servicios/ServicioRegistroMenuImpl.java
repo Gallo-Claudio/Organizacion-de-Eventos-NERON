@@ -23,18 +23,19 @@ public class ServicioRegistroMenuImpl implements ServicioRegistroMenu {
 	@Inject
 	private RegistroMenuDao registroMenuDao;
 
+
 	@Override
 	public void ingresarMenuSeleccionado(Long idreserva,Long idmenu[] ) {
 		Reserva reservaMenu =registroMenuDao.traerReserva(idreserva);
 		List<Menu> menuElegido = new ArrayList();
-		
+
 		   int arrayLength = idmenu.length;
 
 		    for (int i=0; i<arrayLength; i++) {
 		    	Long id = idmenu[i];
 		    	menuElegido.add(registroPlatosMenuDao.traerMenuPorId(id));
 		    }
-		
+
 		reservaMenu.setMenu(menuElegido);
 
 		registroMenuDao.registraMenuEnReserva(reservaMenu);

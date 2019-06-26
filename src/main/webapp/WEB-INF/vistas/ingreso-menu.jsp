@@ -14,8 +14,8 @@
 	</head>
 	<body>
 		<div class = "container">
-	  <center><h2><i>Ingreso de los distintos platos y bebidas que componen el Menu</i></h2></center>
-	   <center><p class="descripcion">Desde aquí se ingresan los diferentes platos/bebidas/postres que componen el listado de opciones a elegir por el cliente.</p></center>
+	  <center> <h1>Ingreso de los distintos platos y bebidas que componen el Menu</h1></center>
+	  <center> <p class="descripcion">Desde aquí se ingresan los diferentes platos/bebidas/postres que componen el listado de opciones a elegir por el cliente</p></center>
 	   
 	   
 				<center><form:form action="registro-plato-menu" method="POST" modelAttribute="descripcion, costo, tipoDeEvento">

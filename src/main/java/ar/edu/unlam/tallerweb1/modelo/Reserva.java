@@ -28,66 +28,116 @@ public class Reserva {
 
     @OneToOne
     private Cliente cliente;
-    
-	@ManyToMany    
-	private List<Menu> menu;  
+
+	@ManyToMany
+	private List<Menu> menu;
+
+
+	@ManyToMany
+	private List <Personal> personal;
+
 
 
     public Reserva() {
 
     }
 
-    public String getHorario() {
-        return horario;
-    }
 
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
 
-    public String getFecha() {
-        return fecha;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Salon getSalon() {
-        return salon;
-    }
 
-    public void setSalon(Salon salon) {
-        this.salon = salon;
-    }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
+	public String getFecha() {
+		return fecha;
+	}
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-    
-	public ar.edu.unlam.tallerweb1.modelo.Extras getExtras() {
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
+
+	public String getHorario() {
+		return horario;
+	}
+
+
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+
+
+	public Extras getExtras() {
 		return Extras;
 	}
 
-	public void setExtras(ar.edu.unlam.tallerweb1.modelo.Extras extras) {
+
+
+	public void setExtras(Extras extras) {
 		Extras = extras;
 	}
+
+
+
+	public Salon getSalon() {
+		return salon;
+	}
+
+
+
+	public void setSalon(Salon salon) {
+		this.salon = salon;
+	}
+
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
 	public List<Menu> getMenu() {
 		return menu;
 	}
+
+
+
 	public void setMenu(List<Menu> menu) {
 		this.menu = menu;
 	}
+
+
+
+	public List<Personal> getPersonal() {
+		return personal;
+	}
+
+
+
+	public void setPersonal(List<Personal> personal) {
+		this.personal = personal;
+	}
+
+
 }
+

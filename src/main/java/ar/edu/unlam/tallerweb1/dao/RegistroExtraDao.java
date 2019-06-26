@@ -3,8 +3,8 @@ package ar.edu.unlam.tallerweb1.dao;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
 
-public interface RegistroMenuDao {
+public interface RegistroExtraDao {
 
-	void registraMenuEnReserva (Reserva reservaMenu);
+	void registraExtraEnReserva (Reserva reservaExtra);
 	Reserva traerReserva(Long id);
 }

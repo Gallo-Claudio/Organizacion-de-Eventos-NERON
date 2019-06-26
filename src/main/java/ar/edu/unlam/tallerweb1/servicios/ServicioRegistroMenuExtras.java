@@ -5,8 +5,8 @@ import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.TipoDeMenu;
 
 // Interface que define los metodos del Servicio de Regisatros de platos del Menu.
-public interface ServicioRegistroMenu {
+public interface ServicioRegistroMenuExtras {
 
-	void ingresarMenuSeleccionado(Long id,Long idmenu[]);
+	void ingresarExtraSeleccionado(Long id,Long idextra[]);
 
 }
