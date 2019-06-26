@@ -25,8 +25,8 @@ public class Personal {
 	private String nombre;
 	private String apellido;
 
-//	@ManyToMany
-//	private List<Reserva> reserva;
+	@ManyToMany
+	private List<Reserva> reserva;
 
 	//	private Date fechaDeIngreso;
 	
@@ -55,12 +55,12 @@ public class Personal {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-//	public List<Reserva> getReserva() {
-//		return reserva;
-//	}
-//	public void setReserva(List<Reserva> reserva) {
-//		this.reserva = reserva;
-//	}	
+	public List<Reserva> getReserva() {
+		return reserva;
+	}
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
+	}	
 
 //	public Date getFechaDeIngreso() {
 //		return fechaDeIngreso;

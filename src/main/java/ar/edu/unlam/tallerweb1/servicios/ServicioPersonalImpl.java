@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -74,13 +73,10 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		return conteo;
 	}
 
-
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 
-
-
-	// Obtengo un listado general de asistencia
+	// Obtengo un listado general de la asistencia (eventos cubiertos por cada personal)
 	@Override
 	public List<Personal> controlDeServiciosPrestados () {
 		List<Reserva> lista = new ArrayList();
@@ -161,8 +157,8 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
 
 		// Se usa el for, para ir pasando por las 6 categorias de empleados
-		for(int i=0; i<6; i++) {
-			int vuelta=1;  // Con esta variable, nos aseguramos de tomar solo la cantidad necesaria de personal para la categoria que se esta rrecorriendo en el bucle WHILE
+//		for(int i=0; i<6; i++) {
+			int encargado=1, chef=1, cocinero=1, ayudanteCocina=1, mozo=1, lavaplatos=1;  // Con esta variable, nos aseguramos de tomar solo la cantidad necesaria de personal para la categoria
 //			Long categoria=1L;  // Con esta variable vamos cambiando la seleccion de la categoria en el bucle WHILE
 
 
@@ -173,57 +169,50 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 				// Obtengo el Id atraves del key
 				Long key = (Long)entry.getKey();
 
-		        // Con "personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()" obtengo el id correspondiente
-				// a la categoria del personal de acuerdo al Id pasado a traves de "key"
-//				if(personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()==categoria && vuelta<=personalNecesario.get(i)) {
-//						vuelta = vuelta+1;
-//						personalDelEvento.add(key);
-//				}
-
-	//			int categorias = (int) 3L;
 				Long valor = personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId();
 				Integer categoria = (int) (long) valor;
-	//			Integer categoria = (int) valor;
 
-	//			Long a=500;
-	//			Integer b=(int)a;
-
-				Long l = 123L;
-				Integer correctButComplicated = Integer.valueOf(l.intValue());
-				Integer withBoxing = l.intValue();
-				Integer terrible = (int) (long) l;
-
-
-
-
-
-
-	//			switch (categoria)
-	//			 {
-	//			 case 1:
-	//				 if(personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()==categoria && vuelta<=personalNecesario.get(i)) {
-	//						vuelta = vuelta+1;
-	//						personalDelEvento.add(key);
-	//				}
-	//				 break;
-	//			 case 2:
-	//				 System.out.println("Ingreso a la opci�n DOS");
-	//				 break;
-	//			 case 3:
-	//				 System.out.println("Ingreso a la opci�n TRES");
-	//				 break;
-	//			 }
-
-
-
-
-
-
-
+				switch (categoria) {
+				 case 1:
+						if(encargado<=personalNecesario.get(0)) {
+							encargado = encargado+1;
+							personalDelEvento.add(key);
+						}
+						break;
+				 case 2:
+						if(chef<=personalNecesario.get(1)) {
+							chef = chef+1;
+							personalDelEvento.add(key);
+						}
+						break;
+				 case 3:
+						if(cocinero<=personalNecesario.get(2)) {
+							cocinero = cocinero+1;
+							personalDelEvento.add(key);
+						}
+						break;
+				 case 4:
+						if(ayudanteCocina<=personalNecesario.get(3)) {
+							ayudanteCocina = ayudanteCocina+1;
+							personalDelEvento.add(key);
+						}
+						break;
+				 case 5:
+						if(mozo<=personalNecesario.get(4)) {
+							mozo = mozo+1;
+							personalDelEvento.add(key);
+						}
+						break;
+				 case 6:
+						if(lavaplatos<=personalNecesario.get(5)) {
+							lavaplatos = lavaplatos+1;
+							personalDelEvento.add(key);
+						}
+						break;
+				 }
 
 			}
-//			categoria = categoria+1;
-		}
+ 
 		return personalDelEvento;
 	}
 
@@ -260,33 +249,106 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		personalDao.ingresarReserva(reserva);
 	}
 
+	
 
-	//////////////////////////////////////////////////////////////////////////////////
-	/// Ordena el map  ///////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////
-	 public Map sortByAsc(Map unsortMap) {
-		 List list = new LinkedList(unsortMap.entrySet());
-		 //Para ordenar ascendentemente
-		 Collections.sort(list, new Comparator() {
-		 public int compare(Object o1, Object o2) {
-		 return ((Comparable) ((Map.Entry) (o1)).getValue())
-		 .compareTo(((Map.Entry) (o2)).getValue());
-		 }
-		 });
-		 //put sorted list into map again
-		 Map<Long, Integer> sortedMap = new LinkedHashMap<Long, Integer>();
-		 for (Iterator it = list.iterator(); it.hasNext();) {
-		 Map.Entry<Long, Integer> entry = (Map.Entry<Long, Integer>)it.next();
-		 sortedMap.put(entry.getKey(), entry.getValue());
-		 }
-		 return sortedMap;
-		 }
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
-}
+	// Obtencion del listado de cargos del personal
+	@Override
+	public List<CategoriaPersonal> consultaCargosDelPersonal () {
+		List<CategoriaPersonal> listadoPersonalDelEvento = new ArrayList <CategoriaPersonal> ();
+		listadoPersonalDelEvento = personalDao.listadoDeCargosDelPersonal();
+
+		return listadoPersonalDelEvento;
+	}
+	
+	
+	
+	
+	//----------------nuevo----------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------
+
+		// Obtengo un listado general de la asistencia (eventos cubiertos por cada personal)
+		@Override
+		public List<Reserva> listadoDeReservas() {
+			List<Reserva> lista = new ArrayList();
+			lista=(personalDao.traerReservas());
+		
+			return lista;
+		}	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		@Override
+		public List<Personal> sinPersonal() {
+	
+			List<Personal> TodoElPersonal = personalDao.cantidadDePersonal();
+
+	
+			return TodoElPersonal;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+}	
+	
 
 
 
-		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//Preguntar si no es mas conveniente separar esta logica en otro servicio que se podria llamar Guardar Reserva
 	//	LocalDate fecha_ingreso = LocalDate.of(2019, 6, 16);  //<----- Verificar si los datos a�o, mes dia se pueden pasar como integer
 	//	evento.setFechaDelEvento(fecha_ingreso);    <--------- ERROR CON LA FECHA
