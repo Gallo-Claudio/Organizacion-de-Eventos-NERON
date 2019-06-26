@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.dao.RecomendacionesDao;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.PuntajeMenu;
 import org.springframework.stereotype.Service;
@@ -19,28 +20,44 @@ public class ServicioRecomendacionesImpl implements ServicioRecomendaciones{
     private RecomendacionesDao RecomendacionesDao;
     @Override
 
-    public List<Menu> ObtenerRecomendaciones(){
+    public   ArrayList<ArrayList<Menu>> ObtenerRecomendaciones(){
        Double puntajeTotal=0.0;
       Integer cantidad=0;
       Double promedio=0.0;
-        List<Menu> listaMenu=RecomendacionesDao.obtenerMenusDeLaBase();
-        List<Menu> menusRecomendados=new ArrayList<>();
-           for (Menu menu:listaMenu){
+
+        List<Reserva> reservas=RecomendacionesDao.obtenerReservasDeLaBase();
+      //  List<Reserva> reservasRecomendados=new ArrayList<>();
+        ArrayList<ArrayList<Menu>> arrayDeMenus= new ArrayList<>();
+
+           for (Reserva reserva:reservas){
+
              puntajeTotal=0.0;
               cantidad=0;
               promedio=0.0;
-           for(PuntajeMenu puntaje:menu.getPuntajes()){
-               puntajeTotal=+puntaje.getPuntaje();
-                cantidad=menu.getPuntajes().size();
-                promedio=puntajeTotal/cantidad;
+           for(PuntajeMenu puntaje:reserva.getPuntajesMenu()){
 
-               }   if(promedio>7) {
-                   menusRecomendados.add(menu);
+               puntajeTotal=+puntaje.getPuntaje();
+                cantidad=reserva.getPuntajesMenu().size();
+
+
                }
+               promedio=puntajeTotal/cantidad;
+
+           if(promedio>7) {
+             //  reservasRecomendados.add(reserva);
+               ArrayList<Menu> menusRecomendados=new ArrayList<>();
+               menusRecomendados.addAll(reserva.getMenu());
+               arrayDeMenus.add(menusRecomendados);
+
+
+           }
+
+
+
     }
 
 
-       return menusRecomendados;
+       return arrayDeMenus;
 
     }
 

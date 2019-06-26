@@ -7,7 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Personal {
@@ -16,13 +19,16 @@ public class Personal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nombre;	
-//	private Date fechaDeIngreso;
-//	private String cargo;
-//	private Integer sueldoPorEvento;
-//	@ManyToMany
-//	private List<Evento> evento;
+	@ManyToOne
+	private CategoriaPersonal categoriaPersonal;
 	
+	private String nombre;
+	private String apellido;
+
+//	@ManyToMany
+//	private List<Reserva> reserva;
+
+	//	private Date fechaDeIngreso;
 	
 	public Long getId() {
 		return id;
@@ -30,38 +36,41 @@ public class Personal {
 	public void setId(Long id) {
 		this.id = id;
 	}
-//	public Date getFechaDeIngreso() {
-//		return fechaDeIngreso;
-//	}
-//	public void setFechaDeIngreso(Date fechaDeIngreso) {
-//		this.fechaDeIngreso = fechaDeIngreso;
-//	}
-//	public String getCargo() {
-//		return cargo;
-//	}
-//	public void setCargo(String cargo) {
-//		this.cargo = cargo;
-//	}
-//	public Integer getSueldoPorEvento() {
-//		return sueldoPorEvento;
-//	}
-//	public void setSueldoPorEvento(Integer sueldoPorEvento) {
-//		this.sueldoPorEvento = sueldoPorEvento;
-//	}
-//	public List<Evento> getEvento() {
-//		return evento;
-//	}
-//	public void setEvento(List<Evento> evento) {
-//		this.evento = evento;
-//	}
+	
+	public CategoriaPersonal getCategoriaPersonal() {
+		return categoriaPersonal;
+	}
+	public void setCategoriaPersonal(CategoriaPersonal categoriaPersonal) {
+		this.categoriaPersonal = categoriaPersonal;
+	}
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	public String getApellido() {
+		return apellido;
+	}
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+//	public List<Reserva> getReserva() {
+//		return reserva;
+//	}
+//	public void setReserva(List<Reserva> reserva) {
+//		this.reserva = reserva;
+//	}	
 
-
+//	public Date getFechaDeIngreso() {
+//		return fechaDeIngreso;
+//	}
+//	public void setFechaDeIngreso(Date fechaDeIngreso) {
+//		this.fechaDeIngreso = fechaDeIngreso;
+//	}
 	
-}
+} 
 
+//   @JoinTable(name = "ReservaPersonal", joinColumns = @JoinColumn(name = "idPersonal"), // id de Personal
+ //           inverseJoinColumns = @JoinColumn(name = "id") // id de Reserva
+ //   )

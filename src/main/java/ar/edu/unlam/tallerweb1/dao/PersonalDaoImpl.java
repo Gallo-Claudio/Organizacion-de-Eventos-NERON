@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.Evento;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,10 +20,11 @@ public class PersonalDaoImpl implements PersonalDao {
 
 	@Inject
     private SessionFactory sessionFactory;
-	List <Evento> listaDeEventos;
-
+	List <Reserva> listaDeReservas;
+	List <Personal> personal;
+	
 	@Override
-	public Personal buscarPersonalAsignadoAlEvento(Long id) {
+	public Personal buscarPersonalPorId(Long id) {
 		
 		final Session session = sessionFactory.getCurrentSession();
 		return (Personal) session.createCriteria(Personal.class)
@@ -32,17 +33,25 @@ public class PersonalDaoImpl implements PersonalDao {
 	}
 
 	@Override
-	public void ingresarEvento(Evento evento) {
+	public void ingresarReserva(Reserva reserva) {
 		
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(evento);
+		session.save(reserva);
 	}
 
 	@Override
-	public List <Evento> traerEventos() {
+	public List <Reserva> traerReservas() {
 		final Session session = sessionFactory.getCurrentSession();
-//		listaDeEventos = session.createCriteria(Evento.class).list();
-		return (listaDeEventos) = session.createCriteria(Evento.class).list();
+	
+		//	listaDeReservas = session.createCriteria(Evento.class).list();
+		return (listaDeReservas) = session.createCriteria(Reserva.class).list();
+	}
+
+	@Override
+	public List <Personal> cantidadDePersonal() {
+		
+		final Session session = sessionFactory.getCurrentSession();
+		return (personal) = session.createCriteria(Personal.class).list();
 	}
 
 }

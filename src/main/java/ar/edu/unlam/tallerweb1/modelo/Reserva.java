@@ -20,6 +20,7 @@ public class Reserva {
     private Long id;
     private String fecha;
     private String horario;
+    private Integer cantidadDeInvitados;
 	@OneToOne
 	private Extras Extras;
 
@@ -28,66 +29,133 @@ public class Reserva {
 
     @OneToOne
     private Cliente cliente;
-    
-	@ManyToMany    
-	private List<Menu> menu;  
+
+	@OneToMany
+	private List<PuntajeMenu> puntajesMenu;
+
+	@ManyToMany
+	private List<Menu> menu;
+
+
+	@ManyToMany
+	private List <Personal> personal;
+
 
 
     public Reserva() {
 
     }
 
-    public String getHorario() {
-        return horario;
-    }
+	public List<PuntajeMenu> getPuntajesMenu() {
+		return puntajesMenu;
+	}
 
-    public void setHorario(String horario) {
-        this.horario = horario;
-    }
+	public Integer getCantidadDeInvitados() {
+		return cantidadDeInvitados;
+	}
 
-    public String getFecha() {
-        return fecha;
-    }
+	public void setCantidadDeInvitados(Integer cantidadDeInvitados) {
+		this.cantidadDeInvitados = cantidadDeInvitados;
+	}
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
-    }
+	public void setPuntajesMenu(List<PuntajeMenu> puntajesMenu) {
+		this.puntajesMenu = puntajesMenu;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public Salon getSalon() {
-        return salon;
-    }
 
-    public void setSalon(Salon salon) {
-        this.salon = salon;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Cliente getCliente() {
-        return cliente;
-    }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-    
-	public ar.edu.unlam.tallerweb1.modelo.Extras getExtras() {
+
+	public String getFecha() {
+		return fecha;
+	}
+
+
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+
+
+	public String getHorario() {
+		return horario;
+	}
+
+
+
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
+
+
+
+	public Extras getExtras() {
 		return Extras;
 	}
 
-	public void setExtras(ar.edu.unlam.tallerweb1.modelo.Extras extras) {
+
+
+	public void setExtras(Extras extras) {
 		Extras = extras;
 	}
+
+
+
+	public Salon getSalon() {
+		return salon;
+	}
+
+
+
+	public void setSalon(Salon salon) {
+		this.salon = salon;
+	}
+
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+
 	public List<Menu> getMenu() {
 		return menu;
 	}
+
+
+
 	public void setMenu(List<Menu> menu) {
 		this.menu = menu;
 	}
+
+
+
+	public List<Personal> getPersonal() {
+		return personal;
+	}
+
+
+
+	public void setPersonal(List<Personal> personal) {
+		this.personal = personal;
+	}
+
+
 }
+

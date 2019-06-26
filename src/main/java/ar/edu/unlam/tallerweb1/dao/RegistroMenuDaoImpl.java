@@ -1,3 +1,4 @@
+
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
@@ -20,6 +21,9 @@ public class RegistroMenuDaoImpl implements RegistroMenuDao {
 		final Session session = sessionFactory.getCurrentSession();  // Obtengo una sesion
 		session.save(reservaMenu);    // Persisto en la BD, el objeto recibido desde el area de Servicios
 	}
+
+
+
 	@Override
 	public Reserva traerReserva(Long id){
 
