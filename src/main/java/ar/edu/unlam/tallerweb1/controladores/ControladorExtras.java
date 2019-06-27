@@ -16,6 +16,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListaSeleccionExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
 
 
 
@@ -71,9 +72,8 @@ public class ControladorExtras {
 	
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
 	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
-										 @ModelAttribute ("id") Long id ){
+										 @ModelAttribute ("mvExtras") RegistroExtrasViewModel mvExtras ){
 
-		servicioSeleccionoExtra.guardarExtra(idReserva,id);
 	//	servicioResumenSeleccion.buscaDatos(idReserva);
 		return new ModelAndView("home"); 
 	} 

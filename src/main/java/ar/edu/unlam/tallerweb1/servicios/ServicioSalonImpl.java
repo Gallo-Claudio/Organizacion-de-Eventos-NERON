@@ -51,7 +51,7 @@ public class ServicioSalonImpl implements ServicioSalon {
         servicioSalonDao.guardarReserva(reserva);
     }
    @Override
-   public Salon traerSalonPorId(Integer id){
+   public Salon traerSalonPorId(Long id){
 
        return  servicioSalonDao.traerSalonPorId(id);
    }

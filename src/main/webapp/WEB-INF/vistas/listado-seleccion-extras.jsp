@@ -26,7 +26,7 @@
 	<th><i>Precio</i></th>
 	</tr>
 	</thead>
-	<form:form action="sele-extras?idReserva=${id}" method="POST" modelAttribute="id">
+	<form:form action="sele-extras?idReserva=${id}" method="POST" modelAttribute="mvExtras">
  <!-- sacar el form y ponerlo afuera del foreach -->					
 	<c:forEach var="variable" items="${listadoFinal2}"> 
 		<tr>
@@ -35,7 +35,7 @@
 		<td><b>$<i>${variable.precio}</i></b></td>
 
 		<td><input name="id" type="checkbox" value="${variable.id}"/></td>
-			<td><input name="id" type="text" value="${variable.id}"/></td>
+			
 
 		</tr>
    	</c:forEach>  

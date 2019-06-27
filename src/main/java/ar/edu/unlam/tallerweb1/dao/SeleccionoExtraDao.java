@@ -6,6 +6,7 @@ public interface SeleccionoExtraDao {
 	
 	void guardarExtra (Reserva reservas);
 	Reserva traerReserva(Long id);
+	Extras traerExtraPorId(Long idm);
 	
 
 

@@ -4,6 +4,8 @@ import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroSalonViewModel;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
@@ -59,7 +61,7 @@ public class ControladorSalon {
 
 
     @RequestMapping(path="/validar", method = RequestMethod.POST)
-    public ModelAndView validar(@ModelAttribute("id") Integer id,
+    public ModelAndView validar(@ModelAttribute("salon") RegistroSalonViewModel salon,
                                    @ModelAttribute("horario") String horario,
                                 @ModelAttribute("fecha") String fecha,
                                 @ModelAttribute("cantidad") Integer cantidad) {//esta en la url
@@ -68,22 +70,24 @@ public class ControladorSalon {
 
        int error=0;
        String mensaje=" ";
+       Long id=salon.getId();
       if(id.equals(0)){
           error++;
           mensaje+="seleccione un salon" ;}
 
-      modelo.put("id",id);
+      modelo.put("id",salon.getId());
         if(error==0){
 
 
            Reserva reserva=new Reserva();
           // reserva.setCliente();
             reserva.setHorario(horario);
-           reserva.setSalon(servicioSalon.traerSalonPorId(id));
+           reserva.setSalon(servicioSalon.traerSalonPorId(salon.getId()));
            reserva.setFecha(fecha);
            reserva.setCantidadDeInvitados(cantidad);
            servicioSalon.guardarReserva(reserva);
            Long idReserva=new Long(reserva.getId());
+          
            return new ModelAndView("redirect:/listado-menu?q="+idReserva+"");
         }else{
 

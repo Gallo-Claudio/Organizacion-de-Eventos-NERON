@@ -40,7 +40,7 @@
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
 
-            <form:form class="border border-success"  ModelAttribute="id,horario,fecha,cantidad" action="validar" method ="post" >
+            <form:form class="border border-success"  ModelAttribute="salon" action="validar" method ="post" >
                 <input  type="hidden" value="${fecha}" name="fecha"/>
                 <input  type="hidden" value="${cantidad}" name="cantidad"/>
 
@@ -62,7 +62,7 @@
                             <tr>
                                 <td><input   name="id"   type="radio" value="${salon.id}"/></td>
                                 <td>${salon.nombre}</td>
-
+                                 <input type="hidden"  value="${salon.ubicacion.localidad}" >
                                 <td>${salon.ubicacion.localidad}</td>
                                 <td>${salon.ubicacion.calle}</td>
                                 <td>${salon.ubicacion.numero}</td>

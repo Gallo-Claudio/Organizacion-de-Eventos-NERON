@@ -15,7 +15,7 @@ public interface SalonDao {
     List<Salon> buscarSalonesZonaNorte(Integer cantidad ,String fecha);
     List<Salon> buscarSalonesCapital(Integer cantidad ,String fecha);
 
-    Salon traerSalonPorId(Integer id);
+    Salon traerSalonPorId(Long id);
 
     void guardarReserva(Reserva reserva);
    Salon galeria(Integer id);

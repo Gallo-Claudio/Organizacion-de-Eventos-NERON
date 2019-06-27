@@ -11,8 +11,8 @@
 
 Listado para la seleccion del menu<br><br><br>
 
-<form:form action="registra-reserva-menu" method="GET">
-
+<form:form action="registra-reserva-menu" method="POST" modelAttribute="vm">
+ 
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${secciones}">
 					<c:if test="${tipo.id==i}">
@@ -33,7 +33,7 @@ Listado para la seleccion del menu<br><br><br>
 						<tr>
 						<td>${menu.descripcion}</td>
 						<td>${menu.costo}</td>
-						<td><input type="checkbox" name="idmenu" value="${menu.id}"></td>
+						<td><input type="checkbox" name="idmenu[${menu.id}]" value="${menu.id}"></td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -42,7 +42,7 @@ Listado para la seleccion del menu<br><br><br>
 		<br><br><br>
 
     </c:forEach>
-	<input type="text" name="id" value="${id}">
+	<input type="text" name="id" value="${idReserva}">
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
 </form:form>

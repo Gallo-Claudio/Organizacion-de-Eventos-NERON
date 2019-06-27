@@ -21,8 +21,8 @@ public class Reserva {
     private String fecha;
     private String horario;
     private Integer cantidadDeInvitados;
-	@OneToOne
-	private Extras Extras;
+	@OneToMany
+	private List<Extras> Extras;
 
     @ManyToOne
     private Salon salon;
@@ -98,17 +98,17 @@ public class Reserva {
 
 
 
-	public Extras getExtras() {
+
+
+
+
+	public List<Extras> getExtras() {
 		return Extras;
 	}
 
-
-
-	public void setExtras(Extras extras) {
+	public void setExtras(List<Extras> extras) {
 		Extras = extras;
 	}
-
-
 
 	public Salon getSalon() {
 		return salon;

@@ -14,7 +14,7 @@ public interface ServicioSalon {
     List<Salon> buscarSalonesZonaOeste(Integer cantidad ,String fecha);
     List<Salon> buscarSalonesZonaNorte(Integer cantidad ,String fecha);
     List<Salon> buscarSalonesCapital(Integer cantidad ,String fecha);
-    Salon traerSalonPorId(Integer id);
+    Salon traerSalonPorId(Long id);
 
     void guardarReserva(Reserva reserva);
      List<Imagenes> galeria(Integer id);

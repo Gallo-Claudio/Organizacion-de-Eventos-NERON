@@ -42,7 +42,7 @@ public class SalonDaoImpl implements SalonDao {
          session.save(reserva);
     }
     @Override
-    public Salon traerSalonPorId(Integer id){
+    public Salon traerSalonPorId(Long id){
         final Session session = sessionFactory.getCurrentSession();
 
 
