@@ -24,6 +24,7 @@ public class ServicioRegistroMenuImpl implements ServicioRegistroMenu {
 	private RegistroMenuDao registroMenuDao;
 
 
+
 	@Override
 	public void ingresarMenuSeleccionado(Long idreserva,Long idmenu[] ) {
 		Reserva reservaMenu =registroMenuDao.traerReserva(idreserva);

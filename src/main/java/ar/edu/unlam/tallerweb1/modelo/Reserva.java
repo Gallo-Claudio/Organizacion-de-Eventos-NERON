@@ -20,6 +20,7 @@ public class Reserva {
     private Long id;
     private String fecha;
     private String horario;
+    private Integer cantidadDeInvitados;
 	@OneToOne
 	private Extras Extras;
 
@@ -28,6 +29,9 @@ public class Reserva {
 
     @OneToOne
     private Cliente cliente;
+
+	@OneToMany
+	private List<PuntajeMenu> puntajesMenu;
 
 	@ManyToMany
 	private List<Menu> menu;
@@ -42,7 +46,21 @@ public class Reserva {
 
     }
 
+	public List<PuntajeMenu> getPuntajesMenu() {
+		return puntajesMenu;
+	}
 
+	public Integer getCantidadDeInvitados() {
+		return cantidadDeInvitados;
+	}
+
+	public void setCantidadDeInvitados(Integer cantidadDeInvitados) {
+		this.cantidadDeInvitados = cantidadDeInvitados;
+	}
+
+	public void setPuntajesMenu(List<PuntajeMenu> puntajesMenu) {
+		this.puntajesMenu = puntajesMenu;
+	}
 
 	public Long getId() {
 		return id;

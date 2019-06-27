@@ -61,7 +61,8 @@ public class ControladorSalon {
     @RequestMapping(path="/validar", method = RequestMethod.POST)
     public ModelAndView validar(@ModelAttribute("id") Integer id,
                                    @ModelAttribute("horario") String horario,
-                                @ModelAttribute("fecha") String fecha) {//esta en la url
+                                @ModelAttribute("fecha") String fecha,
+                                @ModelAttribute("cantidad") Integer cantidad) {//esta en la url
         ModelMap modelo = new ModelMap();
 
 
@@ -80,6 +81,7 @@ public class ControladorSalon {
             reserva.setHorario(horario);
            reserva.setSalon(servicioSalon.traerSalonPorId(id));
            reserva.setFecha(fecha);
+           reserva.setCantidadDeInvitados(cantidad);
            servicioSalon.guardarReserva(reserva);
            Long idReserva=new Long(reserva.getId());
            return new ModelAndView("redirect:/listado-menu?q="+idReserva+"");
@@ -111,8 +113,20 @@ public class ControladorSalon {
     public ModelAndView MoostrarRecomendacionesMenu() {//esta en la url
         ModelMap modelo = new ModelMap();
 
-        List<Menu> menus=ServicioRecomendaciones.ObtenerRecomendaciones();
-        modelo.put("menus",menus);
+        ArrayList<ArrayList<Menu>> array=ServicioRecomendaciones.ObtenerRecomendaciones();
+         int i=0;
+        for(List<Menu> lista:array){
+            i+=1;
+
+               modelo.put("menus"+i+"",lista);
+
+
+        }
+
+
+        modelo.put("tope",array.size());
+
+
 
 
         return new ModelAndView("recomendacionesMenu", modelo);

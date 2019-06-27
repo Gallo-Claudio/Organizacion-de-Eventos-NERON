@@ -5,27 +5,92 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/extras.css">
+
     <title>Recomendaciones Menu</title>
 </head>
 <body>
-<center><table border="6" cellpadding="4" cellspacing="6">
-	<thead>
-	<tr>
-	<th><b><i>Id</i></b></th>
-	<th><b><i>Descripción</i></b></th>
-	<th><b><i>Precio</i></b></th>
-	</tr>
-	</thead>
-<h2><i>Menus</i></h2>
-<c:forEach items="${menus}" var="menu">
+<h2>Menus que te pueden interesar</h2>
 
-<tr>
-   <td><b>${menu.id}</b></td>  
-   <td><b>${menu.descripcion}</b></td>  
-   <td><b>${menu.costo}</b></td>  
-</tr>
 
-</c:forEach>
+<br>
+
+	<c:if test="${tope>=1}">
+		<h2>menu</h2><br>
+	<c:forEach items="${menus1}" var="menu">
+
+	${menu.descripcion}
+		$${menu.costo}<br>
+
+
+	</c:forEach>
+	</c:if>
+
+<br>
+
+
+<br>
+
+<c:if test="${tope>=2}">
+	<h2>menu</h2><br>
+	<c:forEach items="${menus2}" var="menu">
+
+		${menu.descripcion}
+		$${menu.costo}<br>
+
+
+	</c:forEach>
+</c:if>
+
+<br>
+
+
+<br>
+
+<c:if test="${tope>=3}">
+	<h2>menu</h2><br>
+	<c:forEach items="${menus3}" var="menu">
+
+		${menu.descripcion}
+		$${menu.costo}<br>
+
+
+	</c:forEach>
+</c:if>
+
+<br>
+
+
+<br>
+
+<c:if test="${tope>=4}">
+	<h2>menu</h2><br>
+	<c:forEach items="${menus4}" var="menu">
+
+		${menu.descripcion}
+		$${menu.costo}<br>
+
+
+	</c:forEach>
+</c:if>
+
+<br>
+
+
+<br>
+
+<c:if test="${tope>=5}">
+	<h2>menu</h2><br>
+	<c:forEach items="${menus5}" var="menu">
+
+		${menu.descripcion}
+		$${menu.costo}<br>
+
+
+	</c:forEach>
+</c:if>
+
+<br>
+
+
 </body>
 </html>

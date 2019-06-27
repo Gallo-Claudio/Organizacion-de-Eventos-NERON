@@ -40,8 +40,9 @@
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
 
-            <form:form class="border border-success"  ModelAttribute="id,horario,fecha" action="validar" method ="post" >
+            <form:form class="border border-success"  ModelAttribute="id,horario,fecha,cantidad" action="validar" method ="post" >
                 <input  type="hidden" value="${fecha}" name="fecha"/>
+                <input  type="hidden" value="${cantidad}" name="cantidad"/>
 
                 <label>Resultados</label>
                 <div>
