@@ -46,6 +46,16 @@ public class PersonalDaoImpl implements PersonalDao {
 		final Session session = sessionFactory.getCurrentSession();
 	
 		//	listaDeReservas = session.createCriteria(Evento.class).list();
+		return (listaDeReservas) = session.createCriteria(Reserva.class).list();
+	}
+	
+	
+	// EN DESARROLLO ///////////////////////////////////////////////////////
+	@Override
+	public List <Reserva> traerReservas2() {
+		final Session session = sessionFactory.getCurrentSession();
+	
+		//	listaDeReservas = session.createCriteria(Evento.class).list();
 		return (listaDeReservas) = session.createCriteria(Reserva.class)
 				.createAlias("personal", "buscaPersonal")
 				.add(Restrictions.eq("buscaPersonal.nombre", null)).list();
@@ -58,6 +68,7 @@ public class PersonalDaoImpl implements PersonalDao {
 		return (personal) = session.createCriteria(Personal.class).list();
 	}
 	
+	// EN DESARROLLO ///////////////////////////////////////////////////////
 	@Override
 	public List <CategoriaPersonal> listadoDeCargosDelPersonal() {
 		

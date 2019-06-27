@@ -11,7 +11,7 @@
 
 Listado para la seleccion del menu<br><br><br>
 
-<form:form action="registra-reserva-menu" method="GET"> <!--   modelAttribute="idmenu"-->
+<form:form action="registra-reserva-menu" method="GET">
 
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${secciones}">

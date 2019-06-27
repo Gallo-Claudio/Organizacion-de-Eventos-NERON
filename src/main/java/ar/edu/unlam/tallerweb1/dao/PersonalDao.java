@@ -16,6 +16,8 @@ public interface PersonalDao {
 	
 	List <Reserva> traerReservas();
 	
+	List <Reserva> traerReservas2();
+	
 	List <Personal> cantidadDePersonal();
 	
 	List <CategoriaPersonal> listadoDeCargosDelPersonal();

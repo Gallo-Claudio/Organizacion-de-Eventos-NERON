@@ -74,7 +74,8 @@ public class ControladorExtras {
 										 @ModelAttribute ("id") Long id ){
 
 		servicioSeleccionoExtra.guardarExtra(idReserva,id);
-		return new ModelAndView("redirect:/seleccion-extras"); 
+	//	servicioResumenSeleccion.buscaDatos(idReserva);
+		return new ModelAndView("home"); 
 	} 
 	
 	
