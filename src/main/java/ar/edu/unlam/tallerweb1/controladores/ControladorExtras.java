@@ -34,6 +34,15 @@ public class ControladorExtras {
 	
 	@Inject 
 	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;
+
+	
+    ///////////////////////////////////////////////////////////////////////////////////////
+	// PAGINA PRINCIPAL - INDEX ///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
+	@RequestMapping(path = "/index", method = RequestMethod.GET)
+	public ModelAndView index() {
+		return new ModelAndView("index");
+	}
 	
 	/*Lado del administrador*/
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
