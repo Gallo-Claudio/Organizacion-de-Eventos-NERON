@@ -42,7 +42,7 @@ Listado para la seleccion del menu<br><br><br>
 		<br><br><br>
 
     </c:forEach>
-	<input type="text" name="id" value="${idReserva}">
+	<input type="text" name="id" value="${id}">
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
 </form:form>
