@@ -1,4 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListaSeleccionExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioResumenSeleccion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
 
@@ -79,14 +83,25 @@ public class ControladorExtras {
 	}
 
 	
-	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
-										 @ModelAttribute ("mvExtras") RegistroExtrasViewModel mvExtras ){
-
-	//	servicioResumenSeleccion.buscaDatos(idReserva);
-		return new ModelAndView("home"); 
-	} 
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Inject
+	private ServicioResumenSeleccion servicioResumenSeleccion;
+	
+//	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
+//	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
+//										 @ModelAttribute ("mvExtras") RegistroExtrasViewModel mvExtras ){
+		@RequestMapping(path = "/sele-extras")
+		public ModelAndView registroExtras2 (){
+		
+//			Reserva reservafinal= servicioResumenSeleccion.buscarDatos(idReserva);
+		Reserva reservafinal = servicioResumenSeleccion.buscarDatos(99L);
+		ModelMap model = new ModelMap();
+		model.put("reservafinal", reservafinal);
+		
+		return new ModelAndView("resumen-seleccion", model); 
+	} 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)

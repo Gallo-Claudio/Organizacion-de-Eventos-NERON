@@ -11,7 +11,20 @@
 
 Resumen de lo seleccionado para el evento<br><br><br>
 
+	  		
 
+<!--${reservafinal.cantidadDeInvitados}<br><br>
+${reservafinal.fecha}<br><br>
+${reservafinal.salon.nombre}  ${reservafinal.salon.precio}<br><br>
+${reservafinal.horario}<br><br>-->
+
+	  			<c:forEach var="detalle" items="${reservafinal.menu}">
+
+
+ 
+${detalle.descripcion}<br><br>
+
+				</c:forEach>			
 
 
 
