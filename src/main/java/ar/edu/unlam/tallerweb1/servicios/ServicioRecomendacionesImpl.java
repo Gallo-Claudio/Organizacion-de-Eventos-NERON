@@ -5,9 +5,9 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.PuntajeMenu;
 import org.springframework.stereotype.Service;
-
+import java.util.Comparator;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.util.Collections;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ServicioRecomendacionesImpl implements ServicioRecomendaciones{
        Double puntajeTotal=0.0;
       Integer cantidad=0;
       Double promedio=0.0;
-
+      List<Double> promedios= new ArrayList<>();
         List<Reserva> reservas=RecomendacionesDao.obtenerReservasDeLaBase();
       //  List<Reserva> reservasRecomendados=new ArrayList<>();
         ArrayList<ArrayList<Menu>> arrayDeMenus= new ArrayList<>();
@@ -42,6 +42,7 @@ public class ServicioRecomendacionesImpl implements ServicioRecomendaciones{
 
                }
                promedio=puntajeTotal/cantidad;
+
 
            if(promedio>7) {
              //  reservasRecomendados.add(reserva);

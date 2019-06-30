@@ -52,13 +52,27 @@ public class ControladorLogin {
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-			
-			return new ModelAndView("redirect:/home");
+		request.getSession().setAttribute("logueado", usuarioBuscado.getId().toString());
+
+
+			return new ModelAndView("home",model);
 		} else {
-			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
 		}
 		return new ModelAndView("login", model);
+	}
+
+	@RequestMapping(path = "/cerrarsesion ", method = RequestMethod.POST)
+	public ModelAndView cerrarsesion(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+
+			request.getSession().removeAttribute("ROL");
+			request.getSession().removeAttribute("logueado");
+
+
+
+		return new ModelAndView("redirect:login", model);
 	}
 
 	// Escucha la URL /home por GET, y redirige a una vista.

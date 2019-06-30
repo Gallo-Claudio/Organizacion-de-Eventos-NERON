@@ -70,9 +70,10 @@ public class ControladorExtras {
 	/*Lado Cliente*/
 	
 	@RequestMapping(path = "/seleccion-extras", method = RequestMethod.GET)
-	public ModelAndView ingresoDeExtras2() {
+	public ModelAndView ingresoDeExtras2( HttpServletRequest request) {
 		Extras Extras = new Extras();
 		ModelMap model = new ModelMap();
+
 		model.put("Extras", Extras);
 
 		return new ModelAndView("seleccion-extras", model);
@@ -80,20 +81,24 @@ public class ControladorExtras {
 
 	
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
-										 @ModelAttribute ("mvExtras") RegistroExtrasViewModel mvExtras ){
+	public ModelAndView registroExtras2 (@ModelAttribute ("mvExtra") RegistroExtrasViewModel mvExtra ,
+										 HttpServletRequest request){
+		String id=request.getSession().getAttribute("idReserva").toString();
+		Long reserva= Long.parseLong(id);
+		servicioSeleccionoExtra.guardarExtra(reserva,mvExtra.getId());
 
-	//	servicioResumenSeleccion.buscaDatos(idReserva);
+
+
 		return new ModelAndView("home"); 
 	} 
 	
 	
 	
 	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 (@RequestParam(name="idReserva",required=false) Long idReserva) {
+	public ModelAndView listadoExtras2 (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		modelo.put("id",idReserva);
-		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
+
+	    modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
 	}
 	

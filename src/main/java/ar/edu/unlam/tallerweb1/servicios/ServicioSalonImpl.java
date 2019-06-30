@@ -11,8 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+import java.util.*;
+
 import java.util.ArrayList;
-import java.util.List;
 
 @Service("servicioSalon")
 @Transactional
@@ -31,7 +32,21 @@ public class ServicioSalonImpl implements ServicioSalon {
         }
 
     }
+    @Override
+    public  Long hacerReserva(Long id,Long salon,String fecha,String horario,Integer cantidad){
+        Salon salonAingresar=servicioSalonDao.traerSalonPorId(salon);
+        Reserva reserva=new Reserva();
+        Usuario user=servicioSalonDao.traerCliente(id);
+       reserva.setUsuario(user);
+        reserva.setSalon(salonAingresar);
+        reserva.setFecha(fecha);
+        reserva.setCantidadDeInvitados(cantidad);
+        reserva.setHorario(horario);
+        servicioSalonDao.guardarReserva(reserva);
 
+      //  salonAingresar.agregarReservas(reserva);
+        return reserva.getId();
+    }
     @Override
     public List<Imagenes> galeria(Integer id){
        Salon salon=servicioSalonDao.galeria(id);
@@ -56,34 +71,54 @@ public class ServicioSalonImpl implements ServicioSalon {
        return  servicioSalonDao.traerSalonPorId(id);
    }
     @Override
-    public  List<Salon> buscarSalonesZonaSur (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesZonaSur (Integer cantidad ,String fecha) {
        List<Salon> lista=servicioSalonDao.buscarSalonesZonaSur(cantidad, fecha);
+        Set<Salon> salonesNoRepetidos= new HashSet<>();
+        for(Salon salon :lista){
+            salonesNoRepetidos.add(salon);
+        }
 
-      return lista;
+        return salonesNoRepetidos;
     }
 
 
     @Override
-    public  List<Salon> buscarSalonesZonaNorte (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesZonaNorte (Integer cantidad ,String fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalonesZonaNorte(cantidad, fecha);
 
-        return lista;
+
+        Set<Salon> salonesNoRepetidos= new HashSet<>();
+        for(Salon salon :lista){
+            salonesNoRepetidos.add(salon);
+        }
+
+        return salonesNoRepetidos;
     }
 
 
     @Override
-    public  List<Salon> buscarSalonesZonaOeste (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesZonaOeste (Integer cantidad ,String fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalonesZonaOeste(cantidad, fecha);
 
-        return lista;
+        Set<Salon> salonesNoRepetidos= new HashSet<>();
+        for(Salon salon :lista){
+            salonesNoRepetidos.add(salon);
+        }
+
+        return salonesNoRepetidos;
     }
 
 
     @Override
-    public  List<Salon> buscarSalonesCapital (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesCapital (Integer cantidad ,String fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalonesCapital(cantidad, fecha);
 
-        return lista;
+        Set<Salon> salonesNoRepetidos= new HashSet<>();
+        for(Salon salon :lista){
+            salonesNoRepetidos.add(salon);
+        }
+
+        return salonesNoRepetidos;
     }
 
 

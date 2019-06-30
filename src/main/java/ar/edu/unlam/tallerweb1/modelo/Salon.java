@@ -16,7 +16,7 @@ public class Salon {
 
     @OneToOne
     private UbicacionSalon ubicacion;
-    @OneToMany(mappedBy="salon")
+   @OneToMany(mappedBy="salon")
     private List<Reserva> reserva;
 
     @OneToMany
@@ -34,9 +34,15 @@ public class Salon {
         this.capacidadMaxima=capacidadMaxima;
 
 
+
+
+
     }
 
 
+  // public void agregarReservas(Reserva reserva){
+   //     this.reserva.add(reserva);
+ //  }
 
     public Long getId() {
 		return id;
@@ -97,6 +103,8 @@ public class Salon {
    public void setReserva(List<Reserva> reserva) {
        this.reserva = reserva;
   }
+
+
 
     public List<Imagenes> getImagenes() {
         return Imagenes;

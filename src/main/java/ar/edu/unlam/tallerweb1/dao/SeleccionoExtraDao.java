@@ -5,7 +5,7 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 public interface SeleccionoExtraDao {
 	
 	void guardarExtra (Reserva reservas);
-	Reserva traerReserva(Long id);
+	Reserva reserva(Long id);
 	Extras traerExtraPorId(Long idm);
 	
 

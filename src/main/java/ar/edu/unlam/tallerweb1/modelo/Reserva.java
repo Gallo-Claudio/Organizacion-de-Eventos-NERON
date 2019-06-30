@@ -28,7 +28,7 @@ public class Reserva {
     private Salon salon;
 
     @OneToOne
-    private Cliente cliente;
+    private Usuario usuario;
 
 	@OneToMany
 	private List<PuntajeMenu> puntajesMenu;
@@ -121,18 +121,13 @@ public class Reserva {
 	}
 
 
-
-	public Cliente getCliente() {
-		return cliente;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-
-
 
 	public List<Menu> getMenu() {
 		return menu;

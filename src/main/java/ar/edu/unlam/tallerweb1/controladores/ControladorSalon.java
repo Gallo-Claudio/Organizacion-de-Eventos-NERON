@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ControladorSalon {
@@ -27,12 +28,20 @@ public class ControladorSalon {
    // @Inject
    // private ServicioCliente servicioCliente;
 
-    @RequestMapping(path="/salon"
-    )
-    public ModelAndView ir() {
-        ModelMap modelo = new ModelMap();
+    @RequestMapping(path="/salon" )
+    public ModelAndView ir(HttpServletRequest request) {
+        if(request.getSession().getAttribute("logueado")==null){
 
-        return new ModelAndView("/salon", modelo);
+
+            return new ModelAndView("redirect:/home");
+
+
+        }
+
+           return new ModelAndView("salon");
+
+
+
     }
 
     @RequestMapping(path="/tomarDatos", method = RequestMethod.GET)
@@ -40,10 +49,11 @@ public class ControladorSalon {
                                    @RequestParam(name="fecha",required=false) String fecha) {
         ModelMap modelo = new ModelMap();
         //encontrar zalones por zona
-       List<Salon> salonesCapital=servicioSalon.buscarSalonesCapital(cantidad, fecha);
-        List<Salon> salonesZonaSur=servicioSalon.buscarSalonesZonaSur(cantidad, fecha);
-        List<Salon> salonesZonaOeste=servicioSalon.buscarSalonesZonaOeste(cantidad, fecha);
-        List<Salon> salonesZonaNorte=servicioSalon.buscarSalonesZonaNorte(cantidad, fecha);
+        Set<Salon> salonesCapital=servicioSalon.buscarSalonesCapital(cantidad, fecha);
+        Set<Salon> salonesZonaSur=servicioSalon.buscarSalonesZonaSur(cantidad, fecha);
+        Set<Salon> salonesZonaOeste=servicioSalon.buscarSalonesZonaOeste(cantidad, fecha);
+        Set<Salon> salonesZonaNorte=servicioSalon.buscarSalonesZonaNorte(cantidad, fecha);
+
 
         modelo.put("capital",salonesCapital);
         modelo.put("sur",salonesZonaSur);
@@ -64,9 +74,9 @@ public class ControladorSalon {
     public ModelAndView validar(@ModelAttribute("salon") RegistroSalonViewModel salon,
                                    @ModelAttribute("horario") String horario,
                                 @ModelAttribute("fecha") String fecha,
-                                @ModelAttribute("cantidad") Integer cantidad) {//esta en la url
+                                @ModelAttribute("cantidad") Integer cantidad,
+                                HttpServletRequest request) {//esta en la url
         ModelMap modelo = new ModelMap();
-
 
        int error=0;
        String mensaje=" ";
@@ -78,17 +88,13 @@ public class ControladorSalon {
       modelo.put("id",salon.getId());
         if(error==0){
 
+         Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
+          Long idReserva= servicioSalon.hacerReserva(idUser ,salon.getId(),fecha,horario,cantidad);
 
-           Reserva reserva=new Reserva();
-          // reserva.setCliente();
-            reserva.setHorario(horario);
-           reserva.setSalon(servicioSalon.traerSalonPorId(salon.getId()));
-           reserva.setFecha(fecha);
-           reserva.setCantidadDeInvitados(cantidad);
-           servicioSalon.guardarReserva(reserva);
-           Long idReserva=new Long(reserva.getId());
+           request.getSession().setAttribute("idReserva", idReserva);
+
           
-           return new ModelAndView("redirect:/listado-menu?q="+idReserva+"");
+           return new ModelAndView("redirect:/listado-menu");
         }else{
 
             modelo.put("mensaje",mensaje);
@@ -110,29 +116,5 @@ public class ControladorSalon {
 
 
 
-    @Inject
-    private ServicioRecomendaciones ServicioRecomendaciones;
 
-    @RequestMapping(path="/RecomendacionesMenu", method = RequestMethod.GET)
-    public ModelAndView MoostrarRecomendacionesMenu() {//esta en la url
-        ModelMap modelo = new ModelMap();
-
-        ArrayList<ArrayList<Menu>> array=ServicioRecomendaciones.ObtenerRecomendaciones();
-         int i=0;
-        for(List<Menu> lista:array){
-            i+=1;
-
-               modelo.put("menus"+i+"",lista);
-
-
-        }
-
-
-        modelo.put("tope",array.size());
-
-
-
-
-        return new ModelAndView("recomendacionesMenu", modelo);
-    }
 }
