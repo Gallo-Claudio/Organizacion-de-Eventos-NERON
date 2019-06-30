@@ -85,21 +85,16 @@ public class ControladorExtras {
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	@Inject
-	private ServicioResumenSeleccion servicioResumenSeleccion;
+
 	
-//	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-//	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
-//										 @ModelAttribute ("mvExtras") RegistroExtrasViewModel mvExtras ){
-		@RequestMapping(path = "/sele-extras")
-		public ModelAndView registroExtras2 (){
+	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
+	public ModelAndView registroExtras2 (@ModelAttribute ("vmExtra") RegistroExtrasViewModel vmExtra, HttpServletRequest request ){
 		
-//			Reserva reservafinal= servicioResumenSeleccion.buscarDatos(idReserva);
-		Reserva reservafinal = servicioResumenSeleccion.buscarDatos(99L);
-		ModelMap model = new ModelMap();
-		model.put("reservafinal", reservafinal);
-		
-		return new ModelAndView("resumen-seleccion", model); 
+//		String id=request.getSession().getAttribute("idReserva").toString();
+		Long reserva= vmExtra.getIdReserva();
+		servicioSeleccionoExtra.guardarExtra(reserva, vmExtra.getId());
+
+		return new ModelAndView("home");
 	} 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	

@@ -22,7 +22,7 @@ public class Reserva {
     private String horario;
     private Integer cantidadDeInvitados;
 	@OneToMany
-	private List<Extras> Extras;
+	private List<Extras> extras;
 
     @ManyToOne
     private Salon salon;
@@ -103,11 +103,11 @@ public class Reserva {
 
 
 	public List<Extras> getExtras() {
-		return Extras;
+		return extras;
 	}
 
 	public void setExtras(List<Extras> extras) {
-		Extras = extras;
+		this.extras = extras;
 	}
 
 	public Salon getSalon() {
