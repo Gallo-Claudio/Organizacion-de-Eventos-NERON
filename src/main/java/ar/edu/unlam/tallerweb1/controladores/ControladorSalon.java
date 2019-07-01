@@ -81,7 +81,7 @@ public class ControladorSalon {
        int error=0;
        String mensaje=" ";
        Long id=salon.getId();
-      if(id.equals(0)){
+      if(id.equals(0L)){
           error++;
           mensaje+="seleccione un salon" ;}
 
@@ -94,7 +94,7 @@ public class ControladorSalon {
            request.getSession().setAttribute("idReserva", idReserva);
 
           
-           return new ModelAndView("redirect:/listado-menu");
+           return new ModelAndView("redirect:/listado-menu2");
         }else{
 
             modelo.put("mensaje",mensaje);

@@ -25,7 +25,7 @@ import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 public class ControladorMenu {
 
 	@Inject
-	private ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones ServicioRecomendaciones;
+	private ServicioRecomendaciones ServicioRecomendaciones;
 	@Inject
 	private ServicioListarTiposMenu servicioListarTiposMenu;
 	@Inject
@@ -107,7 +107,7 @@ public class ControladorMenu {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
 		servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());
-		return new ModelAndView("redirect:/SeleccionDeExtras");
+		return new ModelAndView("redirect:/home");
 
 	}
 

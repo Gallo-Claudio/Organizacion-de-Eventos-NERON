@@ -1,4 +1,5 @@
 package ar.edu.unlam.tallerweb1.controladores;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,13 +15,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListaSeleccionExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu2;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu2;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu2;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroPlatoMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResumenSeleccion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
 
 
@@ -38,6 +49,27 @@ public class ControladorExtras {
 	
 	@Inject 
 	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	@Inject
+	private ServicioListadoOpcionesMenu2 servicioListadoOpcionesMenu2;
+	@Inject
+	private ServicioListarTiposMenu2 servicioListarTiposMenu2;
+	@Inject
+	private ServicioRegistroMenu2 servicioRegistroMenu2;
+	
+	
+	
+	
+	
 
 	
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -91,8 +123,9 @@ public class ControladorExtras {
 	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
 	public ModelAndView registroExtras2 (@ModelAttribute ("vmExtra") RegistroExtrasViewModel vmExtra, HttpServletRequest request ){
 		
-//		String id=request.getSession().getAttribute("idReserva").toString();
-		Long reserva= vmExtra.getIdReserva();
+		String id=request.getSession().getAttribute("idReserva").toString();
+		Long reserva= Long.parseLong(id);
+//		Long reserva= vmExtra.getIdReserva();
 		servicioSeleccionoExtra.guardarExtra(reserva, vmExtra.getId());
 
 		return new ModelAndView("home");
@@ -106,6 +139,32 @@ public class ControladorExtras {
 
 	    modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
 		return new ModelAndView("listado-seleccion-extras", modelo);
+	}
+	
+	
+	
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(path = "/listado-menu2", method = RequestMethod.GET)
+	public ModelAndView listadoDeOpcionesDeMenu2 (HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+
+		modelo.put("listaopciones", servicioListadoOpcionesMenu2.listarOpcionesMenu2());
+		modelo.put("secciones", servicioListarTiposMenu2.listarTipoDeMenus2());
+
+		return new ModelAndView("listado-opciones-menu2", modelo);
+	}
+
+	@RequestMapping(path = "/registra-reserva-menu2", method = RequestMethod.POST)
+	public ModelAndView registraReservaMenu2 ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+		String id=request.getSession().getAttribute("idReserva").toString();
+		Long reserva= Long.parseLong(id);
+		servicioRegistroMenu2.ingresarMenuSeleccionado2(reserva,vm.getIdmenu());
+		return new ModelAndView("redirect:/listado-menu");
 	}
 	
 }

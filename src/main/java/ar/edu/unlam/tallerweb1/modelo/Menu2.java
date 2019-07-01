@@ -1,32 +1,34 @@
 package ar.edu.unlam.tallerweb1.modelo;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import java.util.List;
 
 @Entity
-public class Extras {
+public class Menu2 {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String nombre;
-	private Integer precio;
-	@ManyToMany
-	private List<Reserva> reserva; 
 
-	
-	
-	public Extras(){}
+	private String descripcion;
+	private Integer costo;
+	@ManyToOne
+	private TipoDeMenu tipoDeEvento;
+
+	public Menu2(){}
+	@ManyToMany
+	private List<Reserva> reserva;              
+
+
+
 	public Long getId() {
 		return id;
 	}
@@ -35,28 +37,36 @@ public class Extras {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-	public Integer getPrecio() {
-		return precio;
+	public Integer getCosto() {
+		return costo;
 	}
 
-	public void setPrecio(Integer precio) {
-		this.precio = precio;
+	public void setCosto(Integer costo) {
+		this.costo = costo;
 	}
+
+	public TipoDeMenu getTipoDeEvento() {
+		return tipoDeEvento;
+	}
+
+	public void setTipoDeEvento(TipoDeMenu tipoDeEvento) {
+		this.tipoDeEvento = tipoDeEvento;
+	}
+
 	public List<Reserva> getReserva() {
 		return reserva;
 	}
 	public void setReserva(List<Reserva> reserva) {
 		this.reserva = reserva;
+
 	}
-	
-	
-	
+
 }

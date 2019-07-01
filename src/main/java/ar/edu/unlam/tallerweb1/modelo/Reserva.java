@@ -21,7 +21,7 @@ public class Reserva {
     private String fecha;
     private String horario;
     private Integer cantidadDeInvitados;
-	@OneToMany
+	@ManyToMany
 	private List<Extras> extras;
 
     @ManyToOne
@@ -35,6 +35,9 @@ public class Reserva {
 
 	@ManyToMany
 	private List<Menu> menu;
+	
+	@ManyToMany
+	private List<Menu2> menu2;
 
 
 	@ManyToMany
@@ -151,6 +154,26 @@ public class Reserva {
 		this.personal = personal;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public List<Menu2> getMenu2() {
+		return menu2;
+	}
 
+	public void setMenu2(List<Menu2> menu2) {
+		this.menu2 = menu2;
+	}
+
+
+	
+	
 }
 

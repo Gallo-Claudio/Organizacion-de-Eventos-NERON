@@ -22,10 +22,13 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 
 
 	@Override
-	public void guardarExtra(Long id,Long[] listaExtras) {
-		Reserva reserva = servicioSeleccionoExtraDao.traerReserva(id);
+	public void guardarExtra(Long id, Long[] listaExtras) {
+		Reserva reserva = servicioSeleccionoExtraDao.reserva(id);
 		List<Extras> extras=new ArrayList<>();
-       
+	   
+//		Reserva reserva=new Reserva();
+//	    reserva.setId(id);  
+	    
 		  int arrayLength = listaExtras.length;
 
 		    for (int i=0; i<arrayLength; i++) {

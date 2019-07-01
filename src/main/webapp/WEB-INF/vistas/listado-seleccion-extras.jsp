@@ -41,7 +41,7 @@
 
 		</tr>
    	</c:forEach>  
-	<input type="text" name="idReserva" value="${id}">
+ <!--	<input type="text" name="idReserva" value="${id}">-->
    	<input type="submit">
 </form:form>
 	

@@ -35,10 +35,9 @@ public class SeleccionoExtraDaoImp implements SeleccionoExtraDao {
 	@Override
 	public Extras traerExtraPorId(Long idm) {
 		final Session session = sessionFactory.getCurrentSession();
-		Extras id = (Extras) session.createCriteria(Extras.class)
-				.add(eq("id", idm))
+		return (Extras) session.createCriteria(Extras.class)
+				.add(Restrictions.eq("id", idm))
 				.uniqueResult();
-		return id;
 	}
 }
 //final Session session = sessionFactory.getCurrentSession();
