@@ -1,10 +1,13 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,17 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
-import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
-import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu;
-import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroPlatoMenu;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
 
 @Controller
 public class ControladorMenu {
 
-
+	@Inject
+	private ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones ServicioRecomendaciones;
 	@Inject
 	private ServicioListarTiposMenu servicioListarTiposMenu;
 	@Inject
@@ -68,23 +68,46 @@ public class ControladorMenu {
 
 	// Muestra el listado de los diferentes platos/bebidas/postres que componen el men�, para que el cliente seleccione entre ellos
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
-	public ModelAndView listadoDeOpcionesDeMenu (@RequestParam("q") Long id) {
+	public ModelAndView listadoDeOpcionesDeMenu (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		modelo.put("id",id);
+
 		// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
 		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 		// Para luego pasarlo a la vista a traves del return ModelAndView
 		modelo.put("listaopciones", servicioListadoOpcionesMenu.listarOpcionesMenu());
 		modelo.put("secciones", servicioListarTiposMenu.listarTipoDeMenus());
+
+		//parte de las recomendaciones de menu
+		//obtengo una lista con los menus recomendados , estos menus estan agrupados segun la reserva
+		//por eso tengo una lista de menu dentro de otra lista
+		ArrayList<ArrayList<Menu>> array=ServicioRecomendaciones.ObtenerRecomendaciones();
+		int i=0;
+		//voy asignando los menus al modelo
+		for(List<Menu> lista:array){
+			i+=1;
+
+			modelo.put("menus"+i+"",lista);
+
+
+		}
+
+       //es la cantidad de menus obtenidos para liego tener un limite al mostrar la vista
+		modelo.put("tope",array.size());
+
+
+
+
+
 		return new ModelAndView("listado-opciones-menu", modelo);
 	}
 
 	@RequestMapping(path = "/registra-reserva-menu", method = RequestMethod.POST)
 
-	public ModelAndView registraReservaMenu (@RequestParam ("id") Long id, @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
-
-		servicioRegistroMenu.ingresarMenuSeleccionado(id,vm.getIdmenu());
-		return new ModelAndView("redirect:/SeleccionDeExtras?idReserva="+id+"");
+	public ModelAndView registraReservaMenu ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+		String id=request.getSession().getAttribute("idReserva").toString();
+		Long reserva= Long.parseLong(id);
+		servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());
+		return new ModelAndView("redirect:/SeleccionDeExtras");
 
 	}
 

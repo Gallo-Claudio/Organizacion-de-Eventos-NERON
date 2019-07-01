@@ -46,6 +46,7 @@
 
                 <label>Resultados</label>
                 <div>
+
                     <h2>Capital</h2>
                     <table class="table table-condenced">
                         <tr>
@@ -217,9 +218,5 @@
 
 </c:if>
 
-<h2>Recomendaciones de Menu</h2>
-<a href="RecomendacionesMenu">
-    <input  class=" btn btn-success" type="button" value="Menus"/>
-</a>
 </body>
 </html>

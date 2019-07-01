@@ -18,27 +18,27 @@ public class SeleccionoExtraDaoImp implements SeleccionoExtraDao {
 	@Inject
     private SessionFactory sessionFactory;
 	@Override
-	public Reserva traerReserva(Long id){
+	public Reserva reserva(Long id){
 
 		final Session session = sessionFactory.getCurrentSession();
-		return (Reserva) session.createCriteria(Reserva.class)
-				.add(Restrictions.eq("id", id))
+		Reserva id1 = (Reserva) session.createCriteria(Reserva.class)
+				.add(eq("id", id))
 				.uniqueResult();
+		return id1;
 	}
 	@Override
-	public void guardarExtra(Reserva reservas) {
+	public void guardarExtra(Reserva reserva) {
 		final Session session = sessionFactory.getCurrentSession();
-		session.save(reservas);
+		session.save(reserva);
 		
 	}
 	@Override
 	public Extras traerExtraPorId(Long idm) {
 		final Session session = sessionFactory.getCurrentSession();
-
-
-        return (Extras) session.createCriteria(Extras.class)
-                .add(eq("id", idm))
-                .uniqueResult();
+		Extras id = (Extras) session.createCriteria(Extras.class)
+				.add(eq("id", idm))
+				.uniqueResult();
+		return id;
 	}
 }
 //final Session session = sessionFactory.getCurrentSession();

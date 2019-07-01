@@ -42,7 +42,7 @@ Listado para la seleccion del menu<br><br><br>
 		<br><br><br>
 
     </c:forEach>
-	<input type="text" name="id" value="${id}">
+
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
 </form:form>
@@ -52,5 +52,95 @@ Listado para la seleccion del menu<br><br><br>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+
+<div>
+	<h2>Menus que te pueden interesar</h2>
+   TOPEEE:${tope}
+
+	<br>
+
+	<c:if test="${tope>=1}">
+		<h2>menu</h2><br>
+		<c:forEach items="${menus1}" var="menu">
+
+			${menu.descripcion}
+			$${menu.costo}<br>
+
+
+		</c:forEach>
+	</c:if>
+
+	<br>
+
+
+	<br>
+
+	<c:if test="${tope>=2}">
+		<h2>menu</h2><br>
+		<c:forEach items="${menus2}" var="menu">
+
+			${menu.descripcion}
+			$${menu.costo}<br>
+
+
+		</c:forEach>
+	</c:if>
+
+	<br>
+
+
+	<br>
+
+	<c:if test="${tope>=3}">
+		<h2>menu</h2><br>
+		<c:forEach items="${menus3}" var="menu">
+
+			${menu.descripcion}
+			$${menu.costo}<br>
+
+
+		</c:forEach>
+	</c:if>
+
+	<br>
+
+
+	<br>
+
+	<c:if test="${tope>=4}">
+		<h2>menu</h2><br>
+		<c:forEach items="${menus4}" var="menu">
+
+			${menu.descripcion}
+			$${menu.costo}<br>
+
+
+		</c:forEach>
+	</c:if>
+
+	<br>
+
+
+	<br>
+
+	<c:if test="${tope>=5}">
+		<h2>menu</h2><br>
+		<c:forEach items="${menus5}" var="menu">
+
+			${menu.descripcion}
+			$${menu.costo}<br>
+
+
+		</c:forEach>
+	</c:if>
+
+	<br>
+
+
+
+</div>
+
+
 </body>
 </html>

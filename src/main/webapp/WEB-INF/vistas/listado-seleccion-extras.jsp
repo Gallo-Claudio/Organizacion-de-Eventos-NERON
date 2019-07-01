@@ -12,7 +12,7 @@
 </head>
 
 <header>
-				<center><b><i>Nerón - Seleccione los extras deseados para su evento</i></b></center><br><br>
+				<center><b><i>Nerï¿½n - Seleccione los extras deseados para su evento</i></b></center><br><br>
 
 	
 	
