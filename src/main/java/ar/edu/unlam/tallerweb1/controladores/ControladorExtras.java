@@ -20,7 +20,7 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListaSeleccionExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
-import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu2;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu2;
@@ -60,7 +60,7 @@ public class ControladorExtras {
 
 	
 	@Inject
-	private ServicioListadoOpcionesMenu2 servicioListadoOpcionesMenu2;
+	private ServicioListadoOpcionesExtras servicioListadoOpcionesExtras;
 	@Inject
 	private ServicioListarTiposMenu2 servicioListarTiposMenu2;
 	@Inject
@@ -149,22 +149,20 @@ public class ControladorExtras {
 	////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(path = "/listado-menu2", method = RequestMethod.GET)
-	public ModelAndView listadoDeOpcionesDeMenu2 (HttpServletRequest request) {
+	@RequestMapping(path = "/listado-extra", method = RequestMethod.GET)
+	public ModelAndView listadoDeOpcionesDeExtras (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
+		modelo.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesMenu2());
 
-		modelo.put("listaopciones", servicioListadoOpcionesMenu2.listarOpcionesMenu2());
-		modelo.put("secciones", servicioListarTiposMenu2.listarTipoDeMenus2());
-
-		return new ModelAndView("listado-opciones-menu2", modelo);
+		return new ModelAndView("listado-opciones-extra", modelo);
 	}
 
 	@RequestMapping(path = "/registra-reserva-menu2", method = RequestMethod.POST)
-	public ModelAndView registraReservaMenu2 ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
 		servicioRegistroMenu2.ingresarMenuSeleccionado2(reserva,vm.getIdmenu());
-		return new ModelAndView("redirect:/listado-menu");
+		return new ModelAndView("redirect:/home");
 	}
 	
 }

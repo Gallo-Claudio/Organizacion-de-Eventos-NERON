@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.Menu2;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.TipoDeMenu;
 
 import org.hibernate.Session;
@@ -25,9 +25,9 @@ public class RegistroPlatosMenuDaoImpl2 implements RegistroPlatosMenuDao2 {
 	}
 
 	@Override
-	public Menu2 traerMenuPorId2(Long id) {
+	public Extra traerMenuPorId2(Long id) {
         final Session session = sessionFactory.getCurrentSession();
-        return (Menu2) session.createCriteria(Menu2.class)
+        return (Extra) session.createCriteria(Extra.class)
                 .add(Restrictions.eq("id", id))
                 .uniqueResult();
     }

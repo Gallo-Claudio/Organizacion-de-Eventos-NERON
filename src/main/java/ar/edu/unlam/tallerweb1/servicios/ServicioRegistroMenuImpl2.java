@@ -12,7 +12,7 @@ import ar.edu.unlam.tallerweb1.dao.RegistroMenuDao;
 import ar.edu.unlam.tallerweb1.dao.RegistroPlatosMenuDao;
 import ar.edu.unlam.tallerweb1.dao.RegistroPlatosMenuDao2;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.Menu2;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
 
@@ -30,7 +30,7 @@ public class ServicioRegistroMenuImpl2 implements ServicioRegistroMenu2 {
 	@Override
 	public void ingresarMenuSeleccionado2(Long id,Long[] idmenu) {
 		Reserva reserva=registroMenuDao.traerReserva(id);
-		List<Menu2> menuElegido = new ArrayList<>();
+		List<Extra> menuElegido = new ArrayList<>();
 
 		  int arrayLength = idmenu.length;
 

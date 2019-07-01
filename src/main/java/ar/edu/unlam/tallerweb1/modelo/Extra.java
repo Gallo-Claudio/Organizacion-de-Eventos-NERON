@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-public class Menu2 {
+public class Extra {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,17 +20,13 @@ public class Menu2 {
 
 	private String nombre;
 	private Integer precio;
-//	@ManyToOne
-//	private TipoDeMenu tipoDeEvento;
+
 	@ManyToMany
 	private List<Reserva> reserva;
+
 	
-	
-	
-	public Menu2(){}
+	public Extra(){}
               
-
-
 
 	public Long getId() {
 		return id;
@@ -56,20 +52,11 @@ public class Menu2 {
 		this.precio = precio;
 	}
 
-//	public TipoDeMenu getTipoDeEvento() {
-//		return tipoDeEvento;
-//	}
-
-//	public void setTipoDeEvento(TipoDeMenu tipoDeEvento) {
-//		this.tipoDeEvento = tipoDeEvento;
-//	}
-
 	public List<Reserva> getReserva() {
 		return reserva;
 	}
 	public void setReserva(List<Reserva> reserva) {
 		this.reserva = reserva;
-
 	}
 
 }

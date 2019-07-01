@@ -10,18 +10,18 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.ListadoOpcionesMenuDao;
 import ar.edu.unlam.tallerweb1.dao.ListadoOpcionesMenuDao2;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.Menu2;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 
-@Service("servicioListadoOpcionesMenu2")
+@Service("servicioListadoOpcionesExtras")
 @Transactional
-public class ServicioListadoOpcionesMenuImpl2 implements ServicioListadoOpcionesMenu2 {
+public class ServicioListadoOpcionesExtrasImpl implements ServicioListadoOpcionesExtras {
 
 	@Inject
 	private ListadoOpcionesMenuDao2 listadoOpcionesMenuDao2;
 
 
 	@Override
-	public List<Menu2> listarOpcionesMenu2() {
+	public List<Extra> listarOpcionesMenu2() {
 		// Llamo al metodo "listadoOpcionesDeMenu()" de la instancia "listadoOpcionesMenuDao", que esta en el area del DAO
 		// El valor obtenido es retornado
 		return listadoOpcionesMenuDao2.listadoOpcionesDeMenu2();

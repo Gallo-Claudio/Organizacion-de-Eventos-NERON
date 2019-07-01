@@ -107,7 +107,7 @@ public class ControladorMenu {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
 		servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());
-		return new ModelAndView("redirect:/home");
+		return new ModelAndView("redirect:/listado-extra");
 
 	}
 

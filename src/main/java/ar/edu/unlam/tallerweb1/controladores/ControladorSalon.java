@@ -94,7 +94,7 @@ public class ControladorSalon {
            request.getSession().setAttribute("idReserva", idReserva);
 
           
-           return new ModelAndView("redirect:/listado-menu2");
+           return new ModelAndView("redirect:/listado-menu");
         }else{
 
             modelo.put("mensaje",mensaje);

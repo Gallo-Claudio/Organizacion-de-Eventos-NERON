@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.Menu2;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -16,16 +16,16 @@ public class ListadoOpcionesMenuDaoImpl2 implements ListadoOpcionesMenuDao2 {
 	
 	@Inject
     private SessionFactory sessionFactory;
-	List <Menu2> listadoDeOpcionesDeMenu2;
+	List <Extra> listadoDeOpcionesDeMenu2;
 	
 	
 	@Override
-	public List<Menu2> listadoOpcionesDeMenu2 () {
+	public List<Extra> listadoOpcionesDeMenu2 () {
 		final Session session = sessionFactory.getCurrentSession(); // Obtengo una sesion
 		// A traves de la sesion abierta, consulto en la tabla Menu que esta en la BD
 		// y guardo el valor obtenido en la coleccion del tipo List llamada "listadoDeOpcionesDeMenu"
 		// para luego retornar el resultado
-		listadoDeOpcionesDeMenu2 = session.createCriteria(Menu2.class).list();
+		listadoDeOpcionesDeMenu2 = session.createCriteria(Extra.class).list();
 		return (listadoDeOpcionesDeMenu2);
 	}
 

@@ -37,7 +37,7 @@ public class Reserva {
 	private List<Menu> menu;
 	
 	@ManyToMany
-	private List<Menu2> menu2;
+	private List<Extra> menu2;
 
 
 	@ManyToMany
@@ -164,11 +164,11 @@ public class Reserva {
 	
 	
 	
-	public List<Menu2> getMenu2() {
+	public List<Extra> getMenu2() {
 		return menu2;
 	}
 
-	public void setMenu2(List<Menu2> menu2) {
+	public void setMenu2(List<Extra> menu2) {
 		this.menu2 = menu2;
 	}
 
