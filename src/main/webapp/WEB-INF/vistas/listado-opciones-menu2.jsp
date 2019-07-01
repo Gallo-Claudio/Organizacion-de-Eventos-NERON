@@ -13,12 +13,8 @@ COPIA PARA EXTRAS<br><br><br>
 
 <form:form action="registra-reserva-menu2" method="POST" modelAttribute="vm">
  
-	<c:forEach var = "i" begin = "1" end = "6">
-	  			<c:forEach var="tipo" items="${secciones}">
-					<c:if test="${tipo.id==i}">
-						<td>${tipo.detalle}</td>
-					</c:if>
-				</c:forEach>
+
+
 		<table border="1" cellpadding="1" cellspacing="0">
 			<thead>
 				<tr>
@@ -29,19 +25,18 @@ COPIA PARA EXTRAS<br><br><br>
 			</thead>
 			<tbody>
 	  			<c:forEach var="menu" items="${listaopciones}">
-					<c:if test="${menu.tipoDeEvento.id==i}">
 						<tr>
-						<td>${menu.descripcion}</td>
-						<td>${menu.costo}</td>
+						<td>${menu.nombre}</td>
+						<td>${menu.precio}</td>
 						<td><input type="checkbox" name="idmenu[${menu.id}]" value="${menu.id}"></td>
 						</tr>
-					</c:if>
+
 				</c:forEach>
 			</tbody>
 		</table>
 		<br><br><br>
 
-    </c:forEach>
+
 
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
