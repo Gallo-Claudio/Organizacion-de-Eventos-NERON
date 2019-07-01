@@ -9,5 +9,5 @@ import ar.edu.unlam.tallerweb1.modelo.Extra;
 public interface ServicioListadoOpcionesExtras {
 
 
-	List<Extra> listarOpcionesMenu2();
+	List<Extra> listarOpcionesDeExtras();
 }

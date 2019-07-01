@@ -10,25 +10,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.RegistroMenuDao;
 import ar.edu.unlam.tallerweb1.dao.RegistroPlatosMenuDao;
-import ar.edu.unlam.tallerweb1.dao.RegistroPlatosMenuDao2;
+import ar.edu.unlam.tallerweb1.dao.RegistroExtrasDao;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
 
-@Service("servicioRegistroMenu2")
+@Service("servicioRegistroExtras")
 @Transactional
-public class ServicioRegistroMenuImpl2 implements ServicioRegistroMenu2 {
+public class ServicioRegistroExtrasImpl implements ServicioRegistroExtras {
 
 	@Inject
-	private RegistroPlatosMenuDao2 registroPlatosMenuDao2;
+	private RegistroExtrasDao registroExtrasDao;
 	@Inject
 	private RegistroMenuDao registroMenuDao;
 
 
 
 	@Override
-	public void ingresarMenuSeleccionado2(Long id,Long[] idmenu) {
+	public void ingresarExtrasSeleccionados(Long id,Long[] idmenu) {
 		Reserva reserva=registroMenuDao.traerReserva(id);
 		List<Extra> menuElegido = new ArrayList<>();
 
@@ -36,10 +36,11 @@ public class ServicioRegistroMenuImpl2 implements ServicioRegistroMenu2 {
 
 		    for (int i=0; i<arrayLength; i++) {
 		    	Long idm = idmenu[i];
-		    	menuElegido.add(registroPlatosMenuDao2.traerMenuPorId2(idm));
+		    	menuElegido.add(registroExtrasDao.traerExtrasPorId(idm));
 		    }
 
-		reserva.setMenu2(menuElegido);
+		    reserva.setExtra(menuElegido);
+
 
 		registroMenuDao.registraMenuEnReserva(reserva);
 	}

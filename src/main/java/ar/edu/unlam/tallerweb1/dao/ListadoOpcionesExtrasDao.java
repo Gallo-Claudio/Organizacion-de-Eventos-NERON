@@ -6,7 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.Extra;
 
 
-public interface ListadoOpcionesMenuDao2{
+public interface ListadoOpcionesExtrasDao{
 	
-	List<Extra> listadoOpcionesDeMenu2 ();
+	List<Extra> listadoOpcionesDeExtras ();
 }

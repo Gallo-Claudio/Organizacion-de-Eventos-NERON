@@ -21,8 +21,8 @@ public class Reserva {
     private String fecha;
     private String horario;
     private Integer cantidadDeInvitados;
-	@ManyToMany
-	private List<Extras> extras;
+//	@ManyToMany
+//	private List<Extras> extras;
 
     @ManyToOne
     private Salon salon;
@@ -37,8 +37,7 @@ public class Reserva {
 	private List<Menu> menu;
 	
 	@ManyToMany
-	private List<Extra> menu2;
-
+	private List<Extra> extra;
 
 	@ManyToMany
 	private List <Personal> personal;
@@ -46,7 +45,6 @@ public class Reserva {
 
 
     public Reserva() {
-
     }
 
 	public List<PuntajeMenu> getPuntajesMenu() {
@@ -105,24 +103,21 @@ public class Reserva {
 
 
 
-	public List<Extras> getExtras() {
-		return extras;
-	}
+//	public List<Extras> getExtras() {
+//		return extras;
+//	}
 
-	public void setExtras(List<Extras> extras) {
-		this.extras = extras;
-	}
+//	public void setExtras(List<Extras> extras) {
+//		this.extras = extras;
+//	}
 
 	public Salon getSalon() {
 		return salon;
 	}
 
-
-
 	public void setSalon(Salon salon) {
 		this.salon = salon;
 	}
-
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -136,19 +131,13 @@ public class Reserva {
 		return menu;
 	}
 
-
-
 	public void setMenu(List<Menu> menu) {
 		this.menu = menu;
 	}
 
-
-
 	public List<Personal> getPersonal() {
 		return personal;
 	}
-
-
 
 	public void setPersonal(List<Personal> personal) {
 		this.personal = personal;
@@ -164,12 +153,12 @@ public class Reserva {
 	
 	
 	
-	public List<Extra> getMenu2() {
-		return menu2;
+	public List<Extra> getExtra() {
+		return extra;
 	}
 
-	public void setMenu2(List<Extra> menu2) {
-		this.menu2 = menu2;
+	public void setExtra(List<Extra> extra) {
+		this.extra = extra;
 	}
 
 

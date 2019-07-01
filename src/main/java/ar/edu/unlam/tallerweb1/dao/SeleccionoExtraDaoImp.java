@@ -1,4 +1,5 @@
 package ar.edu.unlam.tallerweb1.dao;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.Extras;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
@@ -33,9 +34,9 @@ public class SeleccionoExtraDaoImp implements SeleccionoExtraDao {
 		
 	}
 	@Override
-	public Extras traerExtraPorId(Long idm) {
+	public Extra traerExtraPorId(Long idm) {
 		final Session session = sessionFactory.getCurrentSession();
-		return (Extras) session.createCriteria(Extras.class)
+		return (Extra) session.createCriteria(Extra.class)
 				.add(Restrictions.eq("id", idm))
 				.uniqueResult();
 	}

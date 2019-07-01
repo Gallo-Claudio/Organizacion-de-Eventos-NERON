@@ -7,7 +7,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.SeleccionoExtraDao;
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+//import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
@@ -24,7 +25,7 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 	@Override
 	public void guardarExtra(Long id, Long[] listaExtras) {
 		Reserva reserva = servicioSeleccionoExtraDao.reserva(id);
-		List<Extras> extras=new ArrayList<>();
+		List<Extra> extras=new ArrayList<>();
 	   
 //		Reserva reserva=new Reserva();
 //	    reserva.setId(id);  
@@ -36,7 +37,7 @@ public class ServicioSeleccionoExtraImp implements ServicioSeleccionoExtra {
 		    	extras.add(servicioSeleccionoExtraDao.traerExtraPorId(idm));
 		    }
          	    
-		    reserva.setExtras(extras);
+		    reserva.setExtra(extras);
          
 		servicioSeleccionoExtraDao.guardarExtra(reserva);
 

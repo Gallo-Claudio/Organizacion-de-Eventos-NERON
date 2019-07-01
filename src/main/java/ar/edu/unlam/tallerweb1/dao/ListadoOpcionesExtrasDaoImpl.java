@@ -11,22 +11,22 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-@Repository("listadoOpcionesMenuDao2 ")
-public class ListadoOpcionesMenuDaoImpl2 implements ListadoOpcionesMenuDao2 {
+@Repository("listadoOpcionesExtrasDao")
+public class ListadoOpcionesExtrasDaoImpl implements ListadoOpcionesExtrasDao {
 	
 	@Inject
     private SessionFactory sessionFactory;
-	List <Extra> listadoDeOpcionesDeMenu2;
+	List <Extra> listadoDeOpcionesDeExtras;
 	
 	
 	@Override
-	public List<Extra> listadoOpcionesDeMenu2 () {
+	public List<Extra> listadoOpcionesDeExtras () {
 		final Session session = sessionFactory.getCurrentSession(); // Obtengo una sesion
 		// A traves de la sesion abierta, consulto en la tabla Menu que esta en la BD
 		// y guardo el valor obtenido en la coleccion del tipo List llamada "listadoDeOpcionesDeMenu"
 		// para luego retornar el resultado
-		listadoDeOpcionesDeMenu2 = session.createCriteria(Extra.class).list();
-		return (listadoDeOpcionesDeMenu2);
+		listadoDeOpcionesDeExtras = session.createCriteria(Extra.class).list();
+		return (listadoDeOpcionesDeExtras);
 	}
 
 }

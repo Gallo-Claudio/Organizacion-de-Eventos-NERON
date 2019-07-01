@@ -23,10 +23,9 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
-import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu2;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu;
-import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu2;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroPlatoMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResumenSeleccion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
@@ -34,42 +33,21 @@ import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
 
-
 @Controller
 public class ControladorExtras {
 	
 	@Inject
-	private ServicioIngresoExtras servicioIngresoExtras;	
-	
+	private ServicioIngresoExtras servicioIngresoExtras;		
 	@Inject
-	private ServicioListarExtras servicioListarExtras;
-	
+	private ServicioListarExtras servicioListarExtras;	
 	@Inject
-	private ServicioSeleccionoExtra servicioSeleccionoExtra;
-	
+	private ServicioSeleccionoExtra servicioSeleccionoExtra;	
 	@Inject 
-	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;
-	
-	
-	
-	
-	
-	
-	
-
-
-	
+	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;	
 	@Inject
 	private ServicioListadoOpcionesExtras servicioListadoOpcionesExtras;
 	@Inject
-	private ServicioListarTiposMenu2 servicioListarTiposMenu2;
-	@Inject
-	private ServicioRegistroMenu2 servicioRegistroMenu2;
-	
-	
-	
-	
-	
+	private ServicioRegistroExtras servicioRegistroExtras;
 
 	
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -152,16 +130,16 @@ public class ControladorExtras {
 	@RequestMapping(path = "/listado-extra", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeExtras (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
-		modelo.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesMenu2());
+		modelo.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
 
 		return new ModelAndView("listado-opciones-extra", modelo);
 	}
 
-	@RequestMapping(path = "/registra-reserva-menu2", method = RequestMethod.POST)
+	@RequestMapping(path = "/registra-reserva-extras", method = RequestMethod.POST)
 	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
-		servicioRegistroMenu2.ingresarMenuSeleccionado2(reserva,vm.getIdmenu());
+		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
 		return new ModelAndView("redirect:/home");
 	}
 	

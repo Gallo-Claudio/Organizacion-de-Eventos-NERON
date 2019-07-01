@@ -11,7 +11,7 @@
 
 Seleccion de Extras<br><br><br>
 
-<form:form action="registra-reserva-menu2" method="POST" modelAttribute="vm">
+<form:form action="registra-reserva-extras" method="POST" modelAttribute="vm">
 
 		<table border="1" cellpadding="1" cellspacing="0">
 			<thead>
