@@ -12,13 +12,14 @@ public interface ServicioPersonal {
 
 	Map <Long, Integer> obtencionListadoDeAsistencias();
 
-
 	List <Personal> controlDeServiciosPrestados ();
 
 	Map OrdenaAscendentemente(Map unsortMap);
 
-	List <Integer> calcularPersonal();
-
+	List <Integer> calcularPersonal(Integer cantidadDeInvitados);
+	
+	List <Double> consultarSueldoPersonal()
+;
 	List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia);
 
 	List <Personal> listadoPersonalAsignado(List <Long> listado);

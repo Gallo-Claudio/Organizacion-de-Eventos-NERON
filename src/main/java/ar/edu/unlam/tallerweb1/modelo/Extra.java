@@ -19,9 +19,9 @@ public class Extra {
 	private Long id;
 
 	private String nombre;
-	private Integer precio;
+	private Double precio;
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "extra")
 	private List<Reserva> reserva;
 
 	
@@ -44,11 +44,11 @@ public class Extra {
 		this.nombre = nombre;
 	}
 
-	public Integer getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Integer precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 

@@ -26,6 +26,8 @@ import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroSalonViewModel;
 
 
 @Controller
@@ -122,7 +124,7 @@ public class ControladorPersonal {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(path = "/asignar-personal-al-evento", method = RequestMethod.GET)
-	public ModelAndView ingresarPersonal() {
+	public ModelAndView ingresarPersonal(@ModelAttribute("vmSalon") RegistroSalonViewModel vmSalon, HttpServletRequest request) {
 
 		// Obtengo el listado de asistencia ordenado por Id -- (paso 1 y 2)
 		Map <Long, Integer> listadoAsistencia = new HashMap();
@@ -131,8 +133,9 @@ public class ControladorPersonal {
 		// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map) -- (paso 3)
 		Map <Long, Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.OrdenaAscendentemente(listadoAsistencia);
 
-		// Recibo la cantidad de personal necesario para cubrir el evento
-		List<Integer> personalNecesario = servicioPersonal.calcularPersonal();
+		// Recibo la cantidad de personal necesario en cada categoria para cubrir el evento
+		
+		List<Integer> personalNecesario = servicioPersonal.calcularPersonal(vmSalon.getCantidad());
 
 		// Genero el listado del personal a asignar de acuerdo a las necesidades del evento  -- (paso 4)
 		List <Long> personalDelEvento = servicioPersonal.asignarPersonalNecesario(personalNecesario, conteoOrdenadoAscendentementePorAsistencia);
@@ -171,11 +174,11 @@ public class ControladorPersonal {
 		while (p.hasNext()) {
 			personal=p.next();
 
-	        if(conteo.containsKey(personal.getId())){
-	        	conteo.put(personal.getId(),conteo.get(personal.getId())+1);
+	        if(conteo.containsKey(personal.getIdPersonal())){
+	        	conteo.put(personal.getIdPersonal(),conteo.get(personal.getIdPersonal())+1);
 	         }
 	         else{
-	            conteo.put(personal.getId(),1);
+	            conteo.put(personal.getIdPersonal(),1);
 	         }
 		}
 

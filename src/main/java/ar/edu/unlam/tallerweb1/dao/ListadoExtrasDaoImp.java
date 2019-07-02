@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import org.hibernate.Session;
@@ -18,12 +18,12 @@ public class ListadoExtrasDaoImp implements ListadoExtrasDao {
 	
 	@Inject
     private SessionFactory sessionFactory;
-	List <Extras> listadoDeExtras;
+	List <Extra> listadoDeExtras;
 
 	@Override
-	public List<Extras> listaExtras() {
+	public List<Extra> listaExtras() {
 		final Session session = sessionFactory.getCurrentSession();
-		listadoDeExtras = session.createCriteria(Extras.class).list();
+		listadoDeExtras = session.createCriteria(Extra.class).list();
 		return (listadoDeExtras);
 	}
 

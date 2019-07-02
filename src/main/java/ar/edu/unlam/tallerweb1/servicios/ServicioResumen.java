@@ -8,8 +8,9 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.TipoDeMenu;
 
 // Interface que define los metodos del Servicio de Regisatros de platos del Menu.
-public interface ServicioResumenSeleccion {
+public interface ServicioResumen {
+
+	Double calculaCostoTotal(Reserva reservafinal);
 
 	Reserva buscarDatos(Long idReserva);
-
 }

@@ -16,25 +16,26 @@ public class Menu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idMenu;
 
 	private String descripcion;
-	private Integer costo;
+	private Double precio;
 	@ManyToOne
-	private TipoDeMenu tipoDeEvento;
+	private TipoDeMenu tipoDeMenu;
+           
+	@ManyToMany(mappedBy = "menu")
+	private List<Reserva> reserva; 
 
+	
 	public Menu(){}
-	@ManyToMany
-	private List<Reserva> reserva;              
-
-
-
-	public Long getId() {
-		return id;
+	
+	
+	public Long getIdMenu() {
+		return idMenu;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdMenu(Long idMenu) {
+		this.idMenu = idMenu;
 	}
 
 	public String getDescripcion() {
@@ -45,28 +46,28 @@ public class Menu {
 		this.descripcion = descripcion;
 	}
 
-	public Integer getCosto() {
-		return costo;
+	public Double getPrecio() {
+		return precio;
 	}
 
-	public void setCosto(Integer costo) {
-		this.costo = costo;
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 
-	public TipoDeMenu getTipoDeEvento() {
-		return tipoDeEvento;
+	public TipoDeMenu getTipoDeMenu() {
+		return tipoDeMenu;
 	}
 
-	public void setTipoDeEvento(TipoDeMenu tipoDeEvento) {
-		this.tipoDeEvento = tipoDeEvento;
+	public void setTipoDeMenu(TipoDeMenu tipoDeMenu) {
+		this.tipoDeMenu = tipoDeMenu;
 	}
 
 	public List<Reserva> getReserva() {
 		return reserva;
 	}
+	
 	public void setReserva(List<Reserva> reserva) {
 		this.reserva = reserva;
-
 	}
 
 }

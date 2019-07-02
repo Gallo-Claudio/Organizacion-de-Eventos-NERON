@@ -18,11 +18,11 @@ public class ServicioRegistroPlatoMenuImpl implements ServicioRegistroPlatoMenu 
 	private RegistroPlatosMenuDao registroPlatosMenuDao;
 
 	@Override
-	public void ingresarPlatosAlMenu(String descripcion, Integer costo, Long tipodemenu) {
+	public void ingresarPlatosAlMenu(String descripcion, Double precio, Long tipodemenu) {
 		Menu menu = new Menu ();
 		menu.setDescripcion(descripcion);
-		menu.setCosto(costo);
-		menu.setTipoDeEvento(registroPlatosMenuDao.traerTipoDeMenuPorId(tipodemenu));
+		menu.setPrecio(precio);
+		menu.setTipoDeMenu(registroPlatosMenuDao.traerTipoDeMenuPorId(tipodemenu));
 		registroPlatosMenuDao.registraPlatosAlMenu(menu);
 	}
 

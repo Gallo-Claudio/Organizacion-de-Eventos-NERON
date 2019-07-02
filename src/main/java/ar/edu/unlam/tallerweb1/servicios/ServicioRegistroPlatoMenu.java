@@ -6,6 +6,6 @@ import ar.edu.unlam.tallerweb1.modelo.TipoDeMenu;
 // Interface que define los metodos del Servicio de Regisatros de platos del Menu.
 public interface ServicioRegistroPlatoMenu {
 
-	void ingresarPlatosAlMenu(String descripcion, Integer costo, Long tipodemenu);
+	void ingresarPlatosAlMenu(String descripcion, Double precio, Long tipodemenu);
 
 }

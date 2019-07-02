@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.ListadoExtrasDao;
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 
 
 
@@ -22,7 +22,7 @@ public class ServicioListarExtrasImp implements ServicioListarExtras {
 	private ListadoExtrasDao servicioListadoExtrasDao;
 
 	@Override
-	public List<Extras> listarExtras() {
+	public List<Extra> listarExtras() {
 		return servicioListadoExtrasDao.listaExtras();
 	}
 

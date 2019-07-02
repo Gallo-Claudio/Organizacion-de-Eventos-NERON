@@ -38,10 +38,10 @@ public class ControladorMenu {
 
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Ingreso de los diferentes platos que integran el Menu o Carta  //////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Ingreso de los diferentes platos que integran el Menu o Carta  //////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// Se pasa un objeto vacio a la vista para ingresar los datos correspondientesy se recibe y pasa a la vista un listado de los diferentes tipos de menu
+	// Se pasa un objeto vacio a la vista para ingresar los datos correspondientes y se recibe y pasa a la vista un listado de los diferentes tipos de menu
 	@RequestMapping(path = "/ingresar-menu", method = RequestMethod.GET)
 	public ModelAndView ingresarMenu() {
 		ModelMap model = new ModelMap();
@@ -52,9 +52,9 @@ public class ControladorMenu {
 		return new ModelAndView("ingreso-menu", model);
 	}
 
-	// Ingreso de los distintos platos/bebidas/postres que compondr�n las opciones a elegir opr parte del cliente
+	// Ingreso de los distintos platos/bebidas/postres que compondran las opciones a elegir por parte del cliente
 	@RequestMapping(path = "/registro-plato-menu", method = RequestMethod.POST)
-	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("descripcion") String descripcion, @ModelAttribute ("costo") Integer costo, @ModelAttribute ("tipoDeEvento") Long tipodemenu) {
+	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("descripcion") String descripcion, @ModelAttribute ("costo") Double costo, @ModelAttribute ("tipoDeEvento") Long tipodemenu) {
 		ModelMap model = new ModelMap();
 		model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
 		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(descripcion, costo, tipodemenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la l�gica
@@ -66,7 +66,7 @@ public class ControladorMenu {
 	// Seleccion del Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// Muestra el listado de los diferentes platos/bebidas/postres que componen el men�, para que el cliente seleccione entre ellos
+	// Muestra el listado de los diferentes platos/bebidas/postres que componen el menu, para que el cliente seleccione entre ellos
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeMenu (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
@@ -103,7 +103,7 @@ public class ControladorMenu {
 
 	@RequestMapping(path = "/registra-reserva-menu", method = RequestMethod.POST)
 
-	public ModelAndView registraReservaMenu ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+	public ModelAndView registraReservaMenu (@ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
 		servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());

@@ -2,10 +2,10 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
 
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 
 
 public interface ListarSeleccionExtrasDao{
 	
-	List<Extras> listarSeleccionExtras ();
+	List<Extra> listarSeleccionExtras ();
 }

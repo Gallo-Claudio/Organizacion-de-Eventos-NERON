@@ -48,11 +48,11 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			// Alli, guardo en la key el numero de Id y en el value guardo las veces que trabajo.
 			// Dicho conteo lo realizo al comparar si el Id de extraido ya existe (si ya fue agregado) al Map,
 			// de ya estar, sumo una unidad en el "value". De no estar el Id, es agregado al Map en la "key"
-	        if(conteo.containsKey(personal.getId())){
-	        	conteo.put(personal.getId(),conteo.get(personal.getId())+1);
+	        if(conteo.containsKey(personal.getIdPersonal())){
+	        	conteo.put(personal.getIdPersonal(),conteo.get(personal.getIdPersonal())+1);
 	         }
 	         else{
-	            conteo.put(personal.getId(),1);
+	            conteo.put(personal.getIdPersonal(),1);
 	         }
 		}
 
@@ -64,10 +64,10 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		Personal todos;
 		while (tep.hasNext()) {
 			todos=tep.next();
-			 	if(conteo.containsKey(todos.getId())){
+			 	if(conteo.containsKey(todos.getIdPersonal())){
 		         }
 		         else{
-		            conteo.put(todos.getId(),0);
+		            conteo.put(todos.getIdPersonal(),0);
 		         }
 		}
 		return conteo;
@@ -122,12 +122,8 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 	// Calcula el personal de acuerdo a la cantidad total de invitados al evento
 	@Override
-	public List<Integer> calcularPersonal() {
+	public List<Integer> calcularPersonal(Integer cantidadDeInvitados) {
 		List<Integer> cantidadDePersonal = new ArrayList();
-
-		Integer cantidadDeInvitados = 300;  //Cocino la cantidad de invitados
-
-	//	Integer personalNecesario = (cantidadDeInvitados * 10)/100;
 
 		Integer encargado = (cantidadDeInvitados * 1)/100;
 		cantidadDePersonal.add(encargado);
@@ -144,7 +140,20 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 		return cantidadDePersonal;
 	}
+	
+	
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
 
+	// Genera un listado con la cantidad necesaria de personal para cubrir el evento
+		@Override
+		public List <Double> consultarSueldoPersonal() {
+			
+			
+			return null;
+		}
+	
+	
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 

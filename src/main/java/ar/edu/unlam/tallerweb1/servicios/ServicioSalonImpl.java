@@ -45,7 +45,7 @@ public class ServicioSalonImpl implements ServicioSalon {
         servicioSalonDao.guardarReserva(reserva);
 
       //  salonAingresar.agregarReservas(reserva);
-        return reserva.getId();
+        return reserva.getIdReserva();
     }
     @Override
     public List<Imagenes> galeria(Integer id){

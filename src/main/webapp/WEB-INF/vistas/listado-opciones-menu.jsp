@@ -29,11 +29,11 @@ Listado para la seleccion del menu<br><br><br>
 			</thead>
 			<tbody>
 	  			<c:forEach var="menu" items="${listaopciones}">
-					<c:if test="${menu.tipoDeEvento.id==i}">
+					<c:if test="${menu.tipoDeMenu.id==i}">
 						<tr>
 						<td>${menu.descripcion}</td>
-						<td>${menu.costo}</td>
-						<td><input type="checkbox" name="idmenu[${menu.id}]" value="${menu.id}"></td>
+						<td>${menu.precio}</td>
+						<td><input type="checkbox" name="idmenu[${menu.idMenu}]" value="${menu.idMenu}"></td>
 						</tr>
 					</c:if>
 				</c:forEach>

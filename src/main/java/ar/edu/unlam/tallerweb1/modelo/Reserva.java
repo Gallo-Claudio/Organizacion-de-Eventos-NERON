@@ -2,14 +2,6 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 
 
 @Entity
@@ -17,12 +9,10 @@ public class Reserva {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idReserva;
     private String fecha;
     private String horario;
     private Integer cantidadDeInvitados;
-//	@ManyToMany
-//	private List<Extras> extras;
 
     @ManyToOne
     private Salon salon;
@@ -33,13 +23,16 @@ public class Reserva {
 	@OneToMany
 	private List<PuntajeMenu> puntajesMenu;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "reserva_menu", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idMenu"))
 	private List<Menu> menu;
 	
 	@ManyToMany
+	@JoinTable(name = "reserva_extra", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idExtra"))
 	private List<Extra> extra;
 
 	@ManyToMany
+	@JoinTable(name = "reserva_personal", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idPersonal"))
 	private List <Personal> personal;
 
 
@@ -47,8 +40,29 @@ public class Reserva {
     public Reserva() {
     }
 
-	public List<PuntajeMenu> getPuntajesMenu() {
-		return puntajesMenu;
+    
+	public Long getIdReserva() {
+		return idReserva;
+	}
+
+	public void setIdReserva(Long idReserva) {
+		this.idReserva = idReserva;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+
+	public String getHorario() {
+		return horario;
+	}
+
+	public void setHorario(String horario) {
+		this.horario = horario;
 	}
 
 	public Integer getCantidadDeInvitados() {
@@ -58,59 +72,7 @@ public class Reserva {
 	public void setCantidadDeInvitados(Integer cantidadDeInvitados) {
 		this.cantidadDeInvitados = cantidadDeInvitados;
 	}
-
-	public void setPuntajesMenu(List<PuntajeMenu> puntajesMenu) {
-		this.puntajesMenu = puntajesMenu;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
-
-	public String getFecha() {
-		return fecha;
-	}
-
-
-
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
-
-
-
-	public String getHorario() {
-		return horario;
-	}
-
-
-
-	public void setHorario(String horario) {
-		this.horario = horario;
-	}
-
-
-
-
-
-
-
-//	public List<Extras> getExtras() {
-//		return extras;
-//	}
-
-//	public void setExtras(List<Extras> extras) {
-//		this.extras = extras;
-//	}
-
+	
 	public Salon getSalon() {
 		return salon;
 	}
@@ -127,7 +89,15 @@ public class Reserva {
 		this.usuario = usuario;
 	}
 
-	public List<Menu> getMenu() {
+	public List<PuntajeMenu> getPuntajesMenu() {
+		return puntajesMenu;
+	}
+
+	public void setPuntajesMenu(List<PuntajeMenu> puntajesMenu) {
+		this.puntajesMenu = puntajesMenu;
+	}
+	
+		public List<Menu> getMenu() {
 		return menu;
 	}
 
@@ -135,6 +105,14 @@ public class Reserva {
 		this.menu = menu;
 	}
 
+	public List<Extra> getExtra() {
+		return extra;
+	}
+
+	public void setExtra(List<Extra> extra) {
+		this.extra = extra;
+	}
+	
 	public List<Personal> getPersonal() {
 		return personal;
 	}
@@ -143,26 +121,4 @@ public class Reserva {
 		this.personal = personal;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public List<Extra> getExtra() {
-		return extra;
-	}
-
-	public void setExtra(List<Extra> extra) {
-		this.extra = extra;
-	}
-
-
-	
-	
 }
-
