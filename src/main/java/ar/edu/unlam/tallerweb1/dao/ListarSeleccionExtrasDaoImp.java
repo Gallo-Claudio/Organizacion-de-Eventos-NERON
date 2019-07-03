@@ -1,6 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -14,14 +14,14 @@ public class ListarSeleccionExtrasDaoImp implements ListarSeleccionExtrasDao {
 
 	@Inject
     private SessionFactory sessionFactory;
-	List <Extras> listarSeleccionExtras;
+	List <Extra> listarSeleccionExtras;
 	
 	
 
 	@Override
-	public List<Extras> listarSeleccionExtras() {
+	public List<Extra> listarSeleccionExtras() {
 		final Session session = sessionFactory.getCurrentSession();
-		listarSeleccionExtras = session.createCriteria(Extras.class).list();
+		listarSeleccionExtras = session.createCriteria(Extra.class).list();
 		return (listarSeleccionExtras);
 	}
 

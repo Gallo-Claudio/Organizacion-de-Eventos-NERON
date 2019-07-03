@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.IngresoExtraDao;
 
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 
 
 
@@ -20,8 +20,8 @@ public class ServicioIngresoExtrasImp implements ServicioIngresoExtras {
 	private IngresoExtraDao servicioIngresoExtraDao; //objeto
 
 	@Override
-	public void ingresarExtras(Extras extras) {
-		servicioIngresoExtraDao.ingresarExtras(extras);
+	public void ingresarExtras(Extra extra) {
+		servicioIngresoExtraDao.ingresarExtras(extra);
 		
 	}
 

@@ -5,7 +5,6 @@
 <html>
 <head>
     <link href="css/bootstrap.min.css" rel="stylesheet" >
-    <link rel="stylesheet" type="text/css" href="css/extras.css">
     <title>Seleccion de Salon</title>
 </head>
 <body>
@@ -19,10 +18,10 @@
 
 
                 <br>
-                <label><p>Cantidad de invitados</p></label>
+                <label>Cantidad de invitados</label>
                 <input class="form-control"  value="${cantidad}" type="number"  name="cantidad">
                 <br>
-                <label><p>Fecha</p></label>
+                <label>Fecha</label>
                 <input class="form-control" value="${fecha}" type="date"  name="fecha">
 
 
@@ -37,15 +36,19 @@
     </div>
 </div>
 
+
+
 <c:if test="${not empty isset}">
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
 
-            <form:form class="border border-success"  ModelAttribute="id,horario,fecha" action="validar" method ="post" >
+            <form:form class="border border-success"  ModelAttribute="salon" action="validar" method ="post" >
                 <input  type="hidden" value="${fecha}" name="fecha"/>
+                <input  type="hidden" value="${cantidad}" name="cantidad"/>
 
                 <label>Resultados</label>
                 <div>
+
                     <h2>Capital</h2>
                     <table class="table table-condenced">
                         <tr>
@@ -62,7 +65,7 @@
                             <tr>
                                 <td><input   name="id"   type="radio" value="${salon.id}"/></td>
                                 <td>${salon.nombre}</td>
-
+                                 <input type="hidden"  value="${salon.ubicacion.localidad}" >
                                 <td>${salon.ubicacion.localidad}</td>
                                 <td>${salon.ubicacion.calle}</td>
                                 <td>${salon.ubicacion.numero}</td>
@@ -217,9 +220,5 @@
 
 </c:if>
 
-<h2>Recomendaciones de Menu</h2>
-<a href="RecomendacionesMenu">
-    <input  class=" btn btn-success" type="button" value="Menus"/>
-</a>
 </body>
 </html>

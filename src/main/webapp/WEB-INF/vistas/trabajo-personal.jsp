@@ -6,11 +6,10 @@
 <head>
 <title>Servicios prestados por cada personal</title>
 <link href="css/gallo.css" rel="stylesheet" >
-<link rel="stylesheet" type="text/css" href="css/extras.css">
 </head>
 <body>
 				
-	<center><table border="1" cellpadding="1" cellspacing="0">
+	<table border="1" cellpadding="1" cellspacing="0">
 	<thead>
 	<tr>
 	<th>Identificador</th>
@@ -29,7 +28,7 @@
 		</tr>
     </c:forEach>  
 	</tbody>
-	</table>   </center>
+	</table>   
 		     
 </body>
 </html>

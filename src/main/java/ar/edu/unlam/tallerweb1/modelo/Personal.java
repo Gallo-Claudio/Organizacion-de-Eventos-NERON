@@ -17,7 +17,7 @@ public class Personal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idPersonal;
 
 	@ManyToOne
 	private CategoriaPersonal categoriaPersonal;
@@ -25,16 +25,16 @@ public class Personal {
 	private String nombre;
 	private String apellido;
 
-//	@ManyToMany
-//	private List<Reserva> reserva;
+	@ManyToMany(mappedBy = "personal")
+	private List<Reserva> reserva;
 
 	//	private Date fechaDeIngreso;
 	
-	public Long getId() {
-		return id;
+	public Long getIdPersonal() {
+		return idPersonal;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setIdPersonal(Long idPersonal) {
+		this.idPersonal = idPersonal;
 	}
 	
 	public CategoriaPersonal getCategoriaPersonal() {
@@ -55,12 +55,12 @@ public class Personal {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-//	public List<Reserva> getReserva() {
-//		return reserva;
-//	}
-//	public void setReserva(List<Reserva> reserva) {
-//		this.reserva = reserva;
-//	}	
+	public List<Reserva> getReserva() {
+		return reserva;
+	}
+	public void setReserva(List<Reserva> reserva) {
+		this.reserva = reserva;
+	}	
 
 //	public Date getFechaDeIngreso() {
 //		return fechaDeIngreso;
@@ -70,7 +70,3 @@ public class Personal {
 //	}
 	
 } 
-
-//   @JoinTable(name = "ReservaPersonal", joinColumns = @JoinColumn(name = "idPersonal"), // id de Personal
- //           inverseJoinColumns = @JoinColumn(name = "id") // id de Reserva
- //   )

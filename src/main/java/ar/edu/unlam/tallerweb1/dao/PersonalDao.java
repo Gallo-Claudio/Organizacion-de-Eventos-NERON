@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import java.util.List;
 
+import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 
@@ -15,6 +16,12 @@ public interface PersonalDao {
 	
 	List <Reserva> traerReservas();
 	
+	List <Reserva> traerReservas2();
+	
 	List <Personal> cantidadDePersonal();
+	
+	List <CategoriaPersonal> listadoDeCargosDelPersonal();
+	
+//	List <Personal> traerReservasDesdePersonal();
 	
 }

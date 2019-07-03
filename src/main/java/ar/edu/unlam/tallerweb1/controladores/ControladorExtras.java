@@ -1,4 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,80 +14,113 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+
+import ar.edu.unlam.tallerweb1.modelo.Extra;
+import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListaSeleccionExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroExtras;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroPlatoMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioResumen;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
-
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
 
 @Controller
 public class ControladorExtras {
 	
 	@Inject
-	private ServicioIngresoExtras servicioIngresoExtras;	
-	
+	private ServicioIngresoExtras servicioIngresoExtras;		
 	@Inject
-	private ServicioListarExtras servicioListarExtras;
-	
+	private ServicioListarExtras servicioListarExtras;	
 	@Inject
-	private ServicioSeleccionoExtra servicioSeleccionoExtra;
-	
+	private ServicioSeleccionoExtra servicioSeleccionoExtra;	
 	@Inject 
-	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;
+	private ServicioListaSeleccionExtras servicioListaSeleccionExtras;	
+	@Inject
+	private ServicioListadoOpcionesExtras servicioListadoOpcionesExtras;
+	@Inject
+	private ServicioRegistroExtras servicioRegistroExtras;
+	@Inject
+	private ServicioResumen servicioResumen;
+
+	
+    ///////////////////////////////////////////////////////////////////////////////////////
+	// PAGINA PRINCIPAL - INDEX ///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////
+//	@RequestMapping(path = "/index", method = RequestMethod.GET)
+//	public ModelAndView index() {
+//		return new ModelAndView("index");
+//	}
 	
 	/*Lado del administrador*/
+	//ADMIN
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
-	public ModelAndView ingresoDeExtras() {
-		Extras extras = new Extras();
-		ModelMap model = new ModelMap();
-		model.put("extras", extras);
-		return new ModelAndView("ingreso-extras", model);
+	public ModelAndView ingresoDeExtras(HttpServletRequest request) {
+		//if(request.getSession().getAttribute("ROL")=="1"){
+
+			Extra extras = new Extra();
+			ModelMap model = new ModelMap();
+			model.put("extras", extras);
+			return new ModelAndView("ingreso-extras", model);
+		//}
+		//return new ModelAndView("redirect:/home");
 	}
 	
 	@RequestMapping(path = "/registro-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extras Extras,
+	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
 										HttpServletRequest request) {
-		servicioIngresoExtras.ingresarExtras(Extras);
+		servicioIngresoExtras.ingresarExtras(extra);
 		return new ModelAndView("redirect:/ingreso-extras"); 
 	}
 	
 	@RequestMapping(path = "/listado-final-extras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras () {
-		ModelMap modelo = new ModelMap();
-		modelo.put("listadoFinal", servicioListarExtras.listarExtras());
-		return new ModelAndView("listado-final-extras", modelo);
+	public ModelAndView listadoExtras (HttpServletRequest request) {
+	//	if(request.getSession().getAttribute("ROL")=="1") {
+			ModelMap modelo = new ModelMap();
+			modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+			return new ModelAndView("listado-final-extras", modelo);
+	//	}
+	//	return new ModelAndView("redirect:/home");
 	}
 	
 	/*Lado Cliente*/
 	
-	@RequestMapping(path = "/seleccion-extras", method = RequestMethod.GET)
-	public ModelAndView ingresoDeExtras2() {
-		Extras Extras = new Extras();
-		ModelMap model = new ModelMap();
-		model.put("Extras", Extras);
+	@RequestMapping(path = "/listado-extra", method = RequestMethod.GET)
+	public ModelAndView listadoDeOpcionesDeExtras (HttpServletRequest request) {
+		ModelMap modelo = new ModelMap();
+		//if(request.getSession().getAttribute("logueado")==null){
+		//	return new ModelAndView("redirect:/home");
 
-		return new ModelAndView("seleccion-extras", model);
+		//}
+		modelo.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
+
+		return new ModelAndView("listado-opciones-extra", modelo);
 	}
 
-	
-	@RequestMapping(path = "/sele-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras2 (@RequestParam("idReserva") Long idReserva,
-										 @ModelAttribute ("id") Long id ){
-
-		servicioSeleccionoExtra.guardarExtra(idReserva,id);
-		return new ModelAndView("redirect:/seleccion-extras"); 
-	} 
-	
-	
-	
-	@RequestMapping(path = "/SeleccionDeExtras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras2 (@RequestParam(name="idReserva",required=false) Long idReserva) {
-		ModelMap modelo = new ModelMap();
-		modelo.put("id",idReserva);
-		modelo.put("listadoFinal2", servicioListaSeleccionExtras.listarSeleccionExtras());
-		return new ModelAndView("listado-seleccion-extras", modelo);
+	@RequestMapping(path = "/registra-reserva-extras", method = RequestMethod.POST)
+	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+		String id=request.getSession().getAttribute("idReserva").toString();
+		Long reserva= Long.parseLong(id);
+		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
+		
+		//////////////////////////////////////////////////////////////////////////////////////
+		Reserva reservafinal = servicioResumen.buscarDatos(reserva);	
+//		Double costoFinal = servicioResumen.calculaCostoTotal(reservafinal);
+		
+		ModelMap model = new ModelMap();
+		model.put("reservafinal", reservafinal);
+		model.put("menufinal", reservafinal.getMenu());
+		
+		return new ModelAndView("resumen-seleccion", model);
 	}
 	
 }

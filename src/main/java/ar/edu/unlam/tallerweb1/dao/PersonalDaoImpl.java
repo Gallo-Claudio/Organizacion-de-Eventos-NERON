@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -22,6 +23,7 @@ public class PersonalDaoImpl implements PersonalDao {
     private SessionFactory sessionFactory;
 	List <Reserva> listaDeReservas;
 	List <Personal> personal;
+	List <CategoriaPersonal> categoriapersonal;
 	
 	@Override
 	public Personal buscarPersonalPorId(Long id) {
@@ -46,6 +48,18 @@ public class PersonalDaoImpl implements PersonalDao {
 		//	listaDeReservas = session.createCriteria(Evento.class).list();
 		return (listaDeReservas) = session.createCriteria(Reserva.class).list();
 	}
+	
+	
+	// EN DESARROLLO ///////////////////////////////////////////////////////
+	@Override
+	public List <Reserva> traerReservas2() {
+		final Session session = sessionFactory.getCurrentSession();
+	
+		//	listaDeReservas = session.createCriteria(Evento.class).list();
+		return (listaDeReservas) = session.createCriteria(Reserva.class)
+				.createAlias("personal", "buscaPersonal")
+				.add(Restrictions.eq("buscaPersonal.nombre", null)).list();
+	}
 
 	@Override
 	public List <Personal> cantidadDePersonal() {
@@ -53,5 +67,22 @@ public class PersonalDaoImpl implements PersonalDao {
 		final Session session = sessionFactory.getCurrentSession();
 		return (personal) = session.createCriteria(Personal.class).list();
 	}
+	
+	// EN DESARROLLO ///////////////////////////////////////////////////////
+	@Override
+	public List <CategoriaPersonal> listadoDeCargosDelPersonal() {
+		
+		final Session session = sessionFactory.getCurrentSession();
+		return (categoriapersonal) = session.createCriteria(CategoriaPersonal.class).list();
+	}
 
+//	@Override
+//	public List <Personal> traerReservasDesdePersonal() {
+//		final Session session = sessionFactory.getCurrentSession();
+//	
+//		return (personal) = session.createCriteria(Personal.class)
+//							.createAlias("reserva", "buscaReserva")
+//							.add(Restrictions.eq("id","Cordoba 1345"))
+//							.list();
+//	}
 }

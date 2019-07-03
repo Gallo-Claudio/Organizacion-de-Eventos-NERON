@@ -6,7 +6,6 @@
 <head>
 <title>Listado</title>
 <link href="css/gallo.css" rel="stylesheet" >
-<link rel="stylesheet" type="text/css" href="css/extras.css">
 </head>
 <body>
 	<table border="1" cellpadding="1" cellspacing="0">

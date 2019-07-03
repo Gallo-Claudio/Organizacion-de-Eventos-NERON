@@ -16,26 +16,39 @@ public class Menu {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
+	private Long idMenu;
+      private Double puntaje;
 	private String descripcion;
-	private Integer costo;
+	private Double precio;
+	//la cantidad de personas por precio para luego calcularlo a la hora de hacer la reserva
+	private int cantPersonas;
+	//imagen para el card
+	private String imagenCard;
+
 	@ManyToOne
-	private TipoDeMenu tipoDeEvento;
-	@OneToMany
-	private List<PuntajeMenu> puntajes;
+	private TipoDeMenu tipoDeMenu;
+
+           
+	@ManyToMany(mappedBy = "menu")
+	private List<Reserva> reserva; 
+
+	
 	public Menu(){}
-	@ManyToMany
-	private List<Reserva> reserva;              
 
-
-
-	public Long getId() {
-		return id;
+	public Double getPuntaje() {
+		return puntaje;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setPuntaje(Double puntaje) {
+		this.puntaje = puntaje;
+	}
+
+	public Long getIdMenu() {
+		return idMenu;
+	}
+
+	public void setIdMenu(Long idMenu) {
+		this.idMenu = idMenu;
 	}
 
 	public String getDescripcion() {
@@ -46,33 +59,43 @@ public class Menu {
 		this.descripcion = descripcion;
 	}
 
-	public Integer getCosto() {
-		return costo;
+	public Double getPrecio() {
+		return precio;
 	}
 
-	public void setCosto(Integer costo) {
-		this.costo = costo;
+	public void setPrecio(Double precio) {
+		this.precio = precio;
 	}
 
-	public TipoDeMenu getTipoDeEvento() {
-		return tipoDeEvento;
+	public TipoDeMenu getTipoDeMenu() {
+		return tipoDeMenu;
 	}
 
-	public void setTipoDeEvento(TipoDeMenu tipoDeEvento) {
-		this.tipoDeEvento = tipoDeEvento;
+	public void setTipoDeMenu(TipoDeMenu tipoDeMenu) {
+		this.tipoDeMenu = tipoDeMenu;
 	}
-	public List<PuntajeMenu> getPuntajes() {
-		return puntajes;
-	}
-	public void setPuntajes(List<PuntajeMenu> puntajes) {
-		this.puntajes = puntajes;
-	}
+
 	public List<Reserva> getReserva() {
 		return reserva;
 	}
+	
 	public void setReserva(List<Reserva> reserva) {
 		this.reserva = reserva;
-
 	}
 
+	public int getCantPersonas() {
+		return cantPersonas;
+	}
+
+	public String getImagenCard() {
+		return imagenCard;
+	}
+
+	public void setImagenCard(String imagenCard) {
+		this.imagenCard = imagenCard;
+	}
+
+	public void setCantPersonas(int cantPersonas) {
+		this.cantPersonas = cantPersonas;
+	}
 }

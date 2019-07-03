@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import java.util.ArrayList;
+
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 public interface ServicioSeleccionoExtra {
 
- void guardarExtra(Long id,Long idExtra);
+ void guardarExtra(Long id, Long[] listaExtras);
  
 }

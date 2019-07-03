@@ -9,7 +9,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="css/extras.css">
     <title>Resultados de la busqueda de salones</title>
 </head>
 <body>

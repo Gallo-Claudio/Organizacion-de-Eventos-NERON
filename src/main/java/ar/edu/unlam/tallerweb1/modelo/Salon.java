@@ -8,15 +8,30 @@ import java.util.List;
 public class Salon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     private String nombre;
     private Double precio;
     private Integer capacidadMaxima;
+    private String direccion;
+     
+    public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	//imagen para el card
+    private String imagenCard;
+
+    private Double puntaje;
 
 
     @OneToOne
-    private UbicacionSalon ubicacion;
-    @OneToMany(mappedBy="salon")
+    private Zona zona;
+   @OneToMany(mappedBy="salon")
     private List<Reserva> reserva;
 
     @OneToMany
@@ -34,18 +49,42 @@ public class Salon {
         this.capacidadMaxima=capacidadMaxima;
 
 
+
+
+
     }
 
 
-    public Integer getId() {
-        return id;
+  // public void agregarReservas(Reserva reserva){
+   //     this.reserva.add(reserva);
+ //  }
+
+    public String getImagenCard() {
+        return imagenCard;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setImagenCard(String imagenCard) {
+        this.imagenCard = imagenCard;
     }
 
-    public String getNombre() {
+    public Long getId() {
+		return id;
+	}
+
+    public Double getPuntaje() {
+        return puntaje;
+    }
+
+    public void setPuntaje(Double puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getNombre() {
         return nombre;
     }
 
@@ -69,16 +108,6 @@ public class Salon {
         this.capacidadMaxima = capacidadMaxima;
     }
 
-    public UbicacionSalon getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(UbicacionSalon ubicacion) {
-        this.ubicacion = ubicacion;
-    }
-
-
-
     public Double getPrecio() {
         return precio;
     }
@@ -94,6 +123,8 @@ public class Salon {
    public void setReserva(List<Reserva> reserva) {
        this.reserva = reserva;
   }
+
+
 
     public List<Imagenes> getImagenes() {
         return Imagenes;

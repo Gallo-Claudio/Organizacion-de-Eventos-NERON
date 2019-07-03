@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.modelo.Imagenes;
 import org.hibernate.SessionFactory;
 
@@ -15,12 +16,15 @@ public interface SalonDao {
     List<Salon> buscarSalonesZonaNorte(Integer cantidad ,String fecha);
     List<Salon> buscarSalonesCapital(Integer cantidad ,String fecha);
 
-    Salon traerSalonPorId(Integer id);
-
+    Salon traerSalonPorId(Long id);
+    List<Reserva> traerListaDeFechas(Salon salon);
     void guardarReserva(Reserva reserva);
    Salon galeria(Integer id);
 
+
+
     Salon verificarSalon(Salon salon);
+    Usuario traerCliente(Long id);
 
 
 }

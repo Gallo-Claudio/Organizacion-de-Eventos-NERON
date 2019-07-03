@@ -1,5 +1,5 @@
 package ar.edu.unlam.tallerweb1.dao;
-import ar.edu.unlam.tallerweb1.modelo.Extras;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,7 @@ public class IngresoExtraDaoImp implements IngresoExtraDao {
 
 
 	@Override
-	public void ingresarExtras(Extras extra) {
+	public void ingresarExtras(Extra extra) {
 		final Session session = sessionFactory.getCurrentSession();
 		session.save(extra);
 	}

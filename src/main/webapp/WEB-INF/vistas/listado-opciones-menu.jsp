@@ -6,15 +6,14 @@
 <head>
 <title>Listado para la seleccion del menu</title>
 <link href="css/gallo.css" rel="stylesheet" >
-<link rel="stylesheet" type="text/css" href="css/extras.css">
 </head>
 <body>
 
 Listado para la seleccion del menu<br><br><br>
 
-<form:form action="registra-reserva-menu" method="GET"> <!--   modelAttribute="idmenu"-->
-
-	<center><c:forEach var = "i" begin = "1" end = "6">
+<form:form action="registra-reserva-menu" method="POST" modelAttribute="vm">
+ 
+	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${secciones}">
 					<c:if test="${tipo.id==i}">
 						<td>${tipo.detalle}</td>
@@ -30,11 +29,11 @@ Listado para la seleccion del menu<br><br><br>
 			</thead>
 			<tbody>
 	  			<c:forEach var="menu" items="${listaopciones}">
-					<c:if test="${menu.tipoDeEvento.id==i}">
+					<c:if test="${menu.tipoDeMenu.id==i}">
 						<tr>
 						<td>${menu.descripcion}</td>
-						<td>${menu.costo}</td>
-						<td><input type="checkbox" name="idmenu" value="${menu.id}"></td>
+						<td>${menu.precio}</td>
+						<td><input type="checkbox" name="idmenu[${menu.idMenu}]" value="${menu.idMenu}"></td>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -42,8 +41,8 @@ Listado para la seleccion del menu<br><br><br>
 		</table>
 		<br><br><br>
 
-    </c:forEach></center>
-	<input type="text" name="id" value="${id}">
+    </c:forEach>
+
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
 </form:form>
@@ -53,5 +52,46 @@ Listado para la seleccion del menu<br><br><br>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+
+
+
+	<h2>Menus que te pueden interesar</h2>
+	<main>
+		<div class="table-bordered" style="width: 18rem;">
+
+			<c:forEach var = "i" begin = "1" end = "6">
+			<c:forEach items="${menus}" var="menu">
+			<img class="card-img-top" src=".." alt="Card image cap">
+			<div class="card-body>">
+				<c:forEach var="tipo" items="${secciones}">
+					<c:if test="${tipo.id==i}">
+						<h3 class="card-title">${tipo.detalle}</h3>
+					</c:if>
+				</c:forEach>
+
+
+					<h2 class="card-title"> ${menu.descripcion}</h2>
+					<p class="card-text" >Precio:${menu.precio}(cada 10 personas)</p>
+
+
+					<h3 class="card-title"> Valoracion Actual:${menu.puntaje}/10</h3>
+					<input   name="id"   type="hidden" value="${menu.idMenu}"/>
+					<h3 class="card-title">Danos tu opinion</h3>
+					<input type="number"  name="puntaje" >
+					<input class=" btn btn-success" type="submit" value="puntuar" >
+
+				</c:forEach>
+				</c:forEach>
+			</div>
+		</div>
+
+
+
+
+
+
+	</main>
+
+
 </body>
 </html>
