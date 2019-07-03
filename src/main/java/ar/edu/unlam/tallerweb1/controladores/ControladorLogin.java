@@ -102,4 +102,11 @@ public class ControladorLogin {
 		model.put("tope",salones.size());
 		return new ModelAndView("home", model);
 	}
+
+	@RequestMapping(path = "/homeAdmin", method = RequestMethod.GET)
+	public ModelAndView irAhomeAdmin() {
+		ModelMap model = new ModelMap();
+
+		return new ModelAndView("homeAdmin", model);
+	}
 }

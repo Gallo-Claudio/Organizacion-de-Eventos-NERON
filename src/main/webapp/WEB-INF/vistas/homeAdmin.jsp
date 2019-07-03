@@ -13,7 +13,16 @@
 <body>
 <nav>
 
+<a hre="homeAdmin">inicio</a>
+<a hre="listado-final-extras">Extras</a>
+<a hre="listado-final-menu">Menu</a>
+<a hre="listado-final-salon">Salon</a>
 
+<div>
+			<form  method="post"  action="cerrarsesion"  >
+				<input type="submit" value="Cerrar session" class="btn btn-secondary">
+			</form>
+		</div>
 </nav>
 
 <main>

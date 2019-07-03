@@ -28,13 +28,41 @@ public class ControladorSalon {
    // @Inject
    // private ServicioCliente servicioCliente;
 
+
+    //Admin
+    //HAY QUE HACERLO
+    @RequestMapping(path = "/ingreso-salon", method = RequestMethod.GET)
+    public ModelAndView ingresoDeSalon() {
+        Salon salon = new Salon();
+        ModelMap model = new ModelMap();
+        model.put("salon", salon);
+        return new ModelAndView("ingreso-salon", model);
+    }
+    //HAY QUE HACERLO
+    @RequestMapping(path = "/registro-Salon", method = RequestMethod.POST)
+    public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
+                                        HttpServletRequest request) {
+        if(request.getSession().getAttribute("ROL")=="1"){
+      //  servicioIngresoExtras.ingresarExtras(extra);
+        return new ModelAndView("redirect:/ingreso-salon");
+    }else{
+            return new ModelAndView("redirect:/home");
+        }
+
+
+    }
+    //HAY QUE HACERLO
+    @RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)
+    public ModelAndView listadoExtras () {
+        ModelMap modelo = new ModelMap();
+       // modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+        return new ModelAndView("listado-final-salon", modelo);
+    }
+
     @RequestMapping(path="/salon" )
     public ModelAndView ir(HttpServletRequest request) {
         if(request.getSession().getAttribute("logueado")==null){
-
-
-            return new ModelAndView("redirect:/home");
-
+          return new ModelAndView("redirect:/home");
 
         }
 

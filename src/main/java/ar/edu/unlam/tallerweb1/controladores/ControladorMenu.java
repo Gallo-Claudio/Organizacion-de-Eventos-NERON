@@ -42,15 +42,20 @@ public class ControladorMenu {
 	// Ingreso de los diferentes platos que integran el Menu o Carta  //////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	//ADMIN
 	// Se pasa un objeto vacio a la vista para ingresar los datos correspondientes y se recibe y pasa a la vista un listado de los diferentes tipos de menu
 	@RequestMapping(path = "/ingresar-menu", method = RequestMethod.GET)
-	public ModelAndView ingresarMenu() {
-		ModelMap model = new ModelMap();
-		// Llamo al metodo "listarTiposDeMenus()" de la instancia "servicioListarTiposMenu", que esta en el area de Servicios.
-		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
-		// Para luego pasarlo a la vista a traves del return ModelAndView
-		model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
-		return new ModelAndView("ingreso-menu", model);
+	public ModelAndView ingresarMenu(HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL")=="1") {
+			ModelMap model = new ModelMap();
+			// Llamo al metodo "listarTiposDeMenus()" de la instancia "servicioListarTiposMenu", que esta en el area de Servicios.
+			// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
+			// Para luego pasarlo a la vista a traves del return ModelAndView
+			model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
+			return new ModelAndView("ingreso-menu", model);
+		}else{
+			return new ModelAndView("redirect:/home");
+		}
 	}
 
 	// Ingreso de los distintos platos/bebidas/postres que compondran las opciones a elegir por parte del cliente
@@ -61,7 +66,17 @@ public class ControladorMenu {
 		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(descripcion, costo, tipodemenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la l�gica
 		return new ModelAndView("ingreso-menu", model); // Retorna a la vista del formulario (ingreso menu)
 	}
-
+	//HAY QUE HACERLO
+	@RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)
+	public ModelAndView listadoExtras (HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL")=="1") {
+			ModelMap modelo = new ModelMap();
+			// modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+			return new ModelAndView("listado-final-salon", modelo);
+		}else{
+			return new ModelAndView("redirect:/home");
+		}
+	}
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Seleccion del Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +86,10 @@ public class ControladorMenu {
 	@RequestMapping(path = "/listado-menu", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeMenu (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
+		if(request.getSession().getAttribute("logueado")==null){
+			return new ModelAndView("redirect:/home");
 
+		}
 		// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
 		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 		// Para luego pasarlo a la vista a traves del return ModelAndView
