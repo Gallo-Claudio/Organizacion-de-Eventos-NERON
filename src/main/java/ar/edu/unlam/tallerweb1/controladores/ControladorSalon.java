@@ -31,6 +31,7 @@ public class ControladorSalon {
 
     //Admin
     //HAY QUE HACERLO
+    /*
     @RequestMapping(path = "/ingreso-salon", method = RequestMethod.GET)
     public ModelAndView ingresoDeSalon() {
         Salon salon = new Salon();
@@ -42,12 +43,12 @@ public class ControladorSalon {
     @RequestMapping(path = "/registro-Salon", method = RequestMethod.POST)
     public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
                                         HttpServletRequest request) {
-        if(request.getSession().getAttribute("ROL")=="1"){
+    //    if(request.getSession().getAttribute("ROL")=="1"){
       //  servicioIngresoExtras.ingresarExtras(extra);
         return new ModelAndView("redirect:/ingreso-salon");
-    }else{
-            return new ModelAndView("redirect:/home");
-        }
+   // }
+      //      return new ModelAndView("redirect:/home");
+
 
 
     }
@@ -58,7 +59,7 @@ public class ControladorSalon {
        // modelo.put("listadoFinal", servicioListarExtras.listarExtras());
         return new ModelAndView("listado-final-salon", modelo);
     }
-
+*/
     @RequestMapping(path="/salon" )
     public ModelAndView ir(HttpServletRequest request) {
         if(request.getSession().getAttribute("logueado")==null){

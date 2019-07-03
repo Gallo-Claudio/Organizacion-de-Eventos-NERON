@@ -5,18 +5,27 @@
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
 	</head>
 	<body>
 
 
 
-	<nav class="">
+	<nav class="container">
+		<div class="row">
+		<div class="col">
 		<h1>Bienvenidos a</h1>
 		<h1>Organizacion de Eventos NERON</h1>
 		<a class="navbar-brand" href=#><img id="logo-nav" src="Webroot/img/logotipo.png" alt="Logo de OnMarket"></a>
+		</div>
+			<div class="col">
+				<a href="salones-a-puntuar"> Nuestros Salones</a>
+			</div>
+			<div class="col">
+				<a href="menus-a-puntuar"> Nuestros Menus</a>
+			</div>
 
-       <div>
+			<div class="col">
 
 			<form action="salon" method="post">
 			<input type="submit" value="Reservar" class="btn btn-light">
@@ -24,26 +33,28 @@
 		</div>
 
 
-		<div>
+		<div class="col">
 			<form  method="post"  action="cerrarsesion"  >
 				<input type="submit" value="Cerrar session" class="btn btn-secondary">
 			</form>
 		</div>
 
 
-		<a href="salones-a-puntuar"> Nuestros Salones</a>
-		<a href="menus-a-puntuar"> Nuestros Menus</a>
-		<!--<div>
+		<!--<div class="col">
 			registrar
 			<form  method="post"  action="+"  >
 			<input type="submit" value="Registrarse" class="btn btn-secondary">
 			</form>
 		</div>-->
-	</nav>
-<main>
-	tope= ${tope}
-	<c:forEach items="${salones}" var="salon">
 
+        </div>
+	</nav>
+
+	<table>
+
+	<c:forEach items="${salones}" var="salon">
+     
+        <td>
 			${salon.nombre}<br>
 			${salon.ubicacion.localidad}<br>
 			${salon.ubicacion.calle}<br>
@@ -54,9 +65,11 @@
 			</a>
 			Valoracion Actual:${salon.puntaje}<br>
 
-
+       </td>
 
 	</c:forEach>
-</main>
+
+	</table>
+
 	</body>
 </html>

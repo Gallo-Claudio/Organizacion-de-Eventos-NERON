@@ -57,7 +57,7 @@ public class ServicioRecomendacionesImpl implements ServicioRecomendaciones{
     public ArrayList<Salon> ObtenerRecomendacionesSalon(){
         ArrayList<Salon> recomendaciones=new ArrayList<>();
         List<Salon> salones=RecomendacionesDao.obtenerSalonesDeLaBase();
-       for(int x=0; x<5 ;x++){
+       for(int x=0; x<3 ;x++){
             int p=0;
             Double max=salones.get(0).getPuntaje();
             for(int i = 0; i < salones.size(); i++)

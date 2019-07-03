@@ -18,7 +18,7 @@
 <c:if test="${!empty mensaje}">
     <h1>${mensaje}</h1>
 </c:if>
-<div class="table-bordered" style="width: 18rem;">
+<div class="container" style="width: 18rem;">
 
 <c:forEach var = "i" begin = "1" end = "6">
 <c:forEach items="${listaopciones}" var="menu">
