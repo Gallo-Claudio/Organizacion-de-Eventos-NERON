@@ -1,6 +1,10 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.List;
 
 
@@ -27,7 +31,9 @@ public class Reserva {
 	@JoinTable(name = "reserva_menu", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idMenu"))
 	private List<Menu> menu;
 	
+
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "reserva_extra", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idExtra"))
 	private List<Extra> extra;
 

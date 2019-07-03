@@ -102,11 +102,13 @@ public class ControladorExtras {
 		
 		//////////////////////////////////////////////////////////////////////////////////////
 		Reserva reservafinal = servicioResumen.buscarDatos(reserva);	
-//		Double costoFinal = servicioResumen.calculaCostoTotal(reservafinal);
+		List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
 		
 		ModelMap model = new ModelMap();
 		model.put("reservafinal", reservafinal);
-		model.put("menufinal", reservafinal.getMenu());
+		model.put("menuseleccionado", reservafinal.getMenu());
+		model.put("extraseleccionado", reservafinal.getExtra());
+		model.put("precios", precios);
 		
 		return new ModelAndView("resumen-seleccion", model);
 	}

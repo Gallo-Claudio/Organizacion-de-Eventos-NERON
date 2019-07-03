@@ -58,7 +58,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 		// Se completa el listrado agregando los Id que aun no tienen ningun registro de asistencia en la BD.
 		// Esto puede ocurrir cuando se ingresa a algun Personal nuevo, y no tuvo ningun evento asignado aun
-		List<Personal> TodoElPersonal = personalDao.cantidadDePersonal();
+		List<Personal> TodoElPersonal = personalDao.listadoDelPersonal();
 
 		Iterator <Personal> tep = TodoElPersonal.iterator();
 		Personal todos;
@@ -145,12 +145,20 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
 
-	// Genera un listado con la cantidad necesaria de personal para cubrir el evento
+	// Genera un listado con los sueldos del personal
 		@Override
 		public List <Double> consultarSueldoPersonal() {
+			List<CategoriaPersonal> listadoPersonal = personalDao.listadoDeCargosDelPersonal();
+			List<Double> sueldos = new ArrayList();
 			
-			
-			return null;
+			Iterator <CategoriaPersonal> lp = listadoPersonal.iterator();
+			CategoriaPersonal todos;
+			while (lp.hasNext()) {
+				todos=lp.next();
+				sueldos.add(todos.getSueldo());
+			}
+
+			return sueldos;
 		}
 	
 	
@@ -330,7 +338,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		@Override
 		public List<Personal> sinPersonal() {
 	
-			List<Personal> TodoElPersonal = personalDao.cantidadDePersonal();
+			List<Personal> TodoElPersonal = personalDao.listadoDelPersonal();
 
 	
 			return TodoElPersonal;

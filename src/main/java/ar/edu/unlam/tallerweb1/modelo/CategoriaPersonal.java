@@ -17,7 +17,7 @@ public class CategoriaPersonal {
 	private Long id;
 
 	private String cargo;
-	private Integer sueldo;
+	private Double sueldo;
 
 	
 	public Long getId() {
@@ -32,10 +32,10 @@ public class CategoriaPersonal {
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	public Integer getSueldo() {
+	public Double getSueldo() {
 		return sueldo;
 	}
-	public void setSueldo(Integer sueldo) {
+	public void setSueldo(Double sueldo) {
 		this.sueldo = sueldo;
 	}
 	
