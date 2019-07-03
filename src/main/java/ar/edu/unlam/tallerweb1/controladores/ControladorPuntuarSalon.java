@@ -45,11 +45,15 @@ public class ControladorPuntuarSalon {
     public ModelAndView ingresarPuntaje(@ModelAttribute("mvSalon") RegistroSalonViewModel mvSalon,
                                         @ModelAttribute("puntaje") Double puntaje) {
         ModelMap model = new ModelMap();
+      if(puntaje>0 && puntaje<=10){
+          Double p=servicioSalon.calcularPuntaje(mvSalon.getId(),puntaje);
 
-       Double p=servicioSalon.calcularPuntaje(mvSalon.getId(),puntaje);
+          model.put("mensaje" ,"gracias por darnos tu opinion :)");
+      }
 
-       model.put("mensaje" ,"gracias por darnos tu opinion :)");
-        return new ModelAndView("puntaje-salon", model);
+
+       model.put("mensaje" ,"solo puntuaciones del 1 al 10 porfavor  :)");
+        return new ModelAndView("redirect:/salon-a-puntuar", model);
     }
 
 

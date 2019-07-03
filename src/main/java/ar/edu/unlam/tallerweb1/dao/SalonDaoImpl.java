@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -81,7 +82,7 @@ public class SalonDaoImpl implements SalonDao {
     }
  //buscar salones por zona
     @Override
-    public List<Salon> buscarSalonesCapital(Integer cantidad , String fecha){
+    public List<Salon> buscarSalones(Integer cantidad , String fecha){
         final Session session = sessionFactory.getCurrentSession();
 
 
@@ -90,63 +91,22 @@ public class SalonDaoImpl implements SalonDao {
                 .createAlias("reserva","reservaBuscada")
                .add(ne(  "reservaBuscada.fecha", fecha))
 
-                .createAlias("ubicacion","ubicacionBuscada")
-                .add(like(  "ubicacionBuscada.zona","Capital"))
                 .list();
 
        return salones;
 }
 
 
-    @Override
-    public List<Salon> buscarSalonesZonaSur(Integer cantidad , String fecha){
-        final Session session = sessionFactory.getCurrentSession();
-        List salones= session.createCriteria(Salon.class)
-                .add(ge("capacidadMaxima", cantidad))
-                .createAlias("reserva","reservaBuscada")
-                  .add(ne(  "reservaBuscada.fecha", fecha))
-                .createAlias("ubicacion","ubicacionBuscada")
-                .add(like(  "ubicacionBuscada.zona","Sur"))
-                .list();
 
-        return salones;
-    }
+@Override
+    public  List<Zona> traerZonas(){
+    final Session session = sessionFactory.getCurrentSession();
+    List zonas= session.createCriteria(Zona.class)
+           .list();
 
+    return zonas;
 
-    @Override
-    public List<Salon> buscarSalonesZonaNorte(Integer cantidad , String fecha){
-        final Session session = sessionFactory.getCurrentSession();
-        List salones= session.createCriteria(Salon.class)
-                .add(ge("capacidadMaxima", cantidad))
-                .createAlias("reserva","reservaBuscada")
-
-                .add(or( isEmpty("reserva" ),
-                 ne("reservaBuscada.fecha", fecha)))
-
-                .createAlias("ubicacion","ubicacionBuscada")
-                .add(like(  "ubicacionBuscada.zona","Norte"))
-                .list();
-        return salones;
-    }
-
-
-    @Override
-    public List<Salon> buscarSalonesZonaOeste(Integer cantidad , String fecha){
-        final Session session = sessionFactory.getCurrentSession();
-        List salones= session.createCriteria(Salon.class)
-                .add(ge("capacidadMaxima", cantidad))
-                .createAlias("reserva","reservaBuscada")
-                .add(ne(  "reservaBuscada.fecha", fecha))
-                .createAlias("ubicacion","ubicacionBuscada")
-                .add(like(  "ubicacionBuscada.zona","Oeste"))
-                .list();
-
-
-
-        return salones;
-    }
-
-
+}
 
 
 }

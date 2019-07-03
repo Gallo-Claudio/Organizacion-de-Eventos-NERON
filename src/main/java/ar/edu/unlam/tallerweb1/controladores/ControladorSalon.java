@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,18 +77,21 @@ public class ControladorSalon {
     @RequestMapping(path="/tomarDatos", method = RequestMethod.GET)
     public ModelAndView tomarDatos(@RequestParam(name="cantidad",required=false) Integer cantidad,
                                    @RequestParam(name="fecha",required=false) String fecha) {
+
         ModelMap modelo = new ModelMap();
-        //encontrar zalones por zona
-        Set<Salon> salonesCapital=servicioSalon.buscarSalonesCapital(cantidad, fecha);
-        Set<Salon> salonesZonaSur=servicioSalon.buscarSalonesZonaSur(cantidad, fecha);
-        Set<Salon> salonesZonaOeste=servicioSalon.buscarSalonesZonaOeste(cantidad, fecha);
-        Set<Salon> salonesZonaNorte=servicioSalon.buscarSalonesZonaNorte(cantidad, fecha);
+       LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaEvento = LocalDate.parse(fecha);
+        if(fechaActual.compareTo(fechaEvento)>=0 ){
+             modelo.put("mensaje","fecha invalida");
+            return new ModelAndView("redirect:/salon", modelo);
+        }
 
 
-        modelo.put("capital",salonesCapital);
-        modelo.put("sur",salonesZonaSur);
-        modelo.put("norte",salonesZonaNorte);
-        modelo.put("oeste",salonesZonaOeste);
+        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fecha);
+        List<Zona> zonas=servicioSalon.traerZonas();
+
+        modelo.put("salones",salones);
+        modelo.put("zonas",zonas);
 
 
         modelo.put("cantidad",cantidad);

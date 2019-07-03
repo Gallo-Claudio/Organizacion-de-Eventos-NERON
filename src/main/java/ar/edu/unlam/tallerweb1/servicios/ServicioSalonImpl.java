@@ -1,5 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
-
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.dao.SalonDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
@@ -83,35 +83,18 @@ public class ServicioSalonImpl implements ServicioSalon {
 
        return  servicioSalonDao.traerSalonPorId(id);
    }
-    @Override
-    public  Set<Salon> buscarSalonesZonaSur (Integer cantidad ,String fecha) {
-       List<Salon> lista=servicioSalonDao.buscarSalonesZonaSur(cantidad, fecha);
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
-        for(Salon salon :lista){
-            salonesNoRepetidos.add(salon);
-        }
 
-        return salonesNoRepetidos;
+    @Override
+    public  List<Zona> traerZonas() {
+
+
+        return servicioSalonDao.traerZonas();
     }
 
-
     @Override
-    public  Set<Salon> buscarSalonesZonaNorte (Integer cantidad ,String fecha) {
-        List<Salon> lista=servicioSalonDao.buscarSalonesZonaNorte(cantidad, fecha);
+    public  Set<Salon> buscarSalones (Integer cantidad ,String fecha) {
+        List<Salon> lista=servicioSalonDao.buscarSalones(cantidad, fecha);
 
-
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
-        for(Salon salon :lista){
-            salonesNoRepetidos.add(salon);
-        }
-
-        return salonesNoRepetidos;
-    }
-
-
-    @Override
-    public  Set<Salon> buscarSalonesZonaOeste (Integer cantidad ,String fecha) {
-        List<Salon> lista=servicioSalonDao.buscarSalonesZonaOeste(cantidad, fecha);
 
         Set<Salon> salonesNoRepetidos= new HashSet<>();
         for(Salon salon :lista){
@@ -121,18 +104,6 @@ public class ServicioSalonImpl implements ServicioSalon {
         return salonesNoRepetidos;
     }
 
-
-    @Override
-    public  Set<Salon> buscarSalonesCapital (Integer cantidad ,String fecha) {
-        List<Salon> lista=servicioSalonDao.buscarSalonesCapital(cantidad, fecha);
-
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
-        for(Salon salon :lista){
-            salonesNoRepetidos.add(salon);
-        }
-
-        return salonesNoRepetidos;
-    }
 
 
     @Override

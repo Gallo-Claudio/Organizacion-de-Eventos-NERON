@@ -44,9 +44,7 @@
 
         <td>
 			${salon.nombre}<br>
-			${salon.ubicacion.localidad}<br>
-			${salon.ubicacion.calle}<br>
-			${salon.ubicacion.numero}<br>
+
 			${salon.precio}<br>
 			<a href="VerImagenes?id=${salon.id}">
 				<input  class=" btn btn-success" type="button" value="Ver mas"/>
