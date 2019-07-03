@@ -21,6 +21,8 @@ public interface SalonDao {
     void guardarReserva(Reserva reserva);
    Salon galeria(Integer id);
 
+
+
     Salon verificarSalon(Salon salon);
     Usuario traerCliente(Long id);
 

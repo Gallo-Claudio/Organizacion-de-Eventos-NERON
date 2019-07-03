@@ -12,6 +12,10 @@ public class Salon {
     private String nombre;
     private Double precio;
     private Integer capacidadMaxima;
+    //imagen para el card
+    private String imagenCard;
+
+    private Double puntaje;
 
 
     @OneToOne
@@ -44,12 +48,27 @@ public class Salon {
    //     this.reserva.add(reserva);
  //  }
 
+    public String getImagenCard() {
+        return imagenCard;
+    }
+
+    public void setImagenCard(String imagenCard) {
+        this.imagenCard = imagenCard;
+    }
+
     public Long getId() {
 		return id;
 	}
 
+    public Double getPuntaje() {
+        return puntaje;
+    }
 
-	public void setId(Long id) {
+    public void setPuntaje(Double puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public void setId(Long id) {
 		this.id = id;
 	}
 

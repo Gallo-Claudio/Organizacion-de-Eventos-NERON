@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.Salon;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -80,26 +81,18 @@ public class ControladorMenu {
 		//parte de las recomendaciones de menu
 		//obtengo una lista con los menus recomendados , estos menus estan agrupados segun la reserva
 		//por eso tengo una lista de menu dentro de otra lista
-		ArrayList<ArrayList<Menu>> array=ServicioRecomendaciones.ObtenerRecomendaciones();
-		int i=0;
-		//voy asignando los menus al modelo
-		for(List<Menu> lista:array){
-			i+=1;
 
-			modelo.put("menus"+i+"",lista);
-
-
-		}
-
-       //es la cantidad de menus obtenidos para liego tener un limite al mostrar la vista
-		modelo.put("tope",array.size());
-
-
+			ArrayList<Menu> menus=ServicioRecomendaciones.ObtenerRecomendacionesMenu();
+			modelo.put("menus",menus);
+			modelo.put("tope",menus.size());
 
 
 
 		return new ModelAndView("listado-opciones-menu", modelo);
 	}
+
+
+
 
 	@RequestMapping(path = "/registra-reserva-menu", method = RequestMethod.POST)
 
@@ -110,5 +103,7 @@ public class ControladorMenu {
 		return new ModelAndView("redirect:/listado-extra");
 
 	}
+
+
 
 }

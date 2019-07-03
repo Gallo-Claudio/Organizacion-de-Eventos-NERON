@@ -22,7 +22,20 @@ public class ServicioSalonImpl implements ServicioSalon {
 
     @Inject
     private SalonDao servicioSalonDao;
+    @Override
+    public  Double calcularPuntaje(Long id,Double puntaje){
+        Salon salon=servicioSalonDao.traerSalonPorId(id);
+        Double nuevoPuntaje=0.0;
+        Double puntajeActual=salon.getPuntaje();
+        if(puntajeActual==null){
+            nuevoPuntaje=puntaje;
+        }else{
+            nuevoPuntaje=(puntajeActual+puntaje)/2;
+        }
 
+        salon.setPuntaje(nuevoPuntaje);
+        return nuevoPuntaje;
+    }
     @Override
     public Boolean verificarSalon(Salon salon){
         if (servicioSalonDao.verificarSalon(salon) != null) {

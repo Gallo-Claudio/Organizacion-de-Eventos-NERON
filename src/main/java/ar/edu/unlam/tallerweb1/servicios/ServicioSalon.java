@@ -10,7 +10,7 @@ import java.util.Set;
 public interface ServicioSalon {
 
    // List<Salon>
-
+   Double calcularPuntaje(Long id,Double nuevoPuntaje);
     Set<Salon> buscarSalonesZonaSur(Integer cantidad ,String fecha);
     Set<Salon> buscarSalonesZonaOeste(Integer cantidad ,String fecha);
     Set<Salon> buscarSalonesZonaNorte(Integer cantidad ,String fecha);

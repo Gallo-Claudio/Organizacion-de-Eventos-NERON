@@ -10,5 +10,5 @@ import ar.edu.unlam.tallerweb1.modelo.TipoDeMenu;
 public interface ServicioRegistroMenu {
 
 	void ingresarMenuSeleccionado(Long id,Long[] idmenu);
-
+    Double calcularPuntaje(Long id, Double puntaje);
 }

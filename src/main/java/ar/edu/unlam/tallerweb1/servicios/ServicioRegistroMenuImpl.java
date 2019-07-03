@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ar.edu.unlam.tallerweb1.modelo.Salon;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,7 +24,20 @@ public class ServicioRegistroMenuImpl implements ServicioRegistroMenu {
 	@Inject
 	private RegistroMenuDao registroMenuDao;
 
+	@Override
+	public  Double calcularPuntaje(Long id,Double puntaje){
+		Menu menu=registroPlatosMenuDao.traerMenuPorId(id);
+		Double nuevoPuntaje=0.0;
+		Double puntajeActual=menu.getPuntaje();
+		if(puntajeActual==null){
+			nuevoPuntaje=puntaje;
+		}else{
+			nuevoPuntaje=(puntajeActual+puntaje)/2;
+		}
 
+		menu.setPuntaje(nuevoPuntaje);
+		return nuevoPuntaje;
+	}
 
 	@Override
 	public void ingresarMenuSeleccionado(Long id,Long[] idmenu) {

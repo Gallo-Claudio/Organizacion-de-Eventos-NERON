@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,6 +30,9 @@
 			</form>
 		</div>
 
+
+		<a href="salones-a-puntuar"> Nuestros Salones</a>
+		<a href="menus-a-puntuar"> Nuestros Menus</a>
 		<!--<div>
 			registrar
 			<form  method="post"  action="+"  >
@@ -36,25 +40,23 @@
 			</form>
 		</div>-->
 	</nav>
+<main>
+	tope= ${tope}
+	<c:forEach items="${salones}" var="salon">
 
-	<!-–Slider de fotos -–>
+			${salon.nombre}<br>
+			${salon.ubicacion.localidad}<br>
+			${salon.ubicacion.calle}<br>
+			${salon.ubicacion.numero}<br>
+			${salon.precio}<br>
+			<a href="VerImagenes?id=${salon.id}">
+				<input  class=" btn btn-success" type="button" value="Ver mas"/>
+			</a>
+			Valoracion Actual:${salon.puntaje}<br>
 
 
-	<!-- Footer -->
-	<footer class="bg-primary page-footer font-small blue pt-4">
 
-		<!-- Copyright -->
-		<div class="bg-secondary text-dark footer-copyright text-center py-3">© 2019 Copyright:
-			<a class="text-dark" href="https://mdbootstrap.com/education/bootstrap/"> Neron.com</a>
-		</div>
-		<!-- Copyright -->
-
-	</footer>
-
-
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	</c:forEach>
+</main>
 	</body>
 </html>
