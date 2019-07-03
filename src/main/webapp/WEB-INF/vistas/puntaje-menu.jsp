@@ -38,7 +38,7 @@
     <h3 class="card-title"> Valoracion Actual:${menu.puntaje}/10</h3>
         <input   name="id"   type="hidden" value="${menu.idMenu}"/>
     <h3 class="card-title">Danos tu opinion</h3>
-        <input type="number"  name="puntaje" >
+        <input type="number" max="10" min="1" name="puntaje" >
         <input class=" btn btn-success" type="submit" value="puntuar" >
     </form:form>
 </c:forEach>

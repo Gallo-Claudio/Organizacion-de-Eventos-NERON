@@ -135,6 +135,12 @@ public class ServicioSalonImpl implements ServicioSalon {
     }
 
 
+    @Override
+    public  List<Salon> buscar(String nombre){
+
+        return servicioSalonDao.buscar(nombre);
+    }
+
 
 }
 

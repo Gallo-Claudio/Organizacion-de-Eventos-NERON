@@ -10,34 +10,22 @@
 	<body>
 
 
+<nav>
 
-	<nav class="container">
-		<div class="row">
-		<div class="col">
+
 		<h1>Bienvenidos a</h1>
 		<h1>Organizacion de Eventos NERON</h1>
 		<a class="navbar-brand" href=#><img id="logo-nav" src="Webroot/img/logotipo.png" alt="Logo de OnMarket"></a>
-		</div>
-			<div class="col">
-				<a href="salones-a-puntuar"> Nuestros Salones</a>
-			</div>
-			<div class="col">
-				<a href="menus-a-puntuar"> Nuestros Menus</a>
-			</div>
 
-			<div class="col">
+    <a href="home"> Inicio</a>
+	<a href="salones-a-puntuar"> Nuestros Salones</a>
 
-			<form action="salon" method="post">
-			<input type="submit" value="Reservar" class="btn btn-light">
-			</form>
-		</div>
+	<a href="menus-a-puntuar"> Nuestros Menus</a>
+
+    <a href="salon"> Reservar</a>
+    <a href="cerrarsesion"> cerrar sesion</a>
 
 
-		<div class="col">
-			<form  method="post"  action="cerrarsesion"  >
-				<input type="submit" value="Cerrar session" class="btn btn-secondary">
-			</form>
-		</div>
 
 
 		<!--<div class="col">
@@ -47,13 +35,13 @@
 			</form>
 		</div>-->
 
-        </div>
+
 	</nav>
 
 	<table>
 
 	<c:forEach items="${salones}" var="salon">
-     
+
         <td>
 			${salon.nombre}<br>
 			${salon.ubicacion.localidad}<br>

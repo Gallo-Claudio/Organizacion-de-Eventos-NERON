@@ -36,7 +36,18 @@ public class SalonDaoImpl implements SalonDao {
     }
 
 
+    @Override
+    public  List<Salon> buscar(String nombre){
+        final Session session = sessionFactory.getCurrentSession();
 
+
+        List salones= session.createCriteria(Salon.class)
+                .add(like("nombre", "%"+nombre+"%"))
+                .list();
+
+        return salones;
+
+    }
     @Override
     public Salon galeria(Integer id){
         final Session session = sessionFactory.getCurrentSession();

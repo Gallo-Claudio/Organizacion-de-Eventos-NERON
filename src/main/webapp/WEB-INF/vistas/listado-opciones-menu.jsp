@@ -56,11 +56,13 @@ Listado para la seleccion del menu<br><br><br>
 
 
 	<h2>Menus que te pueden interesar</h2>
-	<main>
+	<table>
 		<div class="table-bordered" style="width: 18rem;">
 
 			<c:forEach var = "i" begin = "1" end = "6">
+
 			<c:forEach items="${menus}" var="menu">
+				<td>
 			<img class="card-img-top" src=".." alt="Card image cap">
 			<div class="card-body>">
 				<c:forEach var="tipo" items="${secciones}">
@@ -79,7 +81,7 @@ Listado para la seleccion del menu<br><br><br>
 					<h3 class="card-title">Danos tu opinion</h3>
 					<input type="number"  name="puntaje" >
 					<input class=" btn btn-success" type="submit" value="puntuar" >
-
+				</td>
 				</c:forEach>
 				</c:forEach>
 			</div>
@@ -90,7 +92,7 @@ Listado para la seleccion del menu<br><br><br>
 
 
 
-	</main>
+	</table>
 
 
 </body>

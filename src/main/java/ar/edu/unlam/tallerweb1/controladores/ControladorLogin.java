@@ -59,11 +59,11 @@ public class ControladorLogin {
 		request.getSession().setAttribute("logueado", usuarioBuscado.getId().toString());
 
 		    if(usuarioBuscado.getRol().equals("1")){
-				return new ModelAndView("homeAdmin",model);
+				return new ModelAndView("redirect:/homeAdmin",model);
 
 			}
 
-				return new ModelAndView("home", model);
+				return new ModelAndView("redirect:/home", model);
 
 		} else {
 			model.put("error", "Usuario o clave incorrecta");
