@@ -38,6 +38,7 @@ public class Reserva {
 	private List<Extra> extra;
 
 	@ManyToMany
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(name = "reserva_personal", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idPersonal"))
 	private List <Personal> personal;
 

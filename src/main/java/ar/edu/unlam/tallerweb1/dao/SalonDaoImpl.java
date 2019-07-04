@@ -136,6 +136,14 @@ public class SalonDaoImpl implements SalonDao {
     }
 
 
+    // Para el calculo del personal necesario para el evento
+    @Override
+    public Reserva cantidadDeInvitadosPorIdReserva(Long idReserva){
+        final Session session = sessionFactory.getCurrentSession();
 
+        return (Reserva) session.createCriteria(Reserva.class)
+                .add(eq("id", idReserva))
+                .uniqueResult();
+    }
 
 }

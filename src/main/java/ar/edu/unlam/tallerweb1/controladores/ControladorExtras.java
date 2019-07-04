@@ -24,6 +24,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroExtras;
@@ -51,6 +52,9 @@ public class ControladorExtras {
 	private ServicioRegistroExtras servicioRegistroExtras;
 	@Inject
 	private ServicioResumen servicioResumen;
+	@Inject
+	private ServicioPersonal servicioPersonal;
+	
 
 	
     ///////////////////////////////////////////////////////////////////////////////////////
@@ -99,6 +103,12 @@ public class ControladorExtras {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
 		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
+		
+		
+		//////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////
+		servicioPersonal.asignaPersonalAlEvento(reserva);
+		
 		
 		//////////////////////////////////////////////////////////////////////////////////////
 		Reserva reservafinal = servicioResumen.buscarDatos(reserva);	

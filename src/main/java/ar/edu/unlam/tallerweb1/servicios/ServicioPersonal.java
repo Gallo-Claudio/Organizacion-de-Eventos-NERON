@@ -18,15 +18,20 @@ public interface ServicioPersonal {
 
 	List <Integer> calcularPersonal(Integer cantidadDeInvitados);
 	
-	List <Double> consultarSueldoPersonal()
-;
+	List <Double> consultarSueldoPersonal();
+	
 	List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia);
 
 	List <Personal> listadoPersonalAsignado(List <Long> listado);
 
-	void persisteElListadoDePersonalAsignado (List <Personal> listado);
+	void persisteElListadoDePersonalAsignado (Reserva reserva);
 	
 	List<CategoriaPersonal> consultaCargosDelPersonal ();
+	
+	List <Personal> listadoPersonalAsignado (Long idReserva);
+	
+	void asignaPersonalAlEvento(Long idReserva);
+	
 	// nuevo
 	List<Reserva> listadoDeReservas();
 	

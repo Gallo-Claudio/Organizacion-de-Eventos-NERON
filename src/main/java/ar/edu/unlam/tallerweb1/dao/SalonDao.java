@@ -24,5 +24,5 @@ public interface SalonDao {
     Salon verificarSalon(Salon salon);
     Usuario traerCliente(Long id);
 
-
+    Reserva cantidadDeInvitadosPorIdReserva(Long idReserva);
 }

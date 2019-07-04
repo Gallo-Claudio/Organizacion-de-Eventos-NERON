@@ -21,4 +21,6 @@ public interface ServicioSalon {
      List<Imagenes> galeria(Integer id);
       Long hacerReserva(Long id,Long salon,String fecha,String horario,Integer cantidad);
      Boolean verificarSalon(Salon salon);
+     
+     Integer cantidadDeInvitados (Long idReserva);
 }

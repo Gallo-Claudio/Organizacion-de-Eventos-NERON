@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.PersonalDao;
+import ar.edu.unlam.tallerweb1.dao.RegistroMenuDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
@@ -30,6 +31,15 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 	@Inject
 	private PersonalDao personalDao;
+	
+	@Inject
+	private ServicioResumen servicioResumen;
+	
+	@Inject
+	private ServicioSalon servicioSalon;
+	
+	@Inject
+	private RegistroMenuDao registroMenuDao;
 
 
 	// Devuelve el listado de asistencia del personal ordenado por Id
@@ -256,17 +266,11 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 	// Envia al DAO el listado para ser persistido en la BD
 	@Override
-	public void persisteElListadoDePersonalAsignado (List<Personal> listado) {
-		List<Personal> listadoPersonalDelEvento = new ArrayList <Personal> ();
-		Reserva reserva = new Reserva();
+	public void persisteElListadoDePersonalAsignado (Reserva reserva) {
 
-		// Agrego la coleccion List<Personal> obtenida, a un objeto Reserva
-		reserva.setPersonal(listado);
-		// Paso el objeto Reserva al DAO, para ser guardado en la BD
 		personalDao.ingresarReserva(reserva);
 	}
 
-	
 
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
@@ -278,6 +282,64 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		listadoPersonalDelEvento = personalDao.listadoDeCargosDelPersonal();
 
 		return listadoPersonalDelEvento;
+	}
+	
+	
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+
+	// Obtengo un listado general de la asistencia (eventos cubiertos por cada personal)
+	@Override
+	public List<Personal> listadoPersonalAsignado (Long idReserva) {	
+		Reserva reserva = servicioResumen.buscarDatos(idReserva);
+
+		return reserva.getPersonal();
+	}
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+
+	@Override
+	public void asignaPersonalAlEvento(Long idReserva) {	
+	//	String id=request.getSession().getAttribute("idReserva").toString();
+	//	Long idReserva= Long.parseLong(id);
+		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Asigna personal al evento contratado de forma automatica. Lo hace equilibrando las veces trabajadas  /////////////////
+		// por cada empleado, asegurando de esta forma que no haya disparidad en la asistencia a los eventos ////////////////////
+		// Se realiza el siguiente proceso (a grandes rasgos):   ////////////////////////////////////////////////////////////////
+		// 1- Obtencion del listado general de asistencias       ////////////////////////////////////////////////////////////////
+		// 2- Ordenamiento por Id realizando un conteo de las asistencias     ///////////////////////////////////////////////////
+		// 3- Listar en forma ascendente por asistencia         /////////////////////////////////////////////////////////////////
+		// 4- Tomar los "n" primeros registros de acuerdo a la cantidad de personal requerido   /////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
+		Reserva reservaPersonalAsignado = registroMenuDao.traerReserva (idReserva);
+		
+		// Obtengo el listado de asistencia ordenado por Id -- (paso 1 y 2)
+		Map <Long, Integer> listadoAsistencia = new HashMap();
+		listadoAsistencia = obtencionListadoDeAsistencias();
+
+		// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map) -- (paso 3)
+		Map <Long, Integer> conteoOrdenadoAscendentementePorAsistencia = OrdenaAscendentemente(listadoAsistencia);
+
+		// Recibo la cantidad de personal necesario en cada categoria para cubrir el evento
+		Integer cantidadDeInvitados = servicioSalon.cantidadDeInvitados(idReserva);
+		List<Integer> personalNecesario = calcularPersonal(cantidadDeInvitados);
+
+		// Genero el listado del personal a asignar de acuerdo a las necesidades del evento  -- (paso 4)
+		List <Long> personalDelEvento = asignarPersonalNecesario(personalNecesario, conteoOrdenadoAscendentementePorAsistencia);
+
+		// Obtengo el listado del personal asignado
+		List<Personal> personalAsignado = listadoPersonalAsignado(personalDelEvento);
+		
+		reservaPersonalAsignado.setPersonal(personalAsignado);
+
+		// Envio el listado para ser persistido
+		persisteElListadoDePersonalAsignado (reservaPersonalAsignado);
+
+	
 	}
 	
 	

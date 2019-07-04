@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>Servicios prestados por cada personal</title>
 <link href="css/gallo.css" rel="stylesheet" >
 </head>
 <body>
@@ -25,7 +25,7 @@
 				</tr>
 			</thead>
 			<tbody>
-	  			<c:forEach var="personal" items="${listadop}">
+	  			<c:forEach var="personal" items="${listadopersonalasignado}">
 					<c:if test="${personal.categoriaPersonal.id==i}">
 						<tr>
 						<td>${personal.apellido}</td>
