@@ -22,6 +22,7 @@
 				<tr>
 				<th>Nombre</th>
 				<th>Apellido</th>
+				<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,6 +31,7 @@
 						<tr>
 						<td>${personal.apellido}</td>
 						<td>${personal.nombre}</td>
+						<td><input type="checkbox" name="idpersonal[${personal.idPersonal}]" value="${personal.idPersonal}"></td>
 						</tr>
 					</c:if>	
 				</c:forEach>

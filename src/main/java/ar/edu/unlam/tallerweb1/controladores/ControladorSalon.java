@@ -6,22 +6,29 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroSalonViewModel;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class ControladorSalon {
-
+	
     @Inject
     private ServicioSalon servicioSalon;
 
@@ -46,8 +53,11 @@ public class ControladorSalon {
 
     @RequestMapping(path="/tomarDatos", method = RequestMethod.GET)
     public ModelAndView tomarDatos(@RequestParam(name="cantidad",required=false) Integer cantidad,
-                                   @RequestParam(name="fecha",required=false) String fecha) {
+                                   @RequestParam(name="fecha",required=false) String fechaString) {
         ModelMap modelo = new ModelMap();
+        
+        LocalDate fecha = LocalDate.parse(fechaString);
+        
         //encontrar zalones por zona
         Set<Salon> salonesCapital=servicioSalon.buscarSalonesCapital(cantidad, fecha);
         Set<Salon> salonesZonaSur=servicioSalon.buscarSalonesZonaSur(cantidad, fecha);
@@ -73,11 +83,12 @@ public class ControladorSalon {
     @RequestMapping(path="/validar", method = RequestMethod.POST)
     public ModelAndView validar(@ModelAttribute("salon") RegistroSalonViewModel salon,
                                    @ModelAttribute("horario") String horario,
-                                @ModelAttribute("fecha") String fecha,
+                                @ModelAttribute("fecha") String fechaString,
                                 @ModelAttribute("cantidad") Integer cantidad,
                                 HttpServletRequest request) {//esta en la url
         ModelMap modelo = new ModelMap();
-
+        LocalDate fecha = LocalDate.parse(fechaString);
+        
        int error=0;
        String mensaje=" ";
        Long id=salon.getId();

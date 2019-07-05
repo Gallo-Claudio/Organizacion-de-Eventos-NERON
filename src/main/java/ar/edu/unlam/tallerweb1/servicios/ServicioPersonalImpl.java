@@ -302,8 +302,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 	@Override
 	public void asignaPersonalAlEvento(Long idReserva) {	
-	//	String id=request.getSession().getAttribute("idReserva").toString();
-	//	Long idReserva= Long.parseLong(id);
+
 		
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		// Asigna personal al evento contratado de forma automatica. Lo hace equilibrando las veces trabajadas  /////////////////
@@ -339,8 +338,11 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		// Envio el listado para ser persistido
 		persisteElListadoDePersonalAsignado (reservaPersonalAsignado);
 
-	
 	}
+	
+	
+	
+	
 	
 	
 	

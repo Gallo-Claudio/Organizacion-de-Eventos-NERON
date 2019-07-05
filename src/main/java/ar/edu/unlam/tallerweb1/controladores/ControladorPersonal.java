@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
@@ -40,8 +44,55 @@ public class ControladorPersonal {
 	@Inject
 	private ServicioSalon servicioSalon;
 	
+	@Inject
+	private ServicioEventosPendientes servicioEventosPendientes;
+	
+
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Listado de eventos pendientes a realizarse  //////////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(path = "/listado-eventos-pendientes")
+	public ModelAndView listarEventosPendientesDeRealizarse () {
+		ModelMap model = new ModelMap();
+	//	Date fechaActual = new Date(); //Fecha actual (hoy)
+		LocalDate fechaActual = LocalDate.now(); //Fecha actual (hoy)
+		
+		Set <Reserva> listadoEventos = new HashSet();
+		listadoEventos = servicioEventosPendientes.listadoDeEventosPendientes(fechaActual);
+		
+		model.put("listadopendientes", listadoEventos);
+
+		return new ModelAndView("eventos-pendientes", model);
+	}
 	
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Listado del personal asignado a un evento seleccionado, de los pendientes a realizarse    ////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(path = "/listado-personal-asignado", method = RequestMethod.POST)
+	public ModelAndView listarPersonalAsignadoAUnEvento (@ModelAttribute("idreserva") Long idreserva) {
+		ModelMap model = new ModelMap();
+		
+		model.put("listadop", servicioPersonal.listadoPersonalAsignado(idreserva));
+
+		return new ModelAndView("personal-asignado", model);
+	}		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Listado general de las veces trabajadas por cada empleado   //////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,36 +129,6 @@ public class ControladorPersonal {
 
 		return new ModelAndView("trabajo-personal", model);
 	}
-
-	
-	
-
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Listado del personal asignado a un evento  //////////////////////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@RequestMapping(path = "/listado-personal-asignado")
-	public ModelAndView listarPersonalAsignadoAUnEvento () {
-		ModelMap model = new ModelMap();
-		model.put("listadop", servicioPersonal.listadoPersonalAsignado(106L));
-
-		return new ModelAndView("personal-asignado", model);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

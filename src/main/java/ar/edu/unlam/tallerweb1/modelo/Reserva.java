@@ -5,6 +5,7 @@ import javax.persistence.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -14,7 +15,7 @@ public class Reserva {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReserva;
-    private String fecha;
+    private LocalDate fecha;
     private String horario;
     private Integer cantidadDeInvitados;
 
@@ -56,11 +57,11 @@ public class Reserva {
 		this.idReserva = idReserva;
 	}
 
-	public String getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

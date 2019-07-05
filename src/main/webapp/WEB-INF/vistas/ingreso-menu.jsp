@@ -19,6 +19,7 @@
 	   
 				<form:form action="registro-plato-menu" method="POST" modelAttribute="descripcion, costo, tipoDeEvento">
 				  	<input class="tipomenu" name="descripcion" placeholder="Ingrese la descripcion del plato o bebida" />
+				  	<p>El precio debe ser ingresado en el siguiente formato  10.00</p>
 				  	<input class="tipomenu" name="costo" placeholder="Ingrese el costo" />
 				  	
 				     	<select class="tipomenu" name="tipoDeEvento">

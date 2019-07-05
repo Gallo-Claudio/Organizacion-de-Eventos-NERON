@@ -10,6 +10,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hibernate.criterion.Restrictions.*;
@@ -70,7 +72,7 @@ public class SalonDaoImpl implements SalonDao {
     }
  //buscar salones por zona
     @Override
-    public List<Salon> buscarSalonesCapital(Integer cantidad , String fecha){
+    public List<Salon> buscarSalonesCapital(Integer cantidad , LocalDate fecha){
         final Session session = sessionFactory.getCurrentSession();
 
 
@@ -88,7 +90,7 @@ public class SalonDaoImpl implements SalonDao {
 
 
     @Override
-    public List<Salon> buscarSalonesZonaSur(Integer cantidad , String fecha){
+    public List<Salon> buscarSalonesZonaSur(Integer cantidad , LocalDate fecha){
         final Session session = sessionFactory.getCurrentSession();
         List salones= session.createCriteria(Salon.class)
                 .add(ge("capacidadMaxima", cantidad))
@@ -103,7 +105,7 @@ public class SalonDaoImpl implements SalonDao {
 
 
     @Override
-    public List<Salon> buscarSalonesZonaNorte(Integer cantidad , String fecha){
+    public List<Salon> buscarSalonesZonaNorte(Integer cantidad , LocalDate fecha){
         final Session session = sessionFactory.getCurrentSession();
         List salones= session.createCriteria(Salon.class)
                 .add(ge("capacidadMaxima", cantidad))
@@ -120,7 +122,7 @@ public class SalonDaoImpl implements SalonDao {
 
 
     @Override
-    public List<Salon> buscarSalonesZonaOeste(Integer cantidad , String fecha){
+    public List<Salon> buscarSalonesZonaOeste(Integer cantidad , LocalDate fecha){
         final Session session = sessionFactory.getCurrentSession();
         List salones= session.createCriteria(Salon.class)
                 .add(ge("capacidadMaxima", cantidad))

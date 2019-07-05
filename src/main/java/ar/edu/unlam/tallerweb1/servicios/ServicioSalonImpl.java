@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+
+import java.time.LocalDate;
 import java.util.*;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ public class ServicioSalonImpl implements ServicioSalon {
 
     }
     @Override
-    public  Long hacerReserva(Long id,Long salon,String fecha,String horario,Integer cantidad){
+    public  Long hacerReserva(Long id,Long salon,LocalDate fecha,String horario,Integer cantidad){
         Salon salonAingresar=servicioSalonDao.traerSalonPorId(salon);
         Reserva reserva=new Reserva();
         Usuario user=servicioSalonDao.traerCliente(id);
@@ -71,7 +73,7 @@ public class ServicioSalonImpl implements ServicioSalon {
        return  servicioSalonDao.traerSalonPorId(id);
    }
     @Override
-    public  Set<Salon> buscarSalonesZonaSur (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesZonaSur (Integer cantidad ,LocalDate fecha) {
        List<Salon> lista=servicioSalonDao.buscarSalonesZonaSur(cantidad, fecha);
         Set<Salon> salonesNoRepetidos= new HashSet<>();
         for(Salon salon :lista){
@@ -83,7 +85,7 @@ public class ServicioSalonImpl implements ServicioSalon {
 
 
     @Override
-    public  Set<Salon> buscarSalonesZonaNorte (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesZonaNorte (Integer cantidad ,LocalDate fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalonesZonaNorte(cantidad, fecha);
 
 
@@ -97,7 +99,7 @@ public class ServicioSalonImpl implements ServicioSalon {
 
 
     @Override
-    public  Set<Salon> buscarSalonesZonaOeste (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesZonaOeste (Integer cantidad ,LocalDate fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalonesZonaOeste(cantidad, fecha);
 
         Set<Salon> salonesNoRepetidos= new HashSet<>();
@@ -110,7 +112,7 @@ public class ServicioSalonImpl implements ServicioSalon {
 
 
     @Override
-    public  Set<Salon> buscarSalonesCapital (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalonesCapital (Integer cantidad ,LocalDate fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalonesCapital(cantidad, fecha);
 
         Set<Salon> salonesNoRepetidos= new HashSet<>();
