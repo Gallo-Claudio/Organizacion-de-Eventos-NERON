@@ -12,7 +12,8 @@
 <form:form action="reasigna-personal" method="POST" modelAttribute="vmReasignaPersonal">
 <input type="hidden" name="idreserva" value="${idreserva}">
 
-<p>Personal asignado al evento de la reserva numero: ${idreserva}</p>
+<p>Listado del personal asignado al evento de la reserva numero: ${idreserva}</p>
+<p>Con reasignaciones</p>
 
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${cargos}">

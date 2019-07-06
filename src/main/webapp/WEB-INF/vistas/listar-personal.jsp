@@ -19,7 +19,7 @@
 	<tbody>
 	<c:forEach var="personal" items="${listado}"> 
 		<tr>
-		<td>${personal.id}</td>
+		<td>${personal.idPersonal}</td>
 		<td>${personal.nombre}</td>
 		</tr>
     </c:forEach>  

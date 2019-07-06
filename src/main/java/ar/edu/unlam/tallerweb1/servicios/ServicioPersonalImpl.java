@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -21,9 +22,11 @@ import ar.edu.unlam.tallerweb1.dao.PersonalDao;
 import ar.edu.unlam.tallerweb1.dao.RegistroMenuDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
+import ar.edu.unlam.tallerweb1.modelo.Menu;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroReasignacionPersonalViewModel;
 
 @Service("servicioPersonal")
 @Transactional
@@ -185,7 +188,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 		// Se usa el for, para ir pasando por las 6 categorias de empleados
 //		for(int i=0; i<6; i++) {
-			int encargado=1, chef=1, cocinero=1, ayudanteCocina=1, mozo=1, lavaplatos=1;  // Con esta variable, nos aseguramos de tomar solo la cantidad necesaria de personal para la categoria
+			int encargado=1, chef=1, cocinero=1, ayudanteCocina=1, mozo=1, lavaplatos=1;  // Con estas variables, nos aseguramos de tomar solo la cantidad necesaria de personal para la categoria
 //			Long categoria=1L;  // Con esta variable vamos cambiando la seleccion de la categoria en el bucle WHILE
 
 
@@ -251,7 +254,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	public List<Personal> listadoPersonalAsignado(List<Long> listado) {
 		List<Personal> listadoPersonalDelEvento = new ArrayList <Personal> ();
 
-		// Recorro la coleccion (listado del tipo List) recibida y voy agregando al List (listadoPersonalDelEvento)
+		// Recorro la coleccion recibida y voy agregando a "listadoPersonalDelEvento" (coleccion List)
 		// los objetos del tipo Personal, que fueron buscados por su Id.
 		// Se genera una coleccion List <Personal> con el personal asignado a cubrir el evento
 		for(Long personal : listado) {
@@ -339,6 +342,124 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		persisteElListadoDePersonalAsignado (reservaPersonalAsignado);
 
 	}
+
+	
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+	
+	// Determina la cantidad y la categoria del personal que no puede asistir a cubrir el evento
+	@Override
+	public List <Integer> determinaCategoriaYCantidadDelPersonalDadoDeBajaAUnEvento (List<Long> personalDadoDeBajaAlEvento) {	
+		List<Integer> cantidadesAReasignar = new ArrayList();
+		Integer encargado=0, chef=0, cocinero=0, ayudanteCocina=0, mozo=0, lavaplatos=0;
+		
+
+			for (int i=0; i<personalDadoDeBajaAlEvento.size(); i++) {	
+				Long pddbae = personalDadoDeBajaAlEvento.get(i);
+						
+			if (pddbae!=null) {
+			
+			// busco al personal correspondiente al Id para determinar a que categoria pertenece
+			Long valor = personalDao.buscarPersonalPorId(pddbae).getCategoriaPersonal().getId();
+			Integer categoria = (int) (long) valor;
+
+			switch (categoria) {
+			 case 1:
+					encargado++;
+					break;
+			 case 2:
+					chef++;
+					break;
+			 case 3:
+					cocinero++;
+					break;
+			 case 4:
+					ayudanteCocina++;
+					break;
+			 case 5:
+					mozo++;
+					break;
+			 case 6:
+					lavaplatos++;
+					break;
+			}
+			}
+		}
+			
+			
+			
+		cantidadesAReasignar.add(encargado);
+		cantidadesAReasignar.add(chef);
+		cantidadesAReasignar.add(cocinero);
+		cantidadesAReasignar.add(ayudanteCocina);
+		cantidadesAReasignar.add(mozo);
+		cantidadesAReasignar.add(lavaplatos);
+	
+		return cantidadesAReasignar;
+	}
+			
+	
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+	
+	// Reasignacion de personal para cubrir el evento
+	@Override
+	public List <Personal> reasingacionDelPersonalAUnEvento (List<Long> personalDadoDeBajaAlEvento, Long idReserva) {	
+	//	Long idReserva = vmReasignaPersonal.getIdreserva();  // Obtengo el id de la reserva
+		Reserva reservaPersonalAsignado = registroMenuDao.traerReserva (idReserva);  // Obtengo la reserva en la que se va a modificar el listado del personal a asistir al evento
+	//	Long personalDadoDeBajaAlEvento [] = vmReasignaPersonal.getIdpersonal();  // Obtengo la lista de Ids del personal que hay que dar de baja al evento
+	
+		// Determino la cantidad y categoria del personal para dar de alta en la asistencia a cubrir el evento
+		// La posicion indica la categoria y el valor la cantidad
+		List<Integer> cantidadYCategoriaDePersonalASumar = determinaCategoriaYCantidadDelPersonalDadoDeBajaAUnEvento(personalDadoDeBajaAlEvento);
+		
+		// Obtengo el listado del personal que debe ser modificado (alta/baja de personal a asistir al evento), por medio del id de la reserva 
+		List<Personal> listadoPersonal = listadoPersonalAsignado(idReserva);
+			
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		// Asigna personal al evento contratado de forma automatica. Lo hace equilibrando las veces trabajadas  /////////////////
+		// por cada empleado, asegurando de esta forma que no haya disparidad en la asistencia a los eventos ////////////////////
+		// Se realiza el siguiente proceso (a grandes rasgos):   ////////////////////////////////////////////////////////////////
+		// 1- Obtencion del listado general de asistencias       ////////////////////////////////////////////////////////////////
+		// 2- Ordenamiento por Id realizando un conteo de las asistencias     ///////////////////////////////////////////////////
+		// 3- Listar en forma ascendente por asistencia         /////////////////////////////////////////////////////////////////
+		// 4- Tomar los "n" primeros registros de acuerdo a la cantidad de personal requerido   /////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+					
+		// Obtengo el listado de asistencia ordenado por Id -- (paso 1 y 2)
+		Map <Long, Integer> listadoAsistencia = new HashMap();
+		listadoAsistencia = obtencionListadoDeAsistencias();
+
+		// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map) -- (paso 3)
+		Map <Long, Integer> conteoOrdenadoAscendentementePorAsistencia = OrdenaAscendentemente(listadoAsistencia);
+		
+		// Selecciono el personal (obtengo el ID) a asignar por categoria de acuerdo a las necesidades del evento  -- (paso 4)
+		List <Long> personalDelEvento = asignarPersonalNecesario(cantidadYCategoriaDePersonalASumar, conteoOrdenadoAscendentementePorAsistencia);
+
+		// Agrego al listado del personal, los reemplazantes necesarios en cada categoria 
+		for(Long personal : personalDelEvento) {
+			listadoPersonal.add(personalDao.buscarPersonalPorId(personal));
+		}
+		
+		// Se da de baja al personal que no puede asistir al evento    
+		List<Personal> personalABajar = new ArrayList();
+		for(Long personal : personalDadoDeBajaAlEvento) {
+			personalABajar.add(personalDao.buscarPersonalPorId(personal));
+		}
+		
+		listadoPersonal.removeAll(personalABajar);
+		
+		// Se guarda el listado en la reserva
+		reservaPersonalAsignado.setPersonal(listadoPersonal);
+
+		// Envio de la reserva modificada para ser persistido
+		persisteElListadoDePersonalAsignado (reservaPersonalAsignado);
+		
+		return listadoPersonal;
+	}
+	
+	
+	
 	
 	
 	

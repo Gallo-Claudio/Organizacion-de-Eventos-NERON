@@ -106,6 +106,7 @@ public class ControladorMenu {
 	public ModelAndView registraReservaMenu (@ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
+		vm.getIdmenu(); //Agregado para prueba de lo del personal dado de baja
 		servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());
 		return new ModelAndView("redirect:/listado-extra");
 

@@ -30,8 +30,10 @@ import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPersonalImpl;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroReasignacionPersonalViewModel;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroSalonViewModel;
 
 
@@ -76,6 +78,11 @@ public class ControladorPersonal {
 	public ModelAndView listarPersonalAsignadoAUnEvento (@ModelAttribute("idreserva") Long idreserva) {
 		ModelMap model = new ModelMap();
 		
+		// Obtengo el listado de los cargos del personal
+		List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
+
+		model.put("idreserva", idreserva);
+		model.put("cargos", cargosPersonal);
 		model.put("listadop", servicioPersonal.listadoPersonalAsignado(idreserva));
 
 		return new ModelAndView("personal-asignado", model);
@@ -83,7 +90,33 @@ public class ControladorPersonal {
 	
 	
 	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// REASIGNACION DEL PERSONAL A CUBRIR UN EVENTO       ///////////////////////////////////////////////////////////////
+	// El personal que por diferentes motivos no puede asistir a cubrir el evento, es dado de baja   ////////////////////
+	// y reemplazado por otro personal generandose un nuevo listado modificado   ////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping(path = "/reasigna-personal", method = RequestMethod.POST)
+	public ModelAndView reasignarPersonalAUnEvento (@ModelAttribute("vmReasignaPersonal") RegistroReasignacionPersonalViewModel vmReasignaPersonal, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+		
+		// Obtengo el listado de los cargos del personal
+				List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
+
+				model.put("idreserva", vmReasignaPersonal.getIdreserva());
+				model.put("cargos", cargosPersonal);
+				model.put("listadop", servicioPersonal.reasingacionDelPersonalAUnEvento(vmReasignaPersonal.getIdpersonal(), vmReasignaPersonal.getIdreserva()));
+
+		return new ModelAndView("personal-reasignado", model);
+	}
 	
+	
+	
+	
+	
+	
+	
+
 	
 	
 	
