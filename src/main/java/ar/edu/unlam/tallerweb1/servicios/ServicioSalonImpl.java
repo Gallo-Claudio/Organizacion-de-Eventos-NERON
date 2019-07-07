@@ -114,8 +114,6 @@ public class ServicioSalonImpl implements ServicioSalon {
         return servicioSalonDao.buscar(nombre);
     }
 
-    
-    
     // Devuelve la cantidad de invitados de la reserva correspondiente al id de reserva pasado
     @Override
     public Integer cantidadDeInvitados(Long idReserva){
@@ -123,7 +121,6 @@ public class ServicioSalonImpl implements ServicioSalon {
     	
         return  reserva.getCantidadDeInvitados();
     }
-
+    
+    
 }
-
-

@@ -84,7 +84,7 @@ public class SalonDaoImpl implements SalonDao {
     }
  //buscar salones por zona
     @Override
-    public List<Salon> buscarSalonesCapital(Integer cantidad , LocalDate fecha){
+    public List<Salon> buscarSalones(Integer cantidad , String fecha){
         final Session session = sessionFactory.getCurrentSession();
 
 
@@ -110,5 +110,14 @@ public class SalonDaoImpl implements SalonDao {
 
 }
 
+// Para el calculo del personal necesario para el evento
+@Override
+public Reserva cantidadDeInvitadosPorIdReserva(Long idReserva){
+    final Session session = sessionFactory.getCurrentSession();
+
+    return (Reserva) session.createCriteria(Reserva.class)
+            .add(eq("id", idReserva))
+            .uniqueResult();
+}
 
 }

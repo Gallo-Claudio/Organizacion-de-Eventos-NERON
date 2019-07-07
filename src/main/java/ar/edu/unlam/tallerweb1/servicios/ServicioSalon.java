@@ -23,4 +23,6 @@ public interface ServicioSalon {
      Boolean verificarSalon(Salon salon);
 
      List<Salon> buscar(String nombre);
+     
+     Integer cantidadDeInvitados(Long idReserva);
 }
