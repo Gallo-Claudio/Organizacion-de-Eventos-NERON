@@ -132,35 +132,37 @@ public class ControladorPersonal {
 
 
 	@RequestMapping(path = "/trabajo-personal", method = RequestMethod.GET)
-	public ModelAndView listarTrabajoPersonal() {
-		Map<Long, Integer>conteo = new HashMap();
+	public ModelAndView listarTrabajoPersonal(HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL")=="1") {
+			Map<Long, Integer> conteo = new HashMap();
 
-		Iterator<Personal> p = servicioPersonal.controlDeServiciosPrestados().iterator();
-		Personal personal;
-		while (p.hasNext()) {
-			personal=p.next();
+			Iterator<Personal> p = servicioPersonal.controlDeServiciosPrestados().iterator();
+			Personal personal;
+			while (p.hasNext()) {
+				personal = p.next();
 
-	        if(conteo.containsKey(personal.getIdPersonal())){
-	        	conteo.put(personal.getIdPersonal(),conteo.get(personal.getIdPersonal())+1);
-	         }
-	         else{
-	            conteo.put(personal.getIdPersonal(),1);
-	         }
+				if (conteo.containsKey(personal.getIdPersonal())) {
+					conteo.put(personal.getIdPersonal(), conteo.get(personal.getIdPersonal()) + 1);
+				} else {
+					conteo.put(personal.getIdPersonal(), 1);
+				}
+			}
+
+
+			// Obtengo el listado de assitencia ordenado por Id
+			Map<Long, Integer> listadoAsistencia = new HashMap();
+			listadoAsistencia = servicioPersonal.obtencionListadoDeAsistencias();
+
+			// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map)
+			Map<Long, Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.OrdenaAscendentemente(listadoAsistencia);
+
+
+			ModelMap model = new ModelMap();
+			model.put("asistencia", conteoOrdenadoAscendentementePorAsistencia);
+
+			return new ModelAndView("trabajo-personal", model);
 		}
-
-
-		// Obtengo el listado de assitencia ordenado por Id
-		Map <Long, Integer> listadoAsistencia = new HashMap();
-		listadoAsistencia = servicioPersonal.obtencionListadoDeAsistencias();
-
-		// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map)
-		Map<Long,Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.OrdenaAscendentemente(listadoAsistencia);
-
-
-        ModelMap model = new ModelMap();
-		model.put("asistencia", conteoOrdenadoAscendentementePorAsistencia);
-
-		return new ModelAndView("trabajo-personal", model);
+		return new ModelAndView("redirect:/home");
 	}
 	
 	

@@ -12,10 +12,15 @@ public class Salon {
     private String nombre;
     private Double precio;
     private Integer capacidadMaxima;
+    //imagen para el card
+    private String imagenCard;
+
+    private Double puntaje;
+    private String direccion;
 
 
     @OneToOne
-    private UbicacionSalon ubicacion;
+    private Zona zona;
    @OneToMany(mappedBy="salon")
     private List<Reserva> reserva;
 
@@ -28,28 +33,32 @@ public class Salon {
     }
 
 
-    public Salon(String nombre,Double precio,Integer capacidadMaxima) {
-        this.nombre=nombre;
-        this.precio=precio;
-        this.capacidadMaxima=capacidadMaxima;
-
-
-
-
-
-    }
-
 
   // public void agregarReservas(Reserva reserva){
    //     this.reserva.add(reserva);
  //  }
 
+    public String getImagenCard() {
+        return imagenCard;
+    }
+
+    public void setImagenCard(String imagenCard) {
+        this.imagenCard = imagenCard;
+    }
+
     public Long getId() {
 		return id;
 	}
 
+    public Double getPuntaje() {
+        return puntaje;
+    }
 
-	public void setId(Long id) {
+    public void setPuntaje(Double puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -78,13 +87,6 @@ public class Salon {
         this.capacidadMaxima = capacidadMaxima;
     }
 
-    public UbicacionSalon getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(UbicacionSalon ubicacion) {
-        this.ubicacion = ubicacion;
-    }
 
 
 
@@ -114,5 +116,19 @@ public class Salon {
         Imagenes = imagenes;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
 
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
 }

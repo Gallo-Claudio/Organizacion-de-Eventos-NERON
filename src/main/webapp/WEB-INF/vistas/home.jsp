@@ -1,60 +1,61 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- Bootstrap core CSS -->
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
 	</head>
 	<body>
 
 
+<nav>
 
-	<nav class="">
+
 		<h1>Bienvenidos a</h1>
 		<h1>Organizacion de Eventos NERON</h1>
 		<a class="navbar-brand" href=#><img id="logo-nav" src="Webroot/img/logotipo.png" alt="Logo de OnMarket"></a>
 
-       <div>
+    <a href="home"> Inicio</a>
+	<a href="salones-a-puntuar"> Nuestros Salones</a>
 
-			<form action="salon" method="post">
-			<input type="submit" value="Reservar" class="btn btn-light">
-			</form>
-		</div>
+	<a href="menus-a-puntuar"> Nuestros Menus</a>
+
+    <a href="salon"> Reservar</a>
+    <a href="cerrarsesion"> cerrar sesion</a>
 
 
-		<div>
-			<form  method="post"  action="cerrarsesion"  >
-				<input type="submit" value="Cerrar session" class="btn btn-secondary">
-			</form>
-		</div>
 
-		<!--<div>
+
+		<!--<div class="col">
 			registrar
 			<form  method="post"  action="+"  >
 			<input type="submit" value="Registrarse" class="btn btn-secondary">
 			</form>
 		</div>-->
+
+
 	</nav>
 
-	<!-–Slider de fotos -–>
+	<table>
 
+	<c:forEach items="${salones}" var="salon">
 
-	<!-- Footer -->
-	<footer class="bg-primary page-footer font-small blue pt-4">
+        <td>
+			${salon.nombre}<br>
 
-		<!-- Copyright -->
-		<div class="bg-secondary text-dark footer-copyright text-center py-3">© 2019 Copyright:
-			<a class="text-dark" href="https://mdbootstrap.com/education/bootstrap/"> Neron.com</a>
-		</div>
-		<!-- Copyright -->
+			${salon.precio}<br>
+			<a href="VerImagenes?id=${salon.id}">
+				<input  class=" btn btn-success" type="button" value="Ver mas"/>
+			</a>
+			Valoracion Actual:${salon.puntaje}<br>
 
-	</footer>
+       </td>
 
+	</c:forEach>
 
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-		<script src="js/bootstrap.min.js" type="text/javascript"></script>
+	</table>
+
 	</body>
 </html>

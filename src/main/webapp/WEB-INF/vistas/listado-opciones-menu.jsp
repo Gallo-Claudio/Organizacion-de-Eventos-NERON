@@ -54,92 +54,45 @@ Listado para la seleccion del menu<br><br><br>
 		<script src="js/bootstrap.min.js" type="text/javascript"></script>
 
 
-<div>
+
 	<h2>Menus que te pueden interesar</h2>
-   TOPEEE:${tope}
+	<table>
+		<div class="table-bordered" style="width: 18rem;">
 
-	<br>
+			<c:forEach var = "i" begin = "1" end = "6">
 
-	<c:if test="${tope>=1}">
-		<h2>menu</h2><br>
-		<c:forEach items="${menus1}" var="menu">
-
-			${menu.descripcion}
-			$${menu.costo}<br>
-
-
-		</c:forEach>
-	</c:if>
-
-	<br>
+			<c:forEach items="${menus}" var="menu">
+				<td>
+			<img class="card-img-top" src=".." alt="Card image cap">
+			<div class="card-body>">
+				<c:forEach var="tipo" items="${secciones}">
+					<c:if test="${tipo.id==i}">
+						<h3 class="card-title">${tipo.detalle}</h3>
+					</c:if>
+				</c:forEach>
 
 
-	<br>
-
-	<c:if test="${tope>=2}">
-		<h2>menu</h2><br>
-		<c:forEach items="${menus2}" var="menu">
-
-			${menu.descripcion}
-			$${menu.costo}<br>
+					<h2 class="card-title"> ${menu.descripcion}</h2>
+					<p class="card-text" >Precio:${menu.precio}(cada 10 personas)</p>
 
 
-		</c:forEach>
-	</c:if>
-
-	<br>
-
-
-	<br>
-
-	<c:if test="${tope>=3}">
-		<h2>menu</h2><br>
-		<c:forEach items="${menus3}" var="menu">
-
-			${menu.descripcion}
-			$${menu.costo}<br>
-
-
-		</c:forEach>
-	</c:if>
-
-	<br>
-
-
-	<br>
-
-	<c:if test="${tope>=4}">
-		<h2>menu</h2><br>
-		<c:forEach items="${menus4}" var="menu">
-
-			${menu.descripcion}
-			$${menu.costo}<br>
-
-
-		</c:forEach>
-	</c:if>
-
-	<br>
-
-
-	<br>
-
-	<c:if test="${tope>=5}">
-		<h2>menu</h2><br>
-		<c:forEach items="${menus5}" var="menu">
-
-			${menu.descripcion}
-			$${menu.costo}<br>
-
-
-		</c:forEach>
-	</c:if>
-
-	<br>
+					<h3 class="card-title"> Valoracion Actual:${menu.puntaje}/10</h3>
+					<input   name="id"   type="hidden" value="${menu.idMenu}"/>
+					<h3 class="card-title">Danos tu opinion</h3>
+					<input type="number"  name="puntaje" >
+					<input class=" btn btn-success" type="submit" value="puntuar" >
+				</td>
+				</c:forEach>
+				</c:forEach>
+			</div>
+		</div>
 
 
 
-</div>
+
+
+
+	</table>
 
 
 </body>

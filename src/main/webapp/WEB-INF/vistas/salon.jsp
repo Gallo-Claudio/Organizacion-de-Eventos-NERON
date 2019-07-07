@@ -8,7 +8,11 @@
     <title>Seleccion de Salon</title>
 </head>
 <body>
-
+<c:if test="${!empty mensaje}">
+    <h1>${mensaje}</h1>
+</c:if>
+${salon}
+${zona}
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -36,6 +40,8 @@
     </div>
 </div>
 
+
+
 <c:if test="${not empty isset}">
     <div class="container">
         <div class="col-md-4 col-md-offset-4">
@@ -44,146 +50,42 @@
                 <input  type="hidden" value="${fecha}" name="fecha"/>
                 <input  type="hidden" value="${cantidad}" name="cantidad"/>
 
-                <label>Resultados</label>
-                <div>
-
-                    <h2>Capital</h2>
-                    <table class="table table-condenced">
+                <c:forEach var = "i" begin = "1" end = "4">
+                    <c:forEach var="zona" items="${zonas}">
+                        <c:if test="${zona.id==i}">
+                            <td>${zona.nombre}</td>
+                        </c:if>
+                    </c:forEach>
+                    <table border="1" cellpadding="1" cellspacing="0">
+                        <thead>
                         <tr>
-                            <td class="success">-</td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas </td>
-
+                            <th>Pombre</th>
+                            <th>Precio</th>
+                            <th>Capacidad</th>
+                            <th>direccion</th>
+                            <th>Valoracion</th>
+                            <th></th>
                         </tr>
-                        <c:forEach items="${capital}" var="salon">
-                            <tr>
-                                <td><input   name="id"   type="radio" value="${salon.id}"/></td>
-                                <td>${salon.nombre}</td>
-                                 <input type="hidden"  value="${salon.ubicacion.localidad}" >
-                                <td>${salon.ubicacion.localidad}</td>
-                                <td>${salon.ubicacion.calle}</td>
-                                <td>${salon.ubicacion.numero}</td>
-                                <td>${salon.precio}</td>
-                                <td>
-                                    <a href="VerImagenes?id=${salon.id}">
-                                        <input  class=" btn btn-success" type="button" value="Ver mas"/></a>
-                                </td>
-                            </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach var="salon" items="${salones}">
+                            <c:if test="${salon.zona.id==i}">
+                                <tr>
+                                    <td>${salon.nombre}</td>
+                                    <td>${salon.precio}</td>
+                                    <td>${salon.capacidadMaxima}</td>
+                                    <td>${salon.direccion}</td>
+                                    <td>${salon.puntaje}/10</td>
 
-
+                                    <td><input type="checkbox" name="id" value="${salon.id}"></td>
+                                </tr>
+                            </c:if>
                         </c:forEach>
-
+                        </tbody>
                     </table>
-                </div>
+                    <br><br><br>
 
-
-                <br>
-                <div>
-                    <h2>Zona Oeste</h2>
-                    <table class="table table-condenced">
-                        <tr>
-                            <td class="success">- </td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas</td>
-
-                        </tr>
-                        <c:forEach items="${oeste}" var="salon">
-                            <tr>
-                                <td><input name="id"   type="radio" value="${salon.id}"/></td>
-                                <td>${salon.nombre}</td>
-                                <td>${salon.ubicacion.localidad}</td>
-                                <td>${salon.ubicacion.calle}</td>
-                                <td>${salon.ubicacion.numero}</td>
-                                <td>${salon.precio}</td>
-                                <td>
-                                    <a href="VerImagenes?id=${salon.id}">
-                                        <input  class=" btn btn-success" type="button" value="Ver mas"/></a>
-                                </td>
-                            </tr>
-
-
-                        </c:forEach>
-                    </table>
-                </div>
-                <br>
-
-                <div>
-                    <h2>Zona Sur</h2>
-                    <table class="table table-condenced">
-                        <tr>
-                            <td class="success">-</td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas</td>
-
-                        </tr>
-                        <c:forEach items="${sur}" var="salon">
-                            <tr>
-                                <td><input   name="id"   type="radio" value="${salon.id}"/></td>
-                                <td>${salon.nombre}</td>
-                                <td>${salon.ubicacion.localidad}</td>
-                                <td>${salon.ubicacion.calle}</td>
-                                <td>${salon.ubicacion.numero}</td>
-                                <td>${salon.precio}</td>
-                                <td>
-                                    <a href="VerImagenes?id=${salon.id}">
-                                        <input  class=" btn btn-success" type="button" value="Ver mas"/></a>
-                                </td>
-                            </tr>
-
-
-                        </c:forEach>
-                    </table>
-                </div>
-
-                <br>
-                <div>
-                    <h2>Zona Norte</h2>
-                    <table class="table table-condenced">
-                        <tr>
-                            <td class="success">-</td>
-                            <td class="success">Nombre</td>
-                            <td class="success">Localidad</td>
-                            <td class="success">Calle</td>
-                            <td class="success">Numero</td>
-                            <td class="success">Precio</td>
-                            <td class="success">Mas </td>
-
-                        </tr>
-                        <c:forEach items="${norte}" var="salon">
-                            <tr>
-                                <td>
-                                    <input  name="id"  type="radio" value="${salon.id}"/>
-                                </td>
-                                <td>${salon.nombre}</td>
-                                <td>${salon.ubicacion.localidad}</td>
-                                <td>${salon.ubicacion.calle}</td>
-                                <td>${salon.ubicacion.numero}</td>
-
-                                <td>${salon.precio}</td>
-                                <td>
-                                    <a href="VerImagenes?id=${salon.id}">
-                                        <input  class=" btn btn-success" type="button" value="Ver mas"/></a>
-                                </td>
-
-                            </tr>
-
-
-                        </c:forEach>
-                    </table>
-                </div>
-
+                </c:forEach>
                 <div >
                     <h2>Horarios</h2>
                     <select class="list-group" name="horario">

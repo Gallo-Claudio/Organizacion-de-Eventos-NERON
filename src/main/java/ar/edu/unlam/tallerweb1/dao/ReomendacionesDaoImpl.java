@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.dao;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.PuntajeSalon;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
 import org.hibernate.Session;
@@ -21,8 +22,25 @@ public class ReomendacionesDaoImpl implements RecomendacionesDao{
     @Override
     public List<Reserva> obtenerReservasDeLaBase(){
         final Session session = sessionFactory.getCurrentSession();
-        List salones= session.createCriteria(Reserva.class)
+        List reservas=  session.createCriteria(Reserva.class)
                .list();
-        return salones;
+        return reservas;
     }
+
+    @Override
+    public   List<Salon> obtenerSalonesDeLaBase(){
+        final Session session = sessionFactory.getCurrentSession();
+        List salones= session.createCriteria(Salon.class)
+                .list();
+        return salones;
+
+    }
+   @Override
+    public  List<Menu> obtenerMenusDeLaBase(){
+       final Session session = sessionFactory.getCurrentSession();
+       List menus= session.createCriteria(Menu.class)
+               .list();
+       return menus;
+   }
+
 }

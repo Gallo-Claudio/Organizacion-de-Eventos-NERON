@@ -35,13 +35,42 @@ public class ControladorSalon {
    // @Inject
    // private ServicioCliente servicioCliente;
 
+
+    //Admin
+    //HAY QUE HACERLO
+    /*
+    @RequestMapping(path = "/ingreso-salon", method = RequestMethod.GET)
+    public ModelAndView ingresoDeSalon() {
+        Salon salon = new Salon();
+        ModelMap model = new ModelMap();
+        model.put("salon", salon);
+        return new ModelAndView("ingreso-salon", model);
+    }
+    //HAY QUE HACERLO
+    @RequestMapping(path = "/registro-Salon", method = RequestMethod.POST)
+    public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
+                                        HttpServletRequest request) {
+    //    if(request.getSession().getAttribute("ROL")=="1"){
+      //  servicioIngresoExtras.ingresarExtras(extra);
+        return new ModelAndView("redirect:/ingreso-salon");
+   // }
+      //      return new ModelAndView("redirect:/home");
+
+
+
+    }
+    //HAY QUE HACERLO
+    @RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)
+    public ModelAndView listadoExtras () {
+        ModelMap modelo = new ModelMap();
+       // modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+        return new ModelAndView("listado-final-salon", modelo);
+    }
+*/
     @RequestMapping(path="/salon" )
     public ModelAndView ir(HttpServletRequest request) {
         if(request.getSession().getAttribute("logueado")==null){
-
-
-            return new ModelAndView("redirect:/home");
-
+          return new ModelAndView("redirect:/home");
 
         }
 
@@ -53,22 +82,22 @@ public class ControladorSalon {
 
     @RequestMapping(path="/tomarDatos", method = RequestMethod.GET)
     public ModelAndView tomarDatos(@RequestParam(name="cantidad",required=false) Integer cantidad,
-                                   @RequestParam(name="fecha",required=false) String fechaString) {
+                                   @RequestParam(name="fecha",required=false) String fecha) {
+
         ModelMap modelo = new ModelMap();
-        
-        LocalDate fecha = LocalDate.parse(fechaString);
-        
-        //encontrar zalones por zona
-        Set<Salon> salonesCapital=servicioSalon.buscarSalonesCapital(cantidad, fecha);
-        Set<Salon> salonesZonaSur=servicioSalon.buscarSalonesZonaSur(cantidad, fecha);
-        Set<Salon> salonesZonaOeste=servicioSalon.buscarSalonesZonaOeste(cantidad, fecha);
-        Set<Salon> salonesZonaNorte=servicioSalon.buscarSalonesZonaNorte(cantidad, fecha);
+       LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaEvento = LocalDate.parse(fecha);
+        if(fechaActual.compareTo(fechaEvento)>=0 ){
+             modelo.put("mensaje","fecha invalida");
+            return new ModelAndView("redirect:/salon", modelo);
+        }
 
 
-        modelo.put("capital",salonesCapital);
-        modelo.put("sur",salonesZonaSur);
-        modelo.put("norte",salonesZonaNorte);
-        modelo.put("oeste",salonesZonaOeste);
+        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fecha);
+        List<Zona> zonas=servicioSalon.traerZonas();
+
+        modelo.put("salones",salones);
+        modelo.put("zonas",zonas);
 
 
         modelo.put("cantidad",cantidad);

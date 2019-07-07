@@ -25,8 +25,6 @@ public class Reserva {
     @OneToOne
     private Usuario usuario;
 
-	@OneToMany
-	private List<PuntajeMenu> puntajesMenu;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "reserva_menu", joinColumns = @JoinColumn(name = "idReserva"), inverseJoinColumns = @JoinColumn(name = "idMenu"))
@@ -97,13 +95,7 @@ public class Reserva {
 		this.usuario = usuario;
 	}
 
-	public List<PuntajeMenu> getPuntajesMenu() {
-		return puntajesMenu;
-	}
 
-	public void setPuntajesMenu(List<PuntajeMenu> puntajesMenu) {
-		this.puntajesMenu = puntajesMenu;
-	}
 	
 		public List<Menu> getMenu() {
 		return menu;

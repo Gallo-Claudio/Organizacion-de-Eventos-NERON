@@ -66,12 +66,17 @@ public class ControladorExtras {
 //	}
 	
 	/*Lado del administrador*/
+	//ADMIN
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
-	public ModelAndView ingresoDeExtras() {
-		Extra extras = new Extra();
-		ModelMap model = new ModelMap();
-		model.put("extras", extras);
-		return new ModelAndView("ingreso-extras", model);
+	public ModelAndView ingresoDeExtras(HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL")=="1"){
+
+			Extra extras = new Extra();
+			ModelMap model = new ModelMap();
+			model.put("extras", extras);
+			return new ModelAndView("ingreso-extras", model);
+		}
+		return new ModelAndView("redirect:/home");
 	}
 	
 	@RequestMapping(path = "/registro-extras", method = RequestMethod.POST)
@@ -82,10 +87,13 @@ public class ControladorExtras {
 	}
 	
 	@RequestMapping(path = "/listado-final-extras", method = RequestMethod.GET)
-	public ModelAndView listadoExtras () {
-		ModelMap modelo = new ModelMap();
-		modelo.put("listadoFinal", servicioListarExtras.listarExtras());
-		return new ModelAndView("listado-final-extras", modelo);
+	public ModelAndView listadoExtras (HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL")=="1") {
+			ModelMap modelo = new ModelMap();
+			modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+			return new ModelAndView("listado-final-extras", modelo);
+		}
+		return new ModelAndView("redirect:/home");
 	}
 	
 	/*Lado Cliente*/
@@ -93,6 +101,10 @@ public class ControladorExtras {
 	@RequestMapping(path = "/listado-extra", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeExtras (HttpServletRequest request) {
 		ModelMap modelo = new ModelMap();
+		if(request.getSession().getAttribute("logueado")==null){
+			return new ModelAndView("redirect:/home");
+
+		}
 		modelo.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
 
 		return new ModelAndView("listado-opciones-extra", modelo);
