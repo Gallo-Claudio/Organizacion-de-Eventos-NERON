@@ -13,7 +13,7 @@ import java.util.List;
 
 public interface SalonDao {
 
-    List<Salon> buscarSalones(Integer cantidad ,String fecha);
+    List<Salon> buscarSalones(Integer cantidad ,LocalDate fecha);
    List<Zona> traerZonas();
     Salon traerSalonPorId(Long id);
     List<Reserva> traerListaDeFechas(Salon salon);

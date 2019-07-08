@@ -94,7 +94,7 @@ public class ServicioSalonImpl implements ServicioSalon {
     }
 
     @Override
-    public  Set<Salon> buscarSalones (Integer cantidad ,String fecha) {
+    public  Set<Salon> buscarSalones (Integer cantidad ,LocalDate fecha) {
         List<Salon> lista=servicioSalonDao.buscarSalones(cantidad, fecha);
 
 

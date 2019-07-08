@@ -93,7 +93,7 @@ public class ControladorSalon {
         }
 
 
-        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fecha);
+        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fechaEvento);
         List<Zona> zonas=servicioSalon.traerZonas();
 
         modelo.put("salones",salones);
