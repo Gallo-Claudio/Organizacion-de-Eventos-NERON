@@ -7,18 +7,23 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.MenuValidar;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroIngresoMenuViewModel;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
 
@@ -36,17 +41,24 @@ public class ControladorMenu {
 	@Inject
 	private ServicioRegistroMenu servicioRegistroMenu;
 
-
+	private MenuValidar menuValidar;
+	public ControladorMenu () {
+		this.menuValidar = new MenuValidar();
+	}
+	
+	
+	//********************************************************	
+	// Lado ADMININSTRADOR  **********************************
+	//********************************************************
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Ingreso de los diferentes platos que integran el Menu o Carta  //////////////////////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	//ADMIN
-	// Se pasa un objeto vacio a la vista para ingresar los datos correspondientes y se recibe y pasa a la vista un listado de los diferentes tipos de menu
+		// Se pasa un objeto vacio a la vista para ingresar los datos correspondientes y se recibe y pasa a la vista un listado de los diferentes tipos de menu
 	@RequestMapping(path = "/ingresar-menu", method = RequestMethod.GET)
 	public ModelAndView ingresarMenu(HttpServletRequest request) {
-		if(request.getSession().getAttribute("ROL")=="1") {
+		if(request.getSession().getAttribute("ROL").equals("1")) {
 			ModelMap model = new ModelMap();
 			// Llamo al metodo "listarTiposDeMenus()" de la instancia "servicioListarTiposMenu", que esta en el area de Servicios.
 		//	 El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
@@ -60,12 +72,24 @@ public class ControladorMenu {
 
 	// Ingreso de los distintos platos/bebidas/postres que compondran las opciones a elegir por parte del cliente
 	@RequestMapping(path = "/registro-plato-menu", method = RequestMethod.POST)
-	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("descripcion") String descripcion, @ModelAttribute ("costo") Double costo, @ModelAttribute ("tipoDeEvento") Long tipodemenu) {
+	public ModelAndView registroPlatosMenu2 (@ModelAttribute ("vmIngresoMenu") RegistroIngresoMenuViewModel vmIngresoMenu, BindingResult result, SessionStatus status) {
 		ModelMap model = new ModelMap();
 		model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
-		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(descripcion, costo, tipodemenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la l�gica
-		return new ModelAndView("ingreso-menu", model); // Retorna a la vista del formulario (ingreso menu)
+		
+        this.menuValidar.validate(vmIngresoMenu, result);
+        if(result.hasErrors()){
+            //Volvemos al formulario porque los datos ingresados por el usuario no son correctos
+        	model.put("descripcion", vmIngresoMenu.getDescripcion());
+        	model.put("precio", vmIngresoMenu.getPrecio());
+    		return new ModelAndView("ingreso-menu", model); // Retorna a la vista del formulario (ingreso menu)
+        }
+        else{
+    		servicioRegistroPlatoMenu.ingresarPlatosAlMenu(vmIngresoMenu);   // Paso los parametros que recibo desde el formulario a traves del ModelAttribute, al area de Servicios desde donde se maneja la logica
+    		return new ModelAndView("ingreso-menu", model); // Retorna a la vista del formulario (ingreso menu)
+        }
 	}
+	
+	
 	//HAY QUE HACERLO
     /*
 	@RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)
@@ -78,6 +102,13 @@ public class ControladorMenu {
 	//		return new ModelAndView("redirect:/home");
 
 	}*/
+	
+	
+	
+	
+	//********************************************************	
+	// Lado CLIENTE	  ****************************************
+	//********************************************************	
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Seleccion del Menu  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

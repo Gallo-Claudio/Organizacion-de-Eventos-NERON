@@ -12,17 +12,21 @@
 	    <link href="css/neron.css" rel="stylesheet" >
 	</head>
 	<body>
-		<div class = "container">
+        <div class="container">
+            <div class="row">
 	   <h1>Ingreso de los distintos platos y bebidas que componen el Menu</h1>
 	   <p class="descripcion">Desde aquí se ingresan los diferentes platos/bebidas/postres que componen el listado de opciones a elegir por el cliente</p>
 	   
 	   
-				<form:form action="registro-plato-menu" method="POST" modelAttribute="descripcion, costo, tipoDeEvento">
-				  	<input class="tipomenu" name="descripcion" placeholder="Ingrese la descripcion del plato o bebida" />
+				<form:form action="registro-plato-menu" method="POST" modelAttribute="vmIngresoMenu">
+				
+				<form:errors path="*" element="div" class="alert alert-danger" />
+				
+				  	<input class="tipomenu" name="descripcion" value="${descripcion}" placeholder="Ingrese la descripcion del plato o bebida" />
 				  	<p>El precio debe ser ingresado en el siguiente formato  10.00</p>
-				  	<input class="tipomenu" name="costo" placeholder="Ingrese el costo" />
+				  	<input class="tipomenu" name="precio" value="${precio}" placeholder="Ingrese el costo" />
 				  	
-				     	<select class="tipomenu" name="tipoDeEvento">
+				     	<select class="tipomenu" name="tipoDeMenu">
 						<c:forEach var="tipodemenu" items="${listatiposmenu}"> 
 							<option value="${tipodemenu.id}">${tipodemenu.detalle}</option>
     					</c:forEach>
@@ -33,6 +37,7 @@
 				</form:form>
         
         
+            </div>
         </div>
         	<!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

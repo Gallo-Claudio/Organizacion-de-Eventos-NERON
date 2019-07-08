@@ -16,7 +16,6 @@
 				<tr>
 				<th>Salon</th>
 				<th>Dirección</th>
-				<th>Numero</th>
 				<th>Fecha</th>
 				<th>Horario</th>
 				<th></th>
@@ -28,8 +27,7 @@
 
 						<tr>
 						<td>${item.salon.nombre}</td>
-						<td>${item.salon.ubicacion.calle}</td>
-						<td>${item.salon.ubicacion.numero}</td>
+						<td>${item.salon.direccion}</td>
 						<td>${item.fecha}</td>
 						<td>${item.horario}</td>						
 						<td>${item.idReserva}</td>
