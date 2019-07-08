@@ -6,6 +6,7 @@ import java.util.Map;
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroReasignacionPersonalViewModel;
 
 // Interface que define los metodos del Servicio de Usuarios.
 public interface ServicioPersonal {
@@ -18,15 +19,24 @@ public interface ServicioPersonal {
 
 	List <Integer> calcularPersonal(Integer cantidadDeInvitados);
 	
-	List <Double> consultarSueldoPersonal()
-;
+	List <Double> consultarSueldoPersonal();
+	
 	List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia);
 
 	List <Personal> listadoPersonalAsignado(List <Long> listado);
 
-	void persisteElListadoDePersonalAsignado (List <Personal> listado);
+	void persisteElListadoDePersonalAsignado (Reserva reserva);
 	
 	List<CategoriaPersonal> consultaCargosDelPersonal ();
+	
+	List <Personal> listadoPersonalAsignado (Long idReserva);
+	
+	void asignaPersonalAlEvento(Long idReserva);
+	
+	List <Integer> determinaCategoriaYCantidadDelPersonalDadoDeBajaAUnEvento (List<Long> personalDadoDeBajaAlEvento);
+	
+	List <Personal> reasingacionDelPersonalAUnEvento (List<Long> personalDadoDeBajaAlEvento, Long idReserva);
+	
 	// nuevo
 	List<Reserva> listadoDeReservas();
 	

@@ -41,10 +41,14 @@ public class ControladorPuntuarMenu {
     public ModelAndView ingresarPuntaje(@ModelAttribute("mvSalon") RegistroMenuViewModel mvMenu,
                                         @ModelAttribute("puntaje") Double puntaje) {
         ModelMap model = new ModelMap();
+        if(puntaje>0 && puntaje<=10) {
+            servicioRegistroMenu.calcularPuntaje(mvMenu.getId(), puntaje);
 
-        servicioRegistroMenu.calcularPuntaje(mvMenu.getId(),puntaje);
+            model.put("mensaje", "gracias por darnos tu opinion del menu :)");
+            return new ModelAndView("redirect:/menus-a-puntuar", model);
+        }
+        model.put("mensaje", "solo puntajes del 1 al 10 porfavor :)");
 
-        model.put("mensaje" ,"gracias por darnos tu opinion del menu :)");
-        return new ModelAndView("puntaje-menu", model);
+        return new ModelAndView("redirect:/menus-a-puntuar", model);
     }
 }

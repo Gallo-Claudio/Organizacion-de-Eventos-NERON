@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,11 +29,12 @@ public class ServicioResumenImpl implements ServicioResumen {
 	
 
 	@Override
-	public Double calculaCostoTotal(Reserva reservafinal) {
+	public List<Double> calculaCostoTotal(Reserva reservafinal) {
+		List<Double> precios = new ArrayList();
 		
 		// Obtengo el costo del salon
 		Double precioSalon = reservafinal.getSalon().getPrecio();
-		
+
 		
 		// Obtengo el costo del menu
 		Double precioMenu=0D;
@@ -40,13 +42,15 @@ public class ServicioResumenImpl implements ServicioResumen {
 			precioMenu = m.getPrecio() + precioMenu;
 		}
 		Double precioMenuTotal = precioMenu * reservafinal.getCantidadDeInvitados();
-		
+		precios.add(precioMenu);
+		precios.add(precioMenuTotal);
 		
 		// Obtengo el costo de los extras
 		Double precioExtra=0D;
 		for (Extra e: reservafinal.getExtra()){
 			precioExtra = e.getPrecio() + precioExtra;
 		}
+		precios.add(precioExtra);
 		
 		
 		// Obtengo el costo del personal
@@ -54,12 +58,27 @@ public class ServicioResumenImpl implements ServicioResumen {
 		List<Double> sueldoPersonal = servicioPersonal.consultarSueldoPersonal();
 		Double precioPersonal=0D;
 		
-		for (int i=0; i<personal.size(); i++) {
-//			precioPersonal = (personal(i) * sueldoPersonal(i)) + precioPersonal;          <------- TERMINAR
-		}
+		Iterator<Integer> p = personal.iterator();
+		Iterator<Double> sp = sueldoPersonal.iterator();
 		
+		Integer pers;
+		Double sueldoPers;
+		
+		while (p.hasNext()) {
+			pers=p.next();
+			sueldoPers=sp.next();
+			
+			precioPersonal = (pers*sueldoPers) + precioPersonal;
+		}
+		precios.add(precioPersonal);
+		
+		
+		// Calcula el costo final de la reserva
 		Double costoFinal = precioSalon + precioMenuTotal + precioExtra + precioPersonal;
-		return costoFinal;
+		precios.add(costoFinal);
+		
+		
+		return precios;
 	}
 
 	

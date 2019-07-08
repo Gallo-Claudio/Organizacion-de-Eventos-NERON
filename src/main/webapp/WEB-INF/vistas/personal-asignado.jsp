@@ -1,15 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Servicios prestados por cada personal</title>
+<title></title>
 <link href="css/gallo.css" rel="stylesheet" >
 </head>
 <body>
-				<p>Personal asignado al evento</p>
 				
+<form:form action="reasigna-personal" method="POST" modelAttribute="vmReasignaPersonal">
+<input type="hidden" name="idreserva" value="${idreserva}">
+
+<p>Personal asignado al evento de la reserva numero: ${idreserva}</p>
 
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${cargos}">
@@ -22,14 +25,16 @@
 				<tr>
 				<th>Nombre</th>
 				<th>Apellido</th>
+				<th></th>
 				</tr>
 			</thead>
 			<tbody>
-	  			<c:forEach var="personal" items="${listadopersonalasignado}">
+	  			<c:forEach var="personal" items="${listadop}">
 					<c:if test="${personal.categoriaPersonal.id==i}">
 						<tr>
 						<td>${personal.apellido}</td>
 						<td>${personal.nombre}</td>
+						<td><input type="checkbox" name="idpersonal[${personal.idPersonal}]" value="${personal.idPersonal}"></td>
 						</tr>
 					</c:if>	
 				</c:forEach>
@@ -37,6 +42,7 @@
 		</table>
 		<br><br><br>
     </c:forEach>
-	     
+	<button class="btn-agregar" Type="Submit"/>Bajar del evento</button>
+</form:form>	     
 </body>
 </html>

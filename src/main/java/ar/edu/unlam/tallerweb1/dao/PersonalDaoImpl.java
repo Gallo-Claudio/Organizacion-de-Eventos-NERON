@@ -62,11 +62,12 @@ public class PersonalDaoImpl implements PersonalDao {
 	}
 
 	@Override
-	public List <Personal> cantidadDePersonal() {
+	public List <Personal> listadoDelPersonal() {
 		
 		final Session session = sessionFactory.getCurrentSession();
 		return (personal) = session.createCriteria(Personal.class).list();
 	}
+	
 	
 	// EN DESARROLLO ///////////////////////////////////////////////////////
 	@Override
@@ -75,6 +76,9 @@ public class PersonalDaoImpl implements PersonalDao {
 		final Session session = sessionFactory.getCurrentSession();
 		return (categoriapersonal) = session.createCriteria(CategoriaPersonal.class).list();
 	}
+	
+
+	
 
 //	@Override
 //	public List <Personal> traerReservasDesdePersonal() {

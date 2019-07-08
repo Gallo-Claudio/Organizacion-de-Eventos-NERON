@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +13,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +28,12 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPersonalImpl;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
+import ar.edu.unlam.tallerweb1.viewmodel.RegistroReasignacionPersonalViewModel;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroSalonViewModel;
 
 
@@ -36,129 +43,88 @@ public class ControladorPersonal {
 	@Inject
 	private ServicioPersonal servicioPersonal;
 	
+	@Inject
+	private ServicioSalon servicioSalon;
 	
+	@Inject
+	private ServicioEventosPendientes servicioEventosPendientes;
 	
-	// EN DESARROLLO ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Asigna personal a las reservas que aun no lo tienen         //////////////////////////////////////////////////////
+	// Listado de eventos pendientes a realizarse  //////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	@RequestMapping(path = "/reservas-sin-personal-asignado", method = RequestMethod.GET)
-	public ModelAndView listarReservasSinPersonal() {
-//		Map<Long, Integer>conteo = new HashMap();
-
-		List <Reserva> reserva = servicioPersonal.listadoDeReservas();
-		List <Reserva> reservaSinPersonal = new ArrayList();
-		
-		Iterator <Reserva> r = reserva.iterator();
-		Reserva reservafinal;
-		while(r.hasNext()) {
-			reservafinal=r.next();
-			
-			if(reservafinal.getPersonal()==null) {
-				reservaSinPersonal.add(reservafinal);
-			}	
-		}
-		
-
-		
-		//-----------------------------------------------------
-		
-		List <Personal> persona = servicioPersonal.sinPersonal();
-		List <Personal> reservasinpersona = new ArrayList();
-		
-		Iterator <Personal> p = persona.iterator();
-		Personal personareservafinal;
-		while(p.hasNext()) {
-			personareservafinal=p.next();
-			
-			if(personareservafinal.getReserva()!=null) {
-				reservasinpersona.add(personareservafinal);
-			}	
-		}
-		
-		
+	@RequestMapping(path = "/listado-eventos-pendientes")
+	public ModelAndView listarEventosPendientesDeRealizarse () {
 		ModelMap model = new ModelMap();
-		model.put("listaReservaSinPersonal", reservaSinPersonal);
-		model.put("listaSinPersonal", reservasinpersona);
+	//	Date fechaActual = new Date(); //Fecha actual (hoy)
+		LocalDate fechaActual = LocalDate.now(); //Fecha actual (hoy)
 		
-		return new ModelAndView("reservas-sin-personal", model);
+		Set <Reserva> listadoEventos = new HashSet();
+		listadoEventos = servicioEventosPendientes.listadoDeEventosPendientes(fechaActual);
 		
-		
-		
-//		Iterator<Personal> p = servicioPersonal.controlDeServiciosPrestados().iterator();
-//		Personal personal;
-//		while (p.hasNext()) {
-//			personal=p.next();
+		model.put("listadopendientes", listadoEventos);
 
-//	        if(conteo.containsKey(personal.getId())){
-//	        	conteo.put(personal.getId(),conteo.get(personal.getId())+1);
-//	         }
-//	         else{
-//	            conteo.put(personal.getId(),1);
-//	         }
-//		}	
-		// Obtengo el listado de assitencia ordenado por Id
-//		Map <Long, Integer> listadoAsistencia = new HashMap();
-//		listadoAsistencia = servicioPersonal.obtencionListadoDeAsistencias();
-
-		// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map)
-//		Map<Long,Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.OrdenaAscendentemente(listadoAsistencia);
-
-
-//        ModelMap model = new ModelMap();
-//		model.put("asistencia", conteoOrdenadoAscendentementePorAsistencia);
-
-//		return new ModelAndView("trabajo-personal", model);
-	}
+		return new ModelAndView("eventos-pendientes", model);
+	}
 	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Listado del personal asignado a un evento seleccionado, de los pendientes a realizarse    ////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Asigna personal al evento contratado de forma automatica. Lo hace equilibrando las veces trabajadas  /////////////////
-	// por cada empleado, asegurando de esta forma que no haya disparidad en la asistencia a los eventos ////////////////////
-	// Se realiza el siguiente proceso (a grandes rasgos):   ////////////////////////////////////////////////////////////////
-	// 1- Obtencion del listado general de asistencias       ////////////////////////////////////////////////////////////////
-	// 2- Ordenamiento por Id realizando un conteo de las asistencias     ///////////////////////////////////////////////////
-	// 3- Listar en forma ascendente por asistencia         /////////////////////////////////////////////////////////////////
-	// 4- Tomar los "n" primeros registros de acuerdo a la cantidad de personal requerido   /////////////////////////////////
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-	@RequestMapping(path = "/asignar-personal-al-evento", method = RequestMethod.GET)
-	public ModelAndView ingresarPersonal(@ModelAttribute("vmSalon") RegistroSalonViewModel vmSalon, HttpServletRequest request) {
-
-		// Obtengo el listado de asistencia ordenado por Id -- (paso 1 y 2)
-		Map <Long, Integer> listadoAsistencia = new HashMap();
-		listadoAsistencia = servicioPersonal.obtencionListadoDeAsistencias();
-
-		// El Map luego es ordenado de forma ascendente considerando la asistencia del personal ("value" de la coleccion Map) -- (paso 3)
-		Map <Long, Integer> conteoOrdenadoAscendentementePorAsistencia = servicioPersonal.OrdenaAscendentemente(listadoAsistencia);
-
-		// Recibo la cantidad de personal necesario en cada categoria para cubrir el evento
-		
-		List<Integer> personalNecesario = servicioPersonal.calcularPersonal(vmSalon.getCantidad());
-
-		// Genero el listado del personal a asignar de acuerdo a las necesidades del evento  -- (paso 4)
-		List <Long> personalDelEvento = servicioPersonal.asignarPersonalNecesario(personalNecesario, conteoOrdenadoAscendentementePorAsistencia);
-
-		// Obtengo el listado del personal asignado
-		List<Personal> personalAsignado = servicioPersonal.listadoPersonalAsignado(personalDelEvento);
-
-
-		// Envio el listado para ser persistido
-		servicioPersonal.persisteElListadoDePersonalAsignado (personalAsignado);
+	@RequestMapping(path = "/listado-personal-asignado", method = RequestMethod.POST)
+	public ModelAndView listarPersonalAsignadoAUnEvento (@ModelAttribute("idreserva") Long idreserva) {
+		ModelMap model = new ModelMap();
 		
 		// Obtengo el listado de los cargos del personal
 		List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
 
-		// Envio el listado a la vista
-		ModelMap model = new ModelMap();
-		model.put("listadopersonalasignado", personalAsignado);
+		model.put("idreserva", idreserva);
 		model.put("cargos", cargosPersonal);
-		model.put("cantidad", personalNecesario);
+		model.put("listadop", servicioPersonal.listadoPersonalAsignado(idreserva));
 
 		return new ModelAndView("personal-asignado", model);
-	}
+	}		
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// REASIGNACION DEL PERSONAL A CUBRIR UN EVENTO       ///////////////////////////////////////////////////////////////
+	// El personal que por diferentes motivos no puede asistir a cubrir el evento, es dado de baja   ////////////////////
+	// y reemplazado por otro personal generandose un nuevo listado modificado   ////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	@RequestMapping(path = "/reasigna-personal", method = RequestMethod.POST)
+	public ModelAndView reasignarPersonalAUnEvento (@ModelAttribute("vmReasignaPersonal") RegistroReasignacionPersonalViewModel vmReasignaPersonal, HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+		
+		// Obtengo el listado de los cargos del personal
+				List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
+
+				model.put("idreserva", vmReasignaPersonal.getIdreserva());
+				model.put("cargos", cargosPersonal);
+				model.put("listadop", servicioPersonal.reasingacionDelPersonalAUnEvento(vmReasignaPersonal.getIdpersonal(), vmReasignaPersonal.getIdreserva()));
+
+		return new ModelAndView("personal-reasignado", model);
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Listado general de las veces trabajadas por cada empleado   //////////////////////////////////////////////////////
@@ -198,18 +164,6 @@ public class ControladorPersonal {
 		}
 		return new ModelAndView("redirect:/home");
 	}
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -219,7 +173,7 @@ public class ControladorPersonal {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// Listado general ///////  NO ES DE UTILIDAD PARA LA APLICACION POR AHORA ///////////////////////////////////////////////////
+	// Listado general del personal  ///////  NO ES DE UTILIDAD PARA LA APLICACION POR AHORA ////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(path = "/listar-personal", method = RequestMethod.GET)

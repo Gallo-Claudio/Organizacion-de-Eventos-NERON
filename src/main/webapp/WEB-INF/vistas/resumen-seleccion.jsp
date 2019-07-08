@@ -16,19 +16,35 @@ Resumen de lo seleccionado para el evento<br><br><br>
 Cantidad de Invitados: ${reservafinal.cantidadDeInvitados}<br><br>
 Fecha del evento: ${reservafinal.fecha}<br><br>
 Horario: ${reservafinal.horario}<br><br>
-Salon: ${reservafinal.salon.nombre}     -----> Costo:    ${reservafinal.salon.precio}<br><br>
 
+--------------------------------------------------------------------------------------------------<br><br>
+Salon: ${reservafinal.salon.nombre}     -----> Precio:    ${reservafinal.salon.precio}<br><br>
 
+--------------------------------------------------------------------------------------------------<br><br>
 Menu elegido<br><br><br><br>
-	  			<c:forEach var="tipo" items="${menufinal}">
+	  			<c:forEach var="tipomenu" items="${menuseleccionado}">
 
+${tipomenu.descripcion}   ---> Precio por plato:      ${tipomenu.precio}   <br><br>
 
- 
-${tipo.descripcion}   ---> Costo:      ${tipo.precio}   <br><br>
+				</c:forEach>	
+				precio del menu por persona: ${precios[0]}
+				precio total del menu: ${precios[1]}
+				<br><br>			
+----------------------------------------------------------------------------------------------<br><br>
+Extras seleccionado<br><br><br><br>
+	  			<c:forEach var="tipoextra" items="${extraseleccionado}">
 
-				</c:forEach>			
+${tipoextra.nombre}   ---> Precio:      ${tipoextra.precio}   <br><br>
 
-
+				</c:forEach>
+				precio total de los extras: ${precios[2]}
+				<br><br>
+----------------------------------------------------------------------------------------------<br><br>
+Rersonal para asistir al evento
+precio: ${precios[3]}
+	
+----------------------------------------------------------------------------------------------<br><br>
+PRECIO FINAL:${precios[4]}
 
 
         <!-- Placed at the end of the document so the pages load faster -->

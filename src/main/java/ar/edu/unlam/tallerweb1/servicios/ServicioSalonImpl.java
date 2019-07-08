@@ -1,5 +1,5 @@
 package ar.edu.unlam.tallerweb1.servicios;
-
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.dao.SalonDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
+
+import java.time.LocalDate;
 import java.util.*;
 
 import java.util.ArrayList;
@@ -46,7 +48,7 @@ public class ServicioSalonImpl implements ServicioSalon {
 
     }
     @Override
-    public  Long hacerReserva(Long id,Long salon,String fecha,String horario,Integer cantidad){
+    public  Long hacerReserva(Long id,Long salon,LocalDate fecha,String horario,Integer cantidad){
         Salon salonAingresar=servicioSalonDao.traerSalonPorId(salon);
         Reserva reserva=new Reserva();
         Usuario user=servicioSalonDao.traerCliente(id);
@@ -83,48 +85,18 @@ public class ServicioSalonImpl implements ServicioSalon {
 
        return  servicioSalonDao.traerSalonPorId(id);
    }
-    @Override
-    public  Set<Salon> buscarSalonesZonaSur (Integer cantidad ,String fecha) {
-       List<Salon> lista=servicioSalonDao.buscarSalonesZonaSur(cantidad, fecha);
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
-        for(Salon salon :lista){
-            salonesNoRepetidos.add(salon);
-        }
 
-        return salonesNoRepetidos;
+    @Override
+    public  List<Zona> traerZonas() {
+
+
+        return servicioSalonDao.traerZonas();
     }
 
-
     @Override
-    public  Set<Salon> buscarSalonesZonaNorte (Integer cantidad ,String fecha) {
-        List<Salon> lista=servicioSalonDao.buscarSalonesZonaNorte(cantidad, fecha);
+    public  Set<Salon> buscarSalones (Integer cantidad ,String fecha) {
+        List<Salon> lista=servicioSalonDao.buscarSalones(cantidad, fecha);
 
-
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
-        for(Salon salon :lista){
-            salonesNoRepetidos.add(salon);
-        }
-
-        return salonesNoRepetidos;
-    }
-
-
-    @Override
-    public  Set<Salon> buscarSalonesZonaOeste (Integer cantidad ,String fecha) {
-        List<Salon> lista=servicioSalonDao.buscarSalonesZonaOeste(cantidad, fecha);
-
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
-        for(Salon salon :lista){
-            salonesNoRepetidos.add(salon);
-        }
-
-        return salonesNoRepetidos;
-    }
-
-
-    @Override
-    public  Set<Salon> buscarSalonesCapital (Integer cantidad ,String fecha) {
-        List<Salon> lista=servicioSalonDao.buscarSalonesCapital(cantidad, fecha);
 
         Set<Salon> salonesNoRepetidos= new HashSet<>();
         for(Salon salon :lista){
@@ -136,6 +108,19 @@ public class ServicioSalonImpl implements ServicioSalon {
 
 
 
+    @Override
+    public  List<Salon> buscar(String nombre){
+
+        return servicioSalonDao.buscar(nombre);
+    }
+
+    // Devuelve la cantidad de invitados de la reserva correspondiente al id de reserva pasado
+    @Override
+    public Integer cantidadDeInvitados(Long idReserva){
+    	Reserva reserva = servicioSalonDao.cantidadDeInvitadosPorIdReserva(idReserva);
+    	
+        return  reserva.getCantidadDeInvitados();
+    }
+    
+    
 }
-
-

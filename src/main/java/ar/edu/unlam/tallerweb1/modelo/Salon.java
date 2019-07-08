@@ -12,21 +12,11 @@ public class Salon {
     private String nombre;
     private Double precio;
     private Integer capacidadMaxima;
-    private String direccion;
-     
-    public String getDireccion() {
-		return direccion;
-	}
-
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	//imagen para el card
+    //imagen para el card
     private String imagenCard;
 
     private Double puntaje;
+    private String direccion;
 
 
     @OneToOne
@@ -42,17 +32,6 @@ public class Salon {
 
     }
 
-
-    public Salon(String nombre,Double precio,Integer capacidadMaxima) {
-        this.nombre=nombre;
-        this.precio=precio;
-        this.capacidadMaxima=capacidadMaxima;
-
-
-
-
-
-    }
 
 
   // public void agregarReservas(Reserva reserva){
@@ -108,6 +87,9 @@ public class Salon {
         this.capacidadMaxima = capacidadMaxima;
     }
 
+
+
+
     public Double getPrecio() {
         return precio;
     }
@@ -134,5 +116,19 @@ public class Salon {
         Imagenes = imagenes;
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
 
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
 }
