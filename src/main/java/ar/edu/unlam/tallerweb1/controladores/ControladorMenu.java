@@ -7,10 +7,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.MenuValidar;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
 import ar.edu.unlam.tallerweb1.servicios.*;
 import ar.edu.unlam.tallerweb1.validadores.MenuSeleccionValidar;
+import ar.edu.unlam.tallerweb1.validadores.MenuValidar;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -44,15 +44,9 @@ public class ControladorMenu {
 	private ServicioRegistroMenu servicioRegistroMenu;
 
 	private MenuValidar menuValidar = new MenuValidar();
-//	public ControladorMenu () {
-//		this.menuValidar = new MenuValidar();
-//	}
-	
+
 	private MenuSeleccionValidar menuSeleccionValidar = new MenuSeleccionValidar();
-//	public ControladorMenu () {
-//		this.menuSeleccionValidar = new MenuSeleccionValidar();
-//	}
-	
+
 	
 	
 	//********************************************************	
