@@ -19,7 +19,12 @@ Listado para la seleccion del menu<br><br><br>
 
 <form:form action="registra-reserva-menu" method="POST" modelAttribute="vm">
 
-<form:errors path="*" element="div" class="alert alert-danger" />
+
+<c:if test="${!empty mensajeerror}">
+    <div class="alert alert-danger">${mensajeerror}</div>
+</c:if>
+<form:errors path="*" element="div" class="alert alert-danger" /> 
+
  
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${secciones}">

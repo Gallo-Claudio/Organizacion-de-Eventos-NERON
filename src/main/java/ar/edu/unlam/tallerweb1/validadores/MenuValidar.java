@@ -1,13 +1,10 @@
 package ar.edu.unlam.tallerweb1.validadores;
 
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroIngresoMenuViewModel;
-
-
 
 public class MenuValidar implements Validator {
 
