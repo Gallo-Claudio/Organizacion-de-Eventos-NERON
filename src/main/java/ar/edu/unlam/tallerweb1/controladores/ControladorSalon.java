@@ -1,9 +1,6 @@
-
 package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoSalon;
-import ar.edu.unlam.tallerweb1.servicios.ServicioIngresoExtras;
-import ar.edu.unlam.tallerweb1.servicios.ServicioListarExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
@@ -36,24 +33,23 @@ public class ControladorSalon {
     private ServicioSalon servicioSalon;
     @Inject
     private ServicioEliminoSalon servicioEliminoSalon;
-    @Inject
-    private ServicioIngresoExtras servicioIngresoExtras;
-    @Inject
-    private ServicioListarExtras servicioListarExtras;
-    
 
    // @Inject
    // private ServicioCliente servicioCliente;
-    
+
+
     @RequestMapping(path = "/eliminar-salon", method = RequestMethod.POST)
-	public ModelAndView registroExtras (@ModelAttribute ("Salon") Salon salon,
-										HttpServletRequest request) {
-		servicioEliminoSalon.eliminarSalon(salon);
-		return new ModelAndView("redirect:/elimino-salon"); 
-	}
-
-
+ 	public ModelAndView registroExtras (@ModelAttribute ("Salon") Salon salon,
+ 										HttpServletRequest request) {
+ 		servicioEliminoSalon.eliminarSalon(salon);
+ 		return new ModelAndView("redirect:/elimino-salon"); 
+ 	}
+    
+    
+    
     //Admin
+    //HAY QUE HACERLO
+    /*
     @RequestMapping(path = "/ingreso-salon", method = RequestMethod.GET)
     public ModelAndView ingresoDeSalon() {
         Salon salon = new Salon();
@@ -61,29 +57,24 @@ public class ControladorSalon {
         model.put("salon", salon);
         return new ModelAndView("ingreso-salon", model);
     }
-    
-    
-    //Ingreso extras del lado del admin. Con el getSession le asigno el rol de administrador. 
+    //HAY QUE HACERLO
     @RequestMapping(path = "/registro-Salon", method = RequestMethod.POST)
     public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
                                         HttpServletRequest request) {
-        if(request.getSession().getAttribute("ROL")=="1"){
-        servicioIngresoExtras.ingresarExtras(extra);
+    //    if(request.getSession().getAttribute("ROL")=="1"){
+      //  servicioIngresoExtras.ingresarExtras(extra);
         return new ModelAndView("redirect:/ingreso-salon");
+   // }
+      //      return new ModelAndView("redirect:/home");
     }
-            return new ModelAndView("redirect:/home");
-    }
-    
-    
-  
+    //HAY QUE HACERLO
     @RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)
     public ModelAndView listadoExtras () {
         ModelMap modelo = new ModelMap();
-        modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+       // modelo.put("listadoFinal", servicioListarExtras.listarExtras());
         return new ModelAndView("listado-final-salon", modelo);
     }
-    
-    
+*/
     @RequestMapping(path="/salon" )
     public ModelAndView ir(HttpServletRequest request) {
         if(request.getSession().getAttribute("logueado")==null){

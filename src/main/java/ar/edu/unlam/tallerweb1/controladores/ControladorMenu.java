@@ -42,29 +42,19 @@ public class ControladorMenu {
 	private ServicioRegistroMenu servicioRegistroMenu;
 	@Inject
 	private ServicioEliminoMenu servicioEliminoMenu;
-	@Inject
-	private ServicioListarExtras servicioListarExtras;
-	
+
 	private MenuValidar menuValidar;
 	public ControladorMenu () {
 		this.menuValidar = new MenuValidar();
 	}
 	
 	
-	//ADMIN
-	 
-			@RequestMapping(path = "/elimino-menu", method = RequestMethod.POST)
-			public ModelAndView registroExtras (@ModelAttribute ("Menu") Menu menu,
-												HttpServletRequest request) {
-				servicioEliminoMenu.eliminarMenu(menu);
-				return new ModelAndView("redirect:/abmMenu"); 
-			}
-			
-			
-	
-	
-	
-	
+	@RequestMapping(path = "/elimino-menu", method = RequestMethod.POST)
+	public ModelAndView registroExtras (@ModelAttribute ("Menu") Menu menu,
+										HttpServletRequest request) {
+		servicioEliminoMenu.eliminarMenu(menu);
+		return new ModelAndView("redirect:/abmMenu"); 
+	}
 	
 	//********************************************************	
 	// Lado ADMININSTRADOR  **********************************
@@ -110,16 +100,16 @@ public class ControladorMenu {
 	
 	
 	//HAY QUE HACERLO
+    /*
 	@RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)
 	public ModelAndView listadoExtras (HttpServletRequest request) {
-		if(request.getSession().getAttribute("ROL")=="1") {
+	//	if(request.getSession().getAttribute("ROL")=="1") {
 			ModelMap modelo = new ModelMap();
-			 modelo.put("listadoFinal", servicioListarExtras.listarExtras());
+			// modelo.put("listadoFinal", servicioListarExtras.listarExtras());
 			return new ModelAndView("listado-final-salon", modelo);
-		}
-			return new ModelAndView("redirect:/home");
-
-	}
+	//	}
+	//		return new ModelAndView("redirect:/home");
+	}*/
 	
 	
 	

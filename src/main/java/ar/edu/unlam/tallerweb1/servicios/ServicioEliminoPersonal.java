@@ -1,14 +1,11 @@
 
 package ar.edu.unlam.tallerweb1.servicios;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ar.edu.unlam.tallerweb1.modelo.Extra;
 import ar.edu.unlam.tallerweb1.modelo.Menu;
+import ar.edu.unlam.tallerweb1.modelo.Personal;
 
-public interface ServicioListarMenusEliminados {
+public interface ServicioEliminoPersonal {
 
-	List<Menu> listarMenuEliminado();
-
+ void eliminarPersonal(Personal personal);
 }
