@@ -59,7 +59,7 @@ public class ControladorPersonal {
 	 	public ModelAndView registroExtras (@ModelAttribute ("Personal") Personal personal,
 	 										HttpServletRequest request) {
 	 		servicioEliminoPersonal.eliminarPersonal(personal);
-	 		return new ModelAndView("redirect:/elimino-salon"); 
+	 		return new ModelAndView("redirect:/elimino-personal"); 
 	 	}
 	
 	

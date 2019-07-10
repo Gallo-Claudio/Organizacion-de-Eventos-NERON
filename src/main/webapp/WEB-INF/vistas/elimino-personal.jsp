@@ -8,19 +8,19 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/extras.css">
 		
-	    <title>Agregar Extras</title>
+	    <title>Eliminar Personal</title>
 	    
 	</head>
 	
 	<header>
-				<center><b><i>Nerón - Agregar extras</i></b></center><br><br>
+				<center><b><i>Nerón - Eliminar Personal</i></b></center><br><br>
 
 	
 	
 	</header>
 	<body><center>
-				<form:form action="eliminar-salon" method="POST" modelAttribute="Salon">
-				<b><i>Por favor, elimine un salon:</i></b>   
+				<form:form action="eliminar-personal" method="POST" modelAttribute="Personal">
+				<b><i>Por favor, elimine a algún personal</i></b>   
 	
 					
 
@@ -31,9 +31,3 @@
 				</center>
 	</body>
 </html>
-
-
-
-
-
-

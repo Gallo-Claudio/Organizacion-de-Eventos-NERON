@@ -19,13 +19,12 @@
 	
 	</header>
 	<body><center>
-				<form:form action="registro-menu" method="POST" modelAttribute="Menu">
+				<form:form action="elimino-menu" method="POST" modelAttribute="Menu">
 				<b><i>Por favor, elimine un menu:</i></b>  
 				
 					<button Type="Submit"/>Eliminar</button>
 				</form:form>
 				<br>
-				<a href="/proyecto-limpio-spring/listado-final-menu"><i>Obtener un listado</i></a>
 				</center>
 	</body>
 </html>
