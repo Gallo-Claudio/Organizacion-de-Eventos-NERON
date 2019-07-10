@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css/extras.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <!-- Bootstrap theme -->
+    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
 	
 	<title>Listado</title>
 </head>
@@ -17,7 +19,7 @@
 	</header>
 
 <body>
-	<center><table border="6" cellpadding="4" cellspacing="6">
+	<center><table class="table table-hover text-center mt-4" border="6" cellpadding="4" cellspacing="6">
 	<thead>
 	<tr>
 	<th><i>Tipo de show</i></th>

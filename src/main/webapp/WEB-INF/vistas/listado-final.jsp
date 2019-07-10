@@ -5,10 +5,14 @@
 <html>
 <head>
 <title>Listado</title>
-<link href="css/gallo.css" rel="stylesheet" >
-</head>
+
+		<!-- Bootstrap core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" >
+		<!-- Bootstrap theme -->
+		<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	</head>
 <body>
-	<table border="1" cellpadding="1" cellspacing="0">
+	<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 	<thead>
 	<tr>
 	<th>Nombre</th>

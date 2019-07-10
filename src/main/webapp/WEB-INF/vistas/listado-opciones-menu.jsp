@@ -5,16 +5,53 @@
 <html>
 <head>
 <title>Listado para la seleccion del menu</title>
-	    <!-- Bootstrap core CSS -->
-	    <link href="css/bootstrap.min.css" rel="stylesheet" >
-	    <!-- Bootstrap theme -->
-	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	    <link href="css/neron.css" rel="stylesheet" >
-		<link href="css/gallo.css" rel="stylesheet" >
+	<link href="css/bootstrap.min.css" rel="stylesheet" >
+	<!-- Bootstrap theme -->
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-        <div class="container">
-            <div class="row">
+<nav class="navbar navbar-default" role="navigation">
+	<!-- El logotipo y el icono que despliega el men� se agrupan
+         para mostrarlos mejor en los dispositivos m�viles -->
+	<div class="navbar-header">
+
+		<a class="navbar-brand" href="#">Logotipo</a>
+	</div>
+
+	<!-- Agrupar los enlaces de navegaci�n, los formularios y cualquier
+         otro elemento que se pueda ocultar al minimizar la barra -->
+	<div class="collapse navbar-collapse navbar-ex1-collapse">
+		<ul class="nav navbar-nav">
+			<li ><a  href="home"> Inicio    </a></li>
+			<li><a  href="salones-a-puntuar"> Nuestros Salonest</a></li>
+			<li><a  href="menus-a-puntuar"> Nuestros Menus</a></li>
+
+		</ul>
+
+
+		<div class="navbar-form navbar-left">
+			<h5>Bienvenidos a</h5>
+			<h5>Organizacion de Eventos NERON</h5>
+		</div>
+
+
+
+
+		<form class="navbar-form navbar-left"  method="post"  action="salon"  >
+			<div class="form-group">
+				<input type="submit" value="Reservar" class="btn btn-success">
+			</div>
+		</form>
+
+
+		<form class="navbar-form navbar-left"  method="post"  action="cerrarsesion"  >
+			<div class="form-group">
+				<input type="submit" value="cerrar sesion" class="btn btn-success">
+			</div>
+		</form>
+
+	</div>
+</nav>
 Listado para la seleccion del menu<br><br><br>
 
 <form:form action="registra-reserva-menu" method="POST" modelAttribute="vm">
@@ -32,7 +69,7 @@ Listado para la seleccion del menu<br><br><br>
 						<td>${tipo.detalle}</td>
 					</c:if>
 				</c:forEach>
-		<table border="1" cellpadding="1" cellspacing="0">
+		<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 			<thead>
 				<tr>
 				<th>Descripcion</th>
@@ -61,13 +98,13 @@ Listado para la seleccion del menu<br><br><br>
 </form:form>
 
 	<h2>Menus que te pueden interesar</h2>
-	<table>
-		<div class="table-bordered" style="width: 18rem;">
+	<table class=" table table-hover text-center mt-4">
+
 
 			<c:forEach var = "i" begin = "1" end = "6">
 
 			<c:forEach items="${menus}" var="menu">
-				<td>
+				<td class="card border-primary p-3">
 			<img class="card-img-top" src=".." alt="Card image cap">
 			<div class="card-body>">
 				<c:forEach var="tipo" items="${secciones}">
@@ -89,8 +126,6 @@ Listado para la seleccion del menu<br><br><br>
 				</td>
 				</c:forEach>
 				</c:forEach>
-			</div>
-		</div>
 
 	</table>
 </div>
