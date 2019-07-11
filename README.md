@@ -1,3 +1,17 @@
+#### Example:
+```
+Visit www.codeblocq.com when you have time.
+```
+becomes
+```
+Visit <a href="http://www.codeblocq.com" target="_blank">www.codeblocq.com</a> when you have time.
+```
+## Installation
+```
+npm install hexo-autolinker --save
+```
+## Options
+Configure the plugin your blog's main `_config.yml`
 # Organizacion-de-Eventos-NERON
 autolinker:
     enable: true
