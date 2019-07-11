@@ -3,5 +3,5 @@ jdk:
   -oraclejdk11
 install: mvn install
 notifications:
-  slack:
+  slack:https://organizaciond-fgw4929.slack.com/messages/CK6DVENDA/
     on_success: always
