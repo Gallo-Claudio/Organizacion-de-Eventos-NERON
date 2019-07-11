@@ -28,6 +28,8 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.modelo.Salon;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonalImpl;
@@ -49,8 +51,19 @@ public class ControladorPersonal {
 	@Inject
 	private ServicioEventosPendientes servicioEventosPendientes;
 	
+	@Inject
+	private ServicioEliminoPersonal servicioEliminoPersonal;
+	
+
+	  @RequestMapping(path = "/eliminar-personal", method = RequestMethod.POST)
+	 	public ModelAndView registroExtras (@ModelAttribute ("Personal") Personal personal,
+	 										HttpServletRequest request) {
+	 		servicioEliminoPersonal.eliminarPersonal(personal);
+	 		return new ModelAndView("redirect:/elimino-personal"); 
+	 	}
 
 
+	  
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Listado de eventos pendientes a realizarse  //////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

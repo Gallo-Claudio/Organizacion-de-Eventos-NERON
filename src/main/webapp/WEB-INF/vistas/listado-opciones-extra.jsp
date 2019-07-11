@@ -10,67 +10,60 @@
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
+ <%-- ENCABEZADO --%>
+ 
 <nav class="navbar navbar-default" role="navigation">
-	<!-- El logotipo y el icono que despliega el menú se agrupan
+    <!-- El logotipo y el icono que despliega el menú se agrupan
          para mostrarlos mejor en los dispositivos móviles -->
-	<div class="navbar-header">
+    <div class="logotipo-encabezado"></div>
 
-		<a class="navbar-brand" href="#">Logotipo</a>
-	</div>
-
-	<!-- Agrupar los enlaces de navegación, los formularios y cualquier
+    <!-- Agrupar los enlaces de navegación, los formularios y cualquier
          otro elemento que se pueda ocultar al minimizar la barra -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav">
-			<li ><a  href="home"> Inicio    </a></li>
-			<li><a  href="salones-a-puntuar"> Nuestros Salonest</a></li>
-			<li><a  href="menus-a-puntuar"> Nuestros Menus</a></li>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav">
+            <li><a class="btn" href="home">Inicio</a></li>
+            <li><a class="btn" href="salones-a-puntuar"> Nuestros Salones</a></li>
+			<li><a class="btn" href="menus-a-puntuar"> Nuestros Menus</a></li> 
+        </ul>
 
-		</ul>
+        <div class="navbar-form navbar-left">
+            <h5>Organizacion de Eventos NERON</h5>
+        </div>
 
+        <form class="navbar-form navbar-left"  method="post"  action="cerrarsesion"  >
+            <div class="form-group">
+                <input type="submit" value="cerrar sesion" class="btn btn-danger">
+            </div>
+        </form>
 
-		<div class="navbar-form navbar-left">
-			<h5>Bienvenidos a</h5>
-			<h5>Organizacion de Eventos NERON</h5>
-		</div>
-
-
-
-
-		<form class="navbar-form navbar-left"  method="post"  action="salon"  >
-			<div class="form-group">
-				<input type="submit" value="Reservar" class="btn btn-success">
-			</div>
-		</form>
-
-
-		<form class="navbar-form navbar-left"  method="post"  action="cerrarsesion"  >
-			<div class="form-group">
-				<input type="submit" value="cerrar sesion" class="btn btn-success">
-			</div>
-		</form>
-
-	</div>
+    </div>
 </nav>
+	
+	
+	
+	  <%-- CUERPO --%>
+	  
+<div class="container">
+    <div class="row">	  
 
-Seleccion de Extras<br><br><br>
-
+<h2>Seleccion de Extras</h2><br><br><br>
+<div class="table70">
 <form:form action="registra-reserva-extras" method="POST" modelAttribute="vm">
 
 		<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 			<thead>
 				<tr>
-				<th>Descripcion</th>
-				<th>Precio</th>
-				<th></th>
+				<th class="enc">Descripcion</th>
+				<th class="enc">Precio</th>
+				<th class="enc"></th>
 				</tr>
 			</thead>
 			<tbody>
 	  			<c:forEach var="menu" items="${listaopciones}">
 						<tr>
-						<td>${menu.nombre}</td>
-						<td>${menu.precio}</td>
-						<td><input type="checkbox" name="idmenu[${menu.id}]" value="${menu.id}"></td>
+						<td width="650" class="alt-celda margina-izq"">${menu.nombre}</td>
+						<td width="100" class="alt-celda">${menu.precio}</td>
+						<td width="50" class="alt-celda"><input type="checkbox" name="idmenu[${menu.id}]" value="${menu.id}"></td>
 						</tr>
 
 				</c:forEach>
@@ -80,7 +73,31 @@ Seleccion de Extras<br><br><br>
 
 	<button class="btn-agregar" Type="Submit"/>Agregar</button>
 </form:form>
+</div>
+</div></div>
+  <%-- PIE --%>
+  
+       <footer class="footer container pie">
+		<div class="row">
+            <div class="col-md-4">
+                Universidad Nacional<br>de la Matanza<br>
+            </div>
 
+            <div class="col-md-4">
+                Taller Web 1<br>
+                Tecnicatura en desarrollo Web
+            </div>
+
+            <div class="col-md-4">
+                Integrantes:<br>
+                Rocio,
+                Julieta,
+                Agustina,
+                Claudio
+            </div>
+
+        </div>
+    </footer>
 
         <!-- Placed at the end of the document so the pages load faster -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>

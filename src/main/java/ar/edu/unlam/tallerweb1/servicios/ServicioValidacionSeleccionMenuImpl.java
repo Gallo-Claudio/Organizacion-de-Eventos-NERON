@@ -23,12 +23,12 @@ public class ServicioValidacionSeleccionMenuImpl implements ServicioValidacionSe
 	public String validacionSeleccionMenu(RegistroMenuViewModel vm) {
 		Integer fingerFood=0, entrada=0, principal=0, bebida=0, postre=0, mesaDulce=0;
 		
-		Integer minimoFingerFood=3, maximoFingerFood=5;
-		Integer minimoEntrada=1, maximoEntrada=3;
-		Integer minimoPrincipal=3, maximoPrincipal=5;
-		Integer minimoBebida=3, maximoBebida=5;
-		Integer minimoPostre=3, maximoPostre=5;
-		Integer minimoMesaDulce=1, maximoMesaDulce=3;
+		Integer minimoFingerFood=8, maximoFingerFood=14;
+		Integer minimoEntrada=1, maximoEntrada=2;
+		Integer minimoPrincipal=1, maximoPrincipal=2;
+		Integer minimoBebida=4, maximoBebida=7;
+		Integer minimoPostre=1, maximoPostre=2;
+		Integer minimoMesaDulce=4, maximoMesaDulce=6;
 		
 		String mensajeFingerFood = "Para la seccion de Finger Food debe seleccionar un minimo de " + minimoFingerFood + " un máximo de " + maximoFingerFood +"<br/>";
 		String mensajeEntrada = "Para la seccion de Entrada debe seleccionar un minimo de " + minimoEntrada + " un máximo de " + maximoEntrada +"<br/>";

@@ -1,6 +1,6 @@
-
 package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.*;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoSalon;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
@@ -31,11 +31,22 @@ public class ControladorSalon {
 	
     @Inject
     private ServicioSalon servicioSalon;
+    @Inject
+    private ServicioEliminoSalon servicioEliminoSalon;
 
    // @Inject
    // private ServicioCliente servicioCliente;
 
 
+    @RequestMapping(path = "/eliminar-salon", method = RequestMethod.POST)
+ 	public ModelAndView registroExtras (@ModelAttribute ("Salon") Salon salon,
+ 										HttpServletRequest request) {
+ 		servicioEliminoSalon.eliminarSalon(salon);
+ 		return new ModelAndView("redirect:/elimino-salon"); 
+ 	}   
+    
+    
+    
     //Admin
     //HAY QUE HACERLO
     /*
@@ -55,9 +66,6 @@ public class ControladorSalon {
         return new ModelAndView("redirect:/ingreso-salon");
    // }
       //      return new ModelAndView("redirect:/home");
-
-
-
     }
     //HAY QUE HACERLO
     @RequestMapping(path = "/listado-final-salon", method = RequestMethod.GET)

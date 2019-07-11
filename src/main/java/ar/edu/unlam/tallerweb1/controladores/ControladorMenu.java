@@ -44,7 +44,8 @@ public class ControladorMenu {
 	private ServicioRegistroMenu servicioRegistroMenu;
 	@Inject
 	private ServicioValidacionSeleccionMenu servicioValidacionSeleccionMenu;
-	
+	@Inject
+	private ServicioEliminoMenu servicioEliminoMenu;
 	
 	
 
@@ -52,6 +53,15 @@ public class ControladorMenu {
 
 	private MenuSeleccionValidar menuSeleccionValidar = new MenuSeleccionValidar();
 
+
+	
+	
+	@RequestMapping(path = "/elimino-menu", method = RequestMethod.POST)
+	public ModelAndView registroExtras (@ModelAttribute ("Menu") Menu menu,
+										HttpServletRequest request) {
+		servicioEliminoMenu.eliminarMenu(menu);
+		return new ModelAndView("redirect:/abmMenu"); 
+	}	
 	
 	
 	//********************************************************	
