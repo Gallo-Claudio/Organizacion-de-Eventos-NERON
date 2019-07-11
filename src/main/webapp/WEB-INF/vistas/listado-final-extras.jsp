@@ -24,9 +24,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
             <li ><a class="btn" href="homeAdmin">inicio</a></li>
-            <li><a href="listado-final-extras">Extras</a></li>
+            <!-- <li><a href="listado-final-extras">Extras</a></li>
             <li><a href="listado-final-menu">Menu</a></li>
-            <li><a href="listado-final-salon">Salon</a></li>   
+            <li><a href="listado-final-salon">Salon</a></li> -->  
             <li><a class="btn" href="ingresar-menu">Ingresar Menú</a></li>
             <li><a class="btn" href="listado-eventos-pendientes">REASIGNACION PERSONAL - Eventos pendientes</a></li>
             <li><a class="btn" href="ingreso-extras">Ingresar Extras</a></li>
@@ -53,7 +53,7 @@
         <div class="container">
             <div class="row">
 
-<div><center><b><i>Listado de extras agregados</i></b></center><br><br></div>
+<div><center><b><i>Listado de Extras</i></b></center><br><br></div>
 
 
 	<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
@@ -61,7 +61,6 @@
 	<tr>
 	<th><i>Tipo de show</i></th>
 	<th><i>Precio</i></th>
-	<th></th>
 	</tr>
 	</thead></center>
 	<tbody>
@@ -69,7 +68,6 @@
 		<tr>
 		<td><b><i>${variable.nombre}</i></b></td>
 		<td><b>$<i>${variable.precio}</i></b></td>
-		<td><input type="checkbox" value="${variable.id}"></td>
 		</tr>
     </c:forEach>  
 	</tbody>

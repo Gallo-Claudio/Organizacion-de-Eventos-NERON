@@ -22,9 +22,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav">
             <li ><a class="btn" href="homeAdmin">inicio</a></li>
-            <li><a href="listado-final-extras">Extras</a></li>
+       <!-- <li><a href="listado-final-extras">Extras</a></li>
             <li><a href="listado-final-menu">Menu</a></li>
-            <li><a href="listado-final-salon">Salon</a></li>   
+            <li><a href="listado-final-salon">Salon</a></li> -->  
             <li><a class="btn" href="ingresar-menu">Ingresar Menú</a></li>
             <li><a class="btn" href="listado-eventos-pendientes">REASIGNACION PERSONAL - Eventos pendientes</a></li>
             <li><a class="btn" href="ingreso-extras">Ingresar Extras</a></li>
