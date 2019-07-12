@@ -121,6 +121,16 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.1.0.Final</version>
 		</dependency>
+		
+		
+		
+		<dependency>
+	<groupId>org.hibernate</groupId>
+	<artifactId>hibernate-java8</artifactId>
+	<version>5.1.0.Final</version>
+</dependency>
+		
+		
 		<dependency>
 			<groupId>org.hsqldb</groupId>
 			<artifactId>hsqldb</artifactId>
@@ -183,5 +193,6 @@
 		</dependency>
 		
 <!--- El código entre los comentarios fue agregado para que funcione con Java 11 -->
+
 	</dependencies>
 </project>

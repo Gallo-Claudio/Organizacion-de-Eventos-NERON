@@ -3,15 +3,20 @@ package ar.edu.unlam.tallerweb1.controladores;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import ar.edu.unlam.tallerweb1.modelo.Salon;
+import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+
+import java.util.ArrayList;
 
 @Controller
 public class ControladorLogin {
@@ -21,6 +26,9 @@ public class ControladorLogin {
 	// @Service o @Repository y debe estar en un paquete de los indicados en applicationContext.xml
 	@Inject
 	private ServicioLogin servicioLogin;
+	@Inject
+	private ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones ServicioRecomendaciones;
+
 
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
 	@RequestMapping("/login")
@@ -47,24 +55,58 @@ public class ControladorLogin {
 		// hace una llamada a otro action a través de la URL correspondiente a ésta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
-			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-			return new ModelAndView("redirect:/home");
+		request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+		request.getSession().setAttribute("logueado", usuarioBuscado.getId().toString());
+
+		    if(usuarioBuscado.getRol().equals("1")){
+				return new ModelAndView("redirect:/homeAdmin",model);
+
+			}
+
+				return new ModelAndView("redirect:/home", model);
+
 		} else {
-			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
 		}
 		return new ModelAndView("login", model);
 	}
 
-	// Escucha la URL /home por GET, y redirige a una vista.
-	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
-		return new ModelAndView("home");
+	@RequestMapping(path = "/cerrarsesion ", method = RequestMethod.POST)
+	public ModelAndView cerrarsesion(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+
+			request.getSession().removeAttribute("ROL");
+			request.getSession().removeAttribute("logueado");
+
+
+
+		return new ModelAndView("redirect:login", model);
 	}
+
+
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/login");
+	}
+
+
+	@RequestMapping(path = "/home", method = RequestMethod.GET)
+	public ModelAndView ingresarPuntaje() {
+		ModelMap model = new ModelMap();
+
+		ArrayList<Salon> salones=ServicioRecomendaciones.ObtenerRecomendacionesSalon();
+		model.put("salones",salones);
+		model.put("tope",salones.size());
+		return new ModelAndView("home", model);
+	}
+
+	@RequestMapping(path = "/homeAdmin", method = RequestMethod.GET)
+	public ModelAndView irAhomeAdmin() {
+		ModelMap model = new ModelMap();
+
+		return new ModelAndView("homeAdmin", model);
 	}
 }
