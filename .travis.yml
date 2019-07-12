@@ -3,5 +3,5 @@ jdk:
   -oraclejdk11
 install: mvn install
 notifications:
-  slack: https://taller-web-1-unlam.slack.com
+  slack: taller-web-1-unlam:iQCsOwOUX8sFeUadzxnPLwDU
     on_success: always
