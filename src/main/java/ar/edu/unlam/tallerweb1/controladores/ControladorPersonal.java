@@ -55,7 +55,13 @@ public class ControladorPersonal {
 	private ServicioEliminoPersonal servicioEliminoPersonal;
 	
 
-	  @RequestMapping(path = "/eliminar-personal", method = RequestMethod.POST)
+	  public void setServicioEventosPendientes(ServicioEventosPendientes servicioEventosPendientes) {
+		this.servicioEventosPendientes = servicioEventosPendientes;
+	}
+
+
+
+	@RequestMapping(path = "/eliminar-personal", method = RequestMethod.POST)
 	 	public ModelAndView registroExtras (@ModelAttribute ("Personal") Personal personal,
 	 										HttpServletRequest request) {
 	 		servicioEliminoPersonal.eliminarPersonal(personal);
@@ -69,17 +75,24 @@ public class ControladorPersonal {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(path = "/listado-eventos-pendientes")
-	public ModelAndView listarEventosPendientesDeRealizarse () {
+	public ModelAndView listarEventosPendientesDeRealizarse (HttpServletRequest request) {
 		ModelMap model = new ModelMap();
-	//	Date fechaActual = new Date(); //Fecha actual (hoy)
 		LocalDate fechaActual = LocalDate.now(); //Fecha actual (hoy)
 		
-		Set <Reserva> listadoEventos = new HashSet();
-		listadoEventos = servicioEventosPendientes.listadoDeEventosPendientes(fechaActual);
+		if(request.getSession().getAttribute("ROL").equals("1")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());		
 		
-		model.put("listadopendientes", listadoEventos);
+			Set <Reserva> listadoEventos = new TreeSet();
+			listadoEventos = servicioEventosPendientes.listadoDeEventosPendientes(fechaActual);
+			
+			model.put("usuario", nombreUsuario);
+			model.put("listadopendientes", listadoEventos);
 
-		return new ModelAndView("eventos-pendientes", model);
+			return new ModelAndView("eventos-pendientes", model);
+		}
+		
+		return new ModelAndView("redirect:/home");
 	}
 	
 	
@@ -88,17 +101,25 @@ public class ControladorPersonal {
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping(path = "/listado-personal-asignado", method = RequestMethod.POST)
-	public ModelAndView listarPersonalAsignadoAUnEvento (@ModelAttribute("idreserva") Long idreserva) {
+	public ModelAndView listarPersonalAsignadoAUnEvento (@ModelAttribute("idreserva") Long idreserva, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
+
+		if(request.getSession().getAttribute("ROL").equals("1")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
 		
-		// Obtengo el listado de los cargos del personal
-		List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
+			// Obtengo el listado de los cargos del personal
+			List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
+			
+			model.put("usuario", nombreUsuario);
+			model.put("idreserva", idreserva);
+			model.put("cargos", cargosPersonal);
+			model.put("listadop", servicioPersonal.listadoPersonalAsignado(idreserva));
 
-		model.put("idreserva", idreserva);
-		model.put("cargos", cargosPersonal);
-		model.put("listadop", servicioPersonal.listadoPersonalAsignado(idreserva));
-
-		return new ModelAndView("personal-asignado", model);
+			return new ModelAndView("personal-asignado", model);
+		}
+		
+		return new ModelAndView("redirect:/home");			
 	}		
 	
 	
@@ -112,15 +133,22 @@ public class ControladorPersonal {
 	@RequestMapping(path = "/reasigna-personal", method = RequestMethod.POST)
 	public ModelAndView reasignarPersonalAUnEvento (@ModelAttribute("vmReasignaPersonal") RegistroReasignacionPersonalViewModel vmReasignaPersonal, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
+
+		if(request.getSession().getAttribute("ROL").equals("1")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
 		
-		// Obtengo el listado de los cargos del personal
-				List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
+			// Obtengo el listado de los cargos del personal
+			List<CategoriaPersonal> cargosPersonal = servicioPersonal.consultaCargosDelPersonal();
 
-				model.put("idreserva", vmReasignaPersonal.getIdreserva());
-				model.put("cargos", cargosPersonal);
-				model.put("listadop", servicioPersonal.reasingacionDelPersonalAUnEvento(vmReasignaPersonal.getIdpersonal(), vmReasignaPersonal.getIdreserva()));
+			model.put("idreserva", vmReasignaPersonal.getIdreserva());
+			model.put("cargos", cargosPersonal);
+			model.put("listadop", servicioPersonal.reasingacionDelPersonalAUnEvento(vmReasignaPersonal.getIdpersonal(), vmReasignaPersonal.getIdreserva()));
 
-		return new ModelAndView("personal-reasignado", model);
+			return new ModelAndView("personal-reasignado", model);
+		}
+		
+		return new ModelAndView("redirect:/home");	
 	}
 	
 	

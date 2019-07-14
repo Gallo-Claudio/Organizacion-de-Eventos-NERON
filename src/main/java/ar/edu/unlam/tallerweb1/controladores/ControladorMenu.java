@@ -40,6 +40,18 @@ public class ControladorMenu {
 	private ServicioRegistroPlatoMenu servicioRegistroPlatoMenu;
 	@Inject
 	private ServicioListadoOpcionesMenu servicioListadoOpcionesMenu;
+	
+	
+	public void setServicioListarTiposMenu(ServicioListarTiposMenu servicioListarTiposMenu) {
+		this.servicioListarTiposMenu = servicioListarTiposMenu;
+	}
+
+	public void setServicioListadoOpcionesMenu(ServicioListadoOpcionesMenu servicioListadoOpcionesMenu) {
+		this.servicioListadoOpcionesMenu = servicioListadoOpcionesMenu;
+	}
+
+
+
 	@Inject
 	private ServicioRegistroMenu servicioRegistroMenu;
 	@Inject
@@ -77,9 +89,14 @@ public class ControladorMenu {
 	public ModelAndView ingresarMenu(HttpServletRequest request) {
 		if(request.getSession().getAttribute("ROL").equals("1")) {
 			ModelMap model = new ModelMap();
+			
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+		
 			// Llamo al metodo "listarTiposDeMenus()" de la instancia "servicioListarTiposMenu", que esta en el area de Servicios.
-		//	 El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
+		    // El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 			// Para luego pasarlo a la vista a traves del return ModelAndView
+			model.put("usuario", nombreUsuario);
 			model.put("listatiposmenu", servicioListarTiposMenu.listarTipoDeMenus());
 			return new ModelAndView("ingreso-menu", model);
 		}

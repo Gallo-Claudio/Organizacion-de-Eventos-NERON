@@ -64,8 +64,12 @@ public class ControladorExtras {
 	public ModelAndView ingresoDeExtras(HttpServletRequest request) {
 		if(request.getSession().getAttribute("ROL").equals("1")){
 
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+		
 			Extra extras = new Extra();
 			ModelMap model = new ModelMap();
+			model.put("usuario", nombreUsuario);
 			model.put("extras", extras);
 			return new ModelAndView("ingreso-extras", model);
 		}
@@ -74,8 +78,7 @@ public class ControladorExtras {
 
 	
 	@RequestMapping(path = "/registro-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
-										HttpServletRequest request) {
+	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,	HttpServletRequest request) {
 		servicioIngresoExtras.ingresarExtras(extra);
 		return new ModelAndView("redirect:/ingreso-extras"); 
 	}
@@ -85,9 +88,14 @@ public class ControladorExtras {
 	@RequestMapping(path = "/listado-final-extras", method = RequestMethod.GET)
 	public ModelAndView listadoExtras (HttpServletRequest request) {
 		if(request.getSession().getAttribute("ROL").equals("1")) {
-			ModelMap modelo = new ModelMap();
-			modelo.put("listadoFinal", servicioListarExtras.listarExtras());
-			return new ModelAndView("listado-final-extras", modelo);
+			ModelMap model = new ModelMap();
+			
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+			model.put("listadoFinal", servicioListarExtras.listarExtras());
+			return new ModelAndView("listado-final-extras", model);
 		}
 		return new ModelAndView("redirect:/home");
 	}
@@ -118,26 +126,8 @@ public class ControladorExtras {
 		Long reserva= Long.parseLong(id);
 		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
 		
-		
-		
-		
-		// Muestra el resumen de toda la reserva
-		//////////////////////////////////////////////////////////////////////////////////////
-		//////////////////////////////////////////////////////////////////////////////////////
-		servicioPersonal.asignaPersonalAlEvento(reserva);
-		
-		
-		//////////////////////////////////////////////////////////////////////////////////////
-		Reserva reservafinal = servicioResumen.buscarDatos(reserva);	
-		List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
-		
-		ModelMap model = new ModelMap();
-		model.put("reservafinal", reservafinal);
-		model.put("menuseleccionado", reservafinal.getMenu());
-		model.put("extraseleccionado", reservafinal.getExtra());
-		model.put("precios", precios);
-		
-		return new ModelAndView("resumen-seleccion", model);
+		return new ModelAndView("redirect:/resumen-final");
 	}
-	
+
+
 }

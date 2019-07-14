@@ -55,17 +55,20 @@ public class ControladorLogin {
 		// hace una llamada a otro action a través de la URL correspondiente a ésta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(usuario);
 		if (usuarioBuscado != null) {
+			
+		// Guardo datos en la sesion, para luego ser tomados desde distintas partes	
 		request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
 		request.getSession().setAttribute("logueado", usuarioBuscado.getId().toString());
-
+		request.getSession().setAttribute("nombre", usuarioBuscado.getNombre());
+		
+	
 		    if(usuarioBuscado.getRol().equals("1")){
 				return new ModelAndView("redirect:/homeAdmin",model);
-
 			}
-
 				return new ModelAndView("redirect:/home", model);
 
-		} else {
+		}
+		else {
 			model.put("error", "Usuario o clave incorrecta");
 		}
 		return new ModelAndView("login", model);
@@ -75,11 +78,9 @@ public class ControladorLogin {
 	public ModelAndView cerrarsesion(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-
 			request.getSession().removeAttribute("ROL");
 			request.getSession().removeAttribute("logueado");
-
-
+			request.getSession().removeAttribute("nombre");
 
 		return new ModelAndView("redirect:login", model);
 	}
@@ -92,21 +93,52 @@ public class ControladorLogin {
 		return new ModelAndView("redirect:/login");
 	}
 
-
+	
+// ------------------------------------------------------------------------------------------------------------------------	
+// ------------------------------------------------------------------------------------------------------------------------		
+	
+	
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView ingresarPuntaje() {
+	public ModelAndView ingresarPuntaje(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-		ArrayList<Salon> salones=ServicioRecomendaciones.ObtenerRecomendacionesSalon();
-		model.put("salones",salones);
-		model.put("tope",salones.size());
-		return new ModelAndView("home", model);
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+		
+			ArrayList<Salon> salones=ServicioRecomendaciones.ObtenerRecomendacionesSalon();
+			model.put("salones",salones);
+			model.put("tope",salones.size());
+			return new ModelAndView("home", model);
+		}
+		
+		return new ModelAndView("redirect:/homeAdmin", model);
+		
 	}
 
+	
+// ------------------------------------------------------------------------------------------------------------------------	
+// ------------------------------------------------------------------------------------------------------------------------		
+	
+	
 	@RequestMapping(path = "/homeAdmin", method = RequestMethod.GET)
-	public ModelAndView irAhomeAdmin() {
+	public ModelAndView irAhomeAdmin(HttpServletRequest request) {
 		ModelMap model = new ModelMap();
 
-		return new ModelAndView("homeAdmin", model);
+		if(request.getSession().getAttribute("ROL").equals("1")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+			return new ModelAndView("homeAdmin", model);
+		}
+		
+		// Obtengo datos del usuario logueado
+		String nombreUsuario = (request.getSession().getAttribute("nombre").toString());			
+		model.put("usuario", nombreUsuario);
+		return new ModelAndView("redirect:/home");
+
 	}
-}
+}		

@@ -134,3 +134,7 @@
 .desplazado {
 	margin-left:0px;
 }
+.form-btn {
+	float: left;
+    margin-top: 8px;
+}

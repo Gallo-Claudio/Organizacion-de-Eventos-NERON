@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Entity
-public class Reserva {
+public class Reserva implements Comparable <Reserva> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Reserva {
     @ManyToOne
     private Salon salon;
 
-    @OneToOne
+    @ManyToOne
     private Usuario usuario;
 
 
@@ -95,9 +95,7 @@ public class Reserva {
 		this.usuario = usuario;
 	}
 
-
-	
-		public List<Menu> getMenu() {
+	public List<Menu> getMenu() {
 		return menu;
 	}
 
@@ -119,6 +117,12 @@ public class Reserva {
 
 	public void setPersonal(List<Personal> personal) {
 		this.personal = personal;
+	}
+
+
+	@Override
+	public int compareTo(Reserva o) {
+		return this.fecha.compareTo(o.getFecha());
 	}
 
 }

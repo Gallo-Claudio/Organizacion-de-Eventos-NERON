@@ -79,12 +79,8 @@ public class ControladorSalon {
     public ModelAndView ir(HttpServletRequest request) {
         if(request.getSession().getAttribute("logueado")==null){
           return new ModelAndView("redirect:/home");
-
         }
-
            return new ModelAndView("salon");
-
-
 
     }
 
