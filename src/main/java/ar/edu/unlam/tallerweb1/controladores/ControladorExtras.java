@@ -56,20 +56,13 @@ public class ControladorExtras {
 	private ServicioPersonal servicioPersonal;
 	
 
-	
-    ///////////////////////////////////////////////////////////////////////////////////////
-	// PAGINA PRINCIPAL - INDEX ///////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////////////////////
-//	@RequestMapping(path = "/index", method = RequestMethod.GET)
-//	public ModelAndView index() {
-//		return new ModelAndView("index");
-//	}
+
 	
 	/*Lado del administrador*/
 	//ADMIN
 	@RequestMapping(path = "/ingreso-extras", method = RequestMethod.GET)
 	public ModelAndView ingresoDeExtras(HttpServletRequest request) {
-		if(request.getSession().getAttribute("ROL")=="1"){
+		if(request.getSession().getAttribute("ROL").equals("1")){
 
 			Extra extras = new Extra();
 			ModelMap model = new ModelMap();
@@ -78,6 +71,7 @@ public class ControladorExtras {
 		}
 		return new ModelAndView("redirect:/home");
 	}
+
 	
 	@RequestMapping(path = "/registro-extras", method = RequestMethod.POST)
 	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
@@ -85,16 +79,24 @@ public class ControladorExtras {
 		servicioIngresoExtras.ingresarExtras(extra);
 		return new ModelAndView("redirect:/ingreso-extras"); 
 	}
+// .............................................................................................	
+
 	
 	@RequestMapping(path = "/listado-final-extras", method = RequestMethod.GET)
 	public ModelAndView listadoExtras (HttpServletRequest request) {
-		if(request.getSession().getAttribute("ROL")=="1") {
+		if(request.getSession().getAttribute("ROL").equals("1")) {
 			ModelMap modelo = new ModelMap();
 			modelo.put("listadoFinal", servicioListarExtras.listarExtras());
 			return new ModelAndView("listado-final-extras", modelo);
 		}
 		return new ModelAndView("redirect:/home");
 	}
+	
+	
+	
+	
+	
+	
 	
 	/*Lado Cliente*/
 	
@@ -117,6 +119,9 @@ public class ControladorExtras {
 		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
 		
 		
+		
+		
+		// Muestra el resumen de toda la reserva
 		//////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////
 		servicioPersonal.asignaPersonalAlEvento(reserva);

@@ -17,11 +17,10 @@ public class Menu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idMenu;
-      private Double puntaje;
+    private Double puntaje;
 	private String descripcion;
 	private Double precio;
-	//la cantidad de personas por precio para luego calcularlo a la hora de hacer la reserva
-	private int cantPersonas;
+
 	//imagen para el card
 	private String imagenCard;
 
@@ -83,9 +82,6 @@ public class Menu {
 		this.reserva = reserva;
 	}
 
-	public int getCantPersonas() {
-		return cantPersonas;
-	}
 
 	public String getImagenCard() {
 		return imagenCard;
@@ -93,9 +89,5 @@ public class Menu {
 
 	public void setImagenCard(String imagenCard) {
 		this.imagenCard = imagenCard;
-	}
-
-	public void setCantPersonas(int cantPersonas) {
-		this.cantPersonas = cantPersonas;
 	}
 }

@@ -13,7 +13,7 @@ public interface ServicioSalon {
 
    // List<Salon>
    Double calcularPuntaje(Long id,Double nuevoPuntaje);
-    Set<Salon> buscarSalones(Integer cantidad ,String fecha);
+    Set<Salon> buscarSalones(Integer cantidad ,LocalDate fecha);
     public  List<Zona> traerZonas();
     Salon traerSalonPorId(Long id);
 

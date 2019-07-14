@@ -23,7 +23,6 @@
 				<b><i>Por favor, elimine un salon:</i></b>   
 	
 					
-
 				
 					<button Type="Submit"/>Eliminar</button>
 				</form:form>
@@ -31,9 +30,3 @@
 				</center>
 	</body>
 </html>
-
-
-
-
-
-

@@ -28,9 +28,3 @@
 				</center>
 	</body>
 </html>
-
-
-
-
-
-

@@ -7,9 +7,11 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import ar.edu.unlam.tallerweb1.modelo.Menu;
-import ar.edu.unlam.tallerweb1.modelo.MenuValidar;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
 import ar.edu.unlam.tallerweb1.servicios.*;
+import ar.edu.unlam.tallerweb1.validadores.MenuSeleccionValidar;
+import ar.edu.unlam.tallerweb1.validadores.MenuValidar;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -41,12 +43,17 @@ public class ControladorMenu {
 	@Inject
 	private ServicioRegistroMenu servicioRegistroMenu;
 	@Inject
+	private ServicioValidacionSeleccionMenu servicioValidacionSeleccionMenu;
+	@Inject
 	private ServicioEliminoMenu servicioEliminoMenu;
+	
+	
 
-	private MenuValidar menuValidar;
-	public ControladorMenu () {
-		this.menuValidar = new MenuValidar();
-	}
+	private MenuValidar menuValidar = new MenuValidar();
+
+	private MenuSeleccionValidar menuSeleccionValidar = new MenuSeleccionValidar();
+
+
 	
 	
 	@RequestMapping(path = "/elimino-menu", method = RequestMethod.POST)
@@ -54,7 +61,8 @@ public class ControladorMenu {
 										HttpServletRequest request) {
 		servicioEliminoMenu.eliminarMenu(menu);
 		return new ModelAndView("redirect:/abmMenu"); 
-	}
+	}	
+	
 	
 	//********************************************************	
 	// Lado ADMININSTRADOR  **********************************
@@ -109,6 +117,7 @@ public class ControladorMenu {
 			return new ModelAndView("listado-final-salon", modelo);
 	//	}
 	//		return new ModelAndView("redirect:/home");
+
 	}*/
 	
 	
@@ -128,8 +137,8 @@ public class ControladorMenu {
 		ModelMap modelo = new ModelMap();
 		if(request.getSession().getAttribute("logueado")==null){
 			return new ModelAndView("redirect:/home");
-
-	}
+		}
+		
 		// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
 		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
 		// Para luego pasarlo a la vista a traves del return ModelAndView
@@ -139,30 +148,81 @@ public class ControladorMenu {
 		//parte de las recomendaciones de menu
 		//obtengo una lista con los menus recomendados , estos menus estan agrupados segun la reserva
 		//por eso tengo una lista de menu dentro de otra lista
-
 			ArrayList<Menu> menus=ServicioRecomendaciones.ObtenerRecomendacionesMenu();
 			modelo.put("menus",menus);
 			modelo.put("tope",menus.size());
-
-
 
 		return new ModelAndView("listado-opciones-menu", modelo);
 	}
 
 
-
-
+	
+	// Recibo los datos del formulario y valido
 	@RequestMapping(path = "/registra-reserva-menu", method = RequestMethod.POST)
 
-	public ModelAndView registraReservaMenu (@ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+	public ModelAndView registraReservaMenu (@ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request, BindingResult result, SessionStatus status) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
-		vm.getIdmenu(); //Agregado para prueba de lo del personal dado de baja
-		servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());
-		return new ModelAndView("redirect:/listado-extra");
+		ModelMap modelo = new ModelMap();
 
+
+		this.menuSeleccionValidar.validate(vm, result);
+		
+        if(result.hasErrors()){
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+            // Volvemos al formulario porque no se realizo ninguna seleccion
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+        	
+        	// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
+    		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
+    		// Para luego pasarlo a la vista a traves del return ModelAndView
+    		modelo.put("listaopciones", servicioListadoOpcionesMenu.listarOpcionesMenu());
+    		modelo.put("secciones", servicioListarTiposMenu.listarTipoDeMenus());
+
+    		//parte de las recomendaciones de menu
+    		//obtengo una lista con los menus recomendados , estos menus estan agrupados segun la reserva
+    		//por eso tengo una lista de menu dentro de otra lista
+
+    			ArrayList<Menu> menus=ServicioRecomendaciones.ObtenerRecomendacionesMenu();
+    			modelo.put("menus",menus);
+    			modelo.put("tope",menus.size());
+
+    		return new ModelAndView("listado-opciones-menu", modelo);
+        }
+        else{
+		
+		String mensajeFinal = servicioValidacionSeleccionMenu.validacionSeleccionMenu(vm);
+		
+		if(mensajeFinal == "") {
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+            // Se persisten los datos y se pasa a la siguiente vista
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+        	servicioRegistroMenu.ingresarMenuSeleccionado(reserva,vm.getIdmenu());
+    		return new ModelAndView("redirect:/listado-extra");			
+		}
+		else {
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+            // Volvemos al formulario porque los datos ingresados por el usuario no son correctos
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+        	
+        	// Llamo al metodo "listarOPcionesMenu()" de la instancia "servicioListarPersonas", que esta en el area de Servicios.
+    		// El valor obtenido es agregado como "value" en el model(KEY/VALUE) a traves del .put
+    		// Para luego pasarlo a la vista a traves del return ModelAndView
+    		modelo.put("listaopciones", servicioListadoOpcionesMenu.listarOpcionesMenu());
+    		modelo.put("secciones", servicioListarTiposMenu.listarTipoDeMenus());
+    		modelo.put("mensajeerror", mensajeFinal);
+    		modelo.put("datos", vm);
+
+    		//parte de las recomendaciones de menu
+    		//obtengo una lista con los menus recomendados , estos menus estan agrupados segun la reserva
+    		//por eso tengo una lista de menu dentro de otra lista
+
+    			ArrayList<Menu> menus=ServicioRecomendaciones.ObtenerRecomendacionesMenu();
+    			modelo.put("menus",menus);
+    			modelo.put("tope",menus.size());
+
+    		return new ModelAndView("listado-opciones-menu", modelo);			
+		}
+        }
 	}
-
-
-
 }

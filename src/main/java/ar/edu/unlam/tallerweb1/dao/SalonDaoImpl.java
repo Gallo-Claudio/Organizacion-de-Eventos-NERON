@@ -84,7 +84,7 @@ public class SalonDaoImpl implements SalonDao {
     }
  //buscar salones por zona
     @Override
-    public List<Salon> buscarSalones(Integer cantidad , String fecha){
+    public List<Salon> buscarSalones(Integer cantidad , LocalDate fecha){
         final Session session = sessionFactory.getCurrentSession();
 
 

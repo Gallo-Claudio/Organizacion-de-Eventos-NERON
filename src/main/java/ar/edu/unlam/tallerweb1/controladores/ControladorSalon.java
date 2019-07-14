@@ -43,7 +43,7 @@ public class ControladorSalon {
  										HttpServletRequest request) {
  		servicioEliminoSalon.eliminarSalon(salon);
  		return new ModelAndView("redirect:/elimino-salon"); 
- 	}
+ 	}   
     
     
     
@@ -101,7 +101,7 @@ public class ControladorSalon {
         }
 
 
-        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fecha);
+        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fechaEvento);
         List<Zona> zonas=servicioSalon.traerZonas();
 
         modelo.put("salones",salones);
