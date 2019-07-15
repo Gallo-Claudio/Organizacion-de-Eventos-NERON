@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.hibernate.tool.schema.extract.internal.SequenceInformationExtractorH2DatabaseImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Extra;
@@ -31,6 +33,9 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroExtras;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroPlatoMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResumen;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
+import ar.edu.unlam.tallerweb1.servicios.ServicioValidacionSeleccionExtra;
+import ar.edu.unlam.tallerweb1.validadores.MenuSeleccionValidar;
+import ar.edu.unlam.tallerweb1.validadores.MenuValidar;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
@@ -54,9 +59,15 @@ public class ControladorExtras {
 	private ServicioResumen servicioResumen;
 	@Inject
 	private ServicioPersonal servicioPersonal;
+	@Inject
+	private ServicioValidacionSeleccionExtra servicioValidacionSeleccionExtra;
+
+	private MenuSeleccionValidar menuSeleccionValidar = new MenuSeleccionValidar();
 	
-
-
+	
+	
+	
+	
 	
 	/*Lado del administrador*/
 	//ADMIN
@@ -120,14 +131,44 @@ public class ControladorExtras {
 		return new ModelAndView("listado-opciones-extra", modelo);
 	}
 
+	
+	
+	
+	
 	@RequestMapping(path = "/registra-reserva-extras", method = RequestMethod.POST)
-	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
+	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request, BindingResult result, SessionStatus status) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
-		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
+		ModelMap model = new ModelMap();
 		
-		return new ModelAndView("redirect:/resumen-final");
+        this.menuSeleccionValidar.validate(vm, result);
+        if(result.hasErrors()){
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+            // Volvemos al formulario porque NO se realizo ninguna seleccion
+        	//////////////////////////////////////////////////////////////////////////////////////////////////
+        	model.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
+    		return new ModelAndView("listado-opciones-extra", model);
+        }
+        else{
+           	String mensajeFinal = servicioValidacionSeleccionExtra.validacionSeleccionExtra(vm);
+		
+        	if(mensajeFinal == "") {
+        		//////////////////////////////////////////////////////////////////////////////////////////////////
+        		// Se persisten los datos y se pasa a la siguiente vista
+        		//////////////////////////////////////////////////////////////////////////////////////////////////        	
+        		servicioRegistroExtras.ingresarExtrasSeleccionados(reserva,vm.getIdmenu());
+        		return new ModelAndView("redirect:/resumen-final");
+        	}
+        	else {
+    			//////////////////////////////////////////////////////////////////////////////////////////////////
+    			// Volvemos al formulario porque los datos ingresados por el usuario no son correctos
+    			//////////////////////////////////////////////////////////////////////////////////////////////////
+            	model.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
+            	model.put("mensajeerror", mensajeFinal);
+    			model.put("datos", vm);
+        		return new ModelAndView("listado-opciones-extra", model);
+
+        	}
+        }
 	}
-
-
 }

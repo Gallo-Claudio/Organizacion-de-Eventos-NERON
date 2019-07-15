@@ -98,7 +98,7 @@ public class ServicioSalonImpl implements ServicioSalon {
         List<Salon> lista=servicioSalonDao.buscarSalones(cantidad, fecha);
 
 
-        Set<Salon> salonesNoRepetidos= new HashSet<>();
+        Set<Salon> salonesNoRepetidos= new TreeSet<>();
         for(Salon salon :lista){
             salonesNoRepetidos.add(salon);
         }

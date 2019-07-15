@@ -16,7 +16,7 @@ public class MenuSeleccionValidar implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 	
-		ValidationUtils.rejectIfEmpty(errors, "idmenu", "required.idmenu", "Debe realizar una seleccion del menu");
+		ValidationUtils.rejectIfEmpty(errors, "idmenu", "required.idmenu", "Debe realizar una selección");
    
 	}
 }    

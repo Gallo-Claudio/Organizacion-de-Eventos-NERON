@@ -65,10 +65,9 @@
 									<c:if test="${menu.tipoDeMenu.id==i}">
 										<tr>
 											<td class="alt-celda margina-izq">${menu.descripcion}</td>
-											<td class="alt-celda">${menu.precio}</td>
-											<td class="alt-celda"><input type="checkbox"
-												name="idmenu[${menu.idMenu}]" value="${menu.idMenu}"></td>
-										</tr>
+											<td class="alt-celda">$ ${menu.precio}</td>
+											<td class="alt-celda"><input type="checkbox" name="idmenu[${menu.idMenu}]" value="${menu.idMenu}"></td>
+										</tr>										
 									</c:if>
 								</c:forEach>
 							</tbody>

@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoSalon;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
+import ar.edu.unlam.tallerweb1.servicios.ServicioValidacionSeleccionSalon;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroSalonViewModel;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -33,14 +34,15 @@ public class ControladorSalon {
     private ServicioSalon servicioSalon;
     @Inject
     private ServicioEliminoSalon servicioEliminoSalon;
+    @Inject
+    private ServicioValidacionSeleccionSalon servicioValidacionSeleccionSalon;
 
    // @Inject
    // private ServicioCliente servicioCliente;
 
 
     @RequestMapping(path = "/eliminar-salon", method = RequestMethod.POST)
- 	public ModelAndView registroExtras (@ModelAttribute ("Salon") Salon salon,
- 										HttpServletRequest request) {
+ 	public ModelAndView registroExtras (@ModelAttribute ("Salon") Salon salon, HttpServletRequest request) {
  		servicioEliminoSalon.eliminarSalon(salon);
  		return new ModelAndView("redirect:/elimino-salon"); 
  	}   
@@ -75,7 +77,7 @@ public class ControladorSalon {
         return new ModelAndView("listado-final-salon", modelo);
     }
 */
-    @RequestMapping(path="/salon" )
+    @RequestMapping(path="/salon")
     public ModelAndView ir(HttpServletRequest request) {
         if(request.getSession().getAttribute("logueado")==null){
           return new ModelAndView("redirect:/home");
@@ -87,64 +89,65 @@ public class ControladorSalon {
     @RequestMapping(path="/tomarDatos", method = RequestMethod.GET)
     public ModelAndView tomarDatos(@RequestParam(name="cantidad",required=false) Integer cantidad,
                                    @RequestParam(name="fecha",required=false) String fecha) {
-
-        ModelMap modelo = new ModelMap();
-       LocalDate fechaActual = LocalDate.now();
-        LocalDate fechaEvento = LocalDate.parse(fecha);
-        if(fechaActual.compareTo(fechaEvento)>=0 ){
-             modelo.put("mensaje","fecha invalida");
-            return new ModelAndView("redirect:/salon", modelo);
-        }
-
-
-        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fechaEvento);
-        List<Zona> zonas=servicioSalon.traerZonas();
-
-        modelo.put("salones",salones);
-        modelo.put("zonas",zonas);
-
-
-        modelo.put("cantidad",cantidad);
-        modelo.put("fecha",fecha);
-        modelo.put("isset","capital");
-
-
-        return new ModelAndView("/salon", modelo);
+    	ModelMap modelo = new ModelMap();    	
+    	String mensajeFinal = servicioValidacionSeleccionSalon.validacionSeleccionSalon(cantidad, fecha);
+    	
+    	if(mensajeFinal=="") {
+    		LocalDate fechaEvento = LocalDate.parse(fecha);
+    		Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fechaEvento);
+    		List<Zona> zonas=servicioSalon.traerZonas();
+  
+    		modelo.put("salones",salones);
+    		modelo.put("zonas",zonas);
+    		modelo.put("cantidad",cantidad);
+    		modelo.put("fecha",fecha);
+    		modelo.put("isset","capital");
+  
+    		return new ModelAndView("/salon", modelo);
+    	}
+    	else {
+            modelo.put("cantidad", cantidad);
+            modelo.put("fecha", fecha);
+            modelo.put("mensajefecha", mensajeFinal);
+            
+            return new ModelAndView("salon", modelo);
+    	}
     }
 
 
     @RequestMapping(path="/validar", method = RequestMethod.POST)
     public ModelAndView validar(@ModelAttribute("salon") RegistroSalonViewModel salon,
-                                   @ModelAttribute("horario") String horario,
+                                @ModelAttribute("horario") String horario,
                                 @ModelAttribute("fecha") String fechaString,
                                 @ModelAttribute("cantidad") Integer cantidad,
                                 HttpServletRequest request) {//esta en la url
         ModelMap modelo = new ModelMap();
         LocalDate fecha = LocalDate.parse(fechaString);
+        String mensaje="";
+        Long id=salon.getId();
         
-       int error=0;
-       String mensaje=" ";
-       Long id=salon.getId();
-      if(id.equals(0L)){
-          error++;
-          mensaje+="seleccione un salon" ;}
+        if(id.equals(0L)){
+        	mensaje+="Seleccione un salón";
+        }
+        else {
+        	Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
+        	Long idReserva= servicioSalon.hacerReserva(idUser ,salon.getId(),fecha,horario,cantidad);
 
-      modelo.put("id",salon.getId());
-        if(error==0){
-
-         Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
-          Long idReserva= servicioSalon.hacerReserva(idUser ,salon.getId(),fecha,horario,cantidad);
-
-           request.getSession().setAttribute("idReserva", idReserva);
-
-          
-           return new ModelAndView("redirect:/listado-menu");
-        }else{
-
-            modelo.put("mensaje",mensaje);
+        	request.getSession().setAttribute("idReserva", idReserva);
+        	return new ModelAndView("redirect:/listado-menu");
         }
 
-        return new ModelAndView("salon");
+        
+        Set<Salon> salones=servicioSalon.buscarSalones(cantidad, fecha);
+        List<Zona> zonas=servicioSalon.traerZonas();
+
+        modelo.put("salones",salones);
+        modelo.put("zonas",zonas);
+        modelo.put("cantidad",cantidad);
+        modelo.put("fecha",fecha);
+        modelo.put("isset","capital"); 
+        modelo.put("mensaje",mensaje);
+        return new ModelAndView("salon", modelo);   
     }
 
 
@@ -157,8 +160,4 @@ public class ControladorSalon {
 
         return new ModelAndView("/galeria", modelo);
     }
-
-
-
-
 }

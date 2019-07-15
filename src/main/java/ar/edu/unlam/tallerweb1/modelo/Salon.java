@@ -5,23 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Salon {
-    @Id
+public class Salon implements Comparable <Salon> {
+   
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private Double precio;
     private Integer capacidadMaxima;
-    //imagen para el card
     private String imagenCard;
-
     private Double puntaje;
     private String direccion;
 
-
     @OneToOne
     private Zona zona;
-   @OneToMany(mappedBy="salon")
+    
+    @OneToMany(mappedBy="salon")
     private List<Reserva> reserva;
 
     @OneToMany
@@ -32,11 +31,6 @@ public class Salon {
 
     }
 
-
-
-  // public void agregarReservas(Reserva reserva){
-   //     this.reserva.add(reserva);
- //  }
 
     public String getImagenCard() {
         return imagenCard;
@@ -50,6 +44,10 @@ public class Salon {
 		return id;
 	}
 
+    public void setId(Long id) {
+		this.id = id;
+	}
+    
     public Double getPuntaje() {
         return puntaje;
     }
@@ -57,11 +55,6 @@ public class Salon {
     public void setPuntaje(Double puntaje) {
         this.puntaje = puntaje;
     }
-
-    public void setId(Long id) {
-		this.id = id;
-	}
-
 
 	public String getNombre() {
         return nombre;
@@ -71,13 +64,13 @@ public class Salon {
         this.nombre = nombre;
     }
 
-    public Double getPrecioPorInvitado() {
+/*    public Double getPrecioPorInvitado() {
         return precio;
     }
 
     public void setPrecioPorInvitado(Double precioPorInvitado) {
         this.precio= precioPorInvitado;
-    }
+    }*/
 
     public Integer getCapacidadMaxima() {
         return capacidadMaxima;
@@ -86,9 +79,6 @@ public class Salon {
     public void setCapacidadMaxima(Integer capacidadMaxima) {
         this.capacidadMaxima = capacidadMaxima;
     }
-
-
-
 
     public Double getPrecio() {
         return precio;
@@ -102,11 +92,9 @@ public class Salon {
         return reserva;
     }
 
-   public void setReserva(List<Reserva> reserva) {
+    public void setReserva(List<Reserva> reserva) {
        this.reserva = reserva;
-  }
-
-
+    }
 
     public List<Imagenes> getImagenes() {
         return Imagenes;
@@ -131,4 +119,10 @@ public class Salon {
     public void setZona(Zona zona) {
         this.zona = zona;
     }
+
+
+	@Override
+	public int compareTo(Salon o) {
+		return this.capacidadMaxima.compareTo(o.getCapacidadMaxima());
+	}
 }

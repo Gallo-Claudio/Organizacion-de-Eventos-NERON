@@ -18,11 +18,6 @@
 
 	<%-- CUERPO --%>
 
-
-	<c:if test="${!empty mensaje}">
-		<h1>${mensaje}</h1>
-	</c:if>
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
@@ -30,19 +25,18 @@
 				<form class="border border-success" method="GET" action="tomarDatos">
 					<h2>Buscar salones</h2>
 
-
-					<br> <label>Cantidad de invitados</label> <input
-						class="form-control" value="${cantidad}" type="number"
-						name="cantidad"> <br> <label>Fecha</label> <input
-						class="form-control" value="${fecha}" type="date" name="fecha">
+					<c:if test="${!empty mensajefecha}">
+	 			  		 <div class="alert alert-danger">${mensajefecha}</div>
+					</c:if>
 
 
+					<br> <label>Cantidad de invitados</label>
+					<input class="form-control" value="${cantidad}" type="number" name="cantidad">
+					<br> <label>Fecha</label>
+					<input class="form-control" value="${fecha}" type="date" name="fecha">
 
-
-					<br> <input class="btn btn-success" type="submit"
-						name="enviar" value="Buscar salones"> <br>
+					<br> <input class="btn btn-success" type="submit" name="enviar" value="Buscar salones"> <br>
 				</form>
-
 			</div>
 		</div>
 	</div>
@@ -53,10 +47,14 @@
 		<div class="container">
 			<div class="row">
 
-				<form:form class="border border-success" ModelAttribute="salon"
-					action="validar" method="post">
+				<form:form class="border border-success" ModelAttribute="salon"	action="validar" method="post">
 					<input type="hidden" value="${fecha}" name="fecha" />
 					<input type="hidden" value="${cantidad}" name="cantidad" />
+					
+					<br><br>
+					<c:if test="${!empty mensaje}">
+	 			  		 <div class="alert alert-danger">${mensaje}</div>
+					</c:if>
 
 					<c:forEach var="i" begin="1" end="4">
 						<c:forEach var="zona" items="${zonas}">
@@ -81,10 +79,10 @@
 									<c:if test="${salon.zona.id==i}">
 										<tr>
 											<td class="alt-celda">${salon.nombre}</td>
-											<td class="alt-celda">${salon.precio}</td>
+											<td class="alt-celda">$ ${salon.precio}</td>
 											<td class="alt-celda">${salon.capacidadMaxima}</td>
 											<td class="alt-celda">${salon.direccion}</td>
-											<td class="alt-celda">${salon.puntaje}/10</td>
+											<td class="alt-celda">${salon.puntaje} / 10</td>
 
 											<td><input type="radio" name="id" value="${salon.id}"></td>
 										</tr>
@@ -113,9 +111,8 @@
 								<input type="hidden" value=0 name="id" />
 							</c:if>
 
-							<a><input class=" btn btn-success" type="button"
-								value="Cancelar" /></a> <input class=" btn btn-success"
-								type="submit" value="Confirmar y continuar" />
+							<a><input class=" btn btn-success" type="button" value="Cancelar" /></a>
+							<input class=" btn btn-success"	type="submit" value="Confirmar y continuar" />
 						</div>
 					</div>
 

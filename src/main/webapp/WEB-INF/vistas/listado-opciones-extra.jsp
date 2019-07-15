@@ -24,10 +24,17 @@
 
 			<h2>Seleccion de Extras</h2>
 			<br> <br> <br>
+			<p>
+				<b>Debe seleccionar: </b>al menos un extra y como máximo dos<br>
+			</p>
 			<div class="table70">
-				<form:form action="registra-reserva-extras" method="POST"
-					modelAttribute="vm">
-
+				<form:form action="registra-reserva-extras" method="POST" modelAttribute="vm">
+					
+					<c:if test="${!empty mensajeerror}">
+						<div class="alert alert-danger">${mensajeerror}</div>
+					</c:if>
+					<form:errors path="*" element="div" class="alert alert-danger" />
+					
 					<table class="table table-hover text-center mt-4" border="1"
 						cellpadding="1" cellspacing="0">
 						<thead>
@@ -40,12 +47,11 @@
 						<tbody>
 							<c:forEach var="menu" items="${listaopciones}">
 								<tr>
-									<td width="650" class="alt-celda margina-izq"">${menu.nombre}</td>
-									<td width="100" class="alt-celda">${menu.precio}</td>
+									<td width="650" class="alt-celda margina-izq">${menu.nombre}</td>
+									<td width="100" class="alt-celda">$ ${menu.precio}</td>
 									<td width="50" class="alt-celda"><input type="checkbox"
 										name="idmenu[${menu.id}]" value="${menu.id}"></td>
 								</tr>
-
 							</c:forEach>
 						</tbody>
 					</table>
