@@ -21,11 +21,16 @@
 	<div class="container">
 		<div class="row">
 
-			<p>Reservas pendientes</p>
-			<p>Seleccione una reserva para ver el detalle de la misma</p>
+			<p>Cancelacion de Reserva</p>
+			<p>Seleccione una reserva para su cancelacion</p>
+			
+			<p>CONDICIONES DE CANCELACION</p>
+			<p>Si la cancelación se realiza antes de los 30 días de la fecha de la realización del evento, la devolución será del 20% de lo abonado</p><br>
+			<p>Si la cancelación se realiza antes de los 15 días de la fecha de la realización del evento, la devolución será del 10% de lo abonado</p><br>
+			<p>Si la cancelación se realiza antes de los 30 días de la fecha de la realización del evento, la devolución será del 5% de lo abonado</p><br>
 			
 
-			<form:form action="listado-eventos-pendientes-cliente" method="POST" modelAttribute="idreserva">
+			<form:form action="detalle-cancelacion-reserva-seleccionada" method="POST" modelAttribute="idreserva">
 				<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 					<thead>
 						<tr>

@@ -35,9 +35,7 @@
 			<br>
 			<br>
 			<div class="table70">
-				<form:form action="registra-reserva-menu" method="POST"
-					modelAttribute="vm">
-
+				<form:form action="registra-reserva-menu" method="POST" modelAttribute="vm">
 
 					<c:if test="${!empty mensajeerror}">
 						<div class="alert alert-danger">${mensajeerror}</div>

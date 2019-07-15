@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
+import ar.edu.unlam.tallerweb1.servicios.ServicioCancelacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResumen;
 
@@ -31,12 +32,20 @@ public class ControladorClienteEventosPendientes {
 	private ServicioEventosPendientes servicioEventosPendientes;
 	@Inject
 	private ServicioResumen servicioResumen;
+	@Inject
+	private ServicioCancelacion servicioCancelacion;
+	
+	
 
-	  
+	//*******************************************************************************************************************	
+	// Lado CLIENTE	  ***************************************************************************************************
+	//*******************************************************************************************************************	 	
+	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// Listado de eventos pendientes del CLIENTE  ///////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+	
+	// Muestra en un listado de todos los eventos pendientes del Cliente
 	@RequestMapping(path = "/eventos-pendientes-cliente")
 	public ModelAndView eventosPendientesCliente (HttpServletRequest request) {
 		
@@ -44,8 +53,7 @@ public class ControladorClienteEventosPendientes {
 			ModelMap model = new ModelMap();
 			LocalDate fechaActual = LocalDate.now();
 			
-			
-			
+						
 			// Obtengo datos del usuario logueado
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
 			Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
@@ -62,7 +70,11 @@ public class ControladorClienteEventosPendientes {
 		return new ModelAndView("redirect:/homeAdmin");
 	}
 	
+
+// -----------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------
 	
+	// Muestra los detalles (Seleccion y precios) de una Reserva de todo lo seleccionado (Salon-Menu-Extras)
 	@RequestMapping(path = "/listado-eventos-pendientes-cliente", method = RequestMethod.POST)
 	public ModelAndView listadoEventosPendientesCliente (@ModelAttribute("idreserva") Long idreserva) {
 	Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
@@ -77,6 +89,69 @@ public class ControladorClienteEventosPendientes {
 	return new ModelAndView("resumen-seleccion", model);
 	
 	
+	}
+
+	
+	
+	
+	
+	
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Cancelacion de una Reserva  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// Muestra las condiciones de cancelacion y las reservas que aun pueden ser canceladas	
+	@RequestMapping(path = "/condiciones-cancelacion-reserva")
+	public ModelAndView condicionesCancelacionReserva (HttpServletRequest request) {
+		
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
+			LocalDate fechaActual = LocalDate.now();
+			
+						
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
+			
+			Set <Reserva> listadoEventosCliente = new TreeSet();
+			listadoEventosCliente = servicioEventosPendientes.listadoDeEventosPendientesDelCliente(fechaActual, idUser);
+		
+			model.put("usuario", nombreUsuario);
+			model.put("listadoPendientesCliente", listadoEventosCliente);
+
+			return new ModelAndView("condiciones-cancelacion-eventos-cliente", model);
+		}
+		
+		return new ModelAndView("redirect:/homeAdmin");
+	}
+	
+	
+	// Muestra los detalles (Seleccion y precios) de una Reserva de todo lo seleccionado (Salon-Menu-Extras)
+	@RequestMapping(path = "/detalle-cancelacion-reserva-seleccionada", method = RequestMethod.POST)
+	public ModelAndView detalleCancelacionReservaSeleccionada (@ModelAttribute("idreserva") Long idreserva) {
+	Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
+	List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
+	Double montoADevolver = servicioCancelacion.calcularDevolucion(reservafinal, precios);
+	List<Integer> datosDevolucion = servicioCancelacion.datosDevolucion(reservafinal);
+	
+	ModelMap model = new ModelMap();
+	model.put("reservafinal", reservafinal);
+//	model.put("menuseleccionado", reservafinal.getMenu());
+//	model.put("extraseleccionado", reservafinal.getExtra());
+	model.put("precios", precios);
+	model.put("montoadevolver", montoADevolver);
+	model.put("datosdevolucion", datosDevolucion);
+	
+	return new ModelAndView("detalle-cancelacion", model);
+	}
+
+	
+	// Cancelacion de la reserva
+	@RequestMapping(path = "/cancelacion-reserva", method = RequestMethod.POST)
+	public ModelAndView cancelacionReserva (@ModelAttribute("idreserva") Long idreserva) {
+		Reserva reservafinal = servicioResumen.buscarDatos(idreserva);
+		servicioCancelacion.eliminarReserva(reservafinal);
+		return new ModelAndView("cancelacion-reserva");
 	}
 	
 	}
