@@ -199,4 +199,52 @@ public class ControladorPersonal {
 	}
 
 
+
+	public ServicioPersonal getServicioPersonal() {
+		return servicioPersonal;
+	}
+
+
+
+	public void setServicioPersonal(ServicioPersonal servicioPersonal) {
+		this.servicioPersonal = servicioPersonal;
+	}
+
+
+
+	public ServicioSalon getServicioSalon() {
+		return servicioSalon;
+	}
+
+
+
+	public void setServicioSalon(ServicioSalon servicioSalon) {
+		this.servicioSalon = servicioSalon;
+	}
+
+
+
+	public ServicioEventosPendientes getServicioEventosPendientes() {
+		return servicioEventosPendientes;
+	}
+
+
+
+	public void setServicioEventosPendientes(ServicioEventosPendientes servicioEventosPendientes) {
+		this.servicioEventosPendientes = servicioEventosPendientes;
+	}
+
+
+
+	public ServicioEliminoPersonal getServicioEliminoPersonal() {
+		return servicioEliminoPersonal;
+	}
+
+
+
+	public void setServicioEliminoPersonal(ServicioEliminoPersonal servicioEliminoPersonal) {
+		this.servicioEliminoPersonal = servicioEliminoPersonal;
+	}
+
+
 }

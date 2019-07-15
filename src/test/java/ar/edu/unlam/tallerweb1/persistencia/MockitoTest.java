@@ -3,6 +3,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import static org.mockito.Mockito.*;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -46,28 +49,40 @@ public void pruebaLoginRolAdmin(){
 	
 }
 
-//@SuppressWarnings(value = { "" })/*@ SuppressWarnings ("sin marcar") 
-//								   le dice al compilador que el programador cree que el código es seguro 
-//								   y que no causará excepciones inesperadas.*/
-//@Test
-//@Transactional 
-//@Rollback(true)
-//public void ObtenerEventosPendientes() {
-//	
-//	HttpServletRequest request = mock(HttpServletRequest.class);
-//	ServicioEventosPendientes servicioEventosPendientesmock = mock(ServicioEventosPendientes.class);
-//	HttpSession sessionMock = mock(HttpSession.class);
-//	
-//	
-//	
-////	Personal p = mock(Personal.class);
-////	CategoriaPersonal cp = mock(CategoriaPersonal.class);
-//	
-//	Set <Reserva> listadoDeEventosPendientes=mock(Set.class);
-//	ControladorPersonal controladorPersonal = mock(ControladorPersonal.class);
-//	
-//	
-//}
-//
+@SuppressWarnings(value = { "unchecked" })/*@ SuppressWarnings ("sin marcar") 
+								   le dice al compilador que el programador cree que el código es seguro 
+								   y que no causará excepciones inesperadas.*/
+@Test
+@Transactional 
+@Rollback(true)
+public void ObtenerEventosPendientes() {
+	
+	HttpServletRequest request = mock(HttpServletRequest.class);
+	HttpSession sessionMock = mock(HttpSession.class);
+	
+	LocalDate fechaActual = null ;
+	
+	ServicioEventosPendientes servicioEventosPendientesmock = mock(ServicioEventosPendientes.class);
+	Set <Reserva> listadoDeEventosPendientes=mock(Set.class);
+	ControladorPersonal controladorPersonal = new ControladorPersonal();
+	
+	controladorPersonal.setServicioEventosPendientes(servicioEventosPendientesmock);
+	
+	
+	
+	when(request.getSession()).thenReturn(sessionMock);
+	when (servicioEventosPendientesmock.listadoDeEventosPendientes(fechaActual)).thenReturn(listadoDeEventosPendientes);
+	
+	ModelAndView modelandview = controladorPersonal.listarEventosPendientesDeRealizarse();
+	assertThat(modelandview.getModelMap().get("fechaActual")).isEqualTo(fechaActual);
+	
+//	Personal p = mock(Personal.class);
+//	CategoriaPersonal cp = mock(CategoriaPersonal.class);
+	
+	
+	
+	
+}
+
 
 }
