@@ -7,6 +7,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
  <%-- ENCABEZADO --%>
@@ -81,13 +82,13 @@
 		<td>
 		 <form:form action="puntuar-salon" method="Post" modelAttribute="mvSalon">
      <h2 class="card-title">  ${salon.nombre}</h2>
-     <p class="card-title">    Precio:${salon.precio}</p>
+     <h3><p class="card-title">    Precio:${salon.precio}</p></h3>
  <!--     <a href="VerImagenes?id=${salon.id}">
          <input  class=" btn btn-success" type="button" value="Ver mas"/>
      </a>--> 
-     <h3 class="card-title">   Valoracion Actual:${salon.puntaje}/10</h3>
+     <h3 class="card-title">   Valoración Actual:${salon.puntaje}/10</h3>
         <input   name="id"   type="hidden" value="${salon.id}"/>
-        <label>Pon aqui tu puntaje</label>
+        <label>Pon aquí tu puntaje</label>
         <input type="number" max="10" min="1" name="puntaje" >
         <input type="submit" value="puntuar" >
  </form:form>

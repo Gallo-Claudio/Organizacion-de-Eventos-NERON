@@ -6,6 +6,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" >
 	<!-- Bootstrap theme -->
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/extras.css">
 </head>
 	<body>
 
@@ -90,14 +91,14 @@
 			</div>
 		</div>
 <table class=" table table-hover text-center mt-4">
-	<h2>Nuestros mejores salones </h2>
+	<center><h1>Nuestros mejores salones </h1></center>
 
 
 	<c:forEach items="${salones}" var="salon">
 
 		<td class="border border-success" >
 			<img class="card-img-top imagen-salon-grande" src="img/${salon.imagenCard}" alt="Card image cap">
-			<h2>${salon.nombre}</h2><br>
+			<h1>${salon.nombre}</h1><br>
 
 			<h4> Precio: $${salon.precio}</h4>
 		<%-- 	<a href="VerImagenes?id=${salon.id}">

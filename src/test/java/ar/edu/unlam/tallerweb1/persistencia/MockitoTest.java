@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.persistencia;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import static org.mockito.Mockito.*;
@@ -21,11 +23,12 @@ import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 
 public class MockitoTest {
 	
-@SuppressWarnings(value = { "" })           /*@ SuppressWarnings ("sin marcar") 
+@SuppressWarnings(value = { })          /*@ SuppressWarnings ("sin marcar") 
 											le dice al compilador que el programador cree que el código es seguro 
 											y que no causará excepciones inesperadas.*/
 @Test
@@ -69,20 +72,41 @@ public void ObtenerEventosPendientes() {
 	controladorPersonal.setServicioEventosPendientes(servicioEventosPendientesmock);
 	
 	
-	
 	when(request.getSession()).thenReturn(sessionMock);
 	when (servicioEventosPendientesmock.listadoDeEventosPendientes(fechaActual)).thenReturn(listadoDeEventosPendientes);
 	
 	ModelAndView modelandview = controladorPersonal.listarEventosPendientesDeRealizarse();
 	assertThat(modelandview.getModelMap().get("fechaActual")).isEqualTo(fechaActual);
 	
-//	Personal p = mock(Personal.class);
-//	CategoriaPersonal cp = mock(CategoriaPersonal.class);
-	
-	
-	
-	
-}
+}}
 
-
-}
+//@Inject
+//private ServicioEliminoPersonal servicioEliminoPersonal;
+//
+//@SuppressWarnings(value = { "unchecked" })/*@ SuppressWarnings ("sin marcar") 
+//											le dice al compilador que el programador cree que el código es seguro 
+//											y que no causará excepciones inesperadas.*/
+//@Test
+//@Transactional 
+//@Rollback(true)
+//
+//public void mockControlador() {
+//	
+//
+//	
+//	HttpServletRequest request = mock(HttpServletRequest.class);
+//	HttpSession sessionMock = mock(HttpSession.class);
+//	
+//	ControladorPersonal controladorPersonalMock = mock(ControladorPersonal.class);
+//	
+//	controladorPersonalMock.setServicioEliminoPersonal(servicioEliminoPersonal);
+//	
+//	when(controladorPersonalMock.listarPersonalAsignadoAlEvento()).thenReturn(null);
+//	when(controladorPersonalMock.listarTrabajoPersonal(request)).thenReturn(null);
+//	
+//	when(controladorPersonalMock.)
+//	
+//	ModelAndView modelandview = controladorPersonalMock.listarPersonalAsignadoAlEvento();
+//	assertThat(modelandview.getModelMap().get(key))
+//	
+//}}

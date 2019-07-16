@@ -7,6 +7,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="css/extras.css">
+ 
 </head>
 <body>
  <%-- ENCABEZADO --%>
@@ -52,7 +57,7 @@
         <div class="col-md-4 col-md-offset-4">
 
             <form class="border border-success" method="GET" action="tomarDatos">
-                <h2>Buscar salones</h2>
+              <center>  <h2>Buscar salones</h2></center>
 
 
                 <br>
@@ -66,7 +71,7 @@
 
 
                 <br>
-                <input class="btn btn-success" type="submit" name="enviar"  value="Buscar salones">
+              <center>  <input class="btn btn-success" type="submit" name="enviar"  value="Buscar salones"></center>
                 <br>
             </form>
 

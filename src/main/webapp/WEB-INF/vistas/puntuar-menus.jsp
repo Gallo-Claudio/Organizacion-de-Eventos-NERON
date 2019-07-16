@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Puntuar menus</title>
+    <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
 <c:forEach var = "i" begin = "1" end = "${tope}">

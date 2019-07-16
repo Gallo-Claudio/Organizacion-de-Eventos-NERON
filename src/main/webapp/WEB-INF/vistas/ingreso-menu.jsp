@@ -9,6 +9,7 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link rel="stylesheet" href="css/extras.css">
 	    
 	</head>
 <body>
@@ -36,7 +37,7 @@
         </ul>
 
         <div class="navbar-form navbar-left">
-            <h5>Organizacion de Eventos NERON</h5>
+            <h5>Organización de Eventos NERON</h5>
         </div>
 
         <form class="navbar-form navbar-left"  method="post"  action="cerrarsesion"  >
@@ -54,8 +55,8 @@
 	  
         <div class="container">
             <div class="row">
-	   <h1>Ingreso de los distintos platos y bebidas que componen el Menu</h1>
-	   <p class="descripcion">Desde aquí se ingresan los diferentes platos/bebidas/postres que componen el listado de opciones a elegir por el cliente</p>
+	   <center><h2>Ingreso de los distintos platos y bebidas que componen el Menú</h2></center>
+	   <p class="descripcion"><center><h4>Desde aquí se ingresan los diferentes platos/bebidas/postres que componen el listado de opciones a elegir por el cliente</p></h4></center>
 	   
 	   
 				<form:form action="registro-plato-menu" method="POST" modelAttribute="vmIngresoMenu" class="rpm">
@@ -63,7 +64,7 @@
 				<form:errors path="*" element="div" class="alert alert-danger" />
 				
 				  	<input class="tipomenu" name="descripcion" value="${descripcion}" placeholder="Ingrese la descripcion del plato o bebida" />
-				  	<p>El precio debe ser ingresado en el siguiente formato  10.00</p>
+				  	<p><h4>El precio debe ser ingresado en el siguiente formato  10.00</p></h4>
 				  	<input class="tipomenu" name="precio" value="${precio}" placeholder="Ingrese el costo" />
 				  	
 				     	<select class="tipomenu" name="tipoDeMenu">
@@ -72,8 +73,8 @@
     					</c:forEach>
 					    </select>
 
-					<button class="btn-agregar btn btn success" Type="Submit"/>Agregar</button>
-					<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
+					<center><button class="btn-agregar btn btn success" Type="Submit"/>Agregar</button>
+					<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a></center>
 				</form:form>
             </div>
         </div>

@@ -73,6 +73,8 @@ public class ControladorExtras {
 	}
 
 	
+
+	
 	@RequestMapping(path = "/registro-extras", method = RequestMethod.POST)
 	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
 										HttpServletRequest request) {
@@ -90,13 +92,7 @@ public class ControladorExtras {
 			return new ModelAndView("listado-final-extras", modelo);
 		}
 		return new ModelAndView("redirect:/home");
-	}
-	
-	
-	
-	
-	
-	
+	}	
 	
 	/*Lado Cliente*/
 	

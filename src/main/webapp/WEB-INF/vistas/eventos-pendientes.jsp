@@ -8,6 +8,8 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    
+	    
 </head>
 <body>
 
@@ -34,7 +36,7 @@
         </ul>
 
         <div class="navbar-form navbar-left">
-            <h5>Organizacion de Eventos NERON</h5>
+            <h5>Organización de Eventos NERON</h5>
         </div>
 
         <form class="navbar-form navbar-left"  method="post"  action="cerrarsesion"  >
@@ -79,7 +81,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
-	<button class="btn-agregar" Type="Submit"/>Seleccionar</button>
+	<center><button class="btn-agregar" Type="Submit"/>Seleccionar</button></center>
 </form:form>		
 		<br><br><br>
 </div>

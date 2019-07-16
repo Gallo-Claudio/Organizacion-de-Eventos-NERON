@@ -7,6 +7,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
  <%-- ENCABEZADO --%>
@@ -55,7 +56,7 @@
 	          <div class="container">
             <div class="row">
 	  
-<h3>Nuestros Menus </h3>
+<center><h1>Nuestros Menus </h1></center>
 
 <c:if test="${!empty mensaje}">
     <h1>${mensaje}</h1>

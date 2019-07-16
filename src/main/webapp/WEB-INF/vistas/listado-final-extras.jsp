@@ -7,6 +7,7 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    
 	
 	<title>Listado</title>
 </head>
@@ -72,7 +73,7 @@
     </c:forEach>  
 	</tbody>
 	</table> 
-	<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
+	<center><a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a></center>
 	</div>
 	</div>  
 	

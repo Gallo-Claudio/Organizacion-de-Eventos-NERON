@@ -56,25 +56,25 @@ insert into Imagenes(nombre) values ("imagen34.jpg");
 insert into Imagenes(nombre) values ("imagen35.jpg");
 insert into Imagenes(nombre) values ("imagen36.jpg");
 
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon1",3000.0,1);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon2",3400.0,2);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon3",6000.0,3);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon4",700.0,4);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon1",3000.00,1);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon2",3400.00,2);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon3",6000.00,3);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon4",700.00,4);
 
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon5",3000.0,5);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon6",3400.0,6);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon7",6000.0,7);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon8",700.0,8);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon5",3000.00,5);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon6",3400.00,6);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon7",6000.00,7);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon8",700.00,8);
 
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon9",3000.0,9);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon10",3400.0,10);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon11",6000.0,11);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon12",700.0,12);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon9",3000.00,9);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon10",3400.00,10);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon11",6000.00,11);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon12",700.00,12);
 
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon13",3000.0,13);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon14",3400.0,14);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon15",6000.0,15);
-insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon16",700.0,16);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon13",3000.00,13);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(300,"salon14",3400.00,14);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(200,"salon15",6000.00,15);
+insert into salon(capacidadMaxima,nombre,precio,ubicacion_id)values(100,"salon16",700.00,16);
 
 insert into salon_imagenes(salon_id,imagenes_id) values(1,1);
 insert into salon_imagenes(salon_id,imagenes_id) values(1,2);

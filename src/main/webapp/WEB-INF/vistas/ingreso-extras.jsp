@@ -7,6 +7,7 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link rel="stylesheet" href="css/extras.css">
 
 	    <title>Agregar Extras</title>	    
 </head>
@@ -65,8 +66,8 @@
 
 	<center>
 				<form:form action="registro-extras" method="POST" modelAttribute="Extras">
-				<b><i>Por favor, ingrese un extra:</i></b>     <center><input name="nombre" placeholder="Mago"><br><br></center>
-				<b><i>Por favor, ingrese un precio:</i></b>	<center><input name="precio" placeholder="200" /><br><br></center>
+				<b><i><label>Por favor, ingrese un extra:</label></i></b>     <center><input name="nombre" placeholder="Mago"><br><br></center>
+				<b><i><label>Por favor, ingrese un precio:</label></i></b>	<center><input name="precio" placeholder="200" /><br><br></center>
 					
 
 				

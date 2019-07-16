@@ -5,6 +5,7 @@
 	    <link href="css/bootstrap.min.css" rel="stylesheet" >
 	    <!-- Bootstrap theme -->
 	    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+	    <link rel="stylesheet" href="css/extras.css">
 </head>
 <body>
 
@@ -48,8 +49,8 @@
 <div class="container">
             <div class="row central">
         <div class="navbar-form navbar-left">
-            <p class="grande">Bienvenido a</p>
-            <p class="grande">Organizacion de Eventos NERON</p>
+            <center><p class="grande"><h2>Bienvenido a</p></h2></center>
+           <center> <p class="grande"><h2>Organización de Eventos NERON</h2></p></center>
         </div>
 
             </div>
