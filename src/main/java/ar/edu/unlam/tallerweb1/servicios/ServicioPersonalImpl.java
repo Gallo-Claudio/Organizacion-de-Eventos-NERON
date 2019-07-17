@@ -273,7 +273,6 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 						}
 						break;
 				 }
-
 			}
  
 		return personalDelEvento;
@@ -419,8 +418,6 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			}
 		}
 			
-			
-			
 		cantidadesAReasignar.add(encargado);
 		cantidadesAReasignar.add(chef);
 		cantidadesAReasignar.add(cocinero);
@@ -541,18 +538,7 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	//----------------nuevo----------------------------------------------------------------------------------------------------------
@@ -568,158 +554,14 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		}	
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+			
 		
 		@Override
 		public List<Personal> sinPersonal() {
 	
 			List<Personal> TodoElPersonal = personalDao.listadoDelPersonal();
 
-	
 			return TodoElPersonal;
 		}
 		
-}	
-	
-
-
-
-
-
-
-    	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//Preguntar si no es mas conveniente separar esta logica en otro servicio que se podria llamar Guardar Reserva
-	//	LocalDate fecha_ingreso = LocalDate.of(2019, 6, 16);  //<----- Verificar si los datos a�o, mes dia se pueden pasar como integer
-	//	evento.setFechaDelEvento(fecha_ingreso);    <--------- ERROR CON LA FECHA
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------------
-// anterior al 25/6
-
-// Genera un listado con la cantidad necesaria de personal para cubrir el evento
-//@Override
-//public List <Long> asignarPersonalNecesario(Integer personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia) {
-//	List <Long> personalDelEvento = new ArrayList <Long> ();
-
-	// Itero las entradas (representadas por key/value) del Map
-//	Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
-
-	// Recorro N veces (donde N es la cantidad de personal requerido) el Map
-//	for(int i=0;i<personalNecesario;i++) {
-//			 Map.Entry <Long,Integer> entry = (Map.Entry) entries.next();
-
-			 // Obtengo el Id atraves del key
-//			 Long key = (Long)entry.getKey();
-
-			 // Agrego el Id obtenido a la coleccion del tipo List
-//			 personalDelEvento.add(key);
-//		 }
-
-//	return personalDelEvento;
-//}
-
-// -----------------------------------------------------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------------------------------------------------
-// 25/6
-
-/// Genera un listado con la cantidad necesaria de personal para cubrir el evento
-//@Override
-//public List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia) {
-//	List <Long> personalDelEvento = new ArrayList <Long> ();
-
-	// Itero las entradas (representadas por key/value) del Map
-//	Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
-
-	// Se usa el for, para ir pasando por las 6 categorias de empleados
-//	for(int i=0; i<6; i++) {
-//		int vuelta=1;  // Con esta variable, nos aseguramos de tomar solo la cantidad necesaria de personal para la categoria que se esta rrecorriendo en el bucle WHILE
-//		Long categoria=1L;  // Con esta variable vamos cambiando la seleccion de la categoria en el bucle WHILE
-
-
-//		while(entries.hasNext()) {
-
-//			Map.Entry <Long,Integer> entry = (Map.Entry) entries.next();
-
-			// Obtengo el Id atraves del key
-//			Long key = (Long)entry.getKey();
-
-	        // Con "personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()" obtengo el id correspondiente
-			// a la categoria del personal de acuerdo al Id pasado a traves de "key"
-//			if(personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()==categoria && vuelta<=personalNecesario.get(i)) {
-//					vuelta = vuelta+1;
-//					personalDelEvento.add(key);
-//			}
-//		}
-//		categoria = categoria+1;
-//	}
-//	return personalDelEvento;
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

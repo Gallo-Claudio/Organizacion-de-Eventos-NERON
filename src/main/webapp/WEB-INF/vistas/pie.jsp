@@ -11,10 +11,10 @@
 
             <div class="col-md-4">
                 Integrantes:<br>
-                Rocio,
-                Julieta,
-                Agustina,
-                Claudio
+                Baudach Agustina,
+                Centurion Rocio,
+                Iracheta Julieta,
+                Vazquez Claudio
             </div>
 
         </div>
