@@ -25,6 +25,7 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
+import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 
 public class MockitoTest {
 	
@@ -78,4 +79,30 @@ public void ObtenerEventosPendientes() {
 	ModelAndView modelandview = controladorPersonal.listarEventosPendientesDeRealizarse();
 	assertThat(modelandview.getModelMap().get("fechaActual")).isEqualTo(fechaActual);
 	assertThat(modelandview.getViewName()).isEqualTo("eventos-pendientes");
+}
+
+@SuppressWarnings(value = { "unchecked" })/*@ SuppressWarnings ("sin marcar") 
+											le dice al compilador que el programador cree que el código es seguro 
+											y que no causará excepciones inesperadas.*/
+@Test
+@Transactional 
+@Rollback(true)
+public void ObtenerPersonalAsignadoAUnEvento() {
+	HttpServletRequest request = mock(HttpServletRequest.class);
+	HttpSession sessionMock = mock(HttpSession.class);
+	ControladorPersonal controladorPersonal = new ControladorPersonal();
+	
+	ServicioPersonal servicioPersonalmock = mock(ServicioPersonal.class);
+	controladorPersonal.setServicioPersonal(servicioPersonalmock);
+	Reserva reservaMock = mock(Reserva.class);
+	List<Personal> listadoPersonalAsignado=mock(List.class);
+	
+	Long idreserva = reservaMock.getIdReserva();
+	
+	when(request.getSession()).thenReturn(sessionMock);
+	when(servicioPersonalmock.listadoPersonalAsignado(idreserva)).thenReturn(listadoPersonalAsignado);
+	
+	ModelAndView modelandview = controladorPersonal.listarPersonalAsignadoAUnEvento(idreserva);
+	assertThat(modelandview.getModelMap().get("idreserva")).isEqualTo(idreserva);
+	assertThat(modelandview.getViewName()).isEqualTo("personal-asignado");	
 }}

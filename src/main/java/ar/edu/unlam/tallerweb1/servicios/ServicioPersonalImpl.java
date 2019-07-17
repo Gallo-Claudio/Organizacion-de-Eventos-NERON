@@ -480,46 +480,41 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			return lista;
 		}	
 		
+	
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		public PersonalDao getPersonalDao() {
+			return personalDao;
+		}
+
+		public void setPersonalDao(PersonalDao personalDao) {
+			this.personalDao = personalDao;
+		}
+
+		public ServicioResumen getServicioResumen() {
+			return servicioResumen;
+		}
+
+		public void setServicioResumen(ServicioResumen servicioResumen) {
+			this.servicioResumen = servicioResumen;
+		}
+
+		public ServicioSalon getServicioSalon() {
+			return servicioSalon;
+		}
+
+		public void setServicioSalon(ServicioSalon servicioSalon) {
+			this.servicioSalon = servicioSalon;
+		}
+
+		public RegistroMenuDao getRegistroMenuDao() {
+			return registroMenuDao;
+		}
+
+		public void setRegistroMenuDao(RegistroMenuDao registroMenuDao) {
+			this.registroMenuDao = registroMenuDao;
+		}
+
 		@Override
 		public List<Personal> sinPersonal() {
 	
