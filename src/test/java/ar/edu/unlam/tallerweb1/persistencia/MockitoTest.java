@@ -77,36 +77,5 @@ public void ObtenerEventosPendientes() {
 	
 	ModelAndView modelandview = controladorPersonal.listarEventosPendientesDeRealizarse();
 	assertThat(modelandview.getModelMap().get("fechaActual")).isEqualTo(fechaActual);
-	
+	assertThat(modelandview.getViewName()).isEqualTo("eventos-pendientes");
 }}
-
-//@Inject
-//private ServicioEliminoPersonal servicioEliminoPersonal;
-//
-//@SuppressWarnings(value = { "unchecked" })/*@ SuppressWarnings ("sin marcar") 
-//											le dice al compilador que el programador cree que el código es seguro 
-//											y que no causará excepciones inesperadas.*/
-//@Test
-//@Transactional 
-//@Rollback(true)
-//
-//public void mockControlador() {
-//	
-//
-//	
-//	HttpServletRequest request = mock(HttpServletRequest.class);
-//	HttpSession sessionMock = mock(HttpSession.class);
-//	
-//	ControladorPersonal controladorPersonalMock = mock(ControladorPersonal.class);
-//	
-//	controladorPersonalMock.setServicioEliminoPersonal(servicioEliminoPersonal);
-//	
-//	when(controladorPersonalMock.listarPersonalAsignadoAlEvento()).thenReturn(null);
-//	when(controladorPersonalMock.listarTrabajoPersonal(request)).thenReturn(null);
-//	
-//	when(controladorPersonalMock.)
-//	
-//	ModelAndView modelandview = controladorPersonalMock.listarPersonalAsignadoAlEvento();
-//	assertThat(modelandview.getModelMap().get(key))
-//	
-//}}
