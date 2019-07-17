@@ -34,7 +34,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 
 public class ControladorPersonalMockTest extends SpringTest {
 
-	@Test
+	/*@Test
 	public void testQuePruebaListarEventosPendientesDeRealizarse() {
 		ControladorPersonal miControladorPersonal = new ControladorPersonal();	
 		ServicioEventosPendientes servicioEventosPendientes = mock(ServicioEventosPendientes.class);
@@ -47,5 +47,5 @@ public class ControladorPersonalMockTest extends SpringTest {
 		ModelAndView modelAndView = miControladorPersonal.listarEventosPendientesDeRealizarse();
 
 		assertThat(modelAndView.getViewName() ).isEqualTo("eventos-pendientes");
-	}
+	}*/
 }
