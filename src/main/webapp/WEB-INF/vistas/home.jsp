@@ -6,7 +6,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" >
 	<!-- Bootstrap theme -->
 	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/extras.css">
+	<link rel="stylesheet" href="css/EstiloSinFondo.css">
 </head>
 	<body>
 
