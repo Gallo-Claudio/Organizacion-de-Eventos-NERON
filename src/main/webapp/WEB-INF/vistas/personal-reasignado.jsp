@@ -27,6 +27,9 @@
 <p>Listado del personal asignado al evento de la reserva numero: ${idreserva}</p>
 <p>Con reasignaciones</p>
 
+	<!-- Mensaje error VALIDATE -->
+	<form:errors path="*" element="div" class="alert alert-danger" />
+
 	<c:forEach var = "i" begin = "1" end = "6">
 	  			<c:forEach var="tipo" items="${cargos}">
 					<c:if test="${tipo.id==i}">

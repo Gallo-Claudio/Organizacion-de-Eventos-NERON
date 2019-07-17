@@ -12,12 +12,10 @@
 				<li><a class="btn" href="menus-a-puntuar">Nuestros Menus</a></li>			
 				<li><a class="btn" href="eventos-pendientes-cliente">Ver detalles de la/s Reserva/s</a></li>
 				<li><a class="btn" href="condiciones-cancelacion-reserva">Cancelar Reserva</a></li>
-				<jsp:include page="reservar.jsp"></jsp:include>
-					
+			
 				<!--<form class="form-btn" method="post" action="eventos-pendientes-cliente">
 					<input type="submit" value="Resumen de eventos" class="btn">
 				</form>-->
-	
 			</ul>
 			
 			<div class="navbar-form navbar-left">

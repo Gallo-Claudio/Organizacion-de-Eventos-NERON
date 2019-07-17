@@ -100,9 +100,8 @@ public class ControladorLogin {
 	
 	@RequestMapping(path = "/home", method = RequestMethod.GET)
 	public ModelAndView ingresarPuntaje(HttpServletRequest request) {
-		ModelMap model = new ModelMap();
-
 		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
 			// Obtengo datos del usuario logueado
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
 			
@@ -114,8 +113,7 @@ public class ControladorLogin {
 			return new ModelAndView("home", model);
 		}
 		
-		return new ModelAndView("redirect:/homeAdmin", model);
-		
+		return new ModelAndView("redirect:/homeAdmin");
 	}
 
 	
@@ -138,7 +136,7 @@ public class ControladorLogin {
 		// Obtengo datos del usuario logueado
 		String nombreUsuario = (request.getSession().getAttribute("nombre").toString());			
 		model.put("usuario", nombreUsuario);
-		return new ModelAndView("redirect:/home");
+		return new ModelAndView("redirect:/home", model);
 
 	}
 }		

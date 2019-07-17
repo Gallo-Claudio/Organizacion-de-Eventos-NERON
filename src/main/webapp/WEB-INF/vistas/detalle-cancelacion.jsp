@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
 				<tr>
 					<td width="700">Nombre: ${reservafinal.salon.nombre}</td>
 					<td width="100">Precio:</td>
-					<td width="100">$ ${reservafinal.salon.precio}</td>
+					<td width="100">$<fmt:formatNumber currencySymbol="" value="${reservafinal.salon.precio}" type="currency"/></td>
 				</tr>
 			</table>
 			<br>
@@ -48,7 +49,7 @@
 			<table class="table  tabla-ancho2" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td width="200">Precio total del menu:</td>
-					<td width="100">$ ${precios[1]}</td>
+					<td width="100">$<fmt:formatNumber currencySymbol="" value="${precios[1]}" type="currency"/></td>
 				</tr>
 			</table>
 			<br>
@@ -59,9 +60,9 @@
 			<table class="table  tabla-ancho2" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td width="520">Precio total de los extras:</td>
-					<td width="80">$ ${precios[2]}</td>
+					<td width="80">$<fmt:formatNumber currencySymbol="" value="${precios[2]}" type="currency"/></td>
 					<td width="200"></td>
-					<td width="100">$ ${precios[2]}</td>
+					<td width="100">$<fmt:formatNumber currencySymbol="" value="${precios[2]}" type="currency"/></td>
 				</tr>
 			</table>
 			<br>
@@ -74,7 +75,7 @@
 				<tr>
 					<td width="700"></td>
 					<td width="100">Precio:</td>
-					<td width="100">$ ${precios[3]}</td>
+					<td width="100">$<fmt:formatNumber currencySymbol="" value="${precios[3]}" type="currency"/></td>
 				</tr>
 			</table>
 			<br>
@@ -86,7 +87,7 @@
 						<h2>PRECIO FINAL:</h2>
 					</td>
 					<td width="150">
-						<h3>$ ${precios[4]}</h3>
+						<h3>$<fmt:formatNumber currencySymbol="" value="${precios[4]}" type="currency"/></h3>
 					</td>
 				</tr>
 			</table>
@@ -94,21 +95,16 @@
 			<h3>Cancelación de la reserva</h3>
 			<p>La cancelación se realiza con una anticipación de ${datosdevolucion[0]} días a la realización del evento</p>
 			<p>Corresponde una devolución del ${datosdevolucion[1]}%</p>
-			<p>El monto a devolver es: $ ${montoadevolver}</p>
+			<p>El monto a devolver es: $<fmt:formatNumber currencySymbol="" value="${montoadevolver}" type="currency"/></p>
 		
 			
 			<form:form action="cancelacion-reserva" method="POST" modelAttribute="idreserva">
-
-			<input name="idreserva" type="hidden" value="${idreserva}" />
-			
-			
-			
-			
-			<button class="btn-agregar" Type="Submit" />Agregar</button>
-			<input class=" btn btn-success" type="submit" value="Eliminar Reserva">
+				<input name="idreserva" type="hidden" value="${idreserva}" />
+				<input class=" btn btn-success" type="submit" value="Eliminar Reserva">
+				<a href="/proyecto-limpio-spring/home" class="btn btn-danger">CANCELAR la eliminacion de la Reserva</a>
 			</form:form>
 			
-			<br> <a href="/proyecto-limpio-spring/home" class="btn-agregar btn btn success">Cancelar</a> 
+			<br>  
 
 
 		</div>

@@ -41,6 +41,7 @@ public class ControladorSalon {
    // private ServicioCliente servicioCliente;
 
 
+    
     @RequestMapping(path = "/eliminar-salon", method = RequestMethod.POST)
  	public ModelAndView registroExtras (@ModelAttribute ("Salon") Salon salon, HttpServletRequest request) {
  		servicioEliminoSalon.eliminarSalon(salon);
@@ -63,7 +64,7 @@ public class ControladorSalon {
     @RequestMapping(path = "/registro-Salon", method = RequestMethod.POST)
     public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,
                                         HttpServletRequest request) {
-    //    if(request.getSession().getAttribute("ROL")=="1"){
+    //    if(request.getSession().getAttribute("ROL").equals("1")){
       //  servicioIngresoExtras.ingresarExtras(extra);
         return new ModelAndView("redirect:/ingreso-salon");
    // }
@@ -77,15 +78,36 @@ public class ControladorSalon {
         return new ModelAndView("listado-final-salon", modelo);
     }
 */
+ 
+    
+    
+	//********************************************************	
+	// Lado CLIENTE	  ****************************************
+	//********************************************************
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Seleccion del Salon  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// FORMA PARTE DE LA SELECCION DE LA RESERVA    
+    // Ingreso de los datos para realizar la busqueda que se adecue a lo ingresado
     @RequestMapping(path="/salon")
     public ModelAndView ir(HttpServletRequest request) {
-        if(request.getSession().getAttribute("logueado")==null){
-          return new ModelAndView("redirect:/home");
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+			return new ModelAndView("salon", model);
         }
-           return new ModelAndView("salon");
-
+		
+           return new ModelAndView("redirect:/home");
     }
-
+    
+    
+    
+    // Validacion de los datos ingresados para la busqueda de salones y Busqueda de los salones que cumplen con el criterio de los datos ingresados
     @RequestMapping(path="/tomarDatos", method = RequestMethod.GET)
     public ModelAndView tomarDatos(@RequestParam(name="cantidad",required=false) Integer cantidad,
                                    @RequestParam(name="fecha",required=false) String fecha) {
@@ -114,7 +136,7 @@ public class ControladorSalon {
     	}
     }
 
-
+    // Validacion de la seleccion del Salon
     @RequestMapping(path="/validar", method = RequestMethod.POST)
     public ModelAndView validar(@ModelAttribute("salon") RegistroSalonViewModel salon,
                                 @ModelAttribute("horario") String horario,

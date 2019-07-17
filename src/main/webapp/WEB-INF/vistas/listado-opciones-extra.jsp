@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +36,7 @@
 					</c:if>
 					<form:errors path="*" element="div" class="alert alert-danger" />
 					
-					<table class="table table-hover text-center mt-4" border="1"
-						cellpadding="1" cellspacing="0">
+					<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 						<thead>
 							<tr>
 								<th class="enc">Descripcion</th>
@@ -48,9 +48,8 @@
 							<c:forEach var="menu" items="${listaopciones}">
 								<tr>
 									<td width="650" class="alt-celda margina-izq">${menu.nombre}</td>
-									<td width="100" class="alt-celda">$ ${menu.precio}</td>
-									<td width="50" class="alt-celda"><input type="checkbox"
-										name="idmenu[${menu.id}]" value="${menu.id}"></td>
+									<td width="100" class="alt-celda">$<fmt:formatNumber currencySymbol="" value="${menu.precio}" type="currency"/></td>
+									<td width="50" class="alt-celda"><input type="checkbox" name="idmenu[${menu.id}]" value="${menu.id}"></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -60,6 +59,7 @@
 					<br>
 
 					<button class="btn-agregar" Type="Submit" />Agregar</button>
+					<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Cancelar</a>
 				</form:form>
 			</div>
 		</div>

@@ -28,6 +28,9 @@ public class ServicioValidacionSeleccionSalonImpl implements ServicioValidacionS
             if(cantidad<=0) {
             	mensajeFinal = mensajeFinal + "La cantidad ingresada de invitados es incorrecta" + "<br/>";           
             }
+            else if(cantidad>450){
+            	mensajeFinal = mensajeFinal + "No disponemos salones para esa capacidad de invitados" + "<br/>";
+            }
         }
 
         

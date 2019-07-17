@@ -24,7 +24,11 @@
 			<p>Reservas pendientes</p>
 			<p>Seleccione una reserva para ver el detalle de la misma</p>
 			
-
+			
+			<c:if test="${!empty mensajeerror}">
+	 			<div class="alert alert-danger">${mensajeerror}</div>
+			</c:if>
+			
 			<form:form action="listado-eventos-pendientes-cliente" method="POST" modelAttribute="idreserva">
 				<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 					<thead>
@@ -50,7 +54,13 @@
 						</c:forEach>
 					</tbody>
 				</table>
+								
+				<c:if test="${empty idreserva}">
+					<input type="hidden" value=0 name="idreserva" />
+				</c:if>
+				
 				<button class="btn-agregar" Type="Submit" />Seleccionar</button>
+				<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Cancelar</a>
 			</form:form>
 			<br> <br> <br>
 		</div>

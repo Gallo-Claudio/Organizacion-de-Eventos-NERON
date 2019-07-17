@@ -34,6 +34,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroPlatoMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResumen;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSeleccionoExtra;
 import ar.edu.unlam.tallerweb1.servicios.ServicioValidacionSeleccionExtra;
+import ar.edu.unlam.tallerweb1.validadores.ExtrasSeleccionValidar;
 import ar.edu.unlam.tallerweb1.validadores.MenuSeleccionValidar;
 import ar.edu.unlam.tallerweb1.validadores.MenuValidar;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroExtrasViewModel;
@@ -63,10 +64,8 @@ public class ControladorExtras {
 	private ServicioValidacionSeleccionExtra servicioValidacionSeleccionExtra;
 
 	private MenuSeleccionValidar menuSeleccionValidar = new MenuSeleccionValidar();
-	
-	
-	
-	
+	private ExtrasSeleccionValidar extrasSeleccionValidar = new ExtrasSeleccionValidar();
+
 	
 	
 	/*Lado del administrador*/
@@ -89,9 +88,23 @@ public class ControladorExtras {
 
 	
 	@RequestMapping(path = "/registro-extras", method = RequestMethod.POST)
-	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,	HttpServletRequest request) {
+	public ModelAndView registroExtras (@ModelAttribute ("Extras") Extra extra,	HttpServletRequest request, BindingResult result) {
+		
+		this.extrasSeleccionValidar.validate(extra, result);
+        if(result.hasErrors()){
+        	// Obtengo datos del usuario logueado
+        	String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+        	
+        	Extra extras = new Extra();
+			ModelMap model = new ModelMap();
+			model.put("usuario", nombreUsuario);
+			model.put("extras", extras);
+			return new ModelAndView("ingreso-extras", model);
+        }
+        else {
 		servicioIngresoExtras.ingresarExtras(extra);
-		return new ModelAndView("redirect:/ingreso-extras"); 
+		return new ModelAndView("redirect:/ingreso-extras");
+        }
 	}
 // .............................................................................................	
 
@@ -117,26 +130,38 @@ public class ControladorExtras {
 	
 	
 	
-	/*Lado Cliente*/
-	
+	//********************************************************	
+	// Lado CLIENTE	  ****************************************
+	//********************************************************
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Seleccion de Extras  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// FORMA PARTE DE LA SELECCION DE LA RESERVA
+	// Muestra el listado de extras - Seleccion de Extra/s por parte del cliente
 	@RequestMapping(path = "/listado-extra", method = RequestMethod.GET)
 	public ModelAndView listadoDeOpcionesDeExtras (HttpServletRequest request) {
-		ModelMap modelo = new ModelMap();
-		if(request.getSession().getAttribute("logueado")==null){
-			return new ModelAndView("redirect:/home");
-
+		if(request.getSession().getAttribute("ROL").equals("2")) {		
+			ModelMap model = new ModelMap();
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+		
+			model.put("usuario", nombreUsuario);
+			model.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
+			return new ModelAndView("listado-opciones-extra", model);
 		}
-		modelo.put("listaopciones", servicioListadoOpcionesExtras.listarOpcionesDeExtras());
-
-		return new ModelAndView("listado-opciones-extra", modelo);
-	}
-
+		
+			return new ModelAndView("redirect:/home");
+	}	
+	
+// ------------------------------------------------------------------------------------------------------------	
+// ------------------------------------------------------------------------------------------------------------		
 	
 	
-	
-	
+	// Realiza la validacion y persistencia de los datos
 	@RequestMapping(path = "/registra-reserva-extras", method = RequestMethod.POST)
-	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request, BindingResult result, SessionStatus status) {
+	public ModelAndView registraReservaExtras ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request, BindingResult result) {
 		String id=request.getSession().getAttribute("idReserva").toString();
 		Long reserva= Long.parseLong(id);
 		ModelMap model = new ModelMap();

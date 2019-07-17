@@ -21,7 +21,6 @@
 
 
 	<%-- CUERPO --%>
-
 	<div class="container">
 		<div class="row">
 
@@ -32,34 +31,29 @@
 				</center>
 				<br>
 				<br>
-
-
-
 			</div>
-
+			<!-- Mensaje error VALIDATE -->
+				<form:errors path="*" element="div" class="alert alert-danger" />
 			<center>
-				<form:form action="registro-extras" method="POST"
-					modelAttribute="Extras">
+				
+					
+				<form:form action="registro-extras" method="POST" modelAttribute="Extras">
 					<b><i>Por favor, ingrese un extra:</i></b>
 					<center>
 						<input name="nombre" placeholder="Mago"><br>
 						<br>
-					</center>
-					<b><i>Por favor, ingrese un precio:</i></b>
-					<center>
+
+						<b><i>Por favor, ingrese un precio:</i></b><br>
+				
 						<input name="precio" placeholder="200" /><br>
 						<br>
 					</center>
 
-
-
 					<button class="btn btn-success" Type="Submit" />Agregar extra</button>
 				</form:form>
-				<br> <a href="/proyecto-limpio-spring/listado-final-extras"><i>Obtener
-						un listado</i></a>
+				
 			</center>
-			<a href="/proyecto-limpio-spring/homeAdmin"
-				class="btn-agregar btn btn success">Salir</a>
+			<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
 		</div>
 	</div>
 
@@ -77,9 +71,3 @@
 	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
-
-
-
-
-
-

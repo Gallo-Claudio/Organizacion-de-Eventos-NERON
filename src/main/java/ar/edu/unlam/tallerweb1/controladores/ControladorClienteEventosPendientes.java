@@ -76,19 +76,37 @@ public class ControladorClienteEventosPendientes {
 	
 	// Muestra los detalles (Seleccion y precios) de una Reserva de todo lo seleccionado (Salon-Menu-Extras)
 	@RequestMapping(path = "/listado-eventos-pendientes-cliente", method = RequestMethod.POST)
-	public ModelAndView listadoEventosPendientesCliente (@ModelAttribute("idreserva") Long idreserva) {
-	Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
-	List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
+	public ModelAndView listadoEventosPendientesCliente (@ModelAttribute("idreserva") Long idreserva, HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			model.put("usuario", nombreUsuario);			
+			
+			if(idreserva==0) {
+				String mensaje ="Debe seleccionar una reserva";
+				model.put("mensajeerror", mensaje);
+				LocalDate fechaActual = LocalDate.now();
+
+				Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
+				
+				Set <Reserva> listadoEventosCliente = new TreeSet();
+				listadoEventosCliente = servicioEventosPendientes.listadoDeEventosPendientesDelCliente(fechaActual, idUser);
+			
+				model.put("listadoPendientesCliente", listadoEventosCliente);
+				return new ModelAndView("eventos-pendientes-cliente", model);	
+			}
+			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
+			List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
 	
-	ModelMap model = new ModelMap();
-	model.put("reservafinal", reservafinal);
-	model.put("menuseleccionado", reservafinal.getMenu());
-	model.put("extraseleccionado", reservafinal.getExtra());
-	model.put("precios", precios);
-	
-	return new ModelAndView("resumen-seleccion", model);
-	
-	
+			model.put("reservafinal", reservafinal);
+			model.put("menuseleccionado", reservafinal.getMenu());
+			model.put("extraseleccionado", reservafinal.getExtra());
+			model.put("precios", precios);
+			return new ModelAndView("resumen-seleccion", model);
+		}
+		
+		return new ModelAndView("redirect:/homeAdmin");
 	}
 
 	
@@ -128,30 +146,70 @@ public class ControladorClienteEventosPendientes {
 	
 	// Muestra los detalles (Seleccion y precios) de una Reserva de todo lo seleccionado (Salon-Menu-Extras)
 	@RequestMapping(path = "/detalle-cancelacion-reserva-seleccionada", method = RequestMethod.POST)
-	public ModelAndView detalleCancelacionReservaSeleccionada (@ModelAttribute("idreserva") Long idreserva) {
-	Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
-	List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
-	Double montoADevolver = servicioCancelacion.calcularDevolucion(reservafinal, precios);
-	List<Integer> datosDevolucion = servicioCancelacion.datosDevolucion(reservafinal);
+	public ModelAndView detalleCancelacionReservaSeleccionada (@ModelAttribute("idreserva") Long idreserva, HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
+			if(idreserva==0) {
+				String mensaje ="Debe seleccionar una reserva";
+				model.put("mensajeerror", mensaje);
+				
+				LocalDate fechaActual = LocalDate.now();
+				
+				// Obtengo datos del usuario logueado
+				String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+				Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
+				
+				Set <Reserva> listadoEventosCliente = new TreeSet();
+				listadoEventosCliente = servicioEventosPendientes.listadoDeEventosPendientesDelCliente(fechaActual, idUser);
+			
+				model.put("usuario", nombreUsuario);
+				model.put("listadoPendientesCliente", listadoEventosCliente);
+
+				return new ModelAndView("condiciones-cancelacion-eventos-cliente", model);
+				
+			}
+						
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+
+			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
+			List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
+			Double montoADevolver = servicioCancelacion.calcularDevolucion(reservafinal, precios);
+			List<Integer> datosDevolucion = servicioCancelacion.datosDevolucion(reservafinal);
 	
-	ModelMap model = new ModelMap();
-	model.put("reservafinal", reservafinal);
-//	model.put("menuseleccionado", reservafinal.getMenu());
-//	model.put("extraseleccionado", reservafinal.getExtra());
-	model.put("precios", precios);
-	model.put("montoadevolver", montoADevolver);
-	model.put("datosdevolucion", datosDevolucion);
+			model.put("reservafinal", reservafinal);
+			model.put("precios", precios);
+			model.put("montoadevolver", montoADevolver);
+			model.put("datosdevolucion", datosDevolucion);
 	
-	return new ModelAndView("detalle-cancelacion", model);
+			return new ModelAndView("detalle-cancelacion", model);
+		}
+		
+		return new ModelAndView("redirect:/homeAdmin");
 	}
 
 	
+	
 	// Cancelacion de la reserva
 	@RequestMapping(path = "/cancelacion-reserva", method = RequestMethod.POST)
-	public ModelAndView cancelacionReserva (@ModelAttribute("idreserva") Long idreserva) {
-		Reserva reservafinal = servicioResumen.buscarDatos(idreserva);
-		servicioCancelacion.eliminarReserva(reservafinal);
-		return new ModelAndView("cancelacion-reserva");
+	public ModelAndView cancelacionReserva (@ModelAttribute("idreserva") Long idreserva, HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			// Se elimina la reserva
+			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);
+			servicioCancelacion.eliminarReserva(reservafinal);
+			
+			// Mensaje
+			ModelMap model = new ModelMap();
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			model.put("usuario", nombreUsuario);
+			
+			return new ModelAndView("cancelacion-reserva", model);
+		}
+	
+		return new ModelAndView("redirect:/homeAdmin");
 	}
 	
 	}

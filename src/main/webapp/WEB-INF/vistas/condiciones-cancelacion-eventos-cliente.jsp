@@ -29,7 +29,11 @@
 			<p>Si la cancelación se realiza antes de los 15 días de la fecha de la realización del evento, la devolución será del 10% de lo abonado</p><br>
 			<p>Si la cancelación se realiza antes de los 30 días de la fecha de la realización del evento, la devolución será del 5% de lo abonado</p><br>
 			
-
+			
+			<c:if test="${!empty mensajeerror}">
+	 			<div class="alert alert-danger">${mensajeerror}</div>
+			</c:if>
+			
 			<form:form action="detalle-cancelacion-reserva-seleccionada" method="POST" modelAttribute="idreserva">
 				<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 					<thead>
@@ -55,7 +59,13 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<c:if test="${empty idreserva}">
+					<input type="hidden" value=0 name="idreserva" />
+				</c:if>
+				
 				<button class="btn-agregar" Type="Submit" />Seleccionar</button>
+				<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Cancelar</a>
 			</form:form>
 			<br> <br> <br>
 		</div>

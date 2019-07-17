@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,10 +80,10 @@
 									<c:if test="${salon.zona.id==i}">
 										<tr>
 											<td class="alt-celda">${salon.nombre}</td>
-											<td class="alt-celda">$ ${salon.precio}</td>
+											<td class="alt-celda">$<fmt:formatNumber currencySymbol="" value="${salon.precio}" type="currency"/></td>
 											<td class="alt-celda">${salon.capacidadMaxima}</td>
 											<td class="alt-celda">${salon.direccion}</td>
-											<td class="alt-celda">${salon.puntaje} / 10</td>
+											<td class="alt-celda"><fmt:formatNumber type="number" pattern="#0.00" maxFractionDigits="2" value="${salon.puntaje}"/> / 10</td>
 
 											<td><input type="radio" name="id" value="${salon.id}"></td>
 										</tr>

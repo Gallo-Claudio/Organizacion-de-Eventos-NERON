@@ -23,9 +23,12 @@
 
 			<p>Eventos pendientes a realizarse</p>
 
+					<c:if test="${!empty mensajeerror}">
+	 			  		 <div class="alert alert-danger">${mensajeerror}</div>
+					</c:if>
+
 			<form:form action="listado-personal-asignado" method="POST" modelAttribute="idreserva">
-				<table class="table table-hover text-center mt-4" border="1"
-					cellpadding="1" cellspacing="0">
+				<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 					<thead>
 						<tr>
 							<th>Salon</th>
@@ -43,14 +46,19 @@
 								<td>${item.salon.direccion}</td>
 								<td>${item.fecha}</td>
 								<td>${item.horario}</td>
-								<td><input type="radio" name="idreserva"
-									value="${item.idReserva}"></td>
+								<td><input type="radio" name="idreserva" value="${item.idReserva}"></td>
 							</tr>
 
 						</c:forEach>
 					</tbody>
 				</table>
+				
+				<c:if test="${empty idreserva}">
+					<input type="hidden" value=0 name="idreserva" />
+				</c:if>
+				
 				<button class="btn-agregar" Type="Submit" />Seleccionar</button>
+				<a href="/proyecto-limpio-spring/homeAdmin" class="btn btn-danger">Cancelar</a>
 			</form:form>
 			<br>
 			<br>

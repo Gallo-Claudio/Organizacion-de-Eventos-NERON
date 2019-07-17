@@ -7,10 +7,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.time.*;
 
 import javax.inject.Inject;
@@ -94,15 +96,19 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	public List<Personal> controlDeServiciosPrestados () {
 		List<Reserva> lista = new ArrayList();
 		lista=(personalDao.traerReservas());
-
+		
+		// Paso la lista a una coleccion Set para pisar los dupicados que me trajo la consulta por haber varias relaciones ManyToMany en la clase Reserva
+		Set<Reserva> listaSinDuplicados = new HashSet();
+		listaSinDuplicados.addAll(lista);
+				
 		List<Personal> resultado = new ArrayList<>();
-
-		for (Reserva l: lista) {
+		for (Reserva l: listaSinDuplicados) {
 			resultado.addAll(l.getPersonal());
 		}
 
 		return resultado;
 	}
+	
 
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
@@ -124,6 +130,33 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 		 for (Iterator it = list.iterator(); it.hasNext();) {
 			 Map.Entry<Long, Integer> entry = (Map.Entry<Long, Integer>)it.next();
+			 sortedMap.put(entry.getKey(), entry.getValue());
+		 }
+
+		 return sortedMap;
+	}
+		
+
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+
+	// Ordena el listado (Map) en forma ascendente
+	@Override
+	public Map OrdenaAscendentementePersonal(Map unsortMap) {
+		 List list = new LinkedList(unsortMap.entrySet());
+
+		 //Para ordenar ascendentemente
+		 Collections.sort(list, new Comparator() {
+		 public int compare(Object o1, Object o2) {
+		 return ((Comparable) ((Map.Entry) (o1)).getValue()).compareTo(((Map.Entry) (o2)).getValue());
+		 }
+		 });
+
+		 //Agrega la lista ordenana dentro del Map
+		 Map<Personal, Integer> sortedMap = new LinkedHashMap<Personal, Integer>();
+
+		 for (Iterator it = list.iterator(); it.hasNext();) {
+			 Map.Entry<Personal, Integer> entry = (Map.Entry<Personal, Integer>)it.next();
 			 sortedMap.put(entry.getKey(), entry.getValue());
 		 }
 
@@ -460,6 +493,60 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	
 	
 	
+	//--------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------
+	
+	
+	
+	
+	// Devuelve el listado de asistencia del personal
+	@Override
+	public Map <Personal, Integer> obtencionListadoDeAsistenciasPersonal() {
+		Map <Personal, Integer> conteo = new HashMap();
+
+		// Realizo una iteracion del listado general de asistencias de los empleados. Ese listado es
+		// devuelto por (servicioPersonal.controlDeServiciosPrestados ---> Devuelve una coleccion List <Personal>)
+		Iterator<Personal> p = controlDeServiciosPrestados().iterator();
+		Personal personal;
+		while (p.hasNext()) {
+			personal=p.next();
+
+			// De dicha iteracion, extraigo el Id de cada empleado y lo guardo en un Map llamado conteo.
+			// Alli, guardo en la key el numero de Id y en el value guardo las veces que trabajo.
+			// Dicho conteo lo realizo al comparar si el Id de extraido ya existe (si ya fue agregado) al Map,
+			// de ya estar, sumo una unidad en el "value". De no estar el Id, es agregado al Map en la "key"
+	        if(conteo.containsKey(personal)){
+	        	conteo.put(personal,conteo.get(personal)+1);
+	         }
+	         else{
+	            conteo.put(personal,1);
+	         }
+		}
+
+		// Se completa el listrado agregando los Id que aun no tienen ningun registro de asistencia en la BD.
+		// Esto puede ocurrir cuando se ingresa a algun Personal nuevo, y no tuvo ningun evento asignado aun
+		List<Personal> TodoElPersonal = personalDao.listadoDelPersonal();
+
+		Iterator <Personal> tep = TodoElPersonal.iterator();
+		Personal todos;
+		while (tep.hasNext()) {
+			todos=tep.next();
+			 	if(conteo.containsKey(todos)){
+		         }
+		         else{
+		            conteo.put(todos,0);
+		         }
+		}
+		return conteo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -529,19 +616,6 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			return TodoElPersonal;
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 }	
 	
 
@@ -617,3 +691,35 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 //	}
 //	return personalDelEvento;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

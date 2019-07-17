@@ -32,22 +32,34 @@ public class ControladorResumen {
 	//////////////////////////////////////////////////////////////////////////////////////	
 	@RequestMapping(path = "/resumen-final")
 	public ModelAndView resumenFinal ( @ModelAttribute("vm") RegistroMenuViewModel vm, HttpServletRequest request) {
-		String id=request.getSession().getAttribute("idReserva").toString();
-		Long reserva= Long.parseLong(id);
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+
+			// Se asigna el personal a la reserva de acuerdo a la cantidad de personas
+			// Se determina las diferentes cantidades de personal por categoria (Mozo, Chef, Cocinero, etc)
+			String id=request.getSession().getAttribute("idReserva").toString();
+			Long reserva= Long.parseLong(id);
 	
-		servicioPersonal.asignaPersonalAlEvento(reserva);
+			servicioPersonal.asignaPersonalAlEvento(reserva);
 		
-		//////////////////////////////////////////////////////////////////////////////////////
-		Reserva reservafinal = servicioResumen.buscarDatos(reserva);	
-		List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
+			//Se muestra un resumen de lo seleccionado
+			Reserva reservafinal = servicioResumen.buscarDatos(reserva);	
+			List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
 		
-		ModelMap model = new ModelMap();
-		model.put("reservafinal", reservafinal);
-		model.put("menuseleccionado", reservafinal.getMenu());
-		model.put("extraseleccionado", reservafinal.getExtra());
-		model.put("precios", precios);
+			model.put("reservafinal", reservafinal);
+			model.put("menuseleccionado", reservafinal.getMenu());
+			model.put("extraseleccionado", reservafinal.getExtra());
+			model.put("precios", precios);
 		
-		return new ModelAndView("resumen-seleccion", model);
+			return new ModelAndView("resumen-seleccion", model);
+		}
+	
+		return new ModelAndView("redirect:/homeAdmin");
+
 	}
 	
 }

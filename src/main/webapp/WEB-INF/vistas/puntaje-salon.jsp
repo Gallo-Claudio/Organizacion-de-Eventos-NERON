@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,12 +60,11 @@
 							<td><form:form action="puntuar-salon" method="Post"
 									modelAttribute="mvSalon">
 									<h2 class="card-title">${salon.nombre}</h2>
-									<p class="card-title">Precio:${salon.precio}</p>
+									<p class="card-title">Precio: $<fmt:formatNumber currencySymbol="" value="${salon.precio}" type="currency"/></p>
 									<!--     <a href="VerImagenes?id=${salon.id}">
          <input  class=" btn btn-success" type="button" value="Ver mas"/>
      </a>-->
-									<h3 class="card-title">Valoracion
-										Actual:${salon.puntaje}/10</h3>
+									<h3 class="card-title">Valoración Actual: <fmt:formatNumber type="number" pattern="#0.00" maxFractionDigits="2" value="${salon.puntaje}"/> / 10</h3>
 									<input name="id" type="hidden" value="${salon.id}" />
 									<label>Pon aqui tu puntaje</label>
 									<input type="number" max="10" min="1" name="puntaje">

@@ -15,7 +15,7 @@
             <li><a class="btn" href="listado-eventos-pendientes">REASIGNACION PERSONAL - Eventos pendientes</a></li>
             <li><a class="btn" href="ingreso-extras">Ingresar Extras</a></li>
             <li><a class="btn" href="listado-final-extras">Listado de Extras</a></li>
-            
+            <li><a class="btn" href="trabajo-personal">Asistencia del Personal</a></li>
         </ul>
 
 			<div class="navbar-form navbar-left">

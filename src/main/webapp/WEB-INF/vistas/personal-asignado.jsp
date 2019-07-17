@@ -22,12 +22,10 @@
 	<div class="container">
 		<div class="row">
 
-			<form:form action="reasigna-personal" method="POST"
-				modelAttribute="vmReasignaPersonal">
+			<form:form action="reasigna-personal" method="POST" modelAttribute="vmReasignaPersonal">
 				<input type="hidden" name="idreserva" value="${idreserva}">
 
-				<p>Personal asignado al evento de la reserva numero:
-					${idreserva}</p>
+				<p>Personal asignado al evento de la reserva numero: ${idreserva}</p>
 
 				<c:forEach var="i" begin="1" end="6">
 					<c:forEach var="tipo" items="${cargos}">
@@ -35,8 +33,7 @@
 							<td>Categoria: ${tipo.cargo}</td>
 						</c:if>
 					</c:forEach>
-					<table class="table table-hover text-center mt-4" border="1"
-						cellpadding="1" cellspacing="0">
+					<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 						<thead>
 							<tr>
 								<th>Nombre</th>
@@ -50,9 +47,7 @@
 									<tr>
 										<td>${personal.apellido}</td>
 										<td>${personal.nombre}</td>
-										<td><input type="checkbox"
-											name="idpersonal[${personal.idPersonal}]"
-											value="${personal.idPersonal}"></td>
+										<td><input type="checkbox" name="idpersonal[${personal.idPersonal}]" value="${personal.idPersonal}"></td>
 									</tr>
 								</c:if>
 							</c:forEach>
@@ -62,9 +57,9 @@
 					<br>
 					<br>
 				</c:forEach>
+				
 				<button class="btn-agregar" Type="Submit" />Bajar del evento</button>
-				<a href="/proyecto-limpio-spring/homeAdmin"
-					class="btn-agregar btn btn success">Salir</a>
+				<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
 			</form:form>
 		</div>
 	</div>

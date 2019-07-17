@@ -29,16 +29,14 @@
 				por el cliente</p>
 
 
-			<form:form action="registro-plato-menu" method="POST"
-				modelAttribute="vmIngresoMenu" class="rpm">
+			<form:form action="registro-plato-menu" method="POST" modelAttribute="vmIngresoMenu" class="rpm">
 
 				<form:errors path="*" element="div" class="alert alert-danger" />
 
 				<input class="tipomenu" name="descripcion" value="${descripcion}"
 					placeholder="Ingrese la descripcion del plato o bebida" />
 				<p>El precio debe ser ingresado en el siguiente formato 10.00</p>
-				<input class="tipomenu" name="precio" value="${precio}"
-					placeholder="Ingrese el costo" />
+				<input class="tipomenu" name="precio" value="${precio}" placeholder="Ingrese el costo" />
 
 				<select class="tipomenu" name="tipoDeMenu">
 					<c:forEach var="tipodemenu" items="${listatiposmenu}">
@@ -47,8 +45,7 @@
 				</select>
 
 				<button class="btn-agregar btn btn success" Type="Submit" />Agregar</button>
-				<a href="/proyecto-limpio-spring/homeAdmin"
-					class="btn-agregar btn btn success">Salir</a>
+				<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
 			</form:form>
 		</div>
 	</div>

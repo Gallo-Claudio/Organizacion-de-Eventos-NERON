@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 <body>
 
 	<%-- ENCABEZADO --%>
-	<jsp:include page="encabezado-cliente.jsp"></jsp:include>
+	<jsp:include page="encabezado-cliente-index.jsp"></jsp:include>
 
 
 	<%-- CUERPO --%>
@@ -57,8 +58,7 @@
 		<div class="row call-to-action">
 			<form class="navbar-form navbar-left" method="post" action="salon">
 				<div class="form-group">
-					<input type="submit" value="Reservar"
-						class="btn btn-success btn-grande">
+					<input type="submit" value="Reservar" class="btn btn-success btn-grande">
 				</div>
 			</form>
 		</div>
@@ -69,15 +69,16 @@
 
 		<c:forEach items="${salones}" var="salon">
 
-			<td class="border border-success"><img
-				class="card-img-top imagen-salon-grande"
-				src="img/${salon.imagenCard}" alt="Card image cap">
+			<td class="border border-success">
+			<img class="card-img-top imagen-salon-grande" src="img/${salon.imagenCard}" alt="Card image cap">
 				<h2>${salon.nombre}</h2> <br>
 
-				<h4>Precio: $${salon.precio}</h4> <%-- 	<a href="VerImagenes?id=${salon.id}">
-				<input  class=" btn btn-success" type="button" value="Ver mas"/></a>--%>
-
-				<h4>Valoración Actual:${salon.puntaje}</h4> <br></td>
+				<h4>Precio: $<fmt:formatNumber currencySymbol="" value="${salon.precio}" type="currency"/></h4>
+				
+				<%-- 	<a href="VerImagenes?id=${salon.id}"> <input  class=" btn btn-success" type="button" value="Ver mas"/></a>--%>
+  
+				<h4>Valoración Actual: <fmt:formatNumber type="number" pattern="#0.00" maxFractionDigits="2" value="${salon.puntaje}"/> / 10</h4>
+				</td>
 
 		</c:forEach>
 	</table>

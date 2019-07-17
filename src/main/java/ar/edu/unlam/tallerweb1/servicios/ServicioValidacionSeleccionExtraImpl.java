@@ -17,8 +17,15 @@ public class ServicioValidacionSeleccionExtraImpl implements ServicioValidacionS
 	@Override
 	public String validacionSeleccionExtra(RegistroMenuViewModel vm) {
 		String mensajeFinal = "";
-		
-		if(vm.getIdmenu().length>3) {
+		Integer contador = 0;
+
+		for (int i=0; i<vm.getIdmenu().length; i++) {
+			if(vm.getIdmenu()[i]!=null) {
+				contador++;
+			}
+		}
+	int can=vm.getIdmenu().length;
+		if(contador>=3) {
 			mensajeFinal = mensajeFinal + "Como máximo solo puede seleccionar 2 Extras";
 			}
 

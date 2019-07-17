@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,17 +41,17 @@
 					<c:if test="${!empty mensajeerror}">
 						<div class="alert alert-danger">${mensajeerror}</div>
 					</c:if>
+					<!-- Mensaje error VALIDATE -->
 					<form:errors path="*" element="div" class="alert alert-danger" />
 
 
 					<c:forEach var="i" begin="1" end="6">
 						<c:forEach var="tipo" items="${secciones}">
 							<c:if test="${tipo.id==i}">
-								<h3>${tipo.detalle}</h3>
+								<button type="submit" data-toggle="collapse" data-trigger="hover" data-toggle="modal" data-target="#categoria" aria-expanded="false">${tipo.detalle}</button>
 							</c:if>
 						</c:forEach>
-						<table class="table table-hover text-center mt-4" border="1"
-							cellpadding="1" cellspacing="0">
+						<table class="table table-hover text-center mt-4 collapse" id="#categoria" border="1" cellpadding="1" cellspacing="0">
 							<thead>
 								<tr>
 									<th width="650" class="enc">Descripción</th>
@@ -63,7 +64,7 @@
 									<c:if test="${menu.tipoDeMenu.id==i}">
 										<tr>
 											<td class="alt-celda margina-izq">${menu.descripcion}</td>
-											<td class="alt-celda">$ ${menu.precio}</td>
+											<td class="alt-celda">$<fmt:formatNumber currencySymbol="" value="${menu.precio}" type="currency"/></td>
 											<td class="alt-celda"><input type="checkbox" name="idmenu[${menu.idMenu}]" value="${menu.idMenu}"></td>
 										</tr>										
 									</c:if>
@@ -75,6 +76,7 @@
 
 
 					<button class="btn-agregar" Type="Submit" />Agregar</button>
+					<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Cancelar</a>
 				</form:form>
 			</div>
 
@@ -100,15 +102,12 @@
 
 
 										<p class="card-title">${menu.descripcion}</p>
-										<p class="card-text">Precio:${menu.precio}</p>
+										<p class="card-text">Precio: $<fmt:formatNumber currencySymbol="" value="${menu.precio}" type="currency"/></p>
 
 
-										<h4 class="card-title">Valoracion
-											Actual:${menu.puntaje}/10</h4>
+										<h4 class="card-title">Valoración Actual: <fmt:formatNumber type="number" pattern="#0.00" maxFractionDigits="2" value="${menu.puntaje}"/> / 10</h4>
 										<input name="id" type="hidden" value="${menu.idMenu}" />
-										<h4 class="card-title">Danos tu opinion</h4>
-										<input class="puntuacion" type="number" name="puntaje">
-										<input class=" btn btn-success" type="submit" value="puntuar"></td>
+										</td>
 							</c:forEach>
 						</c:forEach>
 

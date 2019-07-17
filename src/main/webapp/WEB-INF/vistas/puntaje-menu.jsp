@@ -2,6 +2,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,8 +24,7 @@
 		<div class="row call-to-action">
 			<form class="navbar-form navbar-left" method="post" action="salon">
 				<div class="form-group">
-					<input type="submit" value="Reservar"
-						class="btn btn-success btn-grande">
+					<input type="submit" value="Reservar" class="btn btn-success btn-grande">
 				</div>
 			</form>
 		</div>
@@ -38,7 +38,7 @@
 			<c:if test="${!empty mensaje}">
 				<h1>${mensaje}</h1>
 			</c:if>
-
+<h1>${mensaje}</h1>
 
 			<c:forEach var="i" begin="1" end="6">
 				<c:forEach items="${listaopciones}" var="menu">
@@ -57,13 +57,17 @@
 										modelAttribute="mvMenu">
 
 										<p class="card-title">${menu.descripcion}</p>
-										<p class="card-text">Precio:${menu.precio}</p>
+										<p class="card-text">Precio: $<fmt:formatNumber currencySymbol="" value="${menu.precio}" type="currency"/></p>
 
 
-										<h3 class="card-title">Valoracion Actual:${menu.puntaje}/10</h3>
+										<h3 class="card-title">Valoración Actual: <fmt:formatNumber type="number" pattern="#0.00" maxFractionDigits="2" value="${menu.puntaje}"/> / 10</h3>
 										<input name="id" type="hidden" value="${menu.idMenu}" />
 										<h3 class="card-title">Danos tu opinion</h3>
 										<input type="number" max="10" min="1" name="puntaje">
+										
+											<c:if test="${empty puntaje}">
+												<input type="hidden" value=0 name="puntaje" />
+											</c:if>
 										<input class=" btn btn-success" type="submit" value="puntuar">
 									</form:form></td>
 							</tr>
