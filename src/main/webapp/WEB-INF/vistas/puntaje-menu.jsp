@@ -24,12 +24,18 @@
 	<div class="container">
 		<div class="row">
 
+<<<<<<< HEAD
 			<h2>Nuestros Menus</h2><br><br>
+=======
+
+>>>>>>> rocio
 
 			<c:if test="${!empty mensaje}">
-				<h1>${mensaje}</h1>
+				<div style="width:200px;" class="alert alert-danger">${mensaje}</div>
 			</c:if>
-<h1>${mensaje}</h1>
+			<form:errors path="*" element="div" class="alert alert-danger" />
+
+
 
 			<c:forEach var="i" begin="1" end="6">
 				<c:forEach items="${listaopciones}" var="menu">

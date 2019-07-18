@@ -61,9 +61,7 @@ public class ControladorMenu {
 		this.servicioListadoOpcionesMenu = servicioListadoOpcionesMenu;
 	}
 
-	public void setServicioRecomendaciones(ServicioRecomendaciones servicioRecomendaciones) {
-		ServicioRecomendaciones = servicioRecomendaciones;
-	}
+
 
 	
 	
