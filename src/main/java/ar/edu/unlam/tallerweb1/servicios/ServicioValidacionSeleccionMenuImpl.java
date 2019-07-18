@@ -48,7 +48,7 @@ public class ServicioValidacionSeleccionMenuImpl implements ServicioValidacionSe
 		
 		
 		// Recorro la array que contiene lo seleccionado por el cliente
-      for (int i=0; i<vm.getIdmenu().length; i++) {
+		for (int i=0; i<vm.getIdmenu().length; i++) {
      	Long idMenu = vm.getIdmenu()[i];
       	if(idMenu!=null) {
      		

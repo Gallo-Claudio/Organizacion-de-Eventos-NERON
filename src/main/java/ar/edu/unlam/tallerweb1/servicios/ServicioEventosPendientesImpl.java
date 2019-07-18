@@ -25,10 +25,16 @@ public class ServicioEventosPendientesImpl implements ServicioEventosPendientes 
 	private EventosPendientesDao eventosPendientesDao;
 	
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// LADO ADMINISTRADOR
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Listado de eventos pendientes de todos los clientes - Lado Administrador   ////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public Set <Reserva> listadoDeEventosPendientes(LocalDate fechaActual) {
-		Set <Reserva> listadoDeEventosSinDuplicados = new HashSet();
+		Set <Reserva> listadoDeEventosSinDuplicados = new TreeSet();
 		
 		List <Reserva> listadoEventos = eventosPendientesDao.traerListaDeFechas(fechaActual);
 
@@ -40,6 +46,35 @@ public class ServicioEventosPendientesImpl implements ServicioEventosPendientes 
 		}
 		
 		return listadoDeEventosSinDuplicados;
+	}
+
+
+// ----------------------------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------------------------------
+	
+	
+	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// LADO CLIENTE
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// Listado de eventos pendientes del CLIENTE    //////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	@Override
+	public Set<Reserva> listadoDeEventosPendientesDelCliente(LocalDate fechaActual, Long idUsuario) {
+		Set <Reserva> listadoDeEventosClienteDuplicados = new TreeSet();
+		
+		List <Reserva> listadoEventosDelCliente = eventosPendientesDao.traerListaDeEventosPendientesPorCliente(fechaActual, idUsuario);
+		
+		Iterator <Reserva> r = listadoEventosDelCliente.iterator();
+		Reserva reserva;
+		while (r.hasNext()) {
+			reserva=r.next();
+			listadoDeEventosClienteDuplicados.add(reserva);
+		}
+		return listadoDeEventosClienteDuplicados;
 	}
 	
 }

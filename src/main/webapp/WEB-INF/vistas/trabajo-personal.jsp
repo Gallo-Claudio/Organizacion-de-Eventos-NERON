@@ -1,79 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Servicios prestados por cada personal</title>
-	<link href="css/bootstrap.min.css" rel="stylesheet" >
-	<!-- Bootstrap theme -->
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet">
+<title>Cantidad de servicios prestados por cada personal</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap theme -->
+<link href="css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-default" role="navigation">
-	<!-- El logotipo y el icono que despliega el menú se agrupan
-         para mostrarlos mejor en los dispositivos móviles -->
-	<div class="navbar-header">
 
-		<a class="navbar-brand" href="#">Logotipo</a>
-	</div>
-
-	<!-- Agrupar los enlaces de navegación, los formularios y cualquier
-         otro elemento que se pueda ocultar al minimizar la barra -->
-	<div class="collapse navbar-collapse navbar-ex1-collapse">
-		<ul class="nav navbar-nav">
-			<li ><a href="homeAdmin">inicio</a></li>
-			<li><a href="listado-final-extras">Extras</a></li>
-
-			<li><a href="listado-final-menu">Menu</a></li>
-			<li><a href="listado-final-salon">Salon</a></li>
-			<li><a href="">Personal</a></li>
-		</ul>
+	<%-- ENCABEZADO --%>
+	<jsp:include page="encabezado-administrador.jsp"></jsp:include>
 
 
-		<div class="navbar-form navbar-left">
-			<h5>Bienvenidos a</h5>
-			<h5>Organizacion de Eventos NERON</h5>
+	<%-- CUERPO --%>
+	<div class="container tabla-ancho">
+		<div class="row">
+
+			<c:forEach var="i" begin="1" end="6">
+
+				<c:forEach var="tipo" items="${cargos}">
+					<c:if test="${tipo.id==i}">
+						<td>Categoria: ${tipo.cargo}</td>
+					</c:if>
+				</c:forEach>
+
+				<table class="table table-hover text-center mt-4 tabla-ancho" border="1" cellpadding="1" cellspacing="0">
+					<thead>
+						<tr>
+							<th width="100" class="enc">Legajo Nº</th>
+							<th width="390" class="enc">Nombre y Apellido</th>
+							<th width="110" class="enc">Servicios prestados</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="personal" items="${asistencia}">
+							<c:if test="${personal.key.categoriaPersonal.id==i}">
+								<tr>
+									<td class="alt-celda">${personal.key.idPersonal}</td>
+									<td class="alt-celda margina-izq">${personal.key.nombre} ${personal.key.apellido}</td>
+									<td class="alt-celda">${personal.value}</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+
+			</c:forEach>
+			<a href="/proyecto-limpio-spring/home" class="btn btn-success">Salir</a>
+
 		</div>
-
-
-
-
-		<form class="navbar-form navbar-left"  method="post"  action="salon"  >
-			<div class="form-group">
-				<input type="submit" value="Reservar" class="btn btn-success">
-			</div>
-		</form>
-
-
-		<form class="navbar-form navbar-left"  method="post"  action="cerrarsesion"  >
-			<div class="form-group">
-				<input type="submit" value="cerrar sesion" class="btn btn-success">
-			</div>
-		</form>
-
 	</div>
-</nav>
-	<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
-	<thead>
-	<tr>
-	<th>Identificador</th>
-	<th>Nombre</th>
-	<th>Cantidad de servicios prestados</th>
 
-	</tr>
-	</thead>
-	<tbody>
-	<c:forEach var="personal" items="${asistencia}"> 
-		<tr>
-		<td>${personal.key}</td>
-		<td></td>
-		<td>${personal.value}</td>
+	<%-- PIE --%>
+	<jsp:include page="pie.jsp"></jsp:include>
 
-		</tr>
-    </c:forEach>  
-	</tbody>
-	</table>   
-		     
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script>
+		window.jQuery
+				|| document
+						.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+	</script>
+	<script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>

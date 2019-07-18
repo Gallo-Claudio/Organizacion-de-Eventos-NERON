@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
@@ -16,6 +17,8 @@ public interface ServicioPersonal {
 	List <Personal> controlDeServiciosPrestados ();
 
 	Map OrdenaAscendentemente(Map unsortMap);
+
+	Map OrdenaAscendentementePersonal(Map unsortMap);
 
 	List <Integer> calcularPersonal(Integer cantidadDeInvitados);
 	
@@ -36,6 +39,9 @@ public interface ServicioPersonal {
 	List <Integer> determinaCategoriaYCantidadDelPersonalDadoDeBajaAUnEvento (List<Long> personalDadoDeBajaAlEvento);
 	
 	List <Personal> reasingacionDelPersonalAUnEvento (List<Long> personalDadoDeBajaAlEvento, Long idReserva);
+
+	Map <Personal, Integer> obtencionListadoDeAsistenciasPersonal();
+	
 	
 	// nuevo
 	List<Reserva> listadoDeReservas();

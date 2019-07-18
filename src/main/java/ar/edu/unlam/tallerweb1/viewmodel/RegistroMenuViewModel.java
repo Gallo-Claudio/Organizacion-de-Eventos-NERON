@@ -4,6 +4,8 @@ public class RegistroMenuViewModel {
 	private Long[] idmenu;
 	private Long id;
 
+	
+	
 	public Long[] getIdmenu() {
 		return idmenu;
 	}

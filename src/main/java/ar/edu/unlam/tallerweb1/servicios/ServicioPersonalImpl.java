@@ -7,10 +7,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.time.*;
 
 import javax.inject.Inject;
@@ -94,15 +96,19 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	public List<Personal> controlDeServiciosPrestados () {
 		List<Reserva> lista = new ArrayList();
 		lista=(personalDao.traerReservas());
-
+		
+		// Paso la lista a una coleccion Set para pisar los dupicados que me trajo la consulta por haber varias relaciones ManyToMany en la clase Reserva
+		Set<Reserva> listaSinDuplicados = new HashSet();
+		listaSinDuplicados.addAll(lista);
+				
 		List<Personal> resultado = new ArrayList<>();
-
-		for (Reserva l: lista) {
+		for (Reserva l: listaSinDuplicados) {
 			resultado.addAll(l.getPersonal());
 		}
 
 		return resultado;
 	}
+	
 
 //--------------------------------------------------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------------------------------------------------
@@ -124,6 +130,33 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 
 		 for (Iterator it = list.iterator(); it.hasNext();) {
 			 Map.Entry<Long, Integer> entry = (Map.Entry<Long, Integer>)it.next();
+			 sortedMap.put(entry.getKey(), entry.getValue());
+		 }
+
+		 return sortedMap;
+	}
+		
+
+//--------------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------------------------
+
+	// Ordena el listado (Map) en forma ascendente
+	@Override
+	public Map OrdenaAscendentementePersonal(Map unsortMap) {
+		 List list = new LinkedList(unsortMap.entrySet());
+
+		 //Para ordenar ascendentemente
+		 Collections.sort(list, new Comparator() {
+		 public int compare(Object o1, Object o2) {
+		 return ((Comparable) ((Map.Entry) (o1)).getValue()).compareTo(((Map.Entry) (o2)).getValue());
+		 }
+		 });
+
+		 //Agrega la lista ordenana dentro del Map
+		 Map<Personal, Integer> sortedMap = new LinkedHashMap<Personal, Integer>();
+
+		 for (Iterator it = list.iterator(); it.hasNext();) {
+			 Map.Entry<Personal, Integer> entry = (Map.Entry<Personal, Integer>)it.next();
 			 sortedMap.put(entry.getKey(), entry.getValue());
 		 }
 
@@ -240,7 +273,6 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 						}
 						break;
 				 }
-
 			}
  
 		return personalDelEvento;
@@ -386,8 +418,6 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			}
 		}
 			
-			
-			
 		cantidadesAReasignar.add(encargado);
 		cantidadesAReasignar.add(chef);
 		cantidadesAReasignar.add(cocinero);
@@ -460,12 +490,55 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	
 	
 	
+	//--------------------------------------------------------------------------------------------------------------------------
+	//--------------------------------------------------------------------------------------------------------------------------
 	
 	
 	
 	
+	// Devuelve el listado de asistencia del personal
+	@Override
+	public Map <Personal, Integer> obtencionListadoDeAsistenciasPersonal() {
+		Map <Personal, Integer> conteo = new HashMap();
+
+		// Realizo una iteracion del listado general de asistencias de los empleados. Ese listado es
+		// devuelto por (servicioPersonal.controlDeServiciosPrestados ---> Devuelve una coleccion List <Personal>)
+		Iterator<Personal> p = controlDeServiciosPrestados().iterator();
+		Personal personal;
+		while (p.hasNext()) {
+			personal=p.next();
+
+			// De dicha iteracion, extraigo el Id de cada empleado y lo guardo en un Map llamado conteo.
+			// Alli, guardo en la key el numero de Id y en el value guardo las veces que trabajo.
+			// Dicho conteo lo realizo al comparar si el Id de extraido ya existe (si ya fue agregado) al Map,
+			// de ya estar, sumo una unidad en el "value". De no estar el Id, es agregado al Map en la "key"
+	        if(conteo.containsKey(personal)){
+	        	conteo.put(personal,conteo.get(personal)+1);
+	         }
+	         else{
+	            conteo.put(personal,1);
+	         }
+		}
+
+		// Se completa el listrado agregando los Id que aun no tienen ningun registro de asistencia en la BD.
+		// Esto puede ocurrir cuando se ingresa a algun Personal nuevo, y no tuvo ningun evento asignado aun
+		List<Personal> TodoElPersonal = personalDao.listadoDelPersonal();
+
+		Iterator <Personal> tep = TodoElPersonal.iterator();
+		Personal todos;
+		while (tep.hasNext()) {
+			todos=tep.next();
+			 	if(conteo.containsKey(todos)){
+		         }
+		         else{
+		            conteo.put(todos,0);
+		         }
+		}
+		return conteo;
+	}
 	
 	
+
 	
 	
 	//----------------nuevo----------------------------------------------------------------------------------------------------------
@@ -480,135 +553,19 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			return lista;
 		}	
 		
-	
 		
+			
 		
-		public PersonalDao getPersonalDao() {
-			return personalDao;
-		}
-
-		public void setPersonalDao(PersonalDao personalDao) {
-			this.personalDao = personalDao;
-		}
-
-		public ServicioResumen getServicioResumen() {
-			return servicioResumen;
-		}
-
-		public void setServicioResumen(ServicioResumen servicioResumen) {
-			this.servicioResumen = servicioResumen;
-		}
-
-		public ServicioSalon getServicioSalon() {
-			return servicioSalon;
-		}
-
-		public void setServicioSalon(ServicioSalon servicioSalon) {
-			this.servicioSalon = servicioSalon;
-		}
-
-		public RegistroMenuDao getRegistroMenuDao() {
-			return registroMenuDao;
-		}
-
-		public void setRegistroMenuDao(RegistroMenuDao registroMenuDao) {
-			this.registroMenuDao = registroMenuDao;
-		}
-
 		@Override
 		public List<Personal> sinPersonal() {
 	
 			List<Personal> TodoElPersonal = personalDao.listadoDelPersonal();
 
-	
 			return TodoElPersonal;
 		}
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
-}	
-	
-
-
-
-
-
-
-    	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		//Preguntar si no es mas conveniente separar esta logica en otro servicio que se podria llamar Guardar Reserva
-	//	LocalDate fecha_ingreso = LocalDate.of(2019, 6, 16);  //<----- Verificar si los datos a�o, mes dia se pueden pasar como integer
-	//	evento.setFechaDelEvento(fecha_ingreso);    <--------- ERROR CON LA FECHA
-
-//-----------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------------
-// anterior al 25/6
-
-// Genera un listado con la cantidad necesaria de personal para cubrir el evento
-//@Override
-//public List <Long> asignarPersonalNecesario(Integer personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia) {
-//	List <Long> personalDelEvento = new ArrayList <Long> ();
-
-	// Itero las entradas (representadas por key/value) del Map
-//	Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
-
-	// Recorro N veces (donde N es la cantidad de personal requerido) el Map
-//	for(int i=0;i<personalNecesario;i++) {
-//			 Map.Entry <Long,Integer> entry = (Map.Entry) entries.next();
-
-			 // Obtengo el Id atraves del key
-//			 Long key = (Long)entry.getKey();
-
-			 // Agrego el Id obtenido a la coleccion del tipo List
-//			 personalDelEvento.add(key);
-//		 }
-
-//	return personalDelEvento;
-//}
-
-// -----------------------------------------------------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------------------------------------------------
-// 25/6
-
-/// Genera un listado con la cantidad necesaria de personal para cubrir el evento
-//@Override
-//public List <Long> asignarPersonalNecesario(List <Integer> personalNecesario, Map <Long,Integer> conteoOrdenadoAscendentementePorAsistencia) {
-//	List <Long> personalDelEvento = new ArrayList <Long> ();
-
-	// Itero las entradas (representadas por key/value) del Map
-//	Iterator entries = conteoOrdenadoAscendentementePorAsistencia.entrySet().iterator();
-
-	// Se usa el for, para ir pasando por las 6 categorias de empleados
-//	for(int i=0; i<6; i++) {
-//		int vuelta=1;  // Con esta variable, nos aseguramos de tomar solo la cantidad necesaria de personal para la categoria que se esta rrecorriendo en el bucle WHILE
-//		Long categoria=1L;  // Con esta variable vamos cambiando la seleccion de la categoria en el bucle WHILE
-
-
-//		while(entries.hasNext()) {
-
-//			Map.Entry <Long,Integer> entry = (Map.Entry) entries.next();
-
-			// Obtengo el Id atraves del key
-//			Long key = (Long)entry.getKey();
-
-	        // Con "personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()" obtengo el id correspondiente
-			// a la categoria del personal de acuerdo al Id pasado a traves de "key"
-//			if(personalDao.buscarPersonalPorId(key).getCategoriaPersonal().getId()==categoria && vuelta<=personalNecesario.get(i)) {
-//					vuelta = vuelta+1;
-//					personalDelEvento.add(key);
-//			}
-//		}
-//		categoria = categoria+1;
-//	}
-//	return personalDelEvento;
-//}
+		public void setPersonalDao(PersonalDao personalDao) {
+			this.personalDao = personalDao;
+		}
+}

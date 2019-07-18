@@ -25,22 +25,34 @@ public class ControladorPuntuarMenu {
     @Inject
     private ServicioListadoOpcionesMenu servicioListadoOpcionesMenu;
 
+    
+    
+    
     @RequestMapping(path = "/menus-a-puntuar", method = RequestMethod.GET)
-    public ModelAndView puntajesMenu() {
-        ModelMap modelo = new ModelMap();
+    public ModelAndView puntajesMenu(HttpServletRequest request) {
+		if(request.getSession().getAttribute("ROL").equals("2")) {
+			ModelMap model = new ModelMap();
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+			model.put("listaopciones", servicioListadoOpcionesMenu.listarOpcionesMenu());
+			model.put("secciones", servicioListarTiposMenu.listarTipoDeMenus());
 
-
-        modelo.put("listaopciones", servicioListadoOpcionesMenu.listarOpcionesMenu());
-        modelo.put("secciones", servicioListarTiposMenu.listarTipoDeMenus());
-
-
-        return new ModelAndView("puntaje-menu", modelo);
+			return new ModelAndView("puntaje-menu", model);
+        
+		}
+		
+		return new ModelAndView("redirect:/homeAdmin");
     }
 
+    
+    
     @RequestMapping(path = "/puntuar-menu", method = RequestMethod.POST)
     public ModelAndView ingresarPuntaje(@ModelAttribute("mvSalon") RegistroMenuViewModel mvMenu,
                                         @ModelAttribute("puntaje") Double puntaje) {
         ModelMap model = new ModelMap();
+       
         if(puntaje>0 && puntaje<=10) {
             servicioRegistroMenu.calcularPuntaje(mvMenu.getId(), puntaje);
 
