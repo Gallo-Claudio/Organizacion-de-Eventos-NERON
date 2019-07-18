@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.viewmodel;
 public class RegistroSalonViewModel {
 	private Long id;
 	private Integer cantidad;
+	private Double puntaje;
 
 	public Long getId() {
 		return id;
@@ -20,6 +21,11 @@ public class RegistroSalonViewModel {
 		this.cantidad = cantidad;
 	}
 
-	
-	
+	public Double getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(Double puntaje) {
+		this.puntaje = puntaje;
+	}
 }
