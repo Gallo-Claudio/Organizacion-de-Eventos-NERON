@@ -174,9 +174,15 @@ public class ControladorClienteEventosPendientes {
 			
 			model.put("usuario", nombreUsuario);
 
-			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
+			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);
+			
+			// Determina los costos parciales y totales de la reserva para mostrar en la vista
 			List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
+			
+			// Determina el monto a devolver
 			Double montoADevolver = servicioCancelacion.calcularDevolucion(reservafinal, precios);
+			
+			// Determina el porcentaje aplicado a la devolucion y la cantidad de dias de la cancelacion con respecto a la fecha del evento
 			List<Integer> datosDevolucion = servicioCancelacion.datosDevolucion(reservafinal);
 	
 			model.put("reservafinal", reservafinal);

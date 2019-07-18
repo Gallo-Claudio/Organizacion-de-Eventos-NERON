@@ -92,7 +92,8 @@ public class ControladorPersonal {
 		if(request.getSession().getAttribute("ROL").equals("1")) {
 			// Obtengo datos del usuario logueado
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());		
-		
+			
+			// Se usa TreeSet para pisar los registros duplicados que trae la consultra de la BD
 			Set <Reserva> listadoEventos = new TreeSet();
 			listadoEventos = servicioEventosPendientes.listadoDeEventosPendientes(fechaActual);
 			
@@ -241,7 +242,6 @@ public class ControladorPersonal {
 
 		ModelMap model = new ModelMap();
 		model.put("listado", servicioPersonal.controlDeServiciosPrestados());
-
 		return new ModelAndView("listar-personal", model);
 	}
 
