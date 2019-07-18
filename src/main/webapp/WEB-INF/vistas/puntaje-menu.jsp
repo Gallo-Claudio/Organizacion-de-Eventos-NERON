@@ -24,14 +24,12 @@
 	<div class="container">
 		<div class="row">
 
-<<<<<<< HEAD
-			<h2>Nuestros Menus</h2><br><br>
-=======
 
->>>>>>> rocio
+			<h2>Nuestros Menus</h2><br><br>
+
 
 			<c:if test="${!empty mensaje}">
-				<div style="width:200px;" class="alert alert-danger">${mensaje}</div>
+				<div class="alert alert-danger">${mensaje}</div>
 			</c:if>
 			<form:errors path="*" element="div" class="alert alert-danger" />
 

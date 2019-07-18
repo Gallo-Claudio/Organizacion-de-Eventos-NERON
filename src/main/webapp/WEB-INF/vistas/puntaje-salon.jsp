@@ -33,9 +33,9 @@
 					<input type="search" name="input" placeholder="Nombre del salon">
 					<input type="submit" value="buscar">
 
-				</form>
+				</form><br><br>
 				<c:if test="${!empty mensaje}">
-					<div style="width:200px;  class="alert alert-danger">${mensaje}</div>
+					<div class="alert alert-danger">${mensaje}</div>
 				</c:if>
 				<form:errors path="*" element="div" class="alert alert-danger" />
 				<br>
