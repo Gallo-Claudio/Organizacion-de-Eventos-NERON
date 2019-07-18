@@ -65,7 +65,10 @@ public class ControladorPersonal {
 		this.servicioEventosPendientes = servicioEventosPendientes;
 	  }
 
-
+	  public void setServicioPersonal(ServicioPersonal servicioPersonal) {   //JULI
+			this.servicioPersonal = servicioPersonal;
+		}
+	  
 
 	@RequestMapping(path = "/eliminar-personal", method = RequestMethod.POST)
 	 	public ModelAndView registroExtras (@ModelAttribute ("Personal") Personal personal,	HttpServletRequest request) {
