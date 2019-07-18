@@ -149,7 +149,7 @@ public class ControladorSalon {
         Long id=salon.getId();
         
         if(id.equals(0L)){
-        	mensaje+="Seleccione un salón";
+        	mensaje+="Seleccione un salï¿½n";
         }
         else {
         	Long idUser= Long.parseLong(request.getSession().getAttribute("logueado").toString());
@@ -181,5 +181,29 @@ public class ControladorSalon {
            modelo.put("imagenes",imagenes);
 
         return new ModelAndView("/galeria", modelo);
+    }
+
+    public ServicioSalon getServicioSalon() {
+        return servicioSalon;
+    }
+
+    public void setServicioSalon(ServicioSalon servicioSalon) {
+        this.servicioSalon = servicioSalon;
+    }
+
+    public ServicioEliminoSalon getServicioEliminoSalon() {
+        return servicioEliminoSalon;
+    }
+
+    public void setServicioEliminoSalon(ServicioEliminoSalon servicioEliminoSalon) {
+        this.servicioEliminoSalon = servicioEliminoSalon;
+    }
+
+    public ServicioValidacionSeleccionSalon getServicioValidacionSeleccionSalon() {
+        return servicioValidacionSeleccionSalon;
+    }
+
+    public void setServicioValidacionSeleccionSalon(ServicioValidacionSeleccionSalon servicioValidacionSeleccionSalon) {
+        this.servicioValidacionSeleccionSalon = servicioValidacionSeleccionSalon;
     }
 }
