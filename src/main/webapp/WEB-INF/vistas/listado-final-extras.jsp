@@ -26,7 +26,7 @@
 
 			<div>
 				<center>
-					<b><i>Listado de Extras</i></b>
+					<h2>Listado de Extras<h2>
 				</center>
 				<br>
 				<br>
@@ -37,22 +37,22 @@
 				cellpadding="1" cellspacing="0">
 				<thead>
 					<tr>
-						<th><i>Tipo de show</i></th>
-						<th><i>Precio</i></th>
+						<th class="enc">Tipo de show</th>
+						<th class="enc">Precio</th>
 					</tr>
 				</thead>
 				</center>
 				<tbody>
 					<c:forEach var="variable" items="${listadoFinal}">
 						<tr>
-							<td><b><i>${variable.nombre}</i></b></td>
-							<td><b>$<i>${variable.precio}</i></b></td>
+							<td class="alt-celda">${variable.nombre}</td>
+							<td class="alt-celda">${variable.precio}</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<a href="/proyecto-limpio-spring/homeAdmin"
-				class="btn-agregar btn btn success">Salir</a>
+				class="btn btn-danger">Salir</a>
 		</div>
 	</div>
 

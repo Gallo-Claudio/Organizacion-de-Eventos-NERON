@@ -75,7 +75,8 @@
 					</c:forEach>
 
 
-					<button class="btn-agregar" Type="Submit" />Agregar</button>
+							<input class=" btn btn-success"	type="submit" value="Confirmar y continuar" />
+							<a><input class=" btn btn-danger" type="button" value="Cancelar" /></a>
 				</form:form>
 			</div>
 

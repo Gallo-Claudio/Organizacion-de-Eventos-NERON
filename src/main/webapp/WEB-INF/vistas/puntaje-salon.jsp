@@ -20,21 +20,11 @@
 
 	<%-- CUERPO --%>
 
-	<div class="container">
-		<div class="row call-to-action">
-			<form class="navbar-form navbar-left" method="post" action="salon">
-				<div class="form-group">
-					<input type="submit" value="Reservar"
-						class="btn btn-success btn-grande">
-				</div>
-			</form>
-		</div>
-	</div>
 
 	<div class="container">
 		<div class="row">
 
-			<h3>Nuestros Salones</h3>
+			<h2>Nuestros Salones</h2><br><br>
 
 			<c:if test="${!empty mensaje}">
 				<h1>${mensaje}</h1>

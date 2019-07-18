@@ -124,7 +124,7 @@
 					</td>
 				</tr>
 			</table>
-			<br> <a href="/proyecto-limpio-spring/home" class="btn-agregar btn btn success">Salir</a>
+			<br> <a href="/proyecto-limpio-spring/home" class="btn btn-success">Salir</a>
 
 
 		</div>

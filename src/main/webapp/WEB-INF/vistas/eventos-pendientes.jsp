@@ -21,7 +21,7 @@
 	<div class="container">
 		<div class="row">
 
-			<p>Eventos pendientes a realizarse</p>
+			<h3>Eventos pendientes a realizarse</h3>
 
 					<c:if test="${!empty mensajeerror}">
 	 			  		 <div class="alert alert-danger">${mensajeerror}</div>
@@ -31,22 +31,22 @@
 				<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 					<thead>
 						<tr>
-							<th>Salon</th>
-							<th>Dirección</th>
-							<th>Fecha</th>
-							<th>Horario</th>
-							<th></th>
+							<th class="enc">Salon</th>
+							<th class="enc">Dirección</th>
+							<th class="enc">Fecha</th>
+							<th class="enc">Horario</th>
+							<th class="enc"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach var="item" items="${listadopendientes}">
 
 							<tr>
-								<td>${item.salon.nombre}</td>
-								<td>${item.salon.direccion}</td>
-								<td>${item.fecha}</td>
-								<td>${item.horario}</td>
-								<td><input type="radio" name="idreserva" value="${item.idReserva}"></td>
+								<td class="alt-celda">${item.salon.nombre}</td>
+								<td class="alt-celda">${item.salon.direccion}</td>
+								<td class="alt-celda">${item.fecha}</td>
+								<td class="alt-celda">${item.horario}</td>
+								<td class="alt-celda"><input type="radio" name="idreserva" value="${item.idReserva}"></td>
 							</tr>
 
 						</c:forEach>
@@ -57,7 +57,7 @@
 					<input type="hidden" value=0 name="idreserva" />
 				</c:if>
 				
-				<button class="btn-agregar" Type="Submit" />Seleccionar</button>
+				<button class="btn btn-success" Type="Submit" />Seleccionar</button>
 				<a href="/proyecto-limpio-spring/homeAdmin" class="btn btn-danger">Cancelar</a>
 			</form:form>
 			<br>

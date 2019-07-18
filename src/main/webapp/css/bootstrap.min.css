@@ -6,13 +6,16 @@
  
 .pie {
     margin-top: 50px;
-    background-color: #f1c2a2;
+    background-color: #85addc;
     padding: 15px;
+    width: 100%;
+    padding-left: 200px;
+    padding-right: 200px;
 }
 .central {
     margin-left: auto;
     margin-right: auto;
-    width: 300px;
+    width: 1000px;
     margin-top: 150px;
     margin-bottom: 150px;
 }
@@ -27,6 +30,7 @@
     padding-top: 7px;
     padding-bottom: 7px;
     margin-top: 7px;
+    margin-bottom: 10px;
 }
 .logotipo-encabezado {
 	width: 100px;
@@ -140,4 +144,40 @@
 }
 .fondito {
 	background-color:#ccc;
+}
+.superior {
+    width: 1170px;
+    display: table;
+}
+.enc-margen {
+	margin-left: 100px;
+}
+.separacion-salir {
+    margin-left: 1045px;
+    margin-top: -85px;
+    margin-bottom: 70px;
+}
+.bienvenido {
+	font-size:30px;
+	    color: #FFF;
+	    margin-left: -10px;
+}
+.neron {
+	font-size:24px;
+	    color: #FFF;
+}
+.bloque-neron {
+    display: inline-block;
+    margin-top: 50px;
+    margin-left: -280px;
+}
+.enca{
+	background-color: #467ab7;
+}
+.bienvenido-home {
+    width: 700px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    float: none !important;
 }

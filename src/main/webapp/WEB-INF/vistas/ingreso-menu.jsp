@@ -22,8 +22,8 @@
 
 	<div class="container">
 		<div class="row">
-			<h1>Ingreso de los distintos platos y bebidas que componen el
-				Menu</h1>
+			<h2>Ingreso de los distintos platos y bebidas que componen el
+				Menu</h2>
 			<p class="descripcion">Desde aquí se ingresan los diferentes
 				platos/bebidas/postres que componen el listado de opciones a elegir
 				por el cliente</p>
@@ -44,8 +44,8 @@
 					</c:forEach>
 				</select>
 
-				<button class="btn-agregar btn btn success" Type="Submit" />Agregar</button>
-				<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
+				<button class="btn btn-success" Type="Submit" />Agregar</button>
+				<a href="/proyecto-limpio-spring/homeAdmin" class="btn btn-danger">Salir</a>
 			</form:form>
 		</div>
 	</div>
