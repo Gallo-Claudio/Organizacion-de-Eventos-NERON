@@ -11,5 +11,6 @@ import java.util.List;
 public interface EventosPendientesDao {
 
 	List <Reserva> traerListaDeFechas (LocalDate fechaActual);
+	List <Reserva> traerListaDeEventosPendientesPorCliente (LocalDate fechaActual, Long idUsuario);
 
 }

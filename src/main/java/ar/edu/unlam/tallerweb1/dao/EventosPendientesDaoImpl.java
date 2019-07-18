@@ -33,4 +33,17 @@ public class EventosPendientesDaoImpl implements EventosPendientesDao {
         return reservas;
     }
 
+	@Override
+	public List<Reserva> traerListaDeEventosPendientesPorCliente(LocalDate fechaActual, Long idUsuario) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        List <Reserva> reservasCliente = session.createCriteria(Reserva.class)
+        		.add(Restrictions.gt("fecha", fechaActual))
+        		.createAlias("usuario", "buscaUsuario")
+        		.add(Restrictions.eq("buscaUsuario.id", idUsuario))
+                .list();
+
+        return reservasCliente;
+	}
+
 }

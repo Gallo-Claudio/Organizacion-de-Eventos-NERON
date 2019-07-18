@@ -2,6 +2,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
@@ -11,5 +12,6 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 public interface ServicioEventosPendientes {
 
 	Set <Reserva> listadoDeEventosPendientes(LocalDate fechaActual);
+	Set <Reserva> listadoDeEventosPendientesDelCliente(LocalDate fechaActual, Long idUsuario);
 
 }
