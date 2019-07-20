@@ -27,7 +27,7 @@
 
 			<div>
 				<center>
-					<b><i>Agregar extras</i></b>
+					<h2>Ingresar extras<h2>
 				</center>
 				<br>
 				<br>
@@ -50,10 +50,11 @@
 					</center>
 
 					<button class="btn btn-success" Type="Submit" />Agregar extra</button>
+					<a href="/proyecto-limpio-spring/homeAdmin" class="btn btn-danger">Salir</a>
 				</form:form>
 				
 			</center>
-			<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
+			
 		</div>
 	</div>
 

@@ -24,6 +24,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,6 +37,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonalImpl;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
+import ar.edu.unlam.tallerweb1.servicios.ServicioValidacionSeleccionFecha;
 import ar.edu.unlam.tallerweb1.validadores.MenuSeleccionValidar;
 import ar.edu.unlam.tallerweb1.validadores.ReasignaPersonalValidar;
 import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
@@ -58,6 +60,9 @@ public class ControladorPersonal {
 	@Inject
 	private ServicioEliminoPersonal servicioEliminoPersonal;
 	
+	@Inject
+	private ServicioValidacionSeleccionFecha servicioValidacionSeleccionFecha;
+	
 	private ReasignaPersonalValidar reasignaPersonalValidar = new ReasignaPersonalValidar();
 	
 
@@ -65,7 +70,10 @@ public class ControladorPersonal {
 		this.servicioEventosPendientes = servicioEventosPendientes;
 	  }
 
-
+	  public void setServicioPersonal(ServicioPersonal servicioPersonal) {   //JULI
+			this.servicioPersonal = servicioPersonal;
+		}
+	  
 
 	@RequestMapping(path = "/eliminar-personal", method = RequestMethod.POST)
 	 	public ModelAndView registroExtras (@ModelAttribute ("Personal") Personal personal,	HttpServletRequest request) {
@@ -104,7 +112,7 @@ public class ControladorPersonal {
 		}
 		
 		return new ModelAndView("redirect:/home");
-	}
+	}
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -245,58 +253,45 @@ public class ControladorPersonal {
 		return new ModelAndView("listar-personal", model);
 	}
 
-
-
-	public ServicioPersonal getServicioPersonal() {
-		return servicioPersonal;
+/*AUSENCIA DE PERSONAL*/
+	
+	
+	@RequestMapping(path = "/seleccionar-ausencia")
+	public ModelAndView seleccionDeFechaAusente (HttpServletRequest request) {
+		ModelMap model = new ModelMap();		
+		if(request.getSession().getAttribute("ROL").equals("3")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());	
+			model.put("usuario", nombreUsuario);
+			
+			return new ModelAndView("seleccionar-ausencia", model);
+		}
+		
+		return new ModelAndView("redirect:/home");
 	}
+	
+	
+	/*Validación de los datos ingresados*/
+	
+	@RequestMapping(path="/validarDatos", method= RequestMethod.GET)
+	public ModelAndView validarDatos (
+									  @RequestParam(name="fecha",required=false) String fecha) {
+		
+		ModelMap model = new ModelMap ();
+		String mensajeFinal = servicioValidacionSeleccionFecha.validacionSeleccionFecha(fecha);
+		
+		if(mensajeFinal=="") {
+			
+    		LocalDate fechaAusencia = LocalDate.parse(fecha);
+    		model.put("fecha",fechaAusencia);
 
-
-
-	public void setServicioPersonal(ServicioPersonal servicioPersonal) {
-		this.servicioPersonal = servicioPersonal;
-	}
-
-
-
-	public ServicioSalon getServicioSalon() {
-		return servicioSalon;
-	}
-
-
-
-	public void setServicioSalon(ServicioSalon servicioSalon) {
-		this.servicioSalon = servicioSalon;
-	}
-
-
-
-	public ServicioEliminoPersonal getServicioEliminoPersonal() {
-		return servicioEliminoPersonal;
-	}
-
-
-
-	public void setServicioEliminoPersonal(ServicioEliminoPersonal servicioEliminoPersonal) {
-		this.servicioEliminoPersonal = servicioEliminoPersonal;
-	}
-
-
-
-	public ReasignaPersonalValidar getReasignaPersonalValidar() {
-		return reasignaPersonalValidar;
-	}
-
-
-
-	public void setReasignaPersonalValidar(ReasignaPersonalValidar reasignaPersonalValidar) {
-		this.reasignaPersonalValidar = reasignaPersonalValidar;
-	}
-
-
-
-	public ServicioEventosPendientes getServicioEventosPendientes() {
-		return servicioEventosPendientes;
-	}
-
+    		return new ModelAndView("redirect:/seleccion-ausencia", model);
+    	}
+    	else {
+            model.put("fecha", fecha);
+            model.put("mensajefecha", mensajeFinal);
+            
+            return new ModelAndView("redirect:/seleccion-ausencia", model);
+    	}
+    }
 }

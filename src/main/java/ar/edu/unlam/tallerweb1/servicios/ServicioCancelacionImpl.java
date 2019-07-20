@@ -27,6 +27,7 @@ public class ServicioCancelacionImpl implements ServicioCancelacion {
 		Integer primerLimite = 30, segundoLimite = 15, tercerLimite = 5;
 		Integer primerPorcentajeDevolucion = 20, segundoPorcentajeDevolucion = 10, tercerPorcentajeDevolucion = 5;
 		Double reintegro;
+		
 		LocalDate fechaEvento = reservafinal.getFecha();
 		LocalDate fechaActual = LocalDate.now();
 		

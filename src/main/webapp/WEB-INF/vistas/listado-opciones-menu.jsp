@@ -18,7 +18,7 @@
 
 
 
-	<%-- CUERPO --%>
+<%-- CUERPO --%>
 	<div class="container">
 		<div class="row">
 
@@ -41,17 +41,17 @@
 					<c:if test="${!empty mensajeerror}">
 						<div class="alert alert-danger">${mensajeerror}</div>
 					</c:if>
-					<!-- Mensaje error VALIDATE -->
 					<form:errors path="*" element="div" class="alert alert-danger" />
 
 
 					<c:forEach var="i" begin="1" end="6">
 						<c:forEach var="tipo" items="${secciones}">
 							<c:if test="${tipo.id==i}">
-								<button type="submit" data-toggle="collapse" data-trigger="hover" data-toggle="modal" data-target="#categoria" aria-expanded="false">${tipo.detalle}</button>
+								<h3>${tipo.detalle}</h3>
 							</c:if>
 						</c:forEach>
-						<table class="table table-hover text-center mt-4 collapse" id="#categoria" border="1" cellpadding="1" cellspacing="0">
+						<table class="table table-hover text-center mt-4" border="1"
+							cellpadding="1" cellspacing="0">
 							<thead>
 								<tr>
 									<th width="650" class="enc">Descripción</th>
@@ -75,8 +75,8 @@
 					</c:forEach>
 
 
-					<button class="btn-agregar" Type="Submit" />Agregar</button>
-					<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Cancelar</a>
+							<input class=" btn btn-success"	type="submit" value="Confirmar y continuar" />
+							<a><input class=" btn btn-danger" type="button" value="Cancelar" /></a>
 				</form:form>
 			</div>
 

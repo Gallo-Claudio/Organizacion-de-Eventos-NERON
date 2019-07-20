@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +23,8 @@ import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.servicios.ServicioCancelacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResumen;
+import ar.edu.unlam.tallerweb1.validadores.MenuValidar;
+
 
 
 @Controller
@@ -174,9 +177,15 @@ public class ControladorClienteEventosPendientes {
 			
 			model.put("usuario", nombreUsuario);
 
-			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);	
+			Reserva reservafinal = servicioResumen.buscarDatos(idreserva);
+			
+			// Determina los costos parciales y totales de la reserva para mostrar en la vista
 			List<Double> precios = servicioResumen.calculaCostoTotal(reservafinal);
+			
+			// Determina el monto a devolver
 			Double montoADevolver = servicioCancelacion.calcularDevolucion(reservafinal, precios);
+			
+			// Determina el porcentaje aplicado a la devolucion y la cantidad de dias de la cancelacion con respecto a la fecha del evento
 			List<Integer> datosDevolucion = servicioCancelacion.datosDevolucion(reservafinal);
 	
 			model.put("reservafinal", reservafinal);

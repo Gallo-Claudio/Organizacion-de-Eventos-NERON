@@ -18,12 +18,12 @@
 	<%-- CUERPO --%>
 	<div class="container tabla-ancho">
 		<div class="row">
-
+<h2>Asistencia del personal</h2><br>
 			<c:forEach var="i" begin="1" end="6">
 
 				<c:forEach var="tipo" items="${cargos}">
 					<c:if test="${tipo.id==i}">
-						<td>Categoria: ${tipo.cargo}</td>
+						<h4>Categoria: ${tipo.cargo}</h4>
 					</c:if>
 				</c:forEach>
 
@@ -49,7 +49,7 @@
 				</table>
 
 			</c:forEach>
-			<a href="/proyecto-limpio-spring/home" class="btn btn-success">Salir</a>
+			<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Salir</a>
 
 		</div>
 	</div>

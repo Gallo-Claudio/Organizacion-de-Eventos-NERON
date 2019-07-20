@@ -28,8 +28,17 @@ public class Personal {
 	@ManyToMany(mappedBy = "personal")
 	private List<Reserva> reserva;
 
+	@ManyToMany(mappedBy = "personal_licencia")
+	private List<Licencia> licencia_personal;
+	
 	//	private Date fechaDeIngreso;
 	
+	public List<Licencia> getLicencia_personal() {
+		return licencia_personal;
+	}
+	public void setLicencia_personal(List<Licencia> licencia_personal) {
+		this.licencia_personal = licencia_personal;
+	}
 	public Long getIdPersonal() {
 		return idPersonal;
 	}

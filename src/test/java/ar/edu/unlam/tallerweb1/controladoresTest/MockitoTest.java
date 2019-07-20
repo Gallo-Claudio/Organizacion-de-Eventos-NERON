@@ -1,11 +1,10 @@
-package ar.edu.unlam.tallerweb1.mocks;
+package ar.edu.unlam.tallerweb1.controladoresTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import static org.mockito.Mockito.*;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
@@ -18,6 +17,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 
 public class MockitoTest {
+	
 
 @SuppressWarnings(value = { })          /*@ SuppressWarnings ("sin marcar") 
 le dice al compilador que el programador cree que el código es seguro 
@@ -50,10 +50,9 @@ public void ObtenerEventosPendientes() {
 	assertThat(modelandview.getViewName()).isEqualTo("eventos-pendientes");
 	
 }
-
 @SuppressWarnings(value = { })          /*@ SuppressWarnings ("sin marcar") 
-										le dice al compilador que el programador cree que el código es seguro 
-										y que no causará excepciones inesperadas.*/
+le dice al compilador que el programador cree que el código es seguro 
+y que no causará excepciones inesperadas.*/
 @Test
 @Transactional 
 @Rollback(true)
@@ -84,4 +83,5 @@ public void ObtenerPersonalAsignadoAUnEvento() {
 	ModelAndView modelandview = controladorPersonal.listarPersonalAsignadoAlEvento();
 	assertThat(modelandview.getModelMap().get("idreserva")).isEqualTo(idreserva);
 	assertThat(modelandview.getViewName()).isEqualTo("listar-personal");
-}}
+}
+}

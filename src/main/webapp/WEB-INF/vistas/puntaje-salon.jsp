@@ -20,25 +20,12 @@
 
 	<%-- CUERPO --%>
 
-	<div class="container">
-		<div class="row call-to-action">
-			<form class="navbar-form navbar-left" method="post" action="salon">
-				<div class="form-group">
-					<input type="submit" value="Reservar"
-						class="btn btn-success btn-grande">
-				</div>
-			</form>
-		</div>
-	</div>
 
 	<div class="container">
 		<div class="row">
 
-			<h3>Nuestros Salones</h3>
+			<h2>Nuestros Salones</h2><br><br>
 
-			<c:if test="${!empty mensaje}">
-				<h1>${mensaje}</h1>
-			</c:if>
 
 
 			<div>
@@ -46,9 +33,14 @@
 					<input type="search" name="input" placeholder="Nombre del salon">
 					<input type="submit" value="buscar">
 
-				</form>
+				</form><br><br>
+				<c:if test="${!empty mensaje}">
+					<div class="alert alert-danger">${mensaje}</div>
+				</c:if>
+				<form:errors path="*" element="div" class="alert alert-danger" />
 				<br>
 			</div>
+
 			<c:forEach items="${salones}" var="salon">
 
 
@@ -59,6 +51,7 @@
 								src="img/${salon.imagenCard}" alt="Card image cap"></td>
 							<td><form:form action="puntuar-salon" method="Post"
 									modelAttribute="mvSalon">
+
 									<h2 class="card-title">${salon.nombre}</h2>
 									<p class="card-title">Precio: $<fmt:formatNumber currencySymbol="" value="${salon.precio}" type="currency"/></p>
 									<!--     <a href="VerImagenes?id=${salon.id}">
@@ -67,9 +60,14 @@
 									<h3 class="card-title">Valoración Actual: <fmt:formatNumber type="number" pattern="#0.00" maxFractionDigits="2" value="${salon.puntaje}"/> / 10</h3>
 									<input name="id" type="hidden" value="${salon.id}" />
 									<label>Pon aqui tu puntaje</label>
-									<input type="number" max="10" min="1" name="puntaje">
-									<input type="submit" value="puntuar">
+									<input type="number"  max="10" min="1" name="puntaje">
+
+								<c:if test="${empty puntaje}">
+									<input type="hidden" value="0" name="puntaje" >
+								</c:if>
+								<input type="submit" value="puntuar">
 								</form:form></td>
+
 						</tr>
 					</tbody>
 				</table>

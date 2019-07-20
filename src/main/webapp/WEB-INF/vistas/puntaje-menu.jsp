@@ -20,25 +20,20 @@
 
 	<%-- CUERPO --%>
 
-	<div class="container">
-		<div class="row call-to-action">
-			<form class="navbar-form navbar-left" method="post" action="salon">
-				<div class="form-group">
-					<input type="submit" value="Reservar" class="btn btn-success btn-grande">
-				</div>
-			</form>
-		</div>
-	</div>
 
 	<div class="container">
 		<div class="row">
 
-			<h3>Nuestros Menus</h3>
+
+			<h2>Nuestros Menus</h2><br><br>
+
 
 			<c:if test="${!empty mensaje}">
-				<h1>${mensaje}</h1>
+				<div class="alert alert-danger">${mensaje}</div>
 			</c:if>
-<h1>${mensaje}</h1>
+			<form:errors path="*" element="div" class="alert alert-danger" />
+
+
 
 			<c:forEach var="i" begin="1" end="6">
 				<c:forEach items="${listaopciones}" var="menu">

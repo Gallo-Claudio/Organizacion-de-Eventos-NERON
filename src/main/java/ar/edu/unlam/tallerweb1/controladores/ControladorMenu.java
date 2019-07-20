@@ -60,6 +60,9 @@ public class ControladorMenu {
 	public void setServicioListadoOpcionesMenu(ServicioListadoOpcionesMenu servicioListadoOpcionesMenu) {
 		this.servicioListadoOpcionesMenu = servicioListadoOpcionesMenu;
 	}
+
+
+
 	
 	
 	
@@ -253,5 +256,33 @@ public class ControladorMenu {
         			return new ModelAndView("listado-opciones-menu", model);			
         	}
         }
+	}
+
+	public void setServicioRecomendaciones(ar.edu.unlam.tallerweb1.servicios.ServicioRecomendaciones servicioRecomendaciones) {
+		ServicioRecomendaciones = servicioRecomendaciones;
+	}
+
+	public void setServicioRegistroPlatoMenu(ServicioRegistroPlatoMenu servicioRegistroPlatoMenu) {
+		this.servicioRegistroPlatoMenu = servicioRegistroPlatoMenu;
+	}
+
+	public void setServicioRegistroMenu(ServicioRegistroMenu servicioRegistroMenu) {
+		this.servicioRegistroMenu = servicioRegistroMenu;
+	}
+
+	public void setServicioValidacionSeleccionMenu(ServicioValidacionSeleccionMenu servicioValidacionSeleccionMenu) {
+		this.servicioValidacionSeleccionMenu = servicioValidacionSeleccionMenu;
+	}
+
+	public void setServicioEliminoMenu(ServicioEliminoMenu servicioEliminoMenu) {
+		this.servicioEliminoMenu = servicioEliminoMenu;
+	}
+
+	public void setMenuValidar(MenuValidar menuValidar) {
+		this.menuValidar = menuValidar;
+	}
+
+	public void setMenuSeleccionValidar(MenuSeleccionValidar menuSeleccionValidar) {
+		this.menuSeleccionValidar = menuSeleccionValidar;
 	}
 }

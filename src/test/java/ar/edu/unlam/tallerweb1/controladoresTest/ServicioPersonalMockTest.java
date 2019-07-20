@@ -33,6 +33,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioListadoOpcionesMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarTiposMenu;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonalImpl;
+import ar.edu.unlam.tallerweb1.servicios.ServicioResumenImpl;
 
 
 

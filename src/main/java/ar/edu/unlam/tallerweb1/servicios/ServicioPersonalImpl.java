@@ -46,7 +46,15 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 	@Inject
 	private RegistroMenuDao registroMenuDao;
 
+	
 
+	public void setPersonalDao(PersonalDao personalDao) {
+		this.personalDao = personalDao;
+	}
+
+	
+	
+	
 	// Devuelve el listado de asistencia del personal ordenado por Id
 	@Override
 	public Map <Long, Integer> obtencionListadoDeAsistencias() {
@@ -102,6 +110,8 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 		listaSinDuplicados.addAll(lista);
 				
 		List<Personal> resultado = new ArrayList<>();
+		
+		// Itero la lista de Reserva y voy obteniendo la lista de Personal de cada Reserva
 		for (Reserva l: listaSinDuplicados) {
 			resultado.addAll(l.getPersonal());
 		}
@@ -564,8 +574,4 @@ public class ServicioPersonalImpl implements ServicioPersonal {
 			return TodoElPersonal;
 		}
 		
-		
-		public void setPersonalDao(PersonalDao personalDao) {
-			this.personalDao = personalDao;
-		}
 }

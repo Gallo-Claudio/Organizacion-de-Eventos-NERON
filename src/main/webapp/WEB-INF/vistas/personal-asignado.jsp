@@ -25,41 +25,40 @@
 			<form:form action="reasigna-personal" method="POST" modelAttribute="vmReasignaPersonal">
 				<input type="hidden" name="idreserva" value="${idreserva}">
 
-				<p>Personal asignado al evento de la reserva numero: ${idreserva}</p>
+				<h3>Reasignar personal asignado a un evento</h3>
+				<p>Personal asignado al evento de la reserva numero: ${idreserva}</p><br><br>
 
 				<c:forEach var="i" begin="1" end="6">
 					<c:forEach var="tipo" items="${cargos}">
 						<c:if test="${tipo.id==i}">
-							<td>Categoria: ${tipo.cargo}</td>
+							<h4>Categoria: ${tipo.cargo}</h4>
 						</c:if>
 					</c:forEach>
 					<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
 						<thead>
 							<tr>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th></th>
+								<th class="enc">Nombre</th>
+								<th class="enc">Apellido</th>
+								<th class="enc"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach var="personal" items="${listadop}">
 								<c:if test="${personal.categoriaPersonal.id==i}">
 									<tr>
-										<td>${personal.apellido}</td>
-										<td>${personal.nombre}</td>
-										<td><input type="checkbox" name="idpersonal[${personal.idPersonal}]" value="${personal.idPersonal}"></td>
+										<td class="alt-celda">${personal.apellido}</td>
+										<td class="alt-celda">${personal.nombre}</td>
+										<td class="alt-celda"><input type="checkbox" name="idpersonal[${personal.idPersonal}]" value="${personal.idPersonal}"></td>
 									</tr>
 								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
-					<br>
-					<br>
-					<br>
+
 				</c:forEach>
 				
-				<button class="btn-agregar" Type="Submit" />Bajar del evento</button>
-				<a href="/proyecto-limpio-spring/homeAdmin" class="btn-agregar btn btn success">Salir</a>
+				<button class="btn btn-success" Type="Submit" />Bajar del evento</button>
+				<a href="/proyecto-limpio-spring/homeAdmin" class="btn btn-danger">Salir</a>
 			</form:form>
 		</div>
 	</div>

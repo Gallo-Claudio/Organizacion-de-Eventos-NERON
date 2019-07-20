@@ -19,7 +19,7 @@
 	<%-- CUERPO --%>
 	<div class="container">
 		<div class="row central">
-			<div class="navbar-form navbar-left">
+			<div class="bienvenido-home">
 				<p class="grande">Bienvenido ${usuario} a</p>
 				<p class="grande">Organizacion de Eventos NERON</p>
 			</div>

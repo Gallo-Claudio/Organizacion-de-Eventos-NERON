@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.viewmodel;
 public class RegistroMenuViewModel {
 	private Long[] idmenu;
 	private Long id;
+	private Double puntaje;
 
 	
 	
@@ -20,5 +21,13 @@ public class RegistroMenuViewModel {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Double getPuntaje() {
+		return puntaje;
+	}
+
+	public void setPuntaje(Double puntaje) {
+		this.puntaje = puntaje;
 	}
 }

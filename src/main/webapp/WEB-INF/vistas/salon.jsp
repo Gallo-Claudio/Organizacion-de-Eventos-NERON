@@ -111,9 +111,8 @@
 							<c:if test="${empty id}">
 								<input type="hidden" value=0 name="id" />
 							</c:if>
-
-							<a><input class=" btn btn-success" type="button" value="Cancelar" /></a>
 							<input class=" btn btn-success"	type="submit" value="Confirmar y continuar" />
+							<a><input class=" btn btn-danger" type="button" value="Cancelar" /></a>
 						</div>
 					</div>
 

@@ -26,7 +26,7 @@
 			<h2>Seleccion de Extras</h2>
 			<br> <br> <br>
 			<p>
-				<b>Debe seleccionar: </b>al menos un extra y como máximo dos<br>
+
 			</p>
 			<div class="table70">
 				<form:form action="registra-reserva-extras" method="POST" modelAttribute="vm">
@@ -37,6 +37,7 @@
 					<form:errors path="*" element="div" class="alert alert-danger" />
 					
 					<table class="table table-hover text-center mt-4" border="1" cellpadding="1" cellspacing="0">
+					<h4><b>Debe seleccionar: </b>al menos un extra y como máximo dos<br></h4>
 						<thead>
 							<tr>
 								<th class="enc">Descripcion</th>
@@ -58,8 +59,8 @@
 					<br>
 					<br>
 
-					<button class="btn-agregar" Type="Submit" />Agregar</button>
-					<a href="/proyecto-limpio-spring/home" class="btn btn-danger">Cancelar</a>
+							<input class=" btn btn-success"	type="submit" value="Confirmar y continuar" />
+							<a><input class=" btn btn-danger" type="button" value="Cancelar" /></a>
 				</form:form>
 			</div>
 		</div>
