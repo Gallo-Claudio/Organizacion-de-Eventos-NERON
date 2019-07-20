@@ -13,7 +13,7 @@
             <p class="bienvenido">Bienvenido: ${usuario}</p>
             </div>
         	<div class="navbar-form bloque-neron">
-            <p class="neron">Organizacion de Eventos NERON</p>
+            <p class="neron">Organización de Eventos NERON</p>
             </div>
             <form class="navbar-form navbar-left separacion-salir"  method="post"  action="cerrarsesion"  >
             <div class="form-group">
@@ -21,12 +21,8 @@
             </div>
         	</form>
        
-        
-        </div>
-				<li><a class="btn" href="home">Inicio</a></li>
-
-        </ul>
-
+  <div>
+  <br><br><br></div>
 
 
 

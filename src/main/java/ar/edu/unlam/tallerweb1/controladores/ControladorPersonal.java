@@ -285,7 +285,7 @@ public class ControladorPersonal {
     		LocalDate fechaAusencia = LocalDate.parse(fecha);
     		model.put("fecha",fechaAusencia);
 
-    		return new ModelAndView("redirect:/home", model);
+    		return new ModelAndView("redirect:/homePersonal", model);
     	}
     	else {
             model.put("fecha", fecha);
