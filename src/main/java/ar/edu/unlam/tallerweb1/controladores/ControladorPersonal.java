@@ -264,10 +264,11 @@ public class ControladorPersonal {
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());	
 			model.put("usuario", nombreUsuario);
 			
-			return new ModelAndView("seleccionar-ausencia", model);
+			return new ModelAndView("redirect:/pedido_ausencia", model);
 		}
-		
-		return new ModelAndView("redirect:/home");
+		else {
+		return new ModelAndView("home");
+		}
 	}
 	
 	
@@ -285,13 +286,13 @@ public class ControladorPersonal {
     		LocalDate fechaAusencia = LocalDate.parse(fecha);
     		model.put("fecha",fechaAusencia);
 
-    		return new ModelAndView("redirect:/seleccion-ausencia", model);
+    		return new ModelAndView("redirect:/home", model);
     	}
     	else {
             model.put("fecha", fecha);
             model.put("mensajefecha", mensajeFinal);
             
-            return new ModelAndView("redirect:/seleccion-ausencia", model);
+            return new ModelAndView("pedido_ausencia", model);
     	}
     }
 }
