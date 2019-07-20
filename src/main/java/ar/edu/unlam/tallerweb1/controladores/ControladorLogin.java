@@ -65,7 +65,17 @@ public class ControladorLogin {
 		    if(usuarioBuscado.getRol().equals("1")){
 				return new ModelAndView("redirect:/homeAdmin",model);
 			}
-				return new ModelAndView("redirect:/home", model);
+		    else {
+		    	if(usuarioBuscado.getRol().equals("2")) {
+		    		return new ModelAndView("redirect:/home", model);
+		    	}else {
+		    		if(usuarioBuscado.getRol().equals("3")) {
+		    			return new ModelAndView("redirect:/homePersonal", model);
+		    		}
+		    	}
+				
+			}
+				
 
 		}
 		else {
@@ -131,6 +141,25 @@ public class ControladorLogin {
 			
 			model.put("usuario", nombreUsuario);
 			return new ModelAndView("homeAdmin", model);
+		}
+		
+		// Obtengo datos del usuario logueado
+		String nombreUsuario = (request.getSession().getAttribute("nombre").toString());			
+		model.put("usuario", nombreUsuario);
+		return new ModelAndView("redirect:/home", model);
+
+	}
+	
+	@RequestMapping(path = "/homePersonal", method = RequestMethod.GET)
+	public ModelAndView irAhomePersonal(HttpServletRequest request) {
+		ModelMap model = new ModelMap();
+
+		if(request.getSession().getAttribute("ROL").equals("3")) {
+			// Obtengo datos del usuario logueado
+			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());
+			
+			model.put("usuario", nombreUsuario);
+			return new ModelAndView("pedido_ausencia", model);
 		}
 		
 		// Obtengo datos del usuario logueado

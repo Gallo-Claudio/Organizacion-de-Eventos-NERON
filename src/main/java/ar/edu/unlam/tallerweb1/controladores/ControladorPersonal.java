@@ -112,7 +112,7 @@ public class ControladorPersonal {
 		}
 		
 		return new ModelAndView("redirect:/home");
-	}
+	}
 	
 	
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -264,18 +264,17 @@ public class ControladorPersonal {
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());	
 			model.put("usuario", nombreUsuario);
 			
-			return new ModelAndView("redirect:/pedido_ausencia", model);
+			return new ModelAndView("pedido_ausencia", model);
 		}
-		else {
-		return new ModelAndView("home");
-		}
+		return new ModelAndView("redirect:/home");
+		
 	}
 	
 	
 	/*Validación de los datos ingresados*/
 	
-	@RequestMapping(path="/validarDatos", method= RequestMethod.GET)
-	public ModelAndView validarDatos (
+	@RequestMapping(path="/validar__Datos", method= RequestMethod.GET)
+	public ModelAndView validar__Datos (
 									  @RequestParam(name="fecha",required=false) String fecha) {
 		
 		ModelMap model = new ModelMap ();
