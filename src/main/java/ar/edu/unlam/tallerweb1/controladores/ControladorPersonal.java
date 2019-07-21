@@ -29,13 +29,17 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.CategoriaPersonal;
+import ar.edu.unlam.tallerweb1.modelo.Extra;
+import ar.edu.unlam.tallerweb1.modelo.Licencia;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
+import ar.edu.unlam.tallerweb1.servicios.ServicioListarFechas;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPersonalImpl;
+import ar.edu.unlam.tallerweb1.servicios.ServicioRegistroFecha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioSalon;
 import ar.edu.unlam.tallerweb1.servicios.ServicioValidacionSeleccionFecha;
 import ar.edu.unlam.tallerweb1.validadores.MenuSeleccionValidar;
@@ -62,6 +66,13 @@ public class ControladorPersonal {
 	
 	@Inject
 	private ServicioValidacionSeleccionFecha servicioValidacionSeleccionFecha;
+	
+	@Inject
+	private ServicioRegistroFecha servicioRegistroFecha;
+	
+	@Inject
+	private ServicioListarFechas servicioListarFechas;
+	
 	
 	private ReasignaPersonalValidar reasignaPersonalValidar = new ReasignaPersonalValidar();
 	
@@ -263,7 +274,7 @@ public class ControladorPersonal {
 			// Obtengo datos del usuario logueado
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());	
 			model.put("usuario", nombreUsuario);
-			
+			model.put("listadoFinal", servicioListarFechas.listarFechas());
 			return new ModelAndView("pedido_ausencia", model);
 		}
 		return new ModelAndView("redirect:/home");
@@ -273,9 +284,10 @@ public class ControladorPersonal {
 	
 	/*Validación de los datos ingresados*/
 	
-	@RequestMapping(path="/validar__Datos", method= RequestMethod.GET)
+	@RequestMapping(path="/validar__Datos", method= RequestMethod.POST)
 	public ModelAndView validar__Datos (
-									  @RequestParam(name="fecha",required=false) String fecha) {
+										@ModelAttribute ("Licencia") Licencia Licencia,
+										@RequestParam(name="fecha",required=false) String fecha) {
 		
 		ModelMap model = new ModelMap ();
 		String mensajeFinal = servicioValidacionSeleccionFecha.validacionSeleccionFecha(fecha);
@@ -288,8 +300,10 @@ public class ControladorPersonal {
     		return new ModelAndView("redirect:/homePersonal", model);
     	}
     	else {
+    		servicioRegistroFecha.registroFecha(Licencia);
             model.put("fecha", fecha);
             model.put("mensajefecha", mensajeFinal);
+            model.put("licencia", Licencia);
             
             return new ModelAndView("pedido_ausencia", model);
     	}

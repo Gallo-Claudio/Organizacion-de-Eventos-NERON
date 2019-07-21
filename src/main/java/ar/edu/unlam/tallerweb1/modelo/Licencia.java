@@ -1,7 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 
-	import java.util.List;
+	import java.util.Date;
+import java.util.List;
 
 	import javax.persistence.Entity;
 	import javax.persistence.GeneratedValue;
@@ -20,7 +21,8 @@ package ar.edu.unlam.tallerweb1.modelo;
 		@Id
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private Long idLicencia;
-
+		
+		private Date fechasLicencias;
 
 		@ManyToMany
 		@JoinTable(name = "personallicencia", joinColumns = @JoinColumn(name = "idLicencia"), inverseJoinColumns = @JoinColumn(name = "idPersonal"))
@@ -36,6 +38,14 @@ package ar.edu.unlam.tallerweb1.modelo;
 
 		
 		//Getters y Setter
+		
+		public Date getFechasLicencias() {
+			return fechasLicencias;
+		}
+
+		public void setFechasLicencias(Date fechasLicencias) {
+			this.fechasLicencias = fechasLicencias;
+		}
 
 		public Long getIdLicencia() {
 			return idLicencia;

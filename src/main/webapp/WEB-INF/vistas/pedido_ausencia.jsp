@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 
-				<form class="border border-success" method="GET" action="validar__Datos">
+				<form class="border border-success" method="POST" action="validar__Datos" modelAttribute="Licencia">
 				<br><br><br>
 					<h4>Seleccione la fecha que no podra asistir</h4>
 
@@ -47,6 +47,14 @@
 		</div>
 	</div>
 
+
+<tbody>
+					<c:forEach var="variable" items="${listadoFinal}">
+						<tr>
+							<td class="alt-celda">${variable.fecha}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
 
 	<%-- PIE --%>
 	<jsp:include page="pie.jsp"></jsp:include>
