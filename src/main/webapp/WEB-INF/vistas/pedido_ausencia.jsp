@@ -23,7 +23,7 @@
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
 
-				<form class="border border-success" method="POST" action="validar__Datos" modelAttribute="Licencia">
+				<form class="border border-success" method="POST" action="validar__Datos" modelAttribute="fecha">
 				<br><br><br>
 					<h4>Seleccione la fecha que no podra asistir</h4>
 

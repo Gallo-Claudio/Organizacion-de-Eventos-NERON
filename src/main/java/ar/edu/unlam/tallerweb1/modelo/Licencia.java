@@ -1,7 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 
-	import java.util.Date;
+	import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 	import javax.persistence.Entity;
@@ -22,12 +23,16 @@ import java.util.List;
 		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		private Long idLicencia;
 		
-		private Date fechasLicencias;
+		private LocalDate fechasLicencias;
 
 		@ManyToMany
 		@JoinTable(name = "personallicencia", joinColumns = @JoinColumn(name = "idLicencia"), inverseJoinColumns = @JoinColumn(name = "idPersonal"))
 		private List <Personal> personal_licencia;
 
+//		@ManyToMany(mappedBy = "licencia")
+//		private List<Reserva> reserva;
+//		
+		
 	    public List<Personal> getPersonal_licencia() {
 			return personal_licencia;
 		}
@@ -39,16 +44,17 @@ import java.util.List;
 		
 		//Getters y Setter
 		
-		public Date getFechasLicencias() {
+	
+		public Long getIdLicencia() {
+			return idLicencia;
+		}
+
+		public LocalDate getFechasLicencias() {
 			return fechasLicencias;
 		}
 
-		public void setFechasLicencias(Date fechasLicencias) {
+		public void setFechasLicencias(LocalDate fechasLicencias) {
 			this.fechasLicencias = fechasLicencias;
-		}
-
-		public Long getIdLicencia() {
-			return idLicencia;
 		}
 
 		public void setIdLicencia(Long idLicencia) {

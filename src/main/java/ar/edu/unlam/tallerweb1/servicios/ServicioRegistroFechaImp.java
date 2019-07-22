@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,11 @@ public class ServicioRegistroFechaImp implements ServicioRegistroFecha {
 	
 
 	@Override
-	public void registroFecha(Licencia licencia) {
+	public void registroFecha(Long idPersonal, LocalDate fechaAusencia) {
+		Licencia licencia = new Licencia();
+		licencia.setIdLicencia(idPersonal);
+		licencia.setFechasLicencias(fechaAusencia);
+		
 		registroFechaDao.registroFecha(licencia);
 		
 	}

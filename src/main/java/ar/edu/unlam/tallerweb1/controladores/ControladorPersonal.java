@@ -274,7 +274,7 @@ public class ControladorPersonal {
 			// Obtengo datos del usuario logueado
 			String nombreUsuario = (request.getSession().getAttribute("nombre").toString());	
 			model.put("usuario", nombreUsuario);
-			model.put("listadoFinal", servicioListarFechas.listarFechas());
+//			model.put("listadoFinal", servicioListarFechas.listarFechas());
 			return new ModelAndView("pedido_ausencia", model);
 		}
 		return new ModelAndView("redirect:/home");
@@ -286,24 +286,25 @@ public class ControladorPersonal {
 	
 	@RequestMapping(path="/validar__Datos", method= RequestMethod.POST)
 	public ModelAndView validar__Datos (
-										@ModelAttribute ("Licencia") Licencia Licencia,
-										@RequestParam(name="fecha",required=false) String fecha) {
+//										@ModelAttribute ("Licencia") Licencia Licencia,
+										@ModelAttribute("fecha") String fecha, HttpServletRequest request) {
 		
+		Long idPersonal = Long.parseLong(request.getSession().getAttribute("logueado").toString());	
 		ModelMap model = new ModelMap ();
 		String mensajeFinal = servicioValidacionSeleccionFecha.validacionSeleccionFecha(fecha);
 		
-		if(mensajeFinal=="") {
+		if(mensajeFinal=="") { 
 			
-    		LocalDate fechaAusencia = LocalDate.parse(fecha);
-    		model.put("fecha",fechaAusencia);
+			LocalDate fechaAusencia = LocalDate.parse(fecha);
+			servicioRegistroFecha.registroFecha(idPersonal,fechaAusencia);
 
     		return new ModelAndView("redirect:/homePersonal", model);
     	}
     	else {
-    		servicioRegistroFecha.registroFecha(Licencia);
+    		
             model.put("fecha", fecha);
             model.put("mensajefecha", mensajeFinal);
-            model.put("licencia", Licencia);
+//            model.put("licencia", Licencia);
             
             return new ModelAndView("pedido_ausencia", model);
     	}

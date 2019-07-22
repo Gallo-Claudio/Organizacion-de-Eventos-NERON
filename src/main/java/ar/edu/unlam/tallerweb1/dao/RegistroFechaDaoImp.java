@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 
 @Repository("registroFechaDao")
@@ -19,9 +21,9 @@ public class RegistroFechaDaoImp implements RegistroFechaDao {
 
 
 	@Override
-	public void registroFecha(Licencia Licencia) {
+	public void registroFecha(Licencia licencia) {
 		final Session session = sessionFactory.getCurrentSession();  // Obtengo una sesion
-		session.save(Licencia);    // Persisto en la BD, el objeto recibido desde el area de Servicios
+		session.save(licencia);    // Persisto en la BD, el objeto recibido desde el area de Servicios
 		
 	}
 
