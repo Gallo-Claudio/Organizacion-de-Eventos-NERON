@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Personal {
@@ -28,20 +29,30 @@ public class Personal {
 	@ManyToMany(mappedBy = "personal")
 	private List<Reserva> reserva;
 
-	@ManyToMany(mappedBy = "personal_licencia")
-	private List<Licencia> licencia_personal;
+	@ManyToMany 
+	(mappedBy = "personal_licencia")
+	private List <Licencia> licencia_personal;
 	
 	//	private Date fechaDeIngreso;
 	
-	public List<Licencia> getLicencia_personal() {
-		return licencia_personal;
-	}
-	public void setLicencia_personal(List<Licencia> licencia_personal) {
-		this.licencia_personal = licencia_personal;
-	}
+//	public List<Licencia> getLicencia_personal() {
+//		return licencia_personal;
+//	}
+//	public void setLicencia_personal(List<Licencia> licencia_personal) {
+//		this.licencia_personal = licencia_personal;
+//	}
 	public Long getIdPersonal() {
 		return idPersonal;
 	}
+
+	public List<Licencia> getLicencia_personal() {
+		return licencia_personal;
+	}
+
+	public void setLicencia_personal(List<Licencia> licencia_personal) {
+		this.licencia_personal = licencia_personal;
+	}
+
 	public void setIdPersonal(Long idPersonal) {
 		this.idPersonal = idPersonal;
 	}

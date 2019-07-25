@@ -6,5 +6,5 @@ import ar.edu.unlam.tallerweb1.viewmodel.RegistroMenuViewModel;
 
 public interface ServicioValidacionSeleccionFecha {
 
-	String validacionSeleccionFecha (String fecha);
+	String validacionSeleccionFecha (Long idPersonal,String fecha);
 }

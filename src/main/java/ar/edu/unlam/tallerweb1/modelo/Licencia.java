@@ -12,8 +12,9 @@ import java.util.List;
 	import javax.persistence.JoinColumn;
 	import javax.persistence.JoinTable;
 	import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
-	import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollection;
 	import org.hibernate.annotations.LazyCollectionOption;
 
 	@Entity
@@ -28,18 +29,14 @@ import java.util.List;
 		@ManyToMany
 		@JoinTable(name = "personallicencia", joinColumns = @JoinColumn(name = "idLicencia"), inverseJoinColumns = @JoinColumn(name = "idPersonal"))
 		private List <Personal> personal_licencia;
-
-//		@ManyToMany(mappedBy = "licencia")
-//		private List<Reserva> reserva;
-//		
 		
-	    public List<Personal> getPersonal_licencia() {
-			return personal_licencia;
-		}
-
-		public void setPersonal_licencia(List<Personal> personal_licencia) {
-			this.personal_licencia = personal_licencia;
-		}
+//	    public List<Personal> getPersonal_licencia() {
+//			return personal_licencia;
+//		}
+//
+//		public void setPersonal_licencia(List<Personal> personal_licencia) {
+//			this.personal_licencia = personal_licencia;
+//		}
 
 		
 		//Getters y Setter
@@ -47,6 +44,14 @@ import java.util.List;
 	
 		public Long getIdLicencia() {
 			return idLicencia;
+		}
+
+		public List<Personal> getPersonal_licencia() {
+			return personal_licencia;
+		}
+
+		public void setPersonal_licencia(List<Personal> personal_licencia) {
+			this.personal_licencia = personal_licencia;
 		}
 
 		public LocalDate getFechasLicencias() {

@@ -34,6 +34,8 @@ import ar.edu.unlam.tallerweb1.modelo.Licencia;
 import ar.edu.unlam.tallerweb1.modelo.Personal;
 import ar.edu.unlam.tallerweb1.modelo.Reserva;
 import ar.edu.unlam.tallerweb1.modelo.Salon;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
+import ar.edu.unlam.tallerweb1.servicios.ServicioValidoFecha;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEliminoPersonal;
 import ar.edu.unlam.tallerweb1.servicios.ServicioEventosPendientes;
 import ar.edu.unlam.tallerweb1.servicios.ServicioListarFechas;
@@ -73,6 +75,8 @@ public class ControladorPersonal {
 	@Inject
 	private ServicioListarFechas servicioListarFechas;
 	
+	@Inject
+	private ServicioValidoFecha servicioValidoFecha;
 	
 	private ReasignaPersonalValidar reasignaPersonalValidar = new ReasignaPersonalValidar();
 	
@@ -284,29 +288,63 @@ public class ControladorPersonal {
 	
 	/*Validación de los datos ingresados*/
 	
-	@RequestMapping(path="/validar__Datos", method= RequestMethod.POST)
+	@RequestMapping(path="/validar__Datos", method= RequestMethod.GET)
 	public ModelAndView validar__Datos (
-//										@ModelAttribute ("Licencia") Licencia Licencia,
-										@ModelAttribute("fecha") String fecha, HttpServletRequest request) {
+										@RequestParam(name="fecha",required=false) String fecha,
+										HttpServletRequest request) {
 		
 		Long idPersonal = Long.parseLong(request.getSession().getAttribute("logueado").toString());	
 		ModelMap model = new ModelMap ();
-		String mensajeFinal = servicioValidacionSeleccionFecha.validacionSeleccionFecha(fecha);
+		String mensajeFinal = servicioValidacionSeleccionFecha.validacionSeleccionFecha(idPersonal,fecha);
 		
-		if(mensajeFinal=="") { 
-			
-			LocalDate fechaAusencia = LocalDate.parse(fecha);
-			servicioRegistroFecha.registroFecha(idPersonal,fechaAusencia);
-
-    		return new ModelAndView("redirect:/homePersonal", model);
-    	}
-    	else {
+//		if(mensajeFinal=="") { 
+//			
+//			LocalDate fechaAusencia = LocalDate.parse(fecha);
+//			servicioRegistroFecha.registroFecha(idPersonal,fechaAusencia);
+//			servicioValidoFecha.buscoFecha(idPersonal, fechaAusencia);
+//
+//    		return new ModelAndView("redirect:/homePersonal", model);
+//    	}
+//    	else {
     		
             model.put("fecha", fecha);
             model.put("mensajefecha", mensajeFinal);
-//            model.put("licencia", Licencia);
             
             return new ModelAndView("pedido_ausencia", model);
-    	}
+//    	}
     }
-}
+	
+//    @RequestMapping(path="/validarFechaVacia", method = RequestMethod.GET)
+//    public ModelAndView validarFechaVacia(
+//    										@RequestParam(name="fecha",required=false) String fecha,
+//    										 HttpServletRequest request) {
+//    	Long idPersonal = Long.parseLong(request.getSession().getAttribute("logueado").toString());	
+//    	ModelMap modelo = new ModelMap();    	
+//    	String mensajeFinal = servicioValidacionSeleccionFecha.validacionSeleccionFecha(fecha);
+//    	String mensajeFinal2 = servicioBuscoFecha.buscoFecha(null,fecha);
+//    	
+//    	
+//    	if(mensajeFinal=="") {
+//    		LocalDate fechaAusencia = LocalDate.parse(fecha);
+//			servicioRegistroFecha.registroFecha(idPersonal,fechaAusencia);
+////			servicioBuscoFecha.buscoFecha(idPersonal, fechaAusencia);
+//			model.put("fecha", fecha);
+//			model.put("idPersonal", idPersonal);
+//			model.put("fechaAusencia", fechaAusencia);
+//    		
+//  
+// 
+//  
+//    		return new ModelAndView("/salon", modelo);
+//    	}
+//    	else {
+//           
+//            modelo.put("fecha", fecha);
+//            modelo.put("mensajefecha", mensajeFinal);
+//            
+//            return new ModelAndView("salon", modelo);
+//    	}
+//	
+//
+//    	}
+	}
